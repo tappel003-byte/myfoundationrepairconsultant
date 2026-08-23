@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "deploy": "npm run build && wrangler deploy",
     "preview": "astro preview",
     "extract": "python3 scripts/extract-content.py && python3 scripts/clean-extracted.py",
     "check-links": "node scripts/check-links.mjs",
@@ -19,5 +20,8 @@
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.2.4",
     "html-entities": "^2.6.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.125.0"
   }
 }

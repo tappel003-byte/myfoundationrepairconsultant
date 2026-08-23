@@ -30,18 +30,31 @@ You have two valid paths. **Pages is preferred** (gives you a `*.pages.dev` URL)
 
 ### Path A — Fix the existing Worker project (fastest if build already ran)
 
-This repo now includes `wrangler.toml`, which tells `npx wrangler deploy` to publish the `dist/` folder.
+This repo includes `wrangler.toml` + a tiny worker script that serves the `dist/` folder.
 
-1. Open your **`myfoundationrepairconsultant`** project in Cloudflare
-2. Go to **Settings** → **Build**
+**One-time account setup (required if deploy keeps failing):**
+
+1. Cloudflare dashboard → **Workers & Pages**
+2. Look for **Your subdomain** or a banner about registering `workers.dev`
+3. Pick a subdomain (e.g. `tappel` → `tappel.workers.dev`)
+4. Save
+
+Without this, deploy fails at the last step even when the build succeeds.
+
+**Build settings:**
+
+1. Open your **`myfoundationrepairconsultant`** project
+2. **Settings** → **Build**
 3. Confirm:
    - **Build command:** `npm run build`
    - **Deploy command:** `npx wrangler deploy`
    - **Root directory:** `/` (repo root)
-4. Add environment variable: `NODE_VERSION` = `22`
-5. Click **Retry deployment** (or push any commit to trigger a new build)
+   - **Environment variable:** `NODE_VERSION` = `22`
+4. Click **Retry deployment**
 
-After success, your site will be at something like `https://myfoundationrepairconsultant.<your-subdomain>.workers.dev`.
+After success, your site will be at:
+
+`https://myfoundationrepairconsultant.<your-subdomain>.workers.dev/micropiles`
 
 ### Path B — Create a Pages project (preferred long-term)
 
