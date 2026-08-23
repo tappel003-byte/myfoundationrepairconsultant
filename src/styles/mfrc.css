@@ -366,6 +366,46 @@ a:hover {
   color: var(--text-dark);
   font-weight: 600;
 }
+.content-block h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 2.5vw, 28px);
+  font-weight: 400;
+  margin: 48px 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.content-block h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin: 32px 0 14px;
+}
+.content-block blockquote {
+  border-left: 4px solid var(--border-mark);
+  margin: 40px 0;
+  padding: 8px 0 8px 28px;
+  max-width: var(--col);
+}
+.content-block blockquote h2,
+.content-block blockquote p {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px, 2vw, 22px);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+.content-block hr,
+.content-block .section-break {
+  border: none;
+  border-top: 2px dashed var(--border-soft);
+  margin: 40px 0;
+}
+.content-block a {
+  word-break: break-word;
+}
 
 /* ── TABLES ── */
 .table-wrapper {

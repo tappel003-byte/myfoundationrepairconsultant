@@ -30,11 +30,19 @@ STUB_PAGES = {
 
 def clean_html(html: str) -> str:
     html = re.sub(r"<style[^>]*>.*?</style>", "", html, flags=re.DOTALL)
+    # Strip Squarespace / Claude artifact classes and inline styles
+    html = re.sub(r'\s*class="[^"]*(?:font-claude|sqs-|fe-block)[^"]*"', "", html)
     html = re.sub(r'\s*style="[^"]*"', "", html)
+    html = re.sub(r'\s*data-rte-list="[^"]*"', "", html)
     html = re.sub(r'\s*class=""', "", html)
     html = re.sub(r"<div>\s*</div>", "", html)
-    html = re.sub(r"\s+", " ", html)
-    html = re.sub(r">\s+<", "><", html)
+    html = re.sub(r"</div>(?=\s*<h[1-6])", "", html)  # stray closing divs before headings
+    html = re.sub(r"<h1>\s*</h1>", "", html)
+    html = re.sub(r"<p>\s*</p>", "", html)
+    html = re.sub(r"<li><p>", "<li>", html)
+    html = re.sub(r"</p></li>", "</li>", html)
+    # Normalize em-dashes spacing
+    html = html.replace(" — ", " — ")
     for old, new in LINK_FIXES.items():
         html = html.replace(f'href="{old}"', f'href="{new}"')
     return html.strip()

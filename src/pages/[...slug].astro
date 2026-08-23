@@ -13,9 +13,14 @@ export function getStaticPaths() {
 
 const { page } = Astro.props;
 const htmlPath = path.join(process.cwd(), 'content/extracted', page.file);
-const rawHtml = fs.readFileSync(htmlPath, 'utf-8');
+let rawHtml = fs.readFileSync(htmlPath, 'utf-8');
 const isHub = page.type === 'hub-custom';
 const title = cleanTitle(page.title);
+
+// Avoid duplicate title when extracted content starts with matching h2
+if (!isHub) {
+  rawHtml = rawHtml.replace(new RegExp(`^\\s*<h2>${title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}</h2>`, 'i'), '');
+}
 ---
 
 <BaseLayout title={title} description={page.description} hub={isHub}>
