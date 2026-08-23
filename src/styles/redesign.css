@@ -1,0 +1,293 @@
+/* Redesign enhancements — layered on mfrc.css, same monochrome palette */
+
+.page-redesign .page-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+
+.page-redesign .page-lede {
+  font-size: 17px;
+  color: var(--text-muted);
+  max-width: var(--col);
+  margin-top: 20px;
+  line-height: 1.75;
+}
+
+.page-redesign .topic-link {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.page-redesign .topic-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--text-light);
+  min-width: 20px;
+}
+
+.page-redesign .redesign-body {
+  max-width: var(--content-max);
+}
+
+/* FAQ accordion — cleaner, numbered */
+.faq-list .accordion-section {
+  margin-bottom: 12px;
+  border-left: 3px solid var(--border-soft);
+}
+
+.faq-list .accordion-section.active {
+  border-left-color: var(--text-dark);
+}
+
+.faq-list .accordion-header {
+  padding: 20px 24px;
+}
+
+.faq-list .accordion-title {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  font-size: 1.1em;
+  line-height: 1.4;
+}
+
+.faq-list .faq-number {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--text-light);
+  min-width: 24px;
+  padding-top: 3px;
+}
+
+.faq-list .accordion-section.active .accordion-content {
+  max-height: 8000px;
+}
+
+/* Callout — not red; inverted soft box */
+.callout-neutral {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  padding: 28px 32px;
+  margin: 32px 0;
+}
+
+.callout-neutral h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.callout-warn {
+  border-left: 4px solid var(--text-dark);
+  background: var(--bg-page);
+  padding: 24px 28px;
+  margin: 32px 0;
+}
+
+.callout-warn h3 {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.pull-quote {
+  border-left: 4px solid var(--border-mark);
+  margin: 48px 0;
+  padding: 8px 0 8px 32px;
+  max-width: var(--col);
+}
+
+.pull-quote p {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.related-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin: 24px 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+}
+
+.related-links a {
+  text-decoration: none;
+  border-bottom: 1px dotted var(--border-mark);
+}
+
+.related-links a:hover {
+  border-bottom-color: var(--text-dark);
+}
+
+.section-intro {
+  max-width: var(--col);
+  margin-bottom: 24px;
+  color: var(--text-muted);
+  font-size: 17px;
+}
+
+/* Comparison page */
+.compare-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px var(--gutter) 80px;
+}
+
+.compare-header {
+  text-align: center;
+  margin-bottom: 48px;
+  padding-bottom: 32px;
+  border-bottom: 2px solid var(--border-soft);
+}
+
+.compare-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.compare-header p {
+  color: var(--text-muted);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.compare-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.compare-tab {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 10px 20px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-card);
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text-dark);
+}
+
+.compare-tab.active,
+.compare-tab:hover {
+  border-color: var(--text-dark);
+  background: var(--bg-soft);
+}
+
+.compare-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border-soft);
+  min-height: 70vh;
+  box-shadow: var(--shadow-subtle);
+}
+
+.compare-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 600px;
+}
+
+.compare-panel + .compare-panel {
+  border-left: 2px solid var(--border-soft);
+}
+
+.compare-panel-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 14px 20px;
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--border-soft);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.compare-panel-label span.version {
+  color: var(--text-light);
+  font-size: 9px;
+}
+
+.compare-panel-label a {
+  font-size: 10px;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+.compare-frame {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: var(--bg-page);
+}
+
+.compare-notes {
+  margin-top: 48px;
+  max-width: var(--col);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.compare-notes h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.compare-notes ul {
+  margin-left: 20px;
+  color: var(--text-muted);
+}
+
+.compare-notes li {
+  margin-bottom: 10px;
+}
+
+.preview-banner {
+  background: var(--text-dark);
+  color: var(--bg-page);
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 10px 16px;
+}
+
+.preview-banner a {
+  color: var(--bg-page);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .compare-split {
+    grid-template-columns: 1fr;
+  }
+  .compare-panel + .compare-panel {
+    border-left: none;
+    border-top: 2px solid var(--border-soft);
+  }
+  .compare-frame {
+    min-height: 50vh;
+  }
+}

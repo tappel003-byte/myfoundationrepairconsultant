@@ -1,0 +1,105 @@
+---
+/**
+ * Shared hub shell for redesigned MFRC pages.
+ * Black/white editorial — red only in site header logo (BaseLayout).
+ */
+interface GlanceItem {
+  label: string;
+  value: string;
+}
+
+interface NavItem {
+  id: string;
+  label: string;
+}
+
+interface Props {
+  title: string;
+  subhead: string;
+  description?: string;
+  glance?: GlanceItem[];
+  nav: NavItem[];
+  showFloatingNav?: boolean;
+}
+
+const { title, subhead, description, glance, nav, showFloatingNav = true } = Astro.props;
+---
+
+<div class="page page-redesign">
+  {showFloatingNav && (
+    <div class="floating-nav" id="floatingNav">
+      <a href="#topics" class="top-link"><span>↑</span> Topics</a>
+      <span class="nav-divider">|</span>
+      <a href="#" id="floatingTopLink" class="top-link"><span>↑↑</span> Top</a>
+    </div>
+  )}
+
+  <header class="page-header">
+    <p class="page-eyebrow">MFRC · Educational reference</p>
+    <h1>{title}</h1>
+    <p class="subhead">{subhead}</p>
+    {description && <p class="page-lede">{description}</p>}
+  </header>
+
+  {glance && glance.length > 0 && (
+    <div class="glance" aria-label="At a glance">
+      {glance.map((item) => (
+        <div class="glance-item">
+          <strong>{item.label}</strong>
+          {item.value}
+        </div>
+      ))}
+    </div>
+  )}
+
+  <nav class="quick-nav" aria-label="On this page">
+    {nav.map((item) => (
+      <a href={`#${item.id}`}>{item.label}</a>
+    ))}
+  </nav>
+
+  <nav class="topics-grid" id="topics" aria-label="Section index">
+    {nav.map((item, i) => (
+      <a href={`#${item.id}`} class="topic-link">
+        <span class="topic-num">{String(i + 1).padStart(2, '0')}</span>
+        {item.label}
+      </a>
+    ))}
+  </nav>
+
+  <div class="redesign-body">
+    <slot />
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.accordion-header').forEach((header) => {
+    header.addEventListener('click', () => header.parentElement?.classList.toggle('active'));
+  });
+
+  const floatingNav = document.getElementById('floatingNav');
+  const pageHeader = document.querySelector('.page-header');
+  const topLink = document.getElementById('floatingTopLink');
+
+  if (floatingNav && pageHeader) {
+    window.addEventListener('scroll', () => {
+      floatingNav.classList.toggle('visible', window.scrollY > pageHeader.offsetHeight);
+    });
+    topLink?.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // FAQ: optional one-at-a-time mode
+  document.querySelectorAll('[data-faq-group]').forEach((group) => {
+    group.querySelectorAll('.accordion-header').forEach((header) => {
+      header.addEventListener('click', () => {
+        if (!group.hasAttribute('data-faq-single')) return;
+        group.querySelectorAll('.accordion-section.active').forEach((open) => {
+          if (open !== header.parentElement) open.classList.remove('active');
+        });
+      });
+    });
+  });
+</script>

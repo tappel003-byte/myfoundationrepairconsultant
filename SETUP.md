@@ -13,11 +13,8 @@ The MFRC site is built and ready in this folder. GitHub CLI isn't authenticated 
 Then run these commands from the `mfrc` folder (or tell the agent to run them after you create the repo):
 
 ```bash
-git remote add origin https://github.com/YOUR_USERNAME/myfoundationrepairconsultant.git
+git remote add origin https://github.com/tappel003-byte/myfoundationrepairconsultant.git
 git push -u origin main
-```
-
-Replace `YOUR_USERNAME` with your GitHub username.
 
 ## Option B — GitHub CLI
 

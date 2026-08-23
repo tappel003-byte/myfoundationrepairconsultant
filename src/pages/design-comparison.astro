@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/redesign.css';
+
+const comparisons = [
+  {
+    id: 'helical',
+    label: 'Helical Piers',
+    before: '/helical-piers',
+    after: '/preview/helical-piers',
+    notes: [
+      'Before: single scrolling wall of text, no at-a-glance summary, no section navigation',
+      'After: hub layout with glance bar, numbered topic index, accordions, prominent "when not appropriate" callout',
+      'Same content philosophy — no sales CTAs — but scannable for the 2am reader',
+    ],
+  },
+  {
+    id: 'start',
+    label: 'Start Here',
+    before: '/start-here',
+    after: '/preview/start-here',
+    notes: [
+      'Before: ten questions rendered as one continuous scroll (extraction also truncated some content)',
+      'After: numbered FAQ accordion — one question open at a time, jump nav, moving-forward cards',
+      'Same answers, structured so you can find your question in seconds',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Design Comparison — Before & After"
+  description="Side-by-side comparison of current MFRC pages vs. redesigned hub layouts."
+>
+  <div class="compare-page">
+    <header class="compare-header">
+      <p class="page-eyebrow">MFRC · Design preview</p>
+      <h1>Before & After</h1>
+      <p>
+        Same black-and-white editorial aesthetic. Same content mission. Different structure —
+        designed to make dense educational material easier to scan without dumbing it down.
+      </p>
+    </header>
+
+    {comparisons.map((c, idx) => (
+      <section class="compare-set" id={c.id} style={idx > 0 ? 'margin-top: 64px' : ''}>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 28px; text-align: center; margin-bottom: 24px;">
+          {c.label}
+        </h2>
+
+        <div class="compare-split">
+          <div class="compare-panel">
+            <div class="compare-panel-label">
+              <span>BEFORE <span class="version">· current migration</span></span>
+              <a href={c.before} target="_blank" rel="noopener">Open full ↗</a>
+            </div>
+            <iframe class="compare-frame" src={c.before} title={`${c.label} — before`} loading="lazy"></iframe>
+          </div>
+          <div class="compare-panel">
+            <div class="compare-panel-label">
+              <span>AFTER <span class="version">· redesign preview</span></span>
+              <a href={c.after} target="_blank" rel="noopener">Open full ↗</a>
+            </div>
+            <iframe class="compare-frame" src={c.after} title={`${c.label} — after`} loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <div class="compare-notes">
+          <h2>What changed</h2>
+          <ul>
+            {c.notes.map((note) => <li>{note}</li>)}
+          </ul>
+        </div>
+      </section>
+    ))}
+
+    <div class="callout-neutral" style="margin-top: 64px; text-align: center;">
+      <h3>Your call</h3>
+      <p style="color: var(--text-muted); margin: 0;">
+        These previews live at <code>/preview/helical-piers</code> and <code>/preview/start-here</code>.
+        Original pages are unchanged. If you prefer the redesign direction, hub pages can be migrated to this template —
+        still monochrome, still no sales funnel, just easier to read.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  code {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.9em;
+    background: var(--bg-soft);
+    padding: 2px 6px;
+  }
+</style>
