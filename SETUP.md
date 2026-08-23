@@ -30,31 +30,30 @@ You have two valid paths. **Pages is preferred** (gives you a `*.pages.dev` URL)
 
 ### Path A — Fix the existing Worker project (fastest if build already ran)
 
-This repo includes `wrangler.toml` + a tiny worker script that serves the `dist/` folder.
+This repo includes `wrangler.toml` for a **static** Astro site (upload `dist/` only).
 
-**One-time account setup (required if deploy keeps failing):**
+**Cloudflare dashboard settings (Settings → Builds):**
 
-1. Cloudflare dashboard → **Workers & Pages**
-2. Look for **Your subdomain** or a banner about registering `workers.dev`
-3. Pick a subdomain (e.g. `tappel` → `tappel.workers.dev`)
-4. Save
+| Field | Value |
+|-------|-------|
+| Build command | *(leave blank)* |
+| Deploy command | `npm run deploy` |
+| Root directory | `/` |
+| Environment variable | `NODE_VERSION` = `22` |
 
-Without this, deploy fails at the last step even when the build succeeds.
+Using `npm run deploy` runs build + upload in one step and avoids Cloudflare's Astro autoconfig (which wrongly tries to set up SSR).
 
-**Build settings:**
+**One-time account setup (if deploy still fails):**
 
-1. Open your **`myfoundationrepairconsultant`** project
-2. **Settings** → **Build**
-3. Confirm:
-   - **Build command:** `npm run build`
-   - **Deploy command:** `npx wrangler deploy`
-   - **Root directory:** `/` (repo root)
-   - **Environment variable:** `NODE_VERSION` = `22`
-4. Click **Retry deployment**
+1. Cloudflare → **Workers & Pages**
+2. Register **Your subdomain** (e.g. `tappel.workers.dev`)
+3. **Retry deployment**
 
-After success, your site will be at:
+After success:
 
 `https://myfoundationrepairconsultant.<your-subdomain>.workers.dev/micropiles`
+
+**Important:** If you see build `#f7ae026a` with 12:31 timestamps, that is the *old* failed run. Click **New deployment** (branch `main`) to pick up the latest GitHub code.
 
 ### Path B — Create a Pages project (preferred long-term)
 
