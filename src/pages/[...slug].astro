@@ -1,0 +1,32 @@
+---
+import { getAllRoutes, cleanTitle, type PageEntry } from '../lib/pages';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+export function getStaticPaths() {
+  return getAllRoutes().map(({ params, props }) => ({
+    params,
+    props: { page: props as PageEntry },
+  }));
+}
+
+const { page } = Astro.props;
+const htmlPath = path.join(process.cwd(), 'content/extracted', page.file);
+const rawHtml = fs.readFileSync(htmlPath, 'utf-8');
+const isHub = page.type === 'hub-custom';
+const title = cleanTitle(page.title);
+---
+
+<BaseLayout title={title} description={page.description} hub={isHub}>
+  {isHub ? (
+    <Fragment set:html={rawHtml} />
+  ) : (
+    <div class="page">
+      <div class="page-header">
+        <h1>{title}</h1>
+      </div>
+      <div class="content-block" set:html={rawHtml} />
+    </div>
+  )}
+</BaseLayout>

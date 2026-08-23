@@ -1,0 +1,69 @@
+---
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../styles/mfrc.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  hub?: boolean;
+}
+
+const { title, description = '', hub = false } = Astro.props;
+const fullTitle = title.includes('MFRC')
+  ? title
+  : `${title} — My Foundation Repair Consultant`;
+---
+
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={`https://www.myfoundationrepairconsultant.com${Astro.url.pathname.replace(/\/$/, '') || '/start-here'}`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <meta property="og:site_name" content="My Foundation Repair Consultant" />
+    <meta property="og:title" content={fullTitle} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:type" content="website" />
+  </head>
+  <body class={hub ? 'hub-layout' : 'article-layout'}>
+    <SiteHeader />
+    <main>
+      <slot />
+    </main>
+    <SiteFooter />
+    {hub && (
+      <script is:inline>
+        document.querySelectorAll('.accordion-header').forEach((header) => {
+          header.addEventListener('click', function () {
+            this.parentElement.classList.toggle('active');
+          });
+        });
+        const floatingNav = document.getElementById('floatingNav');
+        const pageHeader = document.querySelector('.page-header');
+        const topLink = document.getElementById('floatingTopLink');
+        if (floatingNav && pageHeader) {
+          window.addEventListener('scroll', () => {
+            if (window.scrollY > pageHeader.offsetHeight) {
+              floatingNav.classList.add('visible');
+            } else {
+              floatingNav.classList.remove('visible');
+            }
+          });
+          topLink?.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+        }
+      </script>
+    )}
+  </body>
+</html>

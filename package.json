@@ -1,0 +1,23 @@
+{
+  "name": "mfrc",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "My Foundation Repair Consultant — independent foundation repair education",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "extract": "python3 scripts/extract-content.py && python3 scripts/clean-extracted.py",
+    "check-links": "node scripts/check-links.mjs",
+    "prebuild": "node scripts/check-links.mjs"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^7.0.7",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.2.4",
+    "html-entities": "^2.6.0"
+  }
+}
