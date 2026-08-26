@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+import '../styles/redesign.css';
+
+const nav = [
+  { id: 'what-changed', label: 'What changed' },
+  { id: 'failure-rare', label: 'Failure is rare' },
+  { id: 'fear', label: 'Fear and time' },
+  { id: 'diagnosis-sales', label: 'Diagnosis plus sales' },
+  { id: 'language', label: 'Technical language' },
+  { id: 'cracks', label: 'Cracks vs distress' },
+  { id: 'alternatives', label: 'Left-out alternatives' },
+  { id: 'how-to-use', label: 'How to use this' },
+];
+---
+
+<BaseLayout
+  title="How the Industry Has Changed"
+  description="The foundation repair industry shifted from local trade work to volume-driven sales. Why that context matters before you decide anything."
+  hub={true}
+>
+  <HubPageShell
+    title="How the Industry Has Changed"
+    subhead="Why evaluation and sales got mixed together — and what that does to decisions"
+    description="Information that used to arrive through engineers and time now often arrives inside a sales conversation. Understanding that shift is part of understanding any recommendation."
+    glance={[
+      { label: 'Shift', value: 'Local trade → volume sales' },
+      { label: 'Pressure', value: 'Urgency created by language' },
+      { label: 'Conflict', value: 'Same person diagnoses and sells' },
+      { label: 'Response', value: 'Slow the conversation down' },
+    ]}
+    nav={nav}
+  >
+    <div class="intro">
+      <p>The foundation repair industry has changed — structurally, financially, and culturally.</p>
+      <p>What was once a local, trade-driven profession has become a multi-billion-dollar industry dominated by large, multi-state companies backed by private equity and venture capital.</p>
+      <p>That shift has consequences. Growth requires volume. Volume requires urgency. Urgency is often created by redefining normal foundation behavior as failure.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>"You shouldn't need a sales meeting to understand your house."</p>
+    </div>
+
+    <h2 class="section-heading" id="what-changed">What changed</h2>
+    <div class="content-block">
+      <p>Information that was once filtered through engineers, longer timelines, and often the company owner personally visiting a home now frequently arrives inside a sales conversation.</p>
+      <p>Understanding that context matters before any repair decision is made. This is education most people encounter unexpectedly. Urgency usually makes it more expensive.</p>
+    </div>
+
+    <div class="accordion-section" id="failure-rare">
+      <div class="accordion-header">
+        <span class="accordion-title">Foundation failure is rare — even though the word is common</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>True foundation failure has a specific meaning. It occurs when a foundation can no longer perform its intended function, typically involving loss of load-carrying capacity, progressive structural instability, or widespread, non-recoverable distress.</p>
+          <p>Most buildings with cracks, sloping floors, or sticking doors do not meet this definition. Buildings move. Soils expand and contract. Structures respond gradually over time.</p>
+          <p>Calling normal movement “failure” is often inaccurate — and sometimes deliberately misleading.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="fear">
+      <div class="accordion-header">
+        <span class="accordion-title">Fear is often used to compress time</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Building owners are frequently presented with alarming conclusions: “your foundation is failing,” “this house is unsafe,” “if you don’t act now, it will only get worse.”</p>
+          <p>Sometimes action is required. Often, it isn’t. Fear shortens the decision window. Short decision windows eliminate understanding. Understanding is the one thing owners need most.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="diagnosis-sales">
+      <div class="accordion-header">
+        <span class="accordion-title">Diagnosis and sales are commonly combined</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>In much of the industry, the person diagnosing the problem is also selling the solution. That creates a structural conflict — whether acknowledged or not.</p>
+          <p>When evaluation, scope, and pricing are tied together, owners are rarely told the issue may be stable, monitoring may be appropriate, the problem may be cosmetic or seasonal, or that no repair may be justified at this time.</p>
+          <p>Foundation failure is often treated as the default explanation. It shouldn’t be.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="language">
+      <div class="accordion-header">
+        <span class="accordion-title">Technical language is used to end the conversation</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Terms such as helical piers, push piers, soil failure, and structural instability are often introduced without explanation.</p>
+          <p>The implied message becomes: this is complicated — trust us. If a recommendation is valid, it can be explained clearly: what problem it addresses, what it does not address, and what happens if nothing is done.</p>
+          <div class="related-links">
+            <a href="/helical-piers">Helical piers →</a>
+            <a href="/micropiles">Micropiles →</a>
+            <a href="/foundation-repair-dictionary">Dictionary →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="cracks">
+      <div class="accordion-header">
+        <span class="accordion-title">Not all cracks indicate structural distress</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Cracks are common — especially in arid and semi-arid regions. Many reflect shrink-swell soil behavior, seasonal moisture, construction tolerances, or normal aging of materials.</p>
+          <p>Cracks are indicators, not conclusions. Treating every crack as evidence of failure leads to over-repair, not better outcomes.</p>
+          <div class="related-links">
+            <a href="/material-behavior">Material behavior →</a>
+            <a href="/common-signs">Common signs →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout-warn" id="alternatives">
+      <h3>Reasonable alternatives are often left out</h3>
+      <div class="content-block">
+        <p>Sometimes the right response is monitoring movement over time, managing drainage or moisture, minor structural adjustments, or simply understanding what is normal for the house.</p>
+        <p>These options slow down sales. They do not slow down good decision-making.</p>
+      </div>
+    </div>
+
+    <div class="ask-box" id="how-to-use">
+      <h3>How to use this site</h3>
+      <ul>
+        <li>Look up the terms you’re hearing.</li>
+        <li>Understand what “failure” actually means.</li>
+        <li>Compare explanations, not just recommendations.</li>
+        <li>Take time back into the decision.</li>
+      </ul>
+      <div class="related-links">
+        <a href="/start-here">Start Here →</a>
+        <a href="/industry-articles">Industry notes →</a>
+        <a href="/know-before-you-sign">Know before you sign →</a>
+      </div>
+    </div>
+
+    <div class="pull-quote">
+      <p>"Clear information leads to better decisions."</p>
+    </div>
+  </HubPageShell>
+</BaseLayout>
