@@ -1,8 +1,4 @@
 ---
-/**
- * Shared hub shell for redesigned MFRC pages.
- * Black/white editorial — red only in site header logo (BaseLayout).
- */
 interface GlanceItem {
   label: string;
   value: string;
@@ -16,16 +12,17 @@ interface NavItem {
 interface Props {
   title: string;
   subhead: string;
+  bannerBlurb?: string;
   description?: string;
   glance?: GlanceItem[];
   nav: NavItem[];
   showFloatingNav?: boolean;
 }
 
-const { title, subhead, description, glance, nav, showFloatingNav = true } = Astro.props;
+const { title, subhead, bannerBlurb, description, glance, nav, showFloatingNav = true } = Astro.props;
 ---
 
-<div class="page page-redesign">
+<div class="hub-wrap">
   {showFloatingNav && (
     <div class="floating-nav" id="floatingNav">
       <a href="#topics" class="top-link"><span>↑</span> Topics</a>
@@ -34,41 +31,38 @@ const { title, subhead, description, glance, nav, showFloatingNav = true } = Ast
     </div>
   )}
 
-  <header class="page-header">
-    <p class="page-eyebrow">MFRC · Educational reference</p>
-    <h1>{title}</h1>
-    <p class="subhead">{subhead}</p>
-    {description && <p class="page-lede">{description}</p>}
-  </header>
-
-  {glance && glance.length > 0 && (
-    <div class="glance" aria-label="At a glance">
-      {glance.map((item) => (
-        <div class="glance-item">
-          <strong>{item.label}</strong>
-          {item.value}
-        </div>
-      ))}
+  <section class="hero-banner" aria-label="Page title">
+    <div class="hero-banner-inner">
+      <h1>{title}</h1>
+      {bannerBlurb ? <p class="hero-blurb">{bannerBlurb}</p> : <p class="hero-blurb">{subhead}</p>}
     </div>
-  )}
+  </section>
 
-  <nav class="quick-nav" aria-label="On this page">
-    {nav.map((item) => (
-      <a href={`#${item.id}`}>{item.label}</a>
-    ))}
-  </nav>
+  <div class="page page-redesign">
+    <p class="page-dek">{subhead}</p>
 
-  <nav class="topics-grid" id="topics" aria-label="Section index">
-    {nav.map((item, i) => (
-      <a href={`#${item.id}`} class="topic-link">
-        <span class="topic-num">{String(i + 1).padStart(2, '0')}</span>
-        {item.label}
-      </a>
-    ))}
-  </nav>
+    {glance && glance.length > 0 && (
+      <div class="glance" aria-label="At a glance">
+        {glance.map((item) => (
+          <div class="glance-item">
+            <strong>{item.label}</strong>
+            {item.value}
+          </div>
+        ))}
+      </div>
+    )}
 
-  <div class="redesign-body">
-    <slot />
+    <nav class="quick-nav" id="topics" aria-label="On this page">
+      {nav.map((item) => (
+        <a href={`#${item.id}`}>{item.label}</a>
+      ))}
+    </nav>
+
+    {description && <p class="page-lede">{description}</p>}
+
+    <div class="redesign-body">
+      <slot />
+    </div>
   </div>
 </div>
 
@@ -78,28 +72,16 @@ const { title, subhead, description, glance, nav, showFloatingNav = true } = Ast
   });
 
   const floatingNav = document.getElementById('floatingNav');
-  const pageHeader = document.querySelector('.page-header');
+  const hero = document.querySelector('.hero-banner');
   const topLink = document.getElementById('floatingTopLink');
 
-  if (floatingNav && pageHeader) {
+  if (floatingNav && hero) {
     window.addEventListener('scroll', () => {
-      floatingNav.classList.toggle('visible', window.scrollY > pageHeader.offsetHeight);
+      floatingNav.classList.toggle('visible', window.scrollY > hero.offsetHeight);
     });
     topLink?.addEventListener('click', (e) => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
-
-  // FAQ: optional one-at-a-time mode
-  document.querySelectorAll('[data-faq-group]').forEach((group) => {
-    group.querySelectorAll('.accordion-header').forEach((header) => {
-      header.addEventListener('click', () => {
-        if (!group.hasAttribute('data-faq-single')) return;
-        group.querySelectorAll('.accordion-section.active').forEach((open) => {
-          if (open !== header.parentElement) open.classList.remove('active');
-        });
-      });
-    });
-  });
 </script>
