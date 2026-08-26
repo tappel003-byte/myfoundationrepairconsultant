@@ -1,1 +1,91 @@
-PLACEHOLDER
+---
+const nav = [
+  { label: 'Start Here', href: '/start-here' },
+  {
+    label: 'Technical References',
+    children: [
+      { label: 'Foundation Repair Dictionary', href: '/foundation-repair-dictionary' },
+      { label: 'Foundation Types', href: '/foundation-types' },
+      { label: 'Material Behavior', href: '/material-behavior' },
+      { label: 'Common Signs', href: '/common-signs' },
+    ],
+  },
+  {
+    label: 'Knowledge Center',
+    children: [
+      { label: 'Educational Articles', href: '/educational-articles' },
+      { label: 'Industry Articles', href: '/industry-articles' },
+      { label: 'All Articles', href: '/all-articles' },
+    ],
+  },
+  {
+    label: 'Repair Methods',
+    children: [
+      { label: 'Helical Piers', href: '/helical-piers' },
+      { label: 'Micropiles', href: '/micropiles' },
+    ],
+  },
+  {
+    label: 'New Mexico',
+    children: [
+      { label: 'Foundation Behavior in NM', href: '/foundation-behavior-in-new-mexico' },
+      { label: 'NM Soil Conditions', href: '/new-mexico-soil-conditions' },
+      { label: 'Investigate Further', href: '/investigate-further' },
+    ],
+  },
+  {
+    label: 'Arizona',
+    children: [
+      { label: 'Know Before You Sign', href: '/know-before-you-sign' },
+      { label: 'Foundation Behavior in AZ', href: '/foundation-behavior-in-arizona' },
+    ],
+  },
+  { label: 'How the Industry Has Changed', href: '/how-the-industry-has-changed' },
+];
+---
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-logo" href="/start-here">
+      <img
+        class="site-logo-img"
+        src="https://images.squarespace-cdn.com/content/v1/6983db0242b9b6302c661059/fa18c5f7-2e51-4ae1-81d8-0517c590d714/MFRC+Logo.jpg?format=500w"
+        alt="MFRC — My Foundation Repair Consultant"
+        width="220"
+        height="139"
+      />
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" id="navToggle">
+      Menu
+    </button>
+    <nav class="site-nav" id="siteNav" aria-label="Main">
+      <ul class="nav-list">
+        {nav.map((item) => (
+          <li class="nav-item">
+            {item.children ? (
+              <details class="nav-dropdown">
+                <summary>{item.label}</summary>
+                <ul>
+                  {item.children.map((child) => (
+                    <li><a href={child.href}>{child.label}</a></li>
+                  ))}
+                </ul>
+              </details>
+            ) : (
+              <a href={item.href}>{item.label}</a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('siteNav');
+  toggle?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+</script>
