@@ -1,6 +1,7 @@
 ---
 import { getAllRoutes, cleanTitle, type PageEntry } from '../lib/pages';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/redesign.css';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -15,21 +16,41 @@ const { page } = Astro.props;
 const htmlPath = path.join(process.cwd(), 'content/extracted', page.file);
 let rawHtml = fs.readFileSync(htmlPath, 'utf-8');
 const isHub = page.type === 'hub-custom';
+const isArticle = page.type === 'article';
 const title = cleanTitle(page.title);
 
-// Avoid duplicate title when extracted content starts with matching h2
 if (!isHub) {
-  rawHtml = rawHtml.replace(new RegExp(`^\\s*<h2>${title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}</h2>`, 'i'), '');
+  rawHtml = rawHtml.replace(new RegExp(`^\\s*<h2>${title.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}</h2>`, 'i'), '');
 }
 ---
 
 <BaseLayout title={title} description={page.description} hub={isHub}>
   {isHub ? (
     <Fragment set:html={rawHtml} />
-  ) : (
-    <div class="page">
-      <div class="page-header">
+  ) : isArticle ? (
+    <article class="page page-redesign article-paper">
+      <header class="page-header">
+        <p class="page-eyebrow">MFRC · Article</p>
         <h1>{title}</h1>
+        {page.description && <p class="page-lede">{page.description}</p>}
+        <p class="article-meta">Educational reference · Not a sales pitch</p>
+      </header>
+      <div class="content-block article-body" set:html={rawHtml} />
+      <footer class="article-end">
+        <p>This is education, not a diagnosis. Broader context: <a href="/start-here">Start Here</a>.</p>
+        <div class="related-links">
+          <a href="/all-articles">All articles →</a>
+          <a href="/foundation-repair-dictionary">Dictionary →</a>
+          <a href="/how-the-industry-has-changed">How the industry changed →</a>
+        </div>
+      </footer>
+    </article>
+  ) : (
+    <div class="page page-redesign">
+      <div class="page-header">
+        <p class="page-eyebrow">MFRC · Reference</p>
+        <h1>{title}</h1>
+        {page.description && <p class="page-lede">{page.description}</p>}
       </div>
       <div class="content-block" set:html={rawHtml} />
     </div>
