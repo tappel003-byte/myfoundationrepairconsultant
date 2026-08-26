@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+import extracted from '../../content/extracted/micropiles.html?raw';
+
+const nav = [
+  { id: 'what-they-are', label: 'What they are' },
+  { id: 'load-transfer', label: 'How they transfer load' },
+  { id: 'grouting-methods', label: 'Grouting methods' },
+  { id: 'soil-type', label: 'Soil type & capacity' },
+  { id: 'when-appropriate', label: 'When appropriate' },
+  { id: 'investigation', label: 'Investigation requirements' },
+  { id: 'installation', label: 'Installation process' },
+  { id: 'building-owners', label: 'What owners should know' },
+];
+
+const start = extracted.indexOf('<div class="intro">');
+const body = start >= 0 ? extracted.slice(start).replace(/<\/div>\s*$/, '') : extracted;
+---
+
+<BaseLayout
+  title="Micropiles"
+  description="What micropiles are, how they transfer load through soil, when specific soil conditions make them appropriate, and what building owners should understand when evaluating recommendations — without sales pressure."
+  hub={true}
+>
+  <HubPageShell
+    title="Micropiles"
+    subhead="What they are, how they work, and when specific soil conditions make them appropriate"
+    bannerBlurb="This page explains what micropiles are, how they transfer load through soil, when specific soil conditions make them appropriate for foundation support, and what building owners should understand when evaluating recommendations—without sales pressure."
+    glance={[
+      { label: 'Diameter', value: '3–12 inches' },
+      { label: 'Capacity source', value: 'Grout-to-ground bond along shaft' },
+      { label: 'Best for', value: 'Deep bearing, variable soils, limited access' },
+      { label: 'Not for', value: 'High lateral loads without battering' },
+    ]}
+    nav={nav}
+  >
+    <Fragment set:html={body} />
+  </HubPageShell>
+</BaseLayout>
