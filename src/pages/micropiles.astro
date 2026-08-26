@@ -14,12 +14,8 @@ const nav = [
   { id: 'building-owners', label: 'What owners should know' },
 ];
 
-const introStart = extracted.indexOf('<div class="intro">');
-const introEnd = extracted.indexOf('<!-- TOPICS LIST');
 const bodyStart = extracted.indexOf('<!-- WHAT MICROPILES ARE');
-const intro = introStart >= 0 && introEnd > introStart ? extracted.slice(introStart, introEnd) : '';
-const rest = bodyStart >= 0 ? extracted.slice(bodyStart).replace(/<\/div>\s*$/, '') : extracted.slice(Math.max(introStart, 0));
-const body = intro + rest;
+const rest = bodyStart >= 0 ? extracted.slice(bodyStart).replace(/<\/div>\s*$/, '') : extracted;
 ---
 
 <BaseLayout
@@ -40,6 +36,6 @@ const body = intro + rest;
     nav={nav}
     topicsStyle="list"
   >
-    <Fragment set:html={body} />
+    <Fragment set:html={rest} />
   </HubPageShell>
 </BaseLayout>
