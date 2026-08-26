@@ -64,23 +64,23 @@ hr {
   font-size: 22px;
 }
 
-.accordion-section {
-  border: none;
-  background: transparent;
-  box-shadow: none;
+html body .accordion-section {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
   margin: 0 0 8px;
 }
-.accordion-header {
-  background: transparent;
+html body .accordion-header {
+  background: transparent !important;
   padding: 14px 0;
 }
-.accordion-header:hover {
-  background: transparent;
+html body .accordion-header:hover {
+  background: transparent !important;
 }
-.accordion-content {
-  background: transparent;
+html body .accordion-content {
+  background: transparent !important;
 }
-.accordion-content-inner {
+html body .accordion-content-inner {
   padding: 8px 0 28px;
 }
 .accordion-content-inner p {
@@ -94,17 +94,7 @@ hr {
   max-height: 12000px;
 }
 .accordion-close {
-  display: block;
-  margin: 24px 0 0 auto;
-  padding: 0;
-  border: none;
-  background: none;
-  color: var(--teal);
-  font-family: 'Source Serif 4', Georgia, serif;
-  font-size: 16px;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
+  display: none !important;
 }
 
 .glance {
