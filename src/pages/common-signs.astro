@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+import extracted from '../../content/extracted/common-signs.html?raw';
+
+const nav = [
+  { id: 'drywall', label: 'Drywall' },
+  { id: 'concrete-interior', label: 'Concrete interior' },
+  { id: 'exterior', label: 'Exterior walls' },
+  { id: 'doors', label: 'Doors and windows' },
+  { id: 'floors', label: 'Uneven floors' },
+  { id: 'gaps', label: 'Gaps' },
+  { id: 'corners', label: 'Corner separation' },
+  { id: 'patterns', label: 'Patterns' },
+  { id: 'observe', label: 'When to observe' },
+  { id: 'evaluate', label: 'When to evaluate' },
+];
+
+const start = extracted.indexOf('<!-- DRYWALL');
+const body = start >= 0 ? extracted.slice(start).replace(/<\/div>\s*$/, '') : extracted;
+---
+
+<BaseLayout
+  title="Common Signs"
+  description="What homeowners often notice — and what it usually means."
+  hub={true}
+>
+  <HubPageShell
+    title="Common Signs"
+    subhead="What homeowners often notice — and what it usually means"
+    bannerBlurb="These observations are a starting point, not a conclusion. Noticing one or more of them does not automatically mean a foundation problem exists or that repair is needed."
+    glance={[
+      { label: 'Drywall', value: 'Often shrinkage or seasonal change' },
+      { label: 'Doors', value: 'Wood and humidity first' },
+      { label: 'Floors', value: 'Watch for change over time' },
+      { label: 'Pattern', value: 'Several signs in one area matter more' },
+    ]}
+    nav={nav}
+    topicsStyle="list"
+  >
+    <Fragment set:html={body} />
+  </HubPageShell>
+</BaseLayout>
