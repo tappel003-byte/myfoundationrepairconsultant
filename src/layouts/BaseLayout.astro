@@ -2,6 +2,7 @@
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import '../styles/mfrc.css';
+import '../styles/redesign.css';
 
 interface Props {
   title: string;
@@ -40,30 +41,5 @@ const fullTitle = title.includes('MFRC')
       <slot />
     </main>
     <SiteFooter />
-    {hub && (
-      <script is:inline>
-        document.querySelectorAll('.accordion-header').forEach((header) => {
-          header.addEventListener('click', function () {
-            this.parentElement.classList.toggle('active');
-          });
-        });
-        const floatingNav = document.getElementById('floatingNav');
-        const pageHeader = document.querySelector('.page-header');
-        const topLink = document.getElementById('floatingTopLink');
-        if (floatingNav && pageHeader) {
-          window.addEventListener('scroll', () => {
-            if (window.scrollY > pageHeader.offsetHeight) {
-              floatingNav.classList.add('visible');
-            } else {
-              floatingNav.classList.remove('visible');
-            }
-          });
-          topLink?.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          });
-        }
-      </script>
-    )}
   </body>
 </html>
