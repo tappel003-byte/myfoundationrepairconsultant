@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+import '../styles/redesign.css';
+---
+
+<BaseLayout
+  title="Investigate Further in Arizona"
+  description="Optional next steps after education for Arizona homeowners considering a second opinion or independent floor survey."
+  hub={true}
+>
+  <HubPageShell
+    title="Investigate Further in Arizona"
+    subhead="Education first. Next steps only if you choose them."
+    bannerBlurb="MFRC is an educational resource. It does not inspect houses or sell repair. If you want a measured second look in Arizona, one option is listed below."
+    glance={[
+      { label: 'This page', value: 'Optional next step' },
+      { label: 'MFRC', value: 'Education only' },
+      { label: 'Arizona option', value: 'Independent second opinion' },
+      { label: 'Not required', value: 'Many concerns stay at learning' },
+    ]}
+    nav={[]}
+    topicsStyle="list"
+  >
+    <div class="intro">
+      <p>MFRC is an educational website created to help homeowners understand common foundation topics before deciding whether any further action is needed.</p>
+      <p>This site does not provide inspections, evaluations, or repair recommendations. Many foundation concerns never progress beyond learning, monitoring, and asking better questions.</p>
+      <p>If you choose to explore a next step in Arizona beyond education, the option below may be appropriate.</p>
+    </div>
+
+    <h2 class="section-heading">Independent second opinion and floor survey</h2>
+    <div class="content-block">
+      <p>Some Arizona homeowners already have a repair estimate and want an independent read of the house before they sign. Others want a measured floor survey that is not tied to selling piers.</p>
+      <p>Foundation Repair Advocate offers paid floor elevation surveys and second opinions for Arizona homeowners. It is not a free sales inspection and not a pier company.</p>
+      <div class="related-links">
+        <a href="https://www.foundationrepairadvocate.com" rel="noopener">Foundation Repair Advocate →</a>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <p>MFRC remains educational. The people who write this content also work in the field. That does not change the purpose of this site.</p>
+    </div>
+  </HubPageShell>
+</BaseLayout>
