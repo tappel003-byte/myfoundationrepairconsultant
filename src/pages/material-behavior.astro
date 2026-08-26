@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+import extracted from '../../content/extracted/material-behavior.html?raw';
+
+const nav = [
+  { id: 'concrete', label: 'Concrete' },
+  { id: 'wood', label: 'Wood' },
+  { id: 'drywall', label: 'Drywall' },
+  { id: 'stucco', label: 'Stucco' },
+  { id: 'masonry', label: 'Masonry' },
+];
+
+const start = extracted.indexOf('<div class="intro">');
+let body = start >= 0 ? extracted.slice(start) : extracted;
+body = body.replace(/<div class="quick-nav"[\s\S]*?<\/div>/, '');
+body = body.replace(/<div class="page-header"[\s\S]*?<\/div>/, '');
+body = body.replace(/<\/div>\s*$/, '');
+---
+
+<BaseLayout
+  title="Material Behavior"
+  description="Why cracks form in concrete, drywall, wood, and finishes — and when they may not mean foundation movement."
+  hub={true}
+>
+  <HubPageShell
+    title="Material Behavior"
+    subhead="Why cracks form, and when they are just the material doing what it does"
+    bannerBlurb="Most cracks start in the material. Understanding that behavior first keeps normal aging from being sold as failure."
+    glance={[
+      { label: 'First question', value: 'What is the material doing?' },
+      { label: 'Common cause', value: 'Shrinkage, moisture, temperature' },
+      { label: 'Misread', value: 'Finish cracks called structural' },
+      { label: 'Next', value: 'Pattern and change over time' },
+    ]}
+    nav={nav}
+    topicsStyle="list"
+  >
+    <Fragment set:html={body} />
+  </HubPageShell>
+</BaseLayout>
