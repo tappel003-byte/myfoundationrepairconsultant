@@ -1,4 +1,4 @@
-/* Hub template: gray banner, chile-red doors, heavier type */
+/* Hub template: gray banner, chile-red only on primary doors */
 
 :root {
   --chile: #c4160d;
@@ -67,10 +67,12 @@ h1, h2, .section-heading, .accordion-title {
   background: var(--door);
 }
 .glance,
-.quick-nav,
+.quick-nav {
+  border-left: 3px solid var(--chile);
+}
 .deeper-card,
 .condition-card {
-  border-left: 4px solid var(--chile);
+  border-left: 3px solid #c8c8c8;
 }
 
 .site-footer-quote {
