@@ -17,9 +17,19 @@ interface Props {
   glance?: GlanceItem[];
   nav: NavItem[];
   showFloatingNav?: boolean;
+  topicsStyle?: 'box' | 'list';
 }
 
-const { title, subhead, bannerBlurb, description, glance, nav, showFloatingNav = true } = Astro.props;
+const {
+  title,
+  subhead,
+  bannerBlurb,
+  description,
+  glance,
+  nav,
+  showFloatingNav = true,
+  topicsStyle = 'box',
+} = Astro.props;
 ---
 
 <div class="hub-wrap">
@@ -52,11 +62,20 @@ const { title, subhead, bannerBlurb, description, glance, nav, showFloatingNav =
       </div>
     )}
 
-    <nav class="quick-nav" id="topics" aria-label="On this page">
-      {nav.map((item) => (
-        <a href={`#${item.id}`}>{item.label}</a>
-      ))}
-    </nav>
+    {topicsStyle === 'list' ? (
+      <nav class="topics-list" id="topics" aria-label="Topics">
+        <h2 class="topics-list-heading">Topics</h2>
+        {nav.map((item) => (
+          <a href={`#${item.id}`}>{item.label}</a>
+        ))}
+      </nav>
+    ) : (
+      <nav class="quick-nav" id="topics" aria-label="On this page">
+        {nav.map((item) => (
+          <a href={`#${item.id}`}>{item.label}</a>
+        ))}
+      </nav>
+    )}
 
     {description && <p class="page-lede">{description}</p>}
 
