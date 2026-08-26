@@ -119,15 +119,19 @@ html body .page-dek {
 
 html body .glance {
   width: 100%;
-  display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  gap: 24px !important;
-  align-items: start;
+  max-width: none;
+  display: flex !important;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
   background: #e8e8e8;
   border-left: 3px solid var(--chile);
   box-shadow: none;
+  padding: 28px 36px;
 }
-.glance-item {
+html body .glance-item {
+  flex: 1 1 0;
   min-width: 0;
 }
 
@@ -155,14 +159,14 @@ html body .glance {
 html body .page-quote {
   display: block;
   font-family: 'Playfair Display', serif;
-  font-size: clamp(44px, 5.5vw, 72px);
+  font-size: clamp(28px, 3.2vw, 42px);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.25;
   color: #1a1a1a;
   text-align: center !important;
-  max-width: 960px;
+  max-width: 820px;
   margin: 80px auto 0;
-  padding: 0 32px 0;
+  padding: 0 32px;
 }
 .page-end {
   height: 96px;
@@ -376,12 +380,14 @@ html body .page-quote {
 
 @media (max-width: 1100px) {
   .site-nav .nav-list { flex-wrap: wrap; gap: 12px 18px; }
-  html body .glance { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  html body .glance { flex-wrap: wrap; }
+  html body .glance-item { flex: 1 1 40%; }
 }
 @media (max-width: 800px) {
   .page { padding-left: 24px; padding-right: 24px; }
   .paper { padding: 36px 24px 64px; }
-  html body .glance { grid-template-columns: 1fr !important; }
+  html body .glance { flex-direction: column; }
+  html body .glance-item { flex: 1 1 auto; }
   .hero-banner-inner {
     grid-template-columns: 1fr;
     gap: 16px;
