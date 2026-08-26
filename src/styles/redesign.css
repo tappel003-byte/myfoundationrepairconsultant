@@ -31,6 +31,46 @@ h1, h2, .section-heading, .accordion-title {
   font-weight: 600;
 }
 
+ul, ol {
+  margin: 12px 0 20px;
+  padding-left: 1.5em;
+}
+ul { list-style: disc; }
+ol { list-style: decimal; }
+li {
+  margin: 0 0 8px;
+  padding-left: 0.15em;
+}
+
+hr {
+  display: none;
+}
+
+.accordion-content-inner {
+  padding: 28px 32px 40px;
+}
+.accordion-content-inner p {
+  margin: 0 0 14px;
+}
+.accordion-content-inner h3,
+.accordion-content-inner .subhead {
+  margin: 28px 0 12px;
+}
+.accordion-section.active .accordion-content {
+  max-height: 12000px;
+}
+
+.condition-card h4 {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.deeper-card {
+  box-shadow: none;
+}
+.glance {
+  box-shadow: none;
+}
+
 .site-header-inner {
   max-width: 1280px;
   padding: 18px 48px;
@@ -87,7 +127,7 @@ h1, h2, .section-heading, .accordion-title {
   z-index: 300;
   box-shadow: 0 8px 20px -12px rgba(0,0,0,0.25);
 }
-.nav-dropdown .nav-menu li { margin: 8px 0; }
+.nav-dropdown .nav-menu li { margin: 8px 0; list-style: none; }
 .nav-dropdown:hover .nav-menu,
 .nav-dropdown:focus-within .nav-menu {
   display: block;
