@@ -1,6 +1,5 @@
 ---
 import SiteHeader from '../components/SiteHeader.astro';
-import SiteFooter from '../components/SiteFooter.astro';
 import '../styles/mfrc.css';
 import '../styles/redesign.css';
 
@@ -39,7 +38,7 @@ const fullTitle = title.includes('MFRC')
     <SiteHeader />
     <main>
       <slot />
+      <p class="page-quote">“Understanding comes from seeing how many small pieces fit together.”</p>
     </main>
-    <SiteFooter />
   </body>
 </html>
