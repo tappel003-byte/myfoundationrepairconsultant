@@ -69,6 +69,7 @@ html body .accordion-section {
   background: transparent !important;
   box-shadow: none !important;
   margin: 0 0 8px;
+  max-width: var(--col);
 }
 html body .accordion-header {
   background: transparent !important;
@@ -136,6 +137,11 @@ html body .glance-item {
   width: auto !important;
   min-width: 0 !important;
   max-width: none !important;
+}
+
+.redesign-body .content-block,
+.redesign-body .section-heading {
+  max-width: var(--col);
 }
 
 .condition-card,
