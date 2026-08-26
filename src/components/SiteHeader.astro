@@ -61,16 +61,16 @@ const nav = [
     <nav class="site-nav" id="siteNav" aria-label="Main">
       <ul class="nav-list">
         {nav.map((item) => (
-          <li class="nav-item">
+          <li class={item.children ? 'nav-item nav-dropdown' : 'nav-item'}>
             {item.children ? (
-              <details class="nav-dropdown">
-                <summary>{item.label}</summary>
-                <ul>
+              <>
+                <span class="nav-parent">{item.label}</span>
+                <ul class="nav-menu">
                   {item.children.map((child) => (
                     <li><a href={child.href}>{child.label}</a></li>
                   ))}
                 </ul>
-              </details>
+              </>
             ) : (
               <a href={item.href}>{item.label}</a>
             )}
