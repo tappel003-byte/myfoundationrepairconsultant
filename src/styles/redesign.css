@@ -8,14 +8,14 @@
 }
 
 html {
-  scroll-padding-top: 128px;
+  scroll-padding-top: 24px;
 }
 [id],
 .section-anchor,
 .section-heading,
 .accordion-section,
 h2 {
-  scroll-margin-top: 128px;
+  scroll-margin-top: 24px;
 }
 .section-anchor {
   display: block;
@@ -168,13 +168,13 @@ html body .glance-item {
 html body .page-quote {
   display: block;
   font-family: 'Playfair Display', serif;
-  font-size: clamp(44px, 5.5vw, 72px);
+  font-size: 36px;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.25;
   color: #1a1a1a;
   text-align: center !important;
-  max-width: 960px;
-  margin: 80px auto 0;
+  max-width: 820px;
+  margin: 64px auto 0;
   padding: 0 32px;
 }
 .page-end {
@@ -182,13 +182,13 @@ html body .page-quote {
 }
 
 .site-header {
+  position: relative;
   overflow: visible;
 }
 .site-header-inner {
   max-width: 1280px;
-  padding: 18px 48px;
+  padding: 16px 48px;
   align-items: center;
-  overflow: visible;
 }
 .site-logo {
   display: flex;
@@ -201,7 +201,7 @@ html body .page-quote {
   height: 88px;
   width: auto;
 }
-.site-nav { flex: 1; overflow: visible; }
+.site-nav { flex: 1; }
 .site-nav .nav-list {
   flex-wrap: nowrap;
   gap: 22px;
@@ -225,13 +225,11 @@ html body .page-quote {
 }
 .nav-dropdown {
   position: relative;
-  padding-bottom: 14px;
-  margin-bottom: -14px;
 }
 .nav-dropdown .nav-menu {
   display: none;
   position: absolute;
-  top: calc(100% - 14px);
+  top: 100%;
   left: 0;
   min-width: 260px;
   background: #fff;
@@ -239,7 +237,6 @@ html body .page-quote {
   padding: 12px 16px;
   list-style: none;
   z-index: 400;
-  box-shadow: 0 8px 20px -12px rgba(0,0,0,0.25);
 }
 .nav-list > li:last-child .nav-menu,
 .nav-list > li:nth-last-child(2) .nav-menu {
