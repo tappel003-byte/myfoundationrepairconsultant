@@ -107,20 +107,21 @@ html body .accordion-content-inner {
   margin-bottom: 56px;
 }
 
-.page-dek {
+html body .page-dek {
   font-size: 18px;
   color: var(--text-muted);
   max-width: none;
-  border-left: none;
-  padding-left: 0;
+  border: none !important;
+  border-left: none !important;
+  padding-left: 0 !important;
   margin: 40px 0 28px;
 }
 
 html body .glance {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 24px !important;
   align-items: start;
   background: #e8e8e8;
   border-left: 3px solid var(--chile);
@@ -151,26 +152,30 @@ html body .glance {
   text-align: left;
 }
 
-.page-quote {
+html body .page-quote {
+  display: block;
   font-family: 'Playfair Display', serif;
-  font-size: clamp(40px, 5vw, 64px);
-  font-weight: 600;
+  font-size: clamp(44px, 5.5vw, 72px);
+  font-weight: 700;
   line-height: 1.2;
   color: #1a1a1a;
-  text-align: center;
-  max-width: 920px;
-  margin: 72px auto 80px;
-  padding: 0 24px;
+  text-align: center !important;
+  max-width: 960px;
+  margin: 80px auto 0;
+  padding: 0 32px 0;
+}
+.page-end {
+  height: 96px;
 }
 
-.site-footer {
-  display: none;
+.site-header {
+  overflow: visible;
 }
-
 .site-header-inner {
   max-width: 1280px;
   padding: 18px 48px;
   align-items: center;
+  overflow: visible;
 }
 .site-logo {
   display: flex;
@@ -183,7 +188,7 @@ html body .glance {
   height: 88px;
   width: auto;
 }
-.site-nav { flex: 1; }
+.site-nav { flex: 1; overflow: visible; }
 .site-nav .nav-list {
   flex-wrap: nowrap;
   gap: 22px;
@@ -215,13 +220,18 @@ html body .glance {
   position: absolute;
   top: calc(100% - 14px);
   left: 0;
-  min-width: 240px;
+  min-width: 260px;
   background: #fff;
   border: 1px solid #e4e4e4;
   padding: 12px 16px;
   list-style: none;
-  z-index: 300;
+  z-index: 400;
   box-shadow: 0 8px 20px -12px rgba(0,0,0,0.25);
+}
+.nav-list > li:last-child .nav-menu,
+.nav-list > li:nth-last-child(2) .nav-menu {
+  left: auto;
+  right: 0;
 }
 .nav-dropdown .nav-menu li { margin: 8px 0; list-style: none; }
 .nav-dropdown:hover .nav-menu,
@@ -366,12 +376,12 @@ html body .glance {
 
 @media (max-width: 1100px) {
   .site-nav .nav-list { flex-wrap: wrap; gap: 12px 18px; }
-  html body .glance { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  html body .glance { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
 }
 @media (max-width: 800px) {
   .page { padding-left: 24px; padding-right: 24px; }
   .paper { padding: 36px 24px 64px; }
-  html body .glance { grid-template-columns: 1fr; }
+  html body .glance { grid-template-columns: 1fr !important; }
   .hero-banner-inner {
     grid-template-columns: 1fr;
     gap: 16px;
