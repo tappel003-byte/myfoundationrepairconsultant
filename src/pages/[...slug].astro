@@ -28,27 +28,24 @@ if (!isHub) {
   {isHub ? (
     <Fragment set:html={rawHtml} />
   ) : isArticle ? (
-    <article class="page page-redesign article-paper">
-      <header class="page-header">
-        <p class="page-eyebrow">MFRC · Article</p>
-        <h1>{title}</h1>
-        {page.description && <p class="page-lede">{page.description}</p>}
-        <p class="article-meta">Educational reference · Not a sales pitch</p>
-      </header>
-      <div class="content-block article-body" set:html={rawHtml} />
-      <footer class="article-end">
-        <p>This is education, not a diagnosis. Broader context: <a href="/start-here">Start Here</a>.</p>
-        <div class="related-links">
-          <a href="/all-articles">All articles →</a>
-          <a href="/foundation-repair-dictionary">Dictionary →</a>
-          <a href="/how-the-industry-has-changed">How the industry changed →</a>
+    <article class="article-paper">
+      <section class="hero-banner">
+        <div class="hero-banner-inner">
+          <h1>{title}</h1>
+          {page.description && <p class="hero-blurb">{page.description}</p>}
         </div>
-      </footer>
+      </section>
+      <div class="page page-redesign">
+        <div class="content-block article-body" set:html={rawHtml} />
+        <p class="article-end">
+          <a href="/educational-articles">Educational Articles</a>
+          · <a href="/start-here">Start Here</a>
+        </p>
+      </div>
     </article>
   ) : (
     <div class="page page-redesign">
       <div class="page-header">
-        <p class="page-eyebrow">MFRC · Reference</p>
         <h1>{title}</h1>
         {page.description && <p class="page-lede">{page.description}</p>}
       </div>
