@@ -118,21 +118,24 @@ html body .page-dek {
 }
 
 html body .glance {
-  width: 100%;
-  max-width: none;
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box;
   display: flex !important;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 32px;
+  flex-wrap: nowrap !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  gap: 24px;
   background: #e8e8e8;
   border-left: 3px solid var(--chile);
-  box-shadow: none;
-  padding: 28px 36px;
+  box-shadow: none !important;
+  padding: 28px 32px;
 }
 html body .glance-item {
-  flex: 1 1 0;
-  min-width: 0;
+  flex: 1 1 0 !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
 }
 
 .condition-card,
@@ -159,12 +162,12 @@ html body .glance-item {
 html body .page-quote {
   display: block;
   font-family: 'Playfair Display', serif;
-  font-size: clamp(28px, 3.2vw, 42px);
+  font-size: clamp(44px, 5.5vw, 72px);
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.2;
   color: #1a1a1a;
   text-align: center !important;
-  max-width: 820px;
+  max-width: 960px;
   margin: 80px auto 0;
   padding: 0 32px;
 }
@@ -380,14 +383,14 @@ html body .page-quote {
 
 @media (max-width: 1100px) {
   .site-nav .nav-list { flex-wrap: wrap; gap: 12px 18px; }
-  html body .glance { flex-wrap: wrap; }
-  html body .glance-item { flex: 1 1 40%; }
+  html body .glance { flex-wrap: wrap !important; }
+  html body .glance-item { flex: 1 1 40% !important; }
 }
 @media (max-width: 800px) {
   .page { padding-left: 24px; padding-right: 24px; }
   .paper { padding: 36px 24px 64px; }
-  html body .glance { flex-direction: column; }
-  html body .glance-item { flex: 1 1 auto; }
+  html body .glance { flex-direction: column !important; }
+  html body .glance-item { flex: 1 1 auto !important; }
   .hero-banner-inner {
     grid-template-columns: 1fr;
     gap: 16px;
