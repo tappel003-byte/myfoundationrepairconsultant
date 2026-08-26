@@ -14,8 +14,12 @@ const nav = [
   { id: 'building-owners', label: 'What owners should know' },
 ];
 
-const start = extracted.indexOf('<div class="intro">');
-const body = start >= 0 ? extracted.slice(start).replace(/<\/div>\s*$/, '') : extracted;
+const introStart = extracted.indexOf('<div class="intro">');
+const introEnd = extracted.indexOf('<!-- TOPICS LIST');
+const bodyStart = extracted.indexOf('<!-- WHAT MICROPILES ARE');
+const intro = introStart >= 0 && introEnd > introStart ? extracted.slice(introStart, introEnd) : '';
+const rest = bodyStart >= 0 ? extracted.slice(bodyStart).replace(/<\/div>\s*$/, '') : '';
+const body = intro + rest;
 ---
 
 <BaseLayout
