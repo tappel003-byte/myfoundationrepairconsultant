@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HubPageShell from '../components/hub/HubPageShell.astro';
+import { articleSchema, stripHtml } from '../lib/schema';
 
 const faqs = [
   {
@@ -77,6 +78,12 @@ const faqs = [
 ];
 
 const nav = faqs.map((f) => ({ id: f.id, label: f.q.replace('?', '') }));
+const schema = articleSchema({
+  headline: 'Start Here',
+  description: 'Independent foundation repair education. Ten questions building owners ask when they notice cracks, sticking doors, or movement.',
+  url: 'https://www.myfoundationrepairconsultant.com/start-here',
+  faqs: faqs.map((f) => ({ name: f.q, text: stripHtml(f.body) })),
+});
 ---
 
 <BaseLayout
@@ -85,6 +92,7 @@ const nav = faqs.map((f) => ({ id: f.id, label: f.q.replace('?', '') }));
   hub={true}
   quote="The question is not whether your building has cracks—most do. The question is whether those cracks tell a story of past movement that has stabilized, or ongoing movement that requires attention."
 >
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   <HubPageShell
     title="Start Here"
     subhead="Ten questions building owners ask when something doesn't feel right"
