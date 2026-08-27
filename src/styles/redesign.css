@@ -73,3 +73,31 @@
 .letter-nav { display: flex; flex-wrap: wrap; gap: 10px 14px; margin: 0 0 40px; }
 .letter-nav a { color: var(--teal); font-weight: 600; text-decoration: none; }
 .term-name { font-family: 'Playfair Display', serif; font-size: 24px; margin: 0 0 10px; }
+
+html body .glance {
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box;
+  display: table !important;
+  table-layout: fixed !important;
+  background: #e8e8e8;
+  border-left: 3px solid var(--chile);
+  box-shadow: none !important;
+  padding: 0;
+  border-spacing: 0;
+}
+html body .glance-item {
+  display: table-cell !important;
+  width: 25% !important;
+  vertical-align: top;
+  padding: 28px 20px;
+}
+html body .glance-item:first-child { padding-left: 32px; }
+html body .glance-item:last-child { padding-right: 32px; }
+@media (max-width: 1100px) {
+  html body .glance,
+  html body .glance-item {
+    display: block !important;
+    width: 100% !important;
+  }
+}
