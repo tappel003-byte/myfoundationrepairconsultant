@@ -122,21 +122,25 @@ html body .glance {
   width: 100% !important;
   max-width: none !important;
   box-sizing: border-box;
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  justify-content: space-between !important;
-  align-items: flex-start !important;
-  gap: 24px;
+  display: table !important;
+  table-layout: fixed !important;
   background: #e8e8e8;
   border-left: 3px solid var(--chile);
   box-shadow: none !important;
-  padding: 28px 32px;
+  padding: 0;
+  border-spacing: 0;
 }
 html body .glance-item {
-  flex: 1 1 0 !important;
-  width: auto !important;
-  min-width: 0 !important;
-  max-width: none !important;
+  display: table-cell !important;
+  width: 25% !important;
+  vertical-align: top;
+  padding: 28px 20px;
+}
+html body .glance-item:first-child {
+  padding-left: 32px;
+}
+html body .glance-item:last-child {
+  padding-right: 32px;
 }
 
 .redesign-body .content-block,
@@ -386,14 +390,15 @@ html body .page-quote {
 
 @media (max-width: 1100px) {
   .site-nav .nav-list { flex-wrap: wrap; gap: 12px 18px; }
-  html body .glance { flex-wrap: wrap !important; }
-  html body .glance-item { flex: 1 1 40% !important; }
+  html body .glance,
+  html body .glance-item {
+    display: block !important;
+    width: 100% !important;
+  }
 }
 @media (max-width: 800px) {
   .page { padding-left: 24px; padding-right: 24px; }
   .paper { padding: 36px 24px 64px; }
-  html body .glance { flex-direction: column !important; }
-  html body .glance-item { flex: 1 1 auto !important; }
   .hero-banner-inner {
     grid-template-columns: 1fr;
     gap: 16px;
