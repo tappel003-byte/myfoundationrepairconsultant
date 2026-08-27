@@ -53,6 +53,14 @@
 }
 .article-index a:hover { text-decoration: underline; }
 
+.redesign-body ul,
+.redesign-body ol {
+  margin: 16px 0 24px 24px;
+}
+.redesign-body li {
+  margin-bottom: 8px;
+}
+
 .paper { max-width: 720px; margin: 0 auto; padding: 56px 48px 80px; }
 .paper-head h1 {
   font-family: 'Playfair Display', serif;
