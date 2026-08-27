@@ -1,1 +1,1210 @@
-PLACEHOLDER
+
+<style>
+  :root {
+    --black:          #0A0A0A;
+    --dark-gray:      #444444;
+    --mid-gray:       #6B6B6B;
+    --light-gray:     #A8A8A8;
+    --rule:           #E0E0DC;
+    --off-white:      #F7F7F4;
+    --white:          #FFFFFF;
+    --text-primary:   #1A1A1A;
+    --text-secondary: #4A4A4A;
+    --text-muted:     #888888;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--white);
+    color: var(--text-primary);
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* BASIN INDEX - white */
+  .basin-index { background: var(--white); padding: 56px 40px 64px; border-bottom: 1px solid var(--rule); }
+  .basin-index-label {
+    font-family: 'Manrope', sans-serif; font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--text-muted); text-align: center; margin-bottom: 36px;
+  }
+  .basin-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px; max-width: 1100px; margin: 0 auto;
+  }
+
+  /* Basin cards - clean light cards until photos added */
+  .basin-card {
+    position: relative; border-radius: 6px; overflow: hidden;
+    cursor: pointer; text-decoration: none; display: block;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: var(--off-white); min-height: 120px;
+    border: 1px solid var(--rule);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .basin-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.09); border-color: #ccc; }
+  /* Photo state — overlay only when has-photo class added */
+  .basin-card.has-photo .basin-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.26) 55%, transparent 100%);
+  }
+  .basin-card.has-photo .basin-card-img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; transition: transform 0.4s ease;
+  }
+  .basin-card.has-photo:hover .basin-card-img { transform: scale(1.04); }
+  .basin-card.has-photo .basin-card-name { color: var(--white); }
+  .basin-card.has-photo .basin-card-cities { color: rgba(255,255,255,0.88); }
+  .basin-card.has-photo .basin-card-text { padding: 80px 18px 18px; }
+  .basin-card-overlay { display: none; }
+  .basin-card-text { position: relative; padding: 18px 20px; }
+  .basin-card-name {
+    font-family: 'Manrope', sans-serif; font-size: 13.5px; font-weight: 700;
+    color: var(--text-primary); line-height: 1.25; margin-bottom: 6px; letter-spacing: -0.01em;
+  }
+  .basin-card-cities {
+    font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600;
+    color: var(--text-muted); line-height: 1.55;
+  }
+
+  /* Placeholder - white card */
+  .basin-card-placeholder {
+    background: var(--white); border: 1px solid var(--rule); border-radius: 6px;
+    min-height: 130px; display: flex; flex-direction: column;
+    align-items: flex-start; padding: 18px 20px; gap: 6px;
+  }
+  .basin-card-placeholder-name {
+    font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600; color: var(--mid-gray);
+  }
+  .basin-card-placeholder-cities {
+    font-family: 'Manrope', sans-serif; font-size: 11.5px; font-weight: 600;
+    color: var(--light-gray); line-height: 1.55;
+  }
+  .basin-card-placeholder-status {
+    font-family: 'Manrope', sans-serif; font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--light-gray); margin-top: auto; padding-top: 8px;
+  }
+
+  /* INTRO */
+  .intro-bridge { max-width: 680px; margin: 64px auto 0; padding: 0 40px; text-align: center; }
+  .intro-bridge p { font-size: 16px; color: var(--text-secondary); line-height: 1.85; }
+  .intro-bridge p + p { margin-top: 18px; }
+
+  /* DIVIDER */
+  .section-divider {
+    max-width: 1100px; margin: 56px auto 0; padding: 0 40px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .divider-rule { flex: 1; height: 1px; background: var(--rule); }
+  .divider-label {
+    font-family: 'Manrope', sans-serif; font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--text-muted); white-space: nowrap;
+  }
+
+  /* BASIN PROFILE */
+  .basin-section {
+    max-width: 1100px; margin: 0 auto; padding: 56px 40px 0;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .basin-section.visible { opacity: 1; transform: translateY(0); }
+
+  /* Photo header - no-photo state: light background, normal flow */
+  .basin-photo-header {
+    position: relative; border-radius: 8px 8px 0 0; overflow: hidden;
+    background: var(--off-white);
+    border: 1px solid var(--rule); border-bottom: none;
+  }
+  .basin-photo-header img { width: 100%; height: 260px; object-fit: cover; display: block; }
+  .basin-photo-overlay { display: none; }
+  /* When photo present, overlay shows and content floats over image */
+  .basin-photo-header.has-photo .basin-photo-overlay {
+    display: block; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(20,20,20,0.72) 0%, rgba(20,20,20,0.18) 55%, transparent 100%);
+  }
+  .basin-photo-header.has-photo .basin-photo-content {
+    position: absolute; bottom: 0; left: 0; right: 0;
+  }
+  .basin-photo-header.has-photo .basin-number { color: rgba(255,255,255,0.55); }
+  .basin-photo-header.has-photo .basin-title { color: var(--white); }
+  .basin-photo-header.has-photo .basin-cities-tag { color: rgba(255,255,255,0.90); }
+  .basin-photo-content { padding: 24px 40px 28px; }
+  .basin-number {
+    font-family: 'Manrope', sans-serif; font-size: 10px; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--text-muted); display: block; margin-bottom: 8px;
+  }
+  .basin-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 700;
+    color: var(--text-primary); line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 10px;
+  }
+  .basin-cities-tag {
+    font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700;
+    color: var(--text-secondary); letter-spacing: 0.005em; line-height: 1.65;
+  }
+
+  /* Basin body */
+  .basin-body {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    background: var(--white); border: 1px solid var(--rule); border-top: none; overflow: hidden;
+  }
+  .basin-intro { padding: 36px 40px; border-right: 1px solid var(--rule); }
+  .basin-col-label {
+    font-family: 'Manrope', sans-serif; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 18px; display: block;
+  }
+  .basin-intro p { font-size: 15px; line-height: 1.85; color: var(--text-secondary); }
+  .basin-intro p + p { margin-top: 14px; }
+
+  .basin-conditions { padding: 36px 40px; background: var(--off-white); }
+  .condition-item { padding: 14px 0; border-bottom: 1px solid var(--rule); }
+  .condition-item:last-of-type { border-bottom: none; }
+  .condition-name {
+    font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700;
+    color: var(--text-primary); margin-bottom: 4px;
+  }
+  .condition-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.65; }
+
+  /* References */
+  .basin-references {
+    background: var(--off-white); border: 1px solid var(--rule); border-top: none;
+    border-radius: 0 0 8px 8px; padding: 18px 40px;
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px;
+  }
+  .references-label {
+    font-family: 'Manrope', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap;
+  }
+  .references-list { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+
+  /* BACK NAV */
+  .basin-nav-bar {
+    display: flex; justify-content: flex-end; align-items: center;
+    padding: 12px 40px; border: 1px solid var(--rule); border-top: none;
+    border-radius: 0 0 8px 8px; background: var(--white);
+  }
+  .basin-nav-link {
+    font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .basin-nav-link:hover { color: var(--text-primary); }
+
+  /* CLOSING */
+  .closing-note { max-width: 640px; margin: 72px auto 80px; padding: 0 40px; text-align: center; }
+  .closing-note p { font-size: 15px; color: var(--text-muted); line-height: 1.8; font-style: italic; }
+
+  /* RESPONSIVE */
+  @media (max-width: 860px) {
+    .basin-body { grid-template-columns: 1fr; }
+    .basin-intro { border-right: none; border-bottom: 1px solid var(--rule); }
+    .basin-index { padding: 40px 24px 48px; }
+    .basin-section { padding: 48px 24px 0; }
+    .intro-bridge, .section-divider { padding: 0 24px; }
+    .basin-photo-content { padding: 24px; }
+    .basin-intro, .basin-conditions, .basin-references { padding: 28px 24px; }
+  }
+  @media (max-width: 540px) {
+    .basin-grid { grid-template-columns: 1fr 1fr; }
+    .basin-photo-header { height: 280px; }
+  }
+</style>
+
+
+<!-- BASIN INDEX -->
+<section class="basin-index" id="basin-index">
+  <p class="basin-index-label">Find your region — 16 basins</p>
+  <div class="basin-grid">
+
+    <a href="#basin01" class="basin-card no-photo">
+      <div class="basin-card-overlay"></div>
+      <div class="basin-card-text">
+        <div class="basin-card-name">Albuquerque Basin</div>
+        <div class="basin-card-cities">Albuquerque · Rio Rancho · Bernalillo · Los Lunas · Belen · Corrales · Placitas · Sandia Park · Tijeras · Cedar Crest · Edgewood · Los Ranchos · Kirtland AFB</div>
+      </div>
+    </a>
+
+    <a href="#basin02" class="basin-card no-photo">
+      <div class="basin-card-overlay"></div>
+      <div class="basin-card-text">
+        <div class="basin-card-name">Española Basin</div>
+        <div class="basin-card-cities">Santa Fe · Española · Los Alamos · Pojoaque · Chimayó · Nambé · Tesuque · Pecos · Glorieta · Galisteo · Lamy</div>
+      </div>
+    </a>
+
+    <a href="#basin03" class="basin-card no-photo">
+      <div class="basin-card-overlay"></div>
+      <div class="basin-card-text">
+        <div class="basin-card-name">Mesilla Basin</div>
+        <div class="basin-card-cities">Las Cruces · Sunland Park · Doña Ana · Anthony · Mesilla · Chaparral · La Mesa · Vado · Radium Springs</div>
+      </div>
+    </a>
+
+    <a href="#basin04" class="basin-card no-photo">
+      <div class="basin-card-overlay"></div>
+      <div class="basin-card-text">
+        <div class="basin-card-name">San Juan Basin</div>
+        <div class="basin-card-cities">Farmington · Aztec · Bloomfield · Gallup · Shiprock · Grants · Kirtland · Flora Vista · Cedar Hill</div>
+      </div>
+    </a>
+
+    <a href="#basin05" class="basin-card no-photo">
+      <div class="basin-card-overlay"></div>
+      <div class="basin-card-text">
+        <div class="basin-card-name">Pecos Valley</div>
+        <div class="basin-card-cities">Roswell · Carlsbad · Artesia · Hagerman · Dexter · Lake Arthur · Eunice · Lovington</div>
+      </div>
+    </a>
+
+    <a href="#basin06" class="basin-card no-photo">
+      <div class="basin-card-overlay"></div>
+      <div class="basin-card-text">
+        <div class="basin-card-name">High Plains</div>
+        <div class="basin-card-cities">Clovis · Portales · Hobbs · Lovington · Tucumcari</div>
+      </div>
+    </a>
+
+    <a href="#basin07" class="basin-card no-photo">
+      <div class="basin-card-overlay"></div>
+      <div class="basin-card-text">
+        <div class="basin-card-name">Tularosa Basin</div>
+        <div class="basin-card-cities">Alamogordo · Tularosa · Carrizozo · La Luz · Bent · Holloman AFB · Orogrande</div>
+      </div>
+    </a>
+
+    <a href="#basin08" class="basin-card no-photo">
+      <div class="basin-card-overlay"></div>
+      <div class="basin-card-text">
+        <div class="basin-card-name">Sacramento Mountains</div>
+        <div class="basin-card-cities">Ruidoso · Ruidoso Downs · Cloudcroft · Mescalero · Alto · Capitan · Lincoln · Corona</div>
+      </div>
+    </a>
+
+    <a href="#basin09" class="basin-card no-photo">
+      <div class="basin-card-overlay"></div>
+      <div class="basin-card-text">
+        <div class="basin-card-name">Taos Plateau</div>
+        <div class="basin-card-cities">Taos · Ranchos de Taos · Angel Fire · Red River · Questa · Arroyo Seco · El Prado · Penasco · Vadito</div>
+      </div>
+    </a>
+
+    <a href="#basin10" class="basin-card no-photo">
+      <div class="basin-card-overlay"></div>
+      <div class="basin-card-text">
+        <div class="basin-card-name">Estancia Basin</div>
+        <div class="basin-card-cities">Moriarty · Estancia · Willard · Mountainair</div>
+      </div>
+    </a>
+
+    <a href="#basin11" class="basin-card no-photo">
+      <div class="basin-card-overlay"></div>
+      <div class="basin-card-text">
+        <div class="basin-card-name">Mimbres Basin</div>
+        <div class="basin-card-cities">Deming · Silver City · Columbus</div>
+      </div>
+    </a>
+
+    <a href="#basin12" class="basin-card no-photo">
+      <div class="basin-card-overlay"></div>
+      <div class="basin-card-text">
+        <div class="basin-card-name">Jornada del Muerto</div>
+        <div class="basin-card-cities">Socorro · Truth or Consequences · Elephant Butte · Williamsburg · Arrey · Caballo · Hillsboro</div>
+      </div>
+    </a>
+
+    <a href="#basin13" class="basin-card no-photo">
+      <div class="basin-card-overlay"></div>
+      <div class="basin-card-text">
+        <div class="basin-card-name">Raton Basin</div>
+        <div class="basin-card-cities">Raton · Cimarron · Springer · Eagle Nest</div>
+      </div>
+    </a>
+
+    <a href="#basin14" class="basin-card no-photo">
+      <div class="basin-card-overlay"></div>
+      <div class="basin-card-text">
+        <div class="basin-card-name">Hatch–Rincon Corridor</div>
+        <div class="basin-card-cities">Hatch · Rincon · Radium Springs</div>
+      </div>
+    </a>
+
+    <a href="#basin15" class="basin-card no-photo">
+      <div class="basin-card-overlay"></div>
+      <div class="basin-card-text">
+        <div class="basin-card-name">Mora Valley</div>
+        <div class="basin-card-cities">Mora · Wagon Mound · Roy · Las Vegas NM · Guadalupita · Ocate · Solano · Mosquero</div>
+      </div>
+    </a>
+
+    <a href="#basin16" class="basin-card no-photo">
+      <div class="basin-card-overlay"></div>
+      <div class="basin-card-text">
+        <div class="basin-card-name">Lordsburg Basin</div>
+        <div class="basin-card-cities">Lordsburg · Virden · Animas · Columbus</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- INTRO BRIDGE -->
+<div class="intro-bridge">
+  <p>New Mexico spans sixteen geologically distinct basins. The soil conditions in each one behave differently, fail differently, and require different investigation approaches. A crack in Farmington does not mean the same thing as a crack in Roswell --- and a repair method appropriate in one basin may be unnecessary or counterproductive in another.</p>
+  <p>These profiles explain what is actually in the ground across the state --- the formations, the mechanisms, and the conditions that drive foundation movement. Understanding your basin is the starting point for understanding what you are seeing.</p>
+</div>
+
+<div class="section-divider">
+  <div class="divider-rule"></div>
+  <div class="divider-label">Basin profiles</div>
+  <div class="divider-rule"></div>
+</div>
+
+
+<!-- BASIN 01 — ALBUQUERQUE -->
+<section class="basin-section" id="basin01">
+  <div class="basin-photo-header">
+    <div class="basin-photo-overlay"></div>
+    <div class="basin-photo-content">
+      <span class="basin-number">Basin 01</span>
+      <h2 class="basin-title">Albuquerque Basin</h2>
+      <p class="basin-cities-tag">Albuquerque &nbsp;·&nbsp; Rio Rancho &nbsp;·&nbsp; Bernalillo &nbsp;·&nbsp; Los Lunas &nbsp;·&nbsp; Belen &nbsp;·&nbsp; Corrales &nbsp;·&nbsp; Placitas &nbsp;·&nbsp; Sandia Park &nbsp;·&nbsp; Tijeras &nbsp;·&nbsp; Cedar Crest &nbsp;·&nbsp; Edgewood &nbsp;·&nbsp; Los Ranchos &nbsp;·&nbsp; Kirtland AFB</p>
+    </div>
+  </div>
+  <div class="basin-body">
+    <div class="basin-intro">
+      <span class="basin-col-label">Geological overview</span>
+      <p>The Albuquerque Basin is a structural graben formed by extensional faulting along the Rio Grande Rift --- the same geological process that produced a chain of basins running from southern Colorado through the length of New Mexico into west Texas. The rift is still active. The basin floor has dropped thousands of feet relative to the flanking mountains over the past several million years, and that subsidence has been filled with sediment eroded off the Sandia and Manzano ranges to the east and the Colorado Plateau to the northwest.</p>
+      <p>The result is a layered sequence of alluvial fan deposits, river gravels, lake clays, and windblown sands that vary considerably over short distances. A home on the East Mesa, built on consolidated alluvial fan gravels near the mountain front, sits on fundamentally different material than a home a mile west on younger basin fill, or a home in the South Valley on historic Rio Grande floodplain deposits.</p>
+      <p>Caliche --- a calcium carbonate hardpan that forms in arid climates as moisture evaporates and deposits dissolved minerals --- is present throughout the basin at variable depths. It is critically important in foundation investigation because its hardness can stop a probe that has not yet reached competent bearing material, and it can mask a weak soil layer immediately beneath it.</p>
+    </div>
+    <div class="basin-conditions">
+      <span class="basin-col-label">Soil conditions and hazards</span>
+      <div class="condition-item">
+        <div class="condition-name">Expansive Basin Fill Soils</div>
+        <div class="condition-desc">Silty and clayey basin fill soils swell when wetted and shrink when dried. Some soils, particularly in the South Valley and near the river corridor, contain smectite clays capable of significant volume change with seasonal moisture cycles.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Caliche Horizons</div>
+        <div class="condition-desc">Depth varies from near-surface on older alluvial fan surfaces to 8 or more feet in younger deposits. Caliche can stop investigation probes before reaching the material that actually matters for bearing analysis.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Differential Fill Settlement</div>
+        <div class="condition-desc">Alluvial fan deposits grade rapidly from gravels to silts over short distances. Foundations that span these transitions compress unevenly under load --- not because either material is defective, but because their compressibility differs.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Rio Grande Floodplain Clays</div>
+        <div class="condition-desc">Soft lacustrine and overbank clays in the South Valley and Corrales floodplain area introduce higher compressibility and greater moisture sensitivity than the alluvial fan materials found elsewhere in the basin.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Collapsible Mesa Surface Soils</div>
+        <div class="condition-desc">Windblown deposits on mesa surfaces can collapse when first wetted under load --- a condition called hydroconsolidation. These soils develop strength through long-term desiccation and lose it when sustained moisture reaches them for the first time.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Acequia and Irrigation Moisture</div>
+        <div class="condition-desc">Traditional acequia irrigation in the North Valley and South Valley introduces sustained moisture to soils that were historically much drier. This moisture history can alter how existing soils respond to additional loading or drainage changes.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Active Rift Faulting</div>
+        <div class="condition-desc">Multiple mapped rift faults cross the basin. Seismic acceleration values run above the national average for the region.</div>
+      </div>
+    </div>
+  </div>
+  <div class="basin-references">
+    <span class="references-label">Sources</span>
+    <span class="references-list">Thorn et al., USGS Open-File Report 93-113 (1993) &nbsp;·&nbsp; Connell, NMBGMR Open-File Report 462 (2004) &nbsp;·&nbsp; Kelley, NMBGMR Memoir 33 (1977) &nbsp;·&nbsp; Hawley, NMBGMR Circular 144 (1975)</span>
+  </div>
+  <div class="basin-nav-bar">
+    <a href="#basin-index" class="basin-nav-link">↑ Back to basins</a>
+  </div>
+</section>
+
+
+<!-- BASIN 02 — ESPAÑOLA -->
+<section class="basin-section" id="basin02">
+  <div class="basin-photo-header">
+    <div class="basin-photo-overlay"></div>
+    <div class="basin-photo-content">
+      <span class="basin-number">Basin 02</span>
+      <h2 class="basin-title">Española Basin</h2>
+      <p class="basin-cities-tag">Santa Fe &nbsp;·&nbsp; Española &nbsp;·&nbsp; Los Alamos &nbsp;·&nbsp; Pojoaque &nbsp;·&nbsp; Chimayó &nbsp;·&nbsp; Nambé &nbsp;·&nbsp; Tesuque &nbsp;·&nbsp; Pecos &nbsp;·&nbsp; Glorieta &nbsp;·&nbsp; Galisteo &nbsp;·&nbsp; Lamy</p>
+    </div>
+  </div>
+  <div class="basin-body">
+    <div class="basin-intro">
+      <span class="basin-col-label">Geological overview</span>
+      <p>The Española Basin occupies a structurally complex position in the northern Rio Grande Rift. Unlike the broader, simpler graben geometry of the Albuquerque Basin to the south, the Española Basin consists of a series of narrow, deep axial troughs within a shallower overall structure --- a configuration produced by the intersection of multiple fault systems. It serves as a transition zone between the more mature rift geometry to the south and the younger rifting environment of the Taos Plateau to the north.</p>
+      <p>The primary basin fill is the Tesuque Formation --- a thick sequence of coalescing alluvial fan deposits derived from the Sangre de Cristo Mountains. The Tesuque is notable for its extreme lateral and vertical heterogeneity. Abrupt textural changes from coarse boulder conglomerate near the mountain front to fine-grained silts and clays in distal fan positions can occur over distances of a few hundred feet. Overlying much of Santa Fe is the Ancha Formation, a coarser piedmont gravel sheet that is more poorly sorted and less cemented than the Tesuque beneath it.</p>
+      <p>The Bandelier Tuff --- erupted from the Valles Caldera approximately 1.25 million years ago --- caps the Pajarito Plateau to the west and contributes ash and reworked volcanic material to basin-margin deposits. Historic adobe construction throughout the basin adds a built-environment layer that responds to soil movement differently than modern concrete foundations.</p>
+    </div>
+    <div class="basin-conditions">
+      <span class="basin-col-label">Soil conditions and hazards</span>
+      <div class="condition-item">
+        <div class="condition-name">Tesuque Formation Variability</div>
+        <div class="condition-desc">The lateral and vertical heterogeneity of the Tesuque Formation is the defining foundation challenge in this basin. Foundations that span the boundary between coarse fan gravels and finer distal silts will experience unequal compression under load --- a condition pervasive enough that a single boring rarely characterizes a site adequately.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Expansive Clays in Fine-Grained Members</div>
+        <div class="condition-desc">The finer-grained members of the Tesuque Formation and overbank deposits along the Rio Grande and its tributaries contain smectite clay minerals. The expansion potential is generally lower than in the San Juan Basin shales, but sufficient to produce measurable seasonal movement in lightly loaded residential foundations.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Acequia Moisture Effects</div>
+        <div class="condition-desc">The acequia system has irrigated this valley for nearly four centuries, introducing sustained moisture to soil profiles that developed their bearing characteristics under much drier conditions. Soils adjacent to active acequias may behave differently than the same soil type found away from irrigation influence.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Adobe Foundation Vulnerability</div>
+        <div class="condition-desc">Historic and modern adobe construction with shallow, unreinforced foundations accumulates differential movement over decades. Adobe responds to moisture and soil movement differently than concrete --- evaluation methods developed for modern construction do not transfer directly.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Collapsible Soils on Dry Fan Margins</div>
+        <div class="condition-desc">Dry alluvial fan margins and mesa surfaces carry the metastable structure typical of arid soils. First wetting under structural load can produce sudden consolidation in areas that appeared stable during construction.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Active Rift Faulting</div>
+        <div class="condition-desc">The Embudo fault zone passes obliquely through the basin. Seismic acceleration values run above the national average.</div>
+      </div>
+    </div>
+  </div>
+  <div class="basin-references">
+    <span class="references-label">Sources</span>
+    <span class="references-list">Galusha & Blick, AMNH Bulletin 144 (1971) &nbsp;·&nbsp; Personius & Mahan, USGS Open-File 2003-123 (2003) &nbsp;·&nbsp; NMBGMR Santa Fe Quadrangle (2004) &nbsp;·&nbsp; Hawley & Haase, NMBGMR Open-File 390 (1992)</span>
+  </div>
+  <div class="basin-nav-bar">
+    <a href="#basin-index" class="basin-nav-link">↑ Back to basins</a>
+  </div>
+</section>
+
+
+<!-- BASIN 03 — MESILLA -->
+<section class="basin-section" id="basin03">
+  <div class="basin-photo-header">
+    <div class="basin-photo-overlay"></div>
+    <div class="basin-photo-content">
+      <span class="basin-number">Basin 03</span>
+      <h2 class="basin-title">Mesilla Basin</h2>
+      <p class="basin-cities-tag">Las Cruces &nbsp;·&nbsp; Sunland Park &nbsp;·&nbsp; Doña Ana &nbsp;·&nbsp; Anthony &nbsp;·&nbsp; Mesilla &nbsp;·&nbsp; Chaparral &nbsp;·&nbsp; La Mesa &nbsp;·&nbsp; Vado</p>
+    </div>
+  </div>
+  <div class="basin-body">
+    <div class="basin-intro">
+      <span class="basin-col-label">Geological overview</span>
+      <p>The Mesilla Basin is the southernmost major basin of the Rio Grande Rift within New Mexico. The Rio Grande enters at Selden Canyon, crosses the Mesilla Valley floor, and exits through the El Paso Narrows --- a constriction that has shaped basin hydrology and sediment distribution throughout the Quaternary. The basin extends across an international boundary, making it one of the few geologic features in New Mexico where subsurface conditions connect directly to Mexico.</p>
+      <p>Foundation conditions divide along two distinct environments. The Mesilla Valley proper --- the entrenched floodplain of the Rio Grande --- contains relatively coarse, hydraulically active fluvial deposits. The broader basin floor, known as the La Mesa surface, is underlain by middle Pleistocene piedmont deposits capped by a well-developed, often indurated caliche horizon. These two environments present fundamentally different foundation conditions and require different investigation approaches.</p>
+      <p>The Fort Hancock Formation, deposited in ancestral Lake Cabeza de Vaca during the Pleistocene, is present in the subsurface throughout much of the southern basin. This lacustrine unit contains fine-grained clays and silts deposited in a large, shallow lake that once occupied much of the southern New Mexico---west Texas---northern Chihuahua region. Where these deposits are near the surface, their plasticity and compressibility are foundationally significant.</p>
+    </div>
+    <div class="basin-conditions">
+      <span class="basin-col-label">Soil conditions and hazards</span>
+      <div class="condition-item">
+        <div class="condition-name">Collapsible La Mesa Soils</div>
+        <div class="condition-desc">Arid alluvial and aeolian deposits beneath the La Mesa caliche cap carry metastable structure developed over thousands of years of desiccation. When sustained moisture first reaches these soils --- through irrigation, plumbing, or drainage changes --- hydroconsolidation can produce sudden, significant settlement.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Caliche Masking</div>
+        <div class="condition-desc">The indurated La Mesa caliche is often stronger than what lies beneath it. Investigation probes that stop at caliche refusal without penetrating further provide an incomplete picture of the soil conditions that actually govern long-term foundation performance.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Fort Hancock Lacustrine Clays</div>
+        <div class="condition-desc">Pleistocene lake deposits in the southern basin contain moderately expansive clays that undergo seasonal volume change with moisture variation. The transition between alluvial fan material and lacustrine deposits is gradational and not always identifiable from surface inspection alone.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Irrigation-Altered Valley Soils</div>
+        <div class="condition-desc">Long-term acequia and agricultural irrigation has altered the consolidation state of valley-floor clays in ways that affect how they respond to loading. Soils that have been under chronic irrigation moisture for generations behave differently than the same material in an unirrigated setting.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Saline Soils and Sulfate Attack</div>
+        <div class="condition-desc">Elevated salt concentrations in some valley-floor and mesa-edge soils attack concrete chemically over time, producing premature degradation of foundation elements independent of any soil movement. Efflorescence on foundation walls is a common surface indicator.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Active Rift Faulting</div>
+        <div class="condition-desc">The Organ-Franklin fault system on the eastern basin margin is active. Seismic acceleration values are above the national average in southern New Mexico.</div>
+      </div>
+    </div>
+  </div>
+  <div class="basin-references">
+    <span class="references-label">Sources</span>
+    <span class="references-list">Hawley & Kennedy, NMBGMR Open-File Report 105 (1990) &nbsp;·&nbsp; Mack et al., NMGS Guidebook 48 (1997) &nbsp;·&nbsp; USGS WRIR 99-4268 (1999) &nbsp;·&nbsp; King et al., NMBGMR Open-File Report 543 (2009)</span>
+  </div>
+  <div class="basin-nav-bar">
+    <a href="#basin-index" class="basin-nav-link">↑ Back to basins</a>
+  </div>
+</section>
+
+
+<!-- BASIN 04 — SAN JUAN -->
+<section class="basin-section" id="basin04">
+  <div class="basin-photo-header">
+    <div class="basin-photo-overlay"></div>
+    <div class="basin-photo-content">
+      <span class="basin-number">Basin 04</span>
+      <h2 class="basin-title">San Juan Basin</h2>
+      <p class="basin-cities-tag">Farmington &nbsp;·&nbsp; Aztec &nbsp;·&nbsp; Bloomfield &nbsp;·&nbsp; Gallup &nbsp;·&nbsp; Shiprock &nbsp;·&nbsp; Grants &nbsp;·&nbsp; Kirtland &nbsp;·&nbsp; Flora Vista &nbsp;·&nbsp; Cedar Hill</p>
+    </div>
+  </div>
+  <div class="basin-body">
+    <div class="basin-intro">
+      <span class="basin-col-label">Geological overview</span>
+      <p>The San Juan Basin is a broad structural downwarp in the Colorado Plateau, filled with a thick sequence of Cretaceous and Tertiary sedimentary rocks. From a foundation standpoint, the basin is defined by one formation above all others: the Mancos Shale. This deep-water marine shale, deposited in the Western Interior Seaway approximately 85 to 95 million years ago, is present throughout the basin and exposed at or near the surface over wide areas, particularly in badland topography south and east of Farmington.</p>
+      <p>The Mancos contains high concentrations of swelling clay minerals, primarily smectite, and is one of the most aggressively expansive geologic materials found anywhere in the American West. When wetted, it swells. Laboratory swell potential values of 5 to 15 percent are not uncommon --- meaning a column of Mancos soil can increase in height by 1.5 to 4.5 inches per foot of depth when fully saturated. When it dries, it shrinks and cracks. This cyclical swell-shrink behavior produces the most severe and unpredictable foundation movement found anywhere in New Mexico.</p>
+      <p>This is heave country --- upward movement driven by soil expansion. That distinction matters because heave symptoms resemble settlement symptoms to an untrained observer. A misdiagnosis leads to interventions that make the situation worse.</p>
+    </div>
+    <div class="basin-conditions">
+      <span class="basin-col-label">Soil conditions and hazards</span>
+      <div class="condition-item">
+        <div class="condition-name">Mancos Shale Heave</div>
+        <div class="condition-desc">Extreme swelling potential driven by smectite clay content. Swell pressures can exceed 5,000 pounds per square foot. Cyclical damage accumulates year over year as the shale responds to seasonal and irrigation moisture changes.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Misdiagnosis Risk</div>
+        <div class="condition-desc">Heave symptoms --- upward floor displacement, doors dragging at the top, window frames racked out of square --- resemble settlement to untrained observers. Installing piers to resist downward movement on a foundation being pushed upward is a costly and counterproductive error.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Differential Moisture Distribution</div>
+        <div class="condition-desc">Patchy irrigation, tree removal, and plumbing leaks create localized heave zones within a single foundation footprint. Removing a tree can reduce moisture extraction from the soil and trigger heave in previously stable material.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Alluvial Cover Over Shale</div>
+        <div class="condition-desc">San Juan River terraces and tributary alluvium overlie Mancos in many developed areas, creating a two-layer problem where alluvial fill and underlying shale may move in different directions simultaneously.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Collapsible Windblown Deposits</div>
+        <div class="condition-desc">Loessic deposits on upland surfaces carry collapse potential on first wetting under structural load --- a separate mechanism from shale heave that requires its own investigation approach.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Induced Seismicity</div>
+        <div class="condition-desc">Active coal bed methane and oil and gas production in the basin. Induced seismicity from operations adds to the natural faulting seismic environment.</div>
+      </div>
+    </div>
+  </div>
+  <div class="basin-references">
+    <span class="references-label">Sources</span>
+    <span class="references-list">Ayers, USGS Professional Paper 1304 (1986) &nbsp;·&nbsp; Fassett & Hinds, USGS Professional Paper 676 (1971) &nbsp;·&nbsp; NMBGMR Geologic Map of New Mexico (2003) &nbsp;·&nbsp; Noe, Colorado Geological Survey SP-43 (1997)</span>
+  </div>
+  <div class="basin-nav-bar">
+    <a href="#basin-index" class="basin-nav-link">↑ Back to basins</a>
+  </div>
+</section>
+
+
+<!-- BASIN 05 — PECOS VALLEY -->
+<section class="basin-section" id="basin05">
+  <div class="basin-photo-header">
+    <div class="basin-photo-overlay"></div>
+    <div class="basin-photo-content">
+      <span class="basin-number">Basin 05</span>
+      <h2 class="basin-title">Pecos Valley</h2>
+      <p class="basin-cities-tag">Roswell &nbsp;·&nbsp; Carlsbad &nbsp;·&nbsp; Artesia &nbsp;·&nbsp; Hagerman &nbsp;·&nbsp; Dexter &nbsp;·&nbsp; Lake Arthur &nbsp;·&nbsp; Eunice</p>
+    </div>
+  </div>
+  <div class="basin-body">
+    <div class="basin-intro">
+      <span class="basin-col-label">Geological overview</span>
+      <p>The Pecos Valley presents the most serious dissolution and karst hazard in New Mexico. The Permian evaporite sequence underlying this region --- particularly the salt-bearing formations of the Salado and the sulfate-bearing formations above it --- is subject to dissolution by circulating groundwater. This process has been ongoing for millions of years and has produced an extensive karst system in the subsurface, including caves, sinkholes, and collapse features. Carlsbad Caverns is the most visible expression of this karst, but similar dissolution processes operate throughout the valley in the subsurface, where they are less studied and less mapped.</p>
+      <p>The risk is not uniform. Areas with shallow evaporite formations and active groundwater circulation are at higher risk than areas with deep evaporites or static groundwater. Changes in groundwater levels --- from pumping, recharge events, or drought --- can accelerate dissolution by introducing fresh, undersaturated water to previously stable mineral surfaces.</p>
+      <p>Unlike the gradual, predictable movement of expansive soil behavior, karst collapse is characteristically abrupt. A foundation that appears stable for years can experience significant displacement in a single event. Standard penetration testing cannot detect or characterize dissolution voids --- this is the one basin in New Mexico where karst screening must precede standard geotechnical analysis.</p>
+    </div>
+    <div class="basin-conditions">
+      <span class="basin-col-label">Soil conditions and hazards</span>
+      <div class="condition-item">
+        <div class="condition-name">Evaporite Karst</div>
+        <div class="condition-desc">Dissolution of Permian gypsum, anhydrite, and salt creates subsurface voids that can collapse suddenly. The USGS and NMMMD maintain sinkhole occurrence records, but the database is incomplete --- dissolution is ongoing and new occurrences cannot be predicted from surface observation alone.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Mescalero Caliche Cap</div>
+        <div class="condition-desc">Thick, indurated caliche on High Plains surfaces masks underlying conditions and requires proper equipment to drill through. Investigation terminating at caliche refusal provides incomplete information about what lies beneath.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Sulfate Attack on Concrete</div>
+        <div class="condition-desc">High sulfate soils and groundwater attack concrete foundations chemically over time. Conventional concrete mix designs are not appropriate where elevated sulfate content is present --- specific cement type and mix design are required.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Ogallala Aquifer Depletion</div>
+        <div class="condition-desc">Declining High Plains aquifer levels expose previously saturated evaporite formations to dissolution as the water table drops. Long-term groundwater withdrawal is an ongoing driver of new void formation.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Expansive Pecos Alluvium</div>
+        <div class="condition-desc">The Pecos River alluvium includes moderately plastic clays that undergo seasonal volume change. Secondary to karst risk in terms of severity, but present and relevant for near-surface foundation behavior.</div>
+      </div>
+    </div>
+  </div>
+  <div class="basin-references">
+    <span class="references-label">Sources</span>
+    <span class="references-list">Land, NMBGMR Open-File Report 507 (2003) &nbsp;·&nbsp; Bachman, USGS Open-File Report 80-1099 (1980) &nbsp;·&nbsp; Weary & Doctor, USGS Circular 1380 (2014) &nbsp;·&nbsp; USGS Water-Resources Investigations Report 99-4163 (1999)</span>
+  </div>
+  <div class="basin-nav-bar">
+    <a href="#basin-index" class="basin-nav-link">↑ Back to basins</a>
+  </div>
+</section>
+
+
+<!-- BASIN 06 — HIGH PLAINS -->
+<section class="basin-section" id="basin06">
+  <div class="basin-photo-header">
+    <div class="basin-photo-overlay"></div>
+    <div class="basin-photo-content">
+      <span class="basin-number">Basin 06</span>
+      <h2 class="basin-title">High Plains</h2>
+      <p class="basin-cities-tag">Clovis &nbsp;·&nbsp; Portales &nbsp;·&nbsp; Hobbs &nbsp;·&nbsp; Lovington &nbsp;·&nbsp; Tucumcari</p>
+    </div>
+  </div>
+  <div class="basin-body">
+    <div class="basin-intro">
+      <span class="basin-col-label">Geological overview</span>
+      <p>The Llano Estacado --- the Staked Plains --- is one of the largest and flattest tablelands in North America. It is not a structural basin in the Rio Grande Rift sense but a plateau remnant, preserved by the resistance of its Ogallala Formation caprock to erosion. The Ogallala was deposited as coalescing alluvial fans derived from the Rocky Mountains during the Miocene. Over millions of years, calcium carbonate transported downward by soil moisture has cemented the upper formation into the indurated caliche caprock that now characterizes the surface. That caliche is what makes the High Plains look geologically simple from the surface --- it is not.</p>
+      <p>Overlying the Ogallala in much of the eastern New Mexico portion is the Blackwater Draw Formation --- a Pleistocene aeolian deposit of silts and clays blown in from the Pecos River valley to the southwest over the past 1.6 million years. The Blackwater Draw contains multiple buried soil horizons reflecting episodic cycles of deposition and pedogenesis. Its surface soils are reddish-brown to dark-brown sandy loams and clay loams with moderate to high plasticity in many locations.</p>
+      <p>The closed drainage of the plateau has produced numerous playa basins --- shallow, internally drained depressions that collect runoff and concentrate fine-grained sediments. Playas are often subtle topographic features, and construction that encroaches on playa margins may not appear to be in problematic terrain until moisture conditions change.</p>
+    </div>
+    <div class="basin-conditions">
+      <span class="basin-col-label">Soil conditions and hazards</span>
+      <div class="condition-item">
+        <div class="condition-name">Expansive Blackwater Draw Clays</div>
+        <div class="condition-desc">Moderate to high plasticity aeolian silts and clay loams undergo cyclical swell-shrink with seasonal moisture variation. The flat, internally drained character of the plateau means water has nowhere to go but down, amplifying moisture cycling in near-surface soils.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Playa Basin Clays</div>
+        <div class="condition-desc">High-plasticity lacustrine clays in closed-drainage depressions carry severe expansion potential. Playa margins are not always obvious from topographic inspection, and construction that encroaches on them produces more severe and less predictable movement than surrounding plateau soils.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Caliche Masking</div>
+        <div class="condition-desc">The Mescalero Caliche caprock masks variable Ogallala sediments beneath it. Investigation that terminates at caliche refusal is incomplete --- the loosely cemented sands, silts, and clays below may have compressibility characteristics that matter for foundation performance.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Agricultural Irrigation Effects</div>
+        <div class="condition-desc">Extensive center-pivot and flood irrigation in farming areas introduces chronic moisture to naturally dry soils, triggering or amplifying expansion in Blackwater Draw clays that would otherwise cycle through lower moisture ranges.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Frost Depth</div>
+        <div class="condition-desc">At elevations above 4,000 feet, frost depth reaches 18 to 24 inches in the Clovis and Portales area during severe winters. Shallow foundations are subject to annual frost heave in colder years.</div>
+      </div>
+    </div>
+  </div>
+  <div class="basin-references">
+    <span class="references-label">Sources</span>
+    <span class="references-list">Holliday, USGS Professional Paper 1539 (1995) &nbsp;·&nbsp; Gustavson & Winkler, Texas Bureau of Economic Geology (1988) &nbsp;·&nbsp; NMBGMR Geologic Map of New Mexico (2003) &nbsp;·&nbsp; Osterkamp & Wood, USGS Water Supply Paper 2340 (1987)</span>
+  </div>
+  <div class="basin-nav-bar">
+    <a href="#basin-index" class="basin-nav-link">↑ Back to basins</a>
+  </div>
+</section>
+
+
+<!-- BASIN 07 — TULAROSA -->
+<section class="basin-section" id="basin07">
+  <div class="basin-photo-header">
+    <div class="basin-photo-overlay"></div>
+    <div class="basin-photo-content">
+      <span class="basin-number">Basin 07</span>
+      <h2 class="basin-title">Tularosa Basin</h2>
+      <p class="basin-cities-tag">Alamogordo &nbsp;·&nbsp; Tularosa &nbsp;·&nbsp; Carrizozo &nbsp;·&nbsp; La Luz &nbsp;·&nbsp; Bent &nbsp;·&nbsp; Holloman AFB &nbsp;·&nbsp; Orogrande</p>
+    </div>
+  </div>
+  <div class="basin-body">
+    <div class="basin-intro">
+      <span class="basin-col-label">Geological overview</span>
+      <p>The Tularosa Basin is an enclosed desert basin --- an endorheic system with no outlet to the sea. Water that enters from surrounding mountains has nowhere to go but down or up: it infiltrates, accumulates in playas, or evaporates. This hydrology, combined with the evaporite-rich geology of the surrounding ranges, has created one of the most mineralogically complex foundation environments in New Mexico.</p>
+      <p>Gypsum is the defining material. The Sacramento Mountains to the east contain thick sequences of Permian gypsum-bearing formations. Erosion carries gypsum into the basin, where it accumulates in alluvial fans, concentrates in evaporative playa deposits, and forms the gypsum sand sea of White Sands. The foundation implications of gypsum differ from those of ordinary caliche or expansive clay --- gypsum is moderately soluble in water, far more so than calcite. Where gypsum is present in the subsurface and moisture encounters it, dissolution can create voids that may be stable for years before collapsing suddenly.</p>
+      <p>Playa lake deposits in the basin center, derived from historic Lake Otero, introduce lacustrine clays with moderate expansive potential. Salt-bearing soils, present in several basin locations, add a third mechanism: salt heave, in which soluble salt crystals exert expansive forces during evaporation cycles.</p>
+    </div>
+    <div class="basin-conditions">
+      <span class="basin-col-label">Soil conditions and hazards</span>
+      <div class="condition-item">
+        <div class="condition-name">Gypsum Dissolution and Void Formation</div>
+        <div class="condition-desc">Subsurface gypsum dissolves under sustained moisture contact. The resulting voids can remain stable for extended periods, then collapse suddenly --- producing dramatic, localized settlement rather than the gradual progressive movement typical of expansive soil problems.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Playa Lake Clays</div>
+        <div class="condition-desc">Lacustrine and playa deposits in the basin center carry high plasticity and moderate to high expansion potential. Seasonal wet-dry cycles produce opening and closing of cracks in a pattern that can resemble, but differs from, Mancos Shale behavior.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Sulfate Attack on Concrete</div>
+        <div class="condition-desc">Gypsum and other sulfate minerals attack concrete chemically, producing surface spalling and structural weakening independent of soil movement. Conventional concrete mixes are not appropriate in high-sulfate environments.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Salt Heave</div>
+        <div class="condition-desc">Soluble salt crystallization in near-surface soils during evaporation cycles exerts expansive forces on shallow foundations. The mechanism differs from clay swell but produces similar surface indicators.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Collapsible Alluvial Fan Deposits</div>
+        <div class="condition-desc">Dry alluvial fan deposits from the surrounding ranges carry collapse potential on first sustained wetting. Unsaturated strength is lost when moisture reaches a critical threshold, producing sudden consolidation.</div>
+      </div>
+    </div>
+  </div>
+  <div class="basin-references">
+    <span class="references-label">Sources</span>
+    <span class="references-list">Seager et al., NMBGMR Memoir 36 (1987) &nbsp;·&nbsp; Herrick, NMBGMR Bulletin 84 (1963) &nbsp;·&nbsp; Land & Newton, NMBGMR Open-File Report 519 (2007) &nbsp;·&nbsp; USGS Open-File Report 2008-1151 (2008)</span>
+  </div>
+  <div class="basin-nav-bar">
+    <a href="#basin-index" class="basin-nav-link">↑ Back to basins</a>
+  </div>
+</section>
+
+
+<!-- BASIN 08 — SACRAMENTO MOUNTAINS -->
+<section class="basin-section" id="basin08">
+  <div class="basin-photo-header">
+    <div class="basin-photo-overlay"></div>
+    <div class="basin-photo-content">
+      <span class="basin-number">Basin 08</span>
+      <h2 class="basin-title">Sacramento Mountains</h2>
+      <p class="basin-cities-tag">Ruidoso &nbsp;·&nbsp; Ruidoso Downs &nbsp;·&nbsp; Cloudcroft &nbsp;·&nbsp; Mescalero &nbsp;·&nbsp; Alto &nbsp;·&nbsp; Capitan &nbsp;·&nbsp; Lincoln &nbsp;·&nbsp; Corona</p>
+    </div>
+  </div>
+  <div class="basin-body">
+    <div class="basin-intro">
+      <span class="basin-col-label">Geological overview</span>
+      <p>The Sacramento Mountains are an uplifted block of Permian carbonate rocks --- limestone and dolomite --- that rises abruptly from the Tularosa Basin to the west, gaining nearly 7,000 feet of elevation over roughly 20 miles. The escarpment face is one of the most dramatic topographic features in New Mexico. The carbonate geology creates a foundation environment dominated by two concerns that do not appear in most of the state's other basins: shallow bedrock with limited soil development, and carbonate dissolution.</p>
+      <p>In Cloudcroft and Ruidoso, the depth to competent limestone is often less than 2 feet, and in many locations bedrock is at or above the surface. The engineering challenge is not weak bearing material --- limestone provides excellent bearing capacity --- but rather the irregularity of the bedrock surface. Where bedrock depth varies over short distances, foundations can span from rock to soil, creating differential bearing that produces cracking even in the absence of soil movement.</p>
+      <p>Frost depth at Sacramento Mountain elevations rivals that of the Mora Valley. Cloudcroft at 8,650 feet has frost depths exceeding 36 inches. Combined with thin soil cover over bedrock, frost effects can be significant --- heave in the soil and organic horizon above the frost depth, differential movement at the soil-rock transition.</p>
+    </div>
+    <div class="basin-conditions">
+      <span class="basin-col-label">Soil conditions and hazards</span>
+      <div class="condition-item">
+        <div class="condition-name">Shallow Bedrock Irregularity</div>
+        <div class="condition-desc">Permian limestone at zero to 3 feet in many locations, with highly irregular surface geometry. Foundations that bear partially on rock and partially on soil experience differential movement that standard soil settlement analysis does not anticipate.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Frost Depth</div>
+        <div class="condition-desc">Frost penetration of 36 to 48 inches at Cloudcroft and higher elevations. Annual freeze-thaw cycles produce upward movement in shallow foundations, with cumulative displacement accumulating at corners and structural discontinuities over time.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Carbonate Dissolution</div>
+        <div class="condition-desc">Limestone karst development creates localized voids and cavities. Less severe than the evaporite karst of the Pecos Valley, but localized collapse remains a risk in areas of advanced dissolution, particularly where precipitation concentrates on the shallow, poorly permeable soil profile.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Thin Residual Soils</div>
+        <div class="condition-desc">Limited soil development over limestone leaves few options for conventional footing construction. Foundations designed for Albuquerque or Las Cruces conditions do not transfer to the Sacramento Mountain environment.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Post-Fire Hydrology</div>
+        <div class="condition-desc">Post-fire hydrophobic soils on burned slopes dramatically increase runoff and erosion. Debris flow potential following fire events introduces a hazard that does not exist in unburned terrain.</div>
+      </div>
+    </div>
+  </div>
+  <div class="basin-references">
+    <span class="references-label">Sources</span>
+    <span class="references-list">Pray, NMBGMR Guidebook 12 (1961) &nbsp;·&nbsp; Kelley & Thompson, NMBGMR Circular 30 (1964) &nbsp;·&nbsp; NMBGMR Sacramento Mountains Quadrangle &nbsp;·&nbsp; USDA Forest Service Lincoln NF Geology Reports</span>
+  </div>
+  <div class="basin-nav-bar">
+    <a href="#basin-index" class="basin-nav-link">↑ Back to basins</a>
+  </div>
+</section>
+
+
+<!-- BASIN 09 — TAOS PLATEAU -->
+<section class="basin-section" id="basin09">
+  <div class="basin-photo-header">
+    <div class="basin-photo-overlay"></div>
+    <div class="basin-photo-content">
+      <span class="basin-number">Basin 09</span>
+      <h2 class="basin-title">Taos Plateau</h2>
+      <p class="basin-cities-tag">Taos &nbsp;·&nbsp; Ranchos de Taos &nbsp;·&nbsp; Angel Fire &nbsp;·&nbsp; Red River &nbsp;·&nbsp; Questa &nbsp;·&nbsp; Arroyo Seco &nbsp;·&nbsp; El Prado &nbsp;·&nbsp; Penasco &nbsp;·&nbsp; Vadito</p>
+    </div>
+  </div>
+  <div class="basin-body">
+    <div class="basin-intro">
+      <span class="basin-col-label">Geological overview</span>
+      <p>The Taos Plateau is geologically distinct from the southern Rio Grande Rift basins. Rather than deep alluvial basin fill, the plateau surface is underlain by Pliocene flood basalt --- the Servilleta Formation --- erupted from fissures in the rift approximately 3 to 5 million years ago. The Rio Grande has cut the iconic Taos Gorge, up to 800 feet deep, through this basalt. The basalt itself is generally competent rock and presents no bearing problems where it is at or near the surface.</p>
+      <p>The engineering complexity arises from two sources: the weathered residual soils developed on basalt surfaces, and the Santa Fe Group sediments that fill the rift beneath the basalt where cover is thin or absent. Basalt weathers to form montmorillonite clay --- one of the most expansive mineral species known. In areas where the basalt surface has been exposed to prolonged weathering, the residual soil can be highly expansive despite appearing to be derived from hard rock. The presence of hard basalt at shallow depth does not mean a site is geologically benign.</p>
+      <p>Frost depth at Taos elevations (6,950 feet in the town itself) exceeds 24 inches in cold winters, and is even greater in surrounding high communities. Foundations not designed to extend below frost depth undergo annual heave and settlement cycles that accumulate as structural damage over time.</p>
+    </div>
+    <div class="basin-conditions">
+      <span class="basin-col-label">Soil conditions and hazards</span>
+      <div class="condition-item">
+        <div class="condition-name">Basalt Residual Clay Expansion</div>
+        <div class="condition-desc">Montmorillonite clays developed on weathered basalt surfaces carry high expansion potential despite the rocky appearance of the terrain. Visual identification of basalt-derived soil without plasticity testing regularly leads to underestimation of the swell risk.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Soil-Rock Interface Differential Movement</div>
+        <div class="condition-desc">Where expansive clay overlies shallow basalt, the clay undergoes volume change with seasonal moisture while the rock beneath it does not. Foundations that span both materials experience shear forces that produce cracking patterns often misinterpreted as simple settlement.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Frost Heave</div>
+        <div class="condition-desc">Frost depth of 24 to 36 inches in the Taos area, greater at higher elevations. Annual upward movement in winter followed by settlement in spring produces cumulative displacement, particularly at corners and foundation discontinuities.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Acequia Irrigation Effects</div>
+        <div class="condition-desc">Traditional acequia irrigation in the Taos and Española valleys introduces seasonal moisture to soils that would otherwise experience much lower annual moisture variation. This cyclical wetting amplifies expansive clay behavior in soils adjacent to active irrigation.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Adobe Construction Vulnerability</div>
+        <div class="condition-desc">Historic adobe construction responds to moisture and soil movement differently than modern concrete. The Taos and Española valleys have centuries of adobe building history --- evaluation methods must account for how earthen materials behave under these specific soil conditions.</div>
+      </div>
+    </div>
+  </div>
+  <div class="basin-references">
+    <span class="references-label">Sources</span>
+    <span class="references-list">Lipman & Mehnert, USGS Professional Paper 849 (1975) &nbsp;·&nbsp; Bauer et al., NMBGMR Open-File Report 477 (2005) &nbsp;·&nbsp; Winograd, USGS Water Supply Paper 1629 (1959) &nbsp;·&nbsp; NMBGMR Taos Quadrangle Map</span>
+  </div>
+  <div class="basin-nav-bar">
+    <a href="#basin-index" class="basin-nav-link">↑ Back to basins</a>
+  </div>
+</section>
+
+
+<!-- BASIN 10 — ESTANCIA -->
+<section class="basin-section" id="basin10">
+  <div class="basin-photo-header">
+    <div class="basin-photo-overlay"></div>
+    <div class="basin-photo-content">
+      <span class="basin-number">Basin 10</span>
+      <h2 class="basin-title">Estancia Basin</h2>
+      <p class="basin-cities-tag">Moriarty &nbsp;·&nbsp; Estancia &nbsp;·&nbsp; Willard &nbsp;·&nbsp; Mountainair</p>
+    </div>
+  </div>
+  <div class="basin-body">
+    <div class="basin-intro">
+      <span class="basin-col-label">Geological overview</span>
+      <p>The Estancia Basin is a closed intermontane basin --- a graben bounded by normal faults --- that during the last glacial maximum, approximately 18,000 to 25,000 years ago, held a substantial lake. Lake Estancia covered much of the basin floor during that period. The lake deposits left behind a legacy of fine-grained lacustrine clays and silts across broad areas, and the evaporative concentration of lake waters left evaporite minerals --- primarily gypsum and halite --- in near-surface soils. The transition from Basin and Range structure to High Plains character gives the Estancia Basin a somewhat different geological character from the more deeply rifted basins to the west.</p>
+      <p>The near-surface foundation environment is dominated by the Lake Estancia deposit legacy, the evaporite mineral content, and the caliche horizons typical of the semiarid high desert. Lake deposits underlie much of the basin floor and lower alluvial fan positions. These fine-grained silts and clays, deposited in quiet water, are often compressible, moderately expansive, and sensitive to moisture change.</p>
+      <p>Caliche horizons are present throughout the basin at varying depths. As elsewhere, caliche can mask underlying weak soils during initial site characterization. The thin, dry climate also produces collapsible soils on mesa and fan surfaces --- materials that develop strength in their dry state and lose it when first wetted under structural load.</p>
+    </div>
+    <div class="basin-conditions">
+      <span class="basin-col-label">Soil conditions and hazards</span>
+      <div class="condition-item">
+        <div class="condition-name">Lake Estancia Deposit Clays</div>
+        <div class="condition-desc">Pleistocene lacustrine silts and clays across the basin floor are compressible and moderately expansive. Long-term settlement under structural loads and seasonal volume change with moisture variation are both present in this material.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Evaporite Mineral Content</div>
+        <div class="condition-desc">Near-surface gypsum and halite from lake evaporation introduce dissolution risk under sustained moisture and sulfate attack on concrete. The hazard is generally less severe than in the Tularosa Basin but follows the same mechanisms.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Collapsible Soils on Mesa Surfaces</div>
+        <div class="condition-desc">Dry alluvial and windblown deposits on upper fan and mesa surfaces carry collapse potential on first wetting. Previously stable structures can experience sudden, localized settlement following unusual precipitation or irrigation events.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Caliche Variability</div>
+        <div class="condition-desc">Caliche depth and continuity are highly variable across the basin. It is not a reliable bearing indicator without investigation of what lies beneath it --- shallow caliche in one location does not predict shallow caliche at an adjacent site.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Agricultural Irrigation History</div>
+        <div class="condition-desc">Historic pinto bean farming with irrigation introduced long-term moisture changes to the soil profile. In previously farmed areas, the soil moisture history may differ from what natural soil characteristics would suggest.</div>
+      </div>
+    </div>
+  </div>
+  <div class="basin-references">
+    <span class="references-label">Sources</span>
+    <span class="references-list">Meinzer & Hare, USGS Water Supply Paper 637 (1915) &nbsp;·&nbsp; Bachman & Mehnert, NMBGMR Circular 159 (1978) &nbsp;·&nbsp; Titus, NMBGMR Circular 65 (1961) &nbsp;·&nbsp; NMBGMR Estancia Basin Hydrogeology Report (1994)</span>
+  </div>
+  <div class="basin-nav-bar">
+    <a href="#basin-index" class="basin-nav-link">↑ Back to basins</a>
+  </div>
+</section>
+
+
+<!-- BASIN 11 — MIMBRES -->
+<section class="basin-section" id="basin11">
+  <div class="basin-photo-header">
+    <div class="basin-photo-overlay"></div>
+    <div class="basin-photo-content">
+      <span class="basin-number">Basin 11</span>
+      <h2 class="basin-title">Mimbres Basin</h2>
+      <p class="basin-cities-tag">Deming &nbsp;·&nbsp; Silver City &nbsp;·&nbsp; Columbus</p>
+    </div>
+  </div>
+  <div class="basin-body">
+    <div class="basin-intro">
+      <span class="basin-col-label">Geological overview</span>
+      <p>The Mimbres Basin is a topographically closed basin --- no surface drainage exits. The Mimbres River, flowing south from the Black Range, loses itself in the playa flats north of Deming. Historically an important agricultural area supported by the Mimbres aquifer, the basin presents a foundation environment shaped by the combination of deep groundwater extraction, agricultural irrigation, and desert soil conditions.</p>
+      <p>The southern portion of the basin, along the US-Mexico border, includes deposits of Lake Palomas --- a Pleistocene lake that occupied much of the Chihuahua border region during wetter periods. Lake Palomas clays are present in the subsurface in this area and represent the primary expansive soil hazard in the basin. The dominant mechanisms differ substantially between the northern and southern portions of the basin, and the transition between them is gradational rather than sharp.</p>
+      <p>Groundwater depletion from agricultural pumping has produced measurable ground surface subsidence in portions of the basin over the past several decades --- a basin-wide process that produces gradual, relatively uniform settlement across large areas rather than the differential movement typical of near-surface soil problems.</p>
+    </div>
+    <div class="basin-conditions">
+      <span class="basin-col-label">Soil conditions and hazards</span>
+      <div class="condition-item">
+        <div class="condition-name">Lake Palomas Expansive Clays</div>
+        <div class="condition-desc">Pleistocene lacustrine deposits in the southern basin are moderately to highly expansive, present beneath alluvial cover, and not identifiable from surface inspection. Seasonal volume change with moisture variation follows the same pattern as other expansive clay environments but with the added complication of the international boundary limiting available subsurface records.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Collapsible Northern Basin Soils</div>
+        <div class="condition-desc">Arid alluvial deposits in the northern and central basin carry collapse potential on first sustained wetting. The surface appearance of collapsible northern soils and expansive southern clays can be similar --- laboratory testing distinguishes them, surface inspection does not.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Groundwater Subsidence</div>
+        <div class="condition-desc">Long-term aquifer depletion produces slow ground surface subsidence. The process is gradual and non-damaging to individual structures in early stages, but contributes to cumulative foundation displacement over decades of water table decline.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Windblown Deposits</div>
+        <div class="condition-desc">Eolian sands and silts in portions of the basin carry low bearing capacity in their loose state and collapse potential under first wetting.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Caliche Variability</div>
+        <div class="condition-desc">Caliche depth and hardness vary considerably across the basin and are not reliable as a bearing indicator without investigation of the material below.</div>
+      </div>
+    </div>
+  </div>
+  <div class="basin-references">
+    <span class="references-label">Sources</span>
+    <span class="references-list">Hawley et al., NMBGMR Hydrologic Report 5 (1969) &nbsp;·&nbsp; Mack et al., NMBGMR Open-File Report 351 (1996) &nbsp;·&nbsp; USGS WRIR 00-4011 (2000) &nbsp;·&nbsp; Seager et al., NMBGMR Memoir 36 (1987)</span>
+  </div>
+  <div class="basin-nav-bar">
+    <a href="#basin-index" class="basin-nav-link">↑ Back to basins</a>
+  </div>
+</section>
+
+
+<!-- BASIN 12 — JORNADA DEL MUERTO -->
+<section class="basin-section" id="basin12">
+  <div class="basin-photo-header">
+    <div class="basin-photo-overlay"></div>
+    <div class="basin-photo-content">
+      <span class="basin-number">Basin 12</span>
+      <h2 class="basin-title">Jornada del Muerto</h2>
+      <p class="basin-cities-tag">Socorro &nbsp;·&nbsp; Truth or Consequences &nbsp;·&nbsp; Elephant Butte &nbsp;·&nbsp; Williamsburg &nbsp;·&nbsp; Arrey &nbsp;·&nbsp; Caballo &nbsp;·&nbsp; Hillsboro</p>
+    </div>
+  </div>
+  <div class="basin-body">
+    <div class="basin-intro">
+      <span class="basin-col-label">Geological overview</span>
+      <p>The Jornada del Muerto --- Journey of the Dead Man --- earned its name from the 90-mile waterless stretch that travelers on the Camino Real had to cross without access to the Rio Grande. From a foundation engineering perspective, the Jornada is characterized by relatively low soil plasticity compared to the San Juan, Taos, and Raton basins. The dominant soils are alluvial fan gravels, gravelly sands, and silts derived from the surrounding ranges --- materials that are generally well-suited to foundation support in their natural state.</p>
+      <p>The qualification "in their natural state" matters here. Desert soils that have developed strength through long-term desiccation can lose that strength rapidly when first wetted under load, a behavior called hydroconsolidation or collapsible soil behavior. Arid alluvial soils develop a metastable structure --- particles bridged by clay and carbonate bonds that provide substantial dry strength. When these soils are first wetted under structural load, the bonds weaken, the structure collapses, and the soil consolidates rapidly.</p>
+      <p>The triggering source for collapse is almost always related to changes in the moisture environment: irrigation, plumbing leaks, roof drainage concentrated near the foundation, or changes in landscape cover. In previously dry desert terrain, the soil profile has often never been wetted to the depths that residential plumbing or irrigation can reach.</p>
+    </div>
+    <div class="basin-conditions">
+      <span class="basin-col-label">Soil conditions and hazards</span>
+      <div class="condition-item">
+        <div class="condition-name">Collapsible Alluvial Soils</div>
+        <div class="condition-desc">The primary hazard in the Jornada. Arid alluvial soils with metastable structure collapse on first sustained wetting under load. Settlement can be sudden and relatively uniform across a broad foundation area, then differential as moisture distribution becomes uneven over time.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Hydroconsolidation Triggers</div>
+        <div class="condition-desc">Collapse is triggered by changes to the moisture environment rather than structural loading alone. Irrigation establishment, plumbing events, and drainage pattern changes are the most common triggers --- and they often occur in the first years after construction on previously undeveloped land.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Caliche Masking</div>
+        <div class="condition-desc">Caliche layers can support construction activity and initial loading while wetting that penetrates through caliche cracks eventually triggers collapse in the soils beneath. Refusal depth without deeper sampling provides an incomplete picture of site conditions.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Low-Plasticity Basin Clays</div>
+        <div class="condition-desc">Minor expansive potential exists in finer-grained basin fill. Secondary to collapse risk in terms of severity, but present in lower alluvial fan and basin center positions.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Wind Erosion</div>
+        <div class="condition-desc">Deflation of fine-grained surface soils in exposed locations can undermine shallow foundations over time, particularly on sites with degraded or disturbed surface cover.</div>
+      </div>
+    </div>
+  </div>
+  <div class="basin-references">
+    <span class="references-label">Sources</span>
+    <span class="references-list">Hawley & Lozinsky, NMBGMR Open-File Report 231 (1992) &nbsp;·&nbsp; Seager et al., NMBGMR Memoir 36 (1987) &nbsp;·&nbsp; Gile et al., USDA Soil Survey (1981) &nbsp;·&nbsp; NMBGMR Jornada del Muerto Map Series</span>
+  </div>
+  <div class="basin-nav-bar">
+    <a href="#basin-index" class="basin-nav-link">↑ Back to basins</a>
+  </div>
+</section>
+
+
+<!-- BASIN 13 — RATON -->
+<section class="basin-section" id="basin13">
+  <div class="basin-photo-header">
+    <div class="basin-photo-overlay"></div>
+    <div class="basin-photo-content">
+      <span class="basin-number">Basin 13</span>
+      <h2 class="basin-title">Raton Basin</h2>
+      <p class="basin-cities-tag">Raton &nbsp;·&nbsp; Cimarron &nbsp;·&nbsp; Springer &nbsp;·&nbsp; Eagle Nest</p>
+    </div>
+  </div>
+  <div class="basin-body">
+    <div class="basin-intro">
+      <span class="basin-col-label">Geological overview</span>
+      <p>The Raton Basin is a coal-producing basin at the southern end of the Rocky Mountain system. Unlike the Basin and Range province to the south and west, the Raton area is structurally more complex --- a combination of Laramide fold and thrust deformation and more recent extensional tectonics. The geology reflects both the Cretaceous sea that once covered this part of the continent and the terrestrial swamp environments that followed as the seaway retreated.</p>
+      <p>The coal-bearing formations of the Raton area create a foundation concern not found in most other New Mexico basins: historic mine subsidence. Underground coal mining in the area dates to the late 19th century, and the geometry of historic workings is imperfectly known. In areas underlain by these mines, void migration toward the surface --- a process that can take decades to centuries --- represents a distinct foundation risk that is unrelated to soil behavior and requires different investigation methods entirely.</p>
+      <p>The Pierre and Niobrara shales are moderately to highly expansive --- not at the extreme level of Mancos Shale in the San Juan Basin, but sufficient to produce significant seasonal movement in residential foundations. These shales crop out along valley walls and underlie shallow alluvial deposits in many locations.</p>
+    </div>
+    <div class="basin-conditions">
+      <span class="basin-col-label">Soil conditions and hazards</span>
+      <div class="condition-item">
+        <div class="condition-name">Historic Mine Subsidence</div>
+        <div class="condition-desc">Underground coal mines from the late 19th and early 20th centuries underlie portions of the developed area. Void migration produces a characteristic bowl-shaped ground surface depression, distinct from expansive soil cracking patterns. Assessment requires review of historic mine records through NMMMD before any structural evaluation can be considered complete.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Pierre and Niobrara Shale Expansion</div>
+        <div class="condition-desc">Moderately to highly expansive marine shales crop out along valley walls and underlie alluvium in many locations. Seasonal movement follows the same swell-shrink pattern as other expansive shale environments, though less severe than Mancos Shale in the San Juan Basin.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Frost Depth</div>
+        <div class="condition-desc">Raton elevations above 6,600 feet place frost depth requirements in the same range as the Taos area. Shallow foundations undergo annual heave cycles that accumulate as structural damage over time.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Steep Terrain and Colluvium</div>
+        <div class="condition-desc">Canyon and slope terrain in the basin carries colluvial deposits with variable stability. Slow creep on clay-bearing colluvium can produce foundation movement independent of soil volume change.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Cimarron River Alluvium</div>
+        <div class="condition-desc">Variable alluvial deposits along the Cimarron and Canadian drainages introduce differential settlement potential where foundations span transitions between coarser channel material and finer overbank deposits.</div>
+      </div>
+    </div>
+  </div>
+  <div class="basin-references">
+    <span class="references-label">Sources</span>
+    <span class="references-list">Baltz, NMBGMR Memoir 12 (1967) &nbsp;·&nbsp; Flores & Pillmore, USGS Open-File Report 87-425 (1987) &nbsp;·&nbsp; NMMMD Historic Mine Records, Colfax County &nbsp;·&nbsp; NMBGMR Raton Quadrangle Map</span>
+  </div>
+  <div class="basin-nav-bar">
+    <a href="#basin-index" class="basin-nav-link">↑ Back to basins</a>
+  </div>
+</section>
+
+
+<!-- BASIN 14 — HATCH-RINCON -->
+<section class="basin-section" id="basin14">
+  <div class="basin-photo-header">
+    <div class="basin-photo-overlay"></div>
+    <div class="basin-photo-content">
+      <span class="basin-number">Basin 14</span>
+      <h2 class="basin-title">Hatch–Rincon Corridor</h2>
+      <p class="basin-cities-tag">Hatch &nbsp;·&nbsp; Rincon &nbsp;·&nbsp; Radium Springs</p>
+    </div>
+  </div>
+  <div class="basin-body">
+    <div class="basin-intro">
+      <span class="basin-col-label">Geological overview</span>
+      <p>The Hatch-Rincon corridor is defined by the Rio Grande and its legacy of repeated flooding, channel migration, and sediment deposition. Unlike the broad basin fill environments of the Albuquerque or Tularosa basins, the foundation conditions here are shaped primarily by fluvial processes --- the highly variable lateral and vertical succession of deposits laid down by a river that has shifted its course many times over the past several hundred thousand years.</p>
+      <p>The result is a mosaic of soil types that can vary significantly within a single property boundary. A boring at one corner of a site may encounter fine-grained overbank deposits; a boring at the other corner may find coarser point bar sands or gravel channel lag. This heterogeneity is the defining engineering challenge of floodplain terrain, and it is one that a single-point investigation cannot adequately characterize.</p>
+      <p>The acequia system that has irrigated this valley for centuries introduces substantial seasonal moisture variation to a soil profile that already has limited capacity to drain laterally. Overbank clay deposits respond to the wet-dry cycles imposed by chile and pecan agriculture in ways that produce measurable seasonal foundation movement.</p>
+    </div>
+    <div class="basin-conditions">
+      <span class="basin-col-label">Soil conditions and hazards</span>
+      <div class="condition-item">
+        <div class="condition-name">Fluvial Heterogeneity</div>
+        <div class="condition-desc">High lateral variability of soil types over short distances is the defining condition. Foundations that span multiple soil units settle unevenly as loads compress each unit at different rates --- not because any single material is defective, but because river-deposited soils are inherently variable.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Overbank Clay Expansion</div>
+        <div class="condition-desc">Fine-grained flood deposits blanket much of the active valley floor with moderate expansion potential. Seasonal opening and closing of cracks tied to agricultural irrigation cycles is a common observation in structures founded on these soils.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Acequia Irrigation Moisture</div>
+        <div class="condition-desc">Traditional earthen-channel irrigation introduces chronic seasonal moisture to soils that already have limited lateral drainage capacity. The moisture regime in irrigated valley floor soils differs substantially from what natural conditions would produce.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Abandoned Channel Fills</div>
+        <div class="condition-desc">Former Rio Grande channel positions are filled with soft, highly compressible sediment. High compressibility and poor bearing capacity in these locations can produce differential settlement relative to adjacent terrace or fan deposits.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Flood Inundation Zone</div>
+        <div class="condition-desc">Much of the active valley floor lies within the 100-year floodplain of the Rio Grande. Episodic deep wetting events accelerate both differential settlement and expansive soil cycling in ways that purely seasonal moisture variation does not.</div>
+      </div>
+    </div>
+  </div>
+  <div class="basin-references">
+    <span class="references-label">Sources</span>
+    <span class="references-list">Hawley & Lozinsky, NMBGMR Open-File Report 231 (1992) &nbsp;·&nbsp; Mack et al., NMBGMR Open-File Report 351 (1996) &nbsp;·&nbsp; FEMA Flood Insurance Rate Maps, Sierra and Doña Ana Counties &nbsp;·&nbsp; USGS Water Supply Paper 1669 (1963)</span>
+  </div>
+  <div class="basin-nav-bar">
+    <a href="#basin-index" class="basin-nav-link">↑ Back to basins</a>
+  </div>
+</section>
+
+
+<!-- BASIN 15 — MORA VALLEY -->
+<section class="basin-section" id="basin15">
+  <div class="basin-photo-header">
+    <div class="basin-photo-overlay"></div>
+    <div class="basin-photo-content">
+      <span class="basin-number">Basin 15</span>
+      <h2 class="basin-title">Mora Valley</h2>
+      <p class="basin-cities-tag">Mora &nbsp;·&nbsp; Wagon Mound &nbsp;·&nbsp; Roy &nbsp;·&nbsp; Las Vegas NM &nbsp;·&nbsp; Guadalupita &nbsp;·&nbsp; Ocate &nbsp;·&nbsp; Solano</p>
+    </div>
+  </div>
+  <div class="basin-body">
+    <div class="basin-intro">
+      <span class="basin-col-label">Geological overview</span>
+      <p>The Mora Valley represents the mountain front environment of the Sangre de Cristo range --- a setting that differs fundamentally from the desert basin environments that characterize most of New Mexico's foundation terrain. Elevation, precipitation, freeze-thaw cycling, and the proximity of competent bedrock create a foundation environment more closely related to the Rocky Mountain states to the north than to the Chihuahuan Desert environments of southern New Mexico.</p>
+      <p>The valley floor soils include coarse alluvial gravels and cobbles --- generally good foundation material --- interspersed with finer-grained swamp and lacustrine deposits in areas of poor drainage. These wet valley bottom deposits can be highly compressible and, where containing organic matter, subject to long-term consolidation that continues for years under structural load. Organic soil consolidation is a slow process --- decades --- and can produce settlement far beyond what would be predicted from soil density alone.</p>
+      <p>Frost heave is the dominant foundation mechanism in this environment. At elevations above 7,000 feet, frost depth can reach 36 to 48 inches. Foundations that do not extend below frost depth undergo annual upward movement in winter and settlement in spring, cycles that cumulate into structural damage over time. Historic construction in the valley, including traditional adobe and stone masonry, often has foundations of insufficient depth by modern standards.</p>
+    </div>
+    <div class="basin-conditions">
+      <span class="basin-col-label">Soil conditions and hazards</span>
+      <div class="condition-item">
+        <div class="condition-name">Frost Heave</div>
+        <div class="condition-desc">The primary hazard at Mora Valley elevations. Frost depth of 36 to 48 inches or greater drives annual upward displacement in shallow foundations, with cumulative damage accumulating at corners and structural discontinuities. Fine-grained soils are more frost-susceptible than gravels --- not all valley soils carry equal risk.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Organic Valley Bottom Soils</div>
+        <div class="condition-desc">Peat and highly organic deposits in wet valley floor positions consolidate slowly under structural load. The process continues for decades after construction and produces persistent, relatively uniform settlement with no clear seasonal pattern --- easily mistaken for other causes.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Adobe and Masonry Vulnerability</div>
+        <div class="condition-desc">Historic adobe and stone masonry construction with shallow, unreinforced foundations is common in the Mora Valley. These structures respond to frost and moisture differently than modern concrete, and evaluation methods must account for the specific vulnerabilities of earthen and masonry systems.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Slope Instability</div>
+        <div class="condition-desc">Colluvial slopes in steep terrain carry potential for slow creep and rapid failure under saturated conditions. Spring snowmelt concentrates annual moisture in a short window, amplifying both the frost heave cycle and slope instability risk.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Bedrock Variability</div>
+        <div class="condition-desc">Shallow Precambrian bedrock on upland positions creates differential bearing conditions where foundations span the transition between competent rock and overlying soil --- a condition that produces cracking independent of soil volume change.</div>
+      </div>
+    </div>
+  </div>
+  <div class="basin-references">
+    <span class="references-label">Sources</span>
+    <span class="references-list">Sando et al., USGS Professional Paper 1042 (1976) &nbsp;·&nbsp; NMBGMR Mora Quadrangle Map &nbsp;·&nbsp; Harrington, USGS Water Supply Paper 599 (1920) &nbsp;·&nbsp; NRCS Soil Survey of Mora County, New Mexico</span>
+  </div>
+  <div class="basin-nav-bar">
+    <a href="#basin-index" class="basin-nav-link">↑ Back to basins</a>
+  </div>
+</section>
+
+
+<!-- BASIN 16 — LORDSBURG -->
+<section class="basin-section" id="basin16">
+  <div class="basin-photo-header">
+    <div class="basin-photo-overlay"></div>
+    <div class="basin-photo-content">
+      <span class="basin-number">Basin 16</span>
+      <h2 class="basin-title">Lordsburg Basin</h2>
+      <p class="basin-cities-tag">Lordsburg &nbsp;·&nbsp; Virden &nbsp;·&nbsp; Animas &nbsp;·&nbsp; Columbus</p>
+    </div>
+  </div>
+  <div class="basin-body">
+    <div class="basin-intro">
+      <span class="basin-col-label">Geological overview</span>
+      <p>The Lordsburg Basin is a fault-bounded graben in Hidalgo County --- one of the more geologically straightforward basin and range environments in New Mexico. The basin is filled with alluvial sediment from surrounding mountain ranges, and the geological hazard inventory, while real, is less complex than in the evaporite-rich or shale-dominated basins to the north and east. The primary geological character is arid alluvial fan terrain with the associated hazards typical of southwestern New Mexico.</p>
+      <p>Collapsible soil behavior is the primary concern, as in other arid Basin and Range environments in the region. Alluvial fan soils on upper to mid-fan positions have developed structure through long-term desiccation and are susceptible to hydroconsolidation. Lower fan and playa-margin soils contain higher clay content and exhibit moderate expansive behavior. The Gila River corridor at Virden introduces floodplain alluvium and the associated variability of river-deposited soils.</p>
+      <p>Understanding which part of the basin a site occupies --- upper fan, lower fan, playa margin, or floodplain --- matters for identifying the primary mechanism. The same general region can produce very different site conditions depending on geomorphic position.</p>
+    </div>
+    <div class="basin-conditions">
+      <span class="basin-col-label">Soil conditions and hazards</span>
+      <div class="condition-item">
+        <div class="condition-name">Collapsible Upper Fan Alluvium</div>
+        <div class="condition-desc">Upper and mid-fan positions carry the metastable dry structure typical of arid alluvial environments. First sustained wetting under load triggers hydroconsolidation --- sudden consolidation that can affect a broad area of the foundation simultaneously.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Expansive Lower Fan and Playa Clays</div>
+        <div class="condition-desc">Higher clay content in lower fan and playa-margin positions introduces moderate expansive behavior. Seasonal movement follows the familiar swell-shrink pattern of other arid basin clay environments in southwestern New Mexico.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Gila River Floodplain Variability</div>
+        <div class="condition-desc">Variable alluvial deposits in the Virden corridor --- point bar sands, overbank silts and clays, and gravel channel lag --- produce differential settlement where foundations span multiple soil units. Loose sands in former channel positions carry potential liquefaction susceptibility under seismic loading.</div>
+      </div>
+      <div class="condition-item">
+        <div class="condition-name">Caliche Horizons</div>
+        <div class="condition-desc">Present throughout the basin at variable depth. As elsewhere in arid New Mexico, caliche masks underlying conditions and is not a reliable bearing indicator without investigation of what lies beneath the refusal horizon.</div>
+      </div>
+    </div>
+  </div>
+  <div class="basin-references">
+    <span class="references-label">Sources</span>
+    <span class="references-list">Seager et al., NMBGMR Memoir 36 (1987) &nbsp;·&nbsp; NMBGMR Lordsburg Quadrangle Map &nbsp;·&nbsp; Hawley et al., NMBGMR Hydrologic Report 5 (1969) &nbsp;·&nbsp; USGS Water-Resources Investigations Report 94-4042 (1994)</span>
+  </div>
+  <div class="basin-nav-bar">
+    <a href="#basin-index" class="basin-nav-link">↑ Back to basins</a>
+  </div>
+</section>
+
+
+<!-- CLOSING -->
+<div class="section-divider" style="margin-top: 72px;">
+  <div class="divider-rule"></div>
+
+</div>
+<div class="closing-note">
+  
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.basin-section').forEach(el => observer.observe(el));
+</script>
