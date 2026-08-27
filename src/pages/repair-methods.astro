@@ -3,14 +3,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HubPageShell from '../components/hub/HubPageShell.astro';
 
 const nav = [
-  { id: 'fitness', label: 'The right tool' },
-  { id: 'questions', label: 'Questions this hub answers' },
+  { id: 'start', label: 'Start here' },
+  { id: 'core', label: 'Core questions' },
   { id: 'methods', label: 'The methods' },
+  { id: 'orient', label: 'Where to read next' },
+  { id: 'more', label: 'More questions' },
   { id: 'before', label: 'Before any method is sold' },
 ];
 
 const pageDescription =
-  'Foundation repair methods compared: helical piers vs push piers, micropiles, compaction grouting, foam jacking, and other deep foundations. A method name is not a diagnosis. Use the tool that matches the condition.';
+  'Repair methods explained as jobs, not products: helical piers, micropiles, push piers, compaction grouting, foam jacking, and other deep foundations. A method name is not a diagnosis. The right tool matches the load path, the movement, the soil, and the water.';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -37,7 +39,15 @@ const schema = {
       name: 'What is the difference between a helical pier and a push pier?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Helical piers are rotated into the ground using helical plates. Push piers are pressed from the existing foundation using the building weight as reaction. They are not the same tool and they are not interchangeable on every house.',
+        text: 'Helical piers are rotated into the ground using helical plates. Push piers are pressed from the existing foundation using the building weight as reaction. They are not interchangeable on every house.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can foam replace a pier?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Foam is not a pile. In some documented conditions, deeper polyurethane injection can be a reasonable alternative to a pier proposal when the problem is treatable soil or voiding and the building does not require a separate deep load path. It is a poor substitute when a footing still needs reliable transfer to deeper competent material, or when water is still removing support.',
       },
     },
     {
@@ -45,23 +55,7 @@ const schema = {
       name: 'When is compaction grouting most effective?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'When the job is densifying suitable soil and improving support in that ground — not when the need is a structural pile, and not as a substitute for expanding foam under a slab.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'When is foam jacking the wrong tool?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'When the problem is an active water, erosion, or weak-soil condition, or when the need is pile underpinning of a footing rather than filling an accessible slab void.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Is a quieter or less expensive method sometimes the right method?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes. Soil, water, access, structure weight, scope, and cost can make a simpler method the honest answer if it matches the condition that was found.',
+        text: 'When the job is densifying suitable soil — not when the need is a conventional structural pile, and not as a synonym for foam.',
       },
     },
     {
@@ -72,6 +66,14 @@ const schema = {
         text: 'No. A crack is a symptom. Drainage, plumbing leaks, seasonal movement, and material behavior can produce cracks without a deep-foundation repair.',
       },
     },
+    {
+      '@type': 'Question',
+      name: 'Is a quieter method sometimes the right method?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Soil, water, access, structure weight, scope, and cost can make a simpler method the honest answer if it matches the condition that was found.',
+      },
+    },
   ],
 };
 ---
@@ -80,163 +82,242 @@ const schema = {
   title="Repair Methods"
   description={pageDescription}
   hub={true}
-  quote="The useful question is not which repair method sounds strongest. It is what problem has actually been identified, and whether the proposed method is designed to solve that problem."
+  quote="The right repair is not the loudest tool, the deepest tool, or the cheapest tool. It is the method that matches a demonstrated problem and a clearly explained objective."
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
   <HubPageShell
     title="Repair Methods"
-    subhead="A method name is not a diagnosis"
-    description="This guide is a starting place for names that show up in a proposal. Read the questions first if you want the short path. Open a method card when you need the tool itself."
+    subhead="What the names mean — and what they do not prove"
+    description="A method name is not a diagnosis. Piers, grout, and foam can each be useful in the right setting. The choice should follow the building’s load path, movement pattern, soil conditions, water conditions, access, and repair objective."
     glance={[
-      { label: 'Start here', value: 'What problem is being solved?' },
-      { label: 'Then', value: 'Which tool matches that job?' },
-      { label: 'Compare', value: 'Helical vs push, grout vs foam' },
-      { label: 'Not this page', value: 'A ranking of best products' },
+      { label: 'Start here', value: 'What job is being asked of the method?' },
+      { label: 'Then', value: 'What evidence supports that job?' },
+      { label: 'Compare only likes', value: 'Piers with piers. Ground improvement with ground improvement.' },
+      { label: 'Not this page', value: 'A ranking of products' },
     ]}
     nav={nav}
     topicsStyle="list"
   >
-    <div class="ask-box" id="fitness">
-      <h3>The right tool for the job</h3>
-      <p>A method is only as good as the job it is asked to do. Helical piers, micropiles, push piers, grout, and foam are tools. A tool used on the wrong problem is the wrong tool, even when it is expensive or sounds more engineered.</p>
-      <p>Sometimes the quieter option is the better one. Soil, water, access, structure weight, scope, and cost can make a simpler method the honest answer. The question is not which name sounds strongest. It is which method matches the condition that was actually found.</p>
+    <div class="ask-box" id="start">
+      <h3>Start here</h3>
+      <ul>
+        <li>Is the goal deep load transfer, soil improvement, void filling, slab lifting, or retaining soil?</li>
+        <li>Is the movement active, historic, seasonal, localized, or widespread?</li>
+        <li>Have drainage, irrigation, plumbing, erosion, and soil-moisture change been considered?</li>
+        <li>What information supports the proposed method?</li>
+      </ul>
+      <p>A method is only as good as the job it is asked to do. Sometimes the quieter option is the better one. Soil, water, access, structure weight, scope, and cost can make a simpler method the honest answer.</p>
     </div>
 
-    <h2 class="section-heading" id="questions">Questions this hub should leave you able to answer</h2>
-    <p>Open a group. The answers live on this page and on the method pages the links point to.</p>
+    <h2 class="section-heading" id="core">Core questions</h2>
 
-    <div class="accordion-section" id="q-what">
-      <div class="accordion-header">
-        <span class="accordion-title">What is this method?</span>
-        <span class="accordion-icon">▸</span>
-      </div>
-      <div class="accordion-content">
-        <div class="accordion-content-inner">
-          <ul>
-            <li><a href="/helical-piers">What is a helical pier?</a></li>
-            <li><a href="/push-piers">What is a push pier?</a></li>
-            <li><a href="/micropiles">What is a micropile?</a></li>
-            <li><a href="/compaction-grouting">What is compaction grouting?</a></li>
-            <li><a href="/foam-jacking">What is foam jacking?</a></li>
-          </ul>
-        </div>
-      </div>
+    <div class="content-block">
+      <h3>What problem is the method meant to solve?</h3>
+      <p>A proposal should identify whether the intended job is:</p>
+      <ul>
+        <li>Transfer structural load deeper.</li>
+        <li>Improve shallow or intermediate-depth soil.</li>
+        <li>Fill voids and restore contact beneath a slab.</li>
+        <li>Lift a slab or foundation toward a target elevation.</li>
+        <li>Retain soil, control erosion, or support an excavation.</li>
+        <li>Support new construction or an addition.</li>
+      </ul>
+      <p>A method can be technically sound and still be wrong for the stated problem.</p>
     </div>
 
-    <div class="accordion-section" id="q-diff">
-      <div class="accordion-header">
-        <span class="accordion-title">What is the difference?</span>
-        <span class="accordion-icon">▸</span>
-      </div>
-      <div class="accordion-content">
-        <div class="accordion-content-inner">
-          <ul>
-            <li><a href="#helical">Helical pier vs push pier?</a> Helical piers are rotated in with plates. Push piers are pressed from the foundation using the building as reaction.</li>
-            <li><a href="/micropiles">Helical or micropile vs “just put steel in the ground”?</a> A product name is not a design. Access, vibration, load, and ground decide the tool.</li>
-            <li><a href="#grout">Compaction grouting vs foam jacking?</a> Grout densifies soil. Foam fills accessible voids and can lift a slab. They are not the same material and not the same job.</li>
-            <li><a href="#foam">A pier vs filling a void under a slab?</a> Underpinning a footing and filling a slab void are different load paths.</li>
-          </ul>
-        </div>
-      </div>
+    <div class="content-block">
+      <h3>Which repair methods are actually comparable?</h3>
+      <ul>
+        <li>Helical piers, push piers, and micropiles may be compared when the question is how to create a structural underpinning load path.</li>
+        <li>Compaction grouting, rammed aggregate piers, and certain resin-injection approaches may be compared when the question is whether ground improvement can create adequate support.</li>
+        <li>Foam jacking and cementitious slabjacking may be compared when the question is void filling, slab support, or controlled slab elevation.</li>
+        <li>A project can require more than one category: underpinning for a footing and void filling beneath an adjacent slab, for example.</li>
+      </ul>
     </div>
 
-    <div class="accordion-section" id="q-when">
-      <div class="accordion-header">
-        <span class="accordion-title">When is this the right tool — and when is it not?</span>
-        <span class="accordion-icon">▸</span>
-      </div>
-      <div class="accordion-content">
-        <div class="accordion-content-inner">
-          <ul>
-            <li><a href="/compaction-grouting">When is compaction grouting most effective?</a> When the soil can be densified and the job is ground improvement, not a structural pile.</li>
-            <li><a href="/foam-jacking">When is foam the wrong tool?</a> Active water, erosion, weak soil, or a footing that needs a pier — not a slab void fill.</li>
-            <li><a href="/push-piers">When is a push pier a poor fit?</a> When the house is too light, the footing cannot take the reaction, or the cause of movement is still open.</li>
-            <li><a href="/micropiles">When does limited access point to micropiles?</a> Tight working room, vibration limits, obstructions, or loads that another system cannot reach cleanly.</li>
-            <li><a href="/all-articles/when-monitoring-makes-more-sense-than-immediate-underpinning">When is monitoring better than any of these?</a></li>
-          </ul>
-        </div>
-      </div>
+    <div class="content-block">
+      <h3>Is the goal stabilization or lift?</h3>
+      <p>Stabilizing movement and lifting a structure are related but different objectives. Lift can close gaps or restore elevations. It can also stress finishes, plumbing, brittle masonry, utilities, and parts of the structure that are not moving uniformly.</p>
+      <p>A proposal should state whether lift is necessary, what degree of lift is intended, what could limit it, and what will be monitored during the work.</p>
     </div>
 
-    <div class="accordion-section" id="q-cause">
-      <div class="accordion-header">
-        <span class="accordion-title">Cause before product</span>
-        <span class="accordion-icon">▸</span>
-      </div>
-      <div class="accordion-content">
-        <div class="accordion-content-inner">
-          <ul>
-            <li>Can drainage or a plumbing leak make a good method fail? Yes. Water that is still changing the soil is not fixed by steel or grout alone.</li>
-            <li>Does a crack mean you need piers? No. A crack is a symptom. Seasonal movement and material behavior produce cracks on stable houses too.</li>
-            <li>Stabilize vs lift — are those the same job? No. Holding a building where it is and raising it are different objectives.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-section" id="q-names">
-      <div class="accordion-header">
-        <span class="accordion-title">Names that show up on bids</span>
-        <span class="accordion-icon">▸</span>
-      </div>
-      <div class="accordion-content">
-        <div class="accordion-content-inner">
-          <p>If the proposal says drilled shaft, caisson, CFA, H-pile, pipe pile, timber pile, sheet pile, or Geopier / rammed aggregate pier, start here:</p>
-          <div class="related-links">
-            <a href="/other-deep-foundations">Other Deep Foundations →</a>
-          </div>
-        </div>
-      </div>
+    <div class="content-block">
+      <h3>Is water part of the mechanism?</h3>
+      <p>Water is not automatically the cause of movement. It should not be treated as an afterthought. Roof runoff, surface drainage, irrigation, plumbing leaks, erosion, perched water, groundwater, and moisture-sensitive soil can change support conditions.</p>
+      <p>A deep foundation system may still be appropriate when water is involved. The proposal should explain whether the water mechanism has been addressed, controlled, or intentionally separated from the structural-repair scope.</p>
     </div>
 
     <h2 class="section-heading" id="methods">The methods</h2>
     <div class="condition-grid">
       <div class="condition-card" id="helical">
         <h4>Helical Piers</h4>
-        <p>Steel elements installed by rotating helical bearing plates into the ground. They transfer structural load to deeper soil or rock.</p>
-        <p>They are not a universal answer to cracking, moisture change, drainage problems, voids, or every form of settlement.</p>
+        <p>Steel elements installed by rotation to provide a deep-foundation load path. Not an automatic answer to every crack or moisture-related movement.</p>
         <div class="related-links">
           <a href="/helical-piers">Helical Piers →</a>
         </div>
       </div>
       <div class="condition-card" id="micropiles">
         <h4>Micropiles</h4>
-        <p>Small-diameter, drilled-and-grouted reinforced piles used for structural support and, in some work, in-place earth reinforcement.</p>
-        <p>They are often considered where access, vibration, ground conditions, obstructions, or load make another approach a poor fit. They are not simply a more technical name for any pier repair.</p>
+        <p>Small-diameter drilled-and-grouted reinforced foundation elements. Used for structural support and, in some work, in-place earth reinforcement. Not simply “stronger piers.”</p>
         <div class="related-links">
           <a href="/micropiles">Micropiles →</a>
         </div>
       </div>
       <div class="condition-card" id="push">
         <h4>Push Piers</h4>
-        <p>Steel resistance piers hydraulically pressed from an existing foundation, using the building’s weight as the installation reaction.</p>
-        <p>They are used for selected existing-building underpinning. They are not torque-installed helical piers, and they are not automatically appropriate when the structure is light, the footing is unsuitable, or the cause of movement is still unresolved.</p>
+        <p>Steel resistance piers pressed using an existing structure as installation reaction. Not torque-installed helical piers. Not automatically suitable for a light structure or an unresolved water problem.</p>
         <div class="related-links">
           <a href="/push-piers">Push Piers →</a>
         </div>
       </div>
       <div class="condition-card" id="grout">
         <h4>Compaction Grouting</h4>
-        <p>A ground-improvement method that injects stiff, low-mobility grout to displace and densify suitable soil.</p>
-        <p>It is used to improve support in specific ground conditions. It is not expanding polyurethane foam and it is not a conventional structural pile.</p>
+        <p>Stiff, low-mobility grout used to displace and densify suitable ground. Not foam. Not a conventional deep pile.</p>
         <div class="related-links">
           <a href="/compaction-grouting">Compaction Grouting →</a>
         </div>
       </div>
       <div class="condition-card" id="foam">
         <h4>Foam Jacking</h4>
-        <p>Expanding polyurethane injected beneath a slab to fill accessible voids and, where conditions allow, lift or re-level concrete.</p>
-        <p>It is used for slab support and elevation correction. It is not pile underpinning and it is not a substitute for correcting an active water, erosion, or weak-soil condition.</p>
+        <p>Expanding polyurethane used to fill voids, restore contact, and lift concrete in controlled stages. Not a pile. In suitable documented conditions it can be used for more than cosmetic slab lifting, and it can be a reasonable alternative to a pier proposal when the problem is treatable soil or voiding and a separate deep load path is not required.</p>
         <div class="related-links">
           <a href="/foam-jacking">Foam Jacking →</a>
         </div>
       </div>
       <div class="condition-card" id="other">
         <h4>Other Deep Foundations</h4>
-        <p>A catalog of names that often arise in commercial and infrastructure work: drilled shafts, auger-cast / CFA piles, driven H-piles and pipe piles, timber piles, precast concrete piles, caissons, sheet piling, and rammed aggregate piers.</p>
-        <p>This is not a sixth residential repair product page. It explains systems owners may hear about and why their normal purpose may be different from repairing an existing house.</p>
+        <p>A vocabulary guide to systems commonly encountered in commercial, industrial, infrastructure, marine, retaining, and new-construction work. Not a sixth residential repair product.</p>
         <div class="related-links">
           <a href="/other-deep-foundations">Other Deep Foundations →</a>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-heading" id="orient">Where to read next</h2>
+    <p>These are orientation cards. They do not diagnose a house.</p>
+    <div class="condition-grid">
+      <div class="condition-card">
+        <h4>Was I told the footing needs deeper support?</h4>
+        <div class="related-links">
+          <a href="/helical-piers">Helical Piers →</a>
+          <a href="/push-piers">Push Piers →</a>
+          <a href="/micropiles">Micropiles →</a>
+        </div>
+      </div>
+      <div class="condition-card">
+        <h4>Was I told the slab has a void or has settled?</h4>
+        <div class="related-links">
+          <a href="/foam-jacking">Foam Jacking →</a>
+          <a href="/compaction-grouting">Compaction Grouting →</a>
+        </div>
+      </div>
+      <div class="condition-card">
+        <h4>Was I told the soil itself needs improvement?</h4>
+        <div class="related-links">
+          <a href="/compaction-grouting">Compaction Grouting →</a>
+          <a href="/foam-jacking">Foam Jacking →</a>
+          <a href="/other-deep-foundations">Other Deep Foundations →</a>
+        </div>
+      </div>
+      <div class="condition-card">
+        <h4>Did the proposal use a name I do not recognize?</h4>
+        <div class="related-links">
+          <a href="/other-deep-foundations">Other Deep Foundations →</a>
+        </div>
+      </div>
+      <div class="condition-card">
+        <h4>Was the problem identified after rain, irrigation, a leak, or erosion?</h4>
+        <p>Start with water and soil behavior before selecting a repair system.</p>
+        <div class="related-links">
+          <a href="/material-behavior">Material Behavior →</a>
+          <a href="/common-signs">Common Signs →</a>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-heading" id="more">More questions</h2>
+
+    <div class="accordion-section">
+      <div class="accordion-header">
+        <span class="accordion-title">Does “bedrock” automatically mean the repair is sound?</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>No. “Bedrock” is not a complete design explanation. Ask what material was encountered, at what depth, whether it is competent for the intended load, how the system engages it, and how the existing building connects to the proposed support.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section">
+      <div class="accordion-header">
+        <span class="accordion-title">Does a deeper repair automatically mean a better repair?</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>No. A deeper system may be appropriate where shallow support is inadequate. Depth alone does not solve a moisture problem, a drainage problem, a structural-connection problem, a void, or an incorrect diagnosis.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section">
+      <div class="accordion-header">
+        <span class="accordion-title">Can compaction grouting and foam do the same thing?</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Sometimes their scopes overlap around voids, loose ground, slab support, or controlled lifting. Their materials and intended mechanisms are different. Compaction grouting uses stiff low-mobility grout to displace and densify suitable ground. Polyurethane injection uses expanding resin that can fill voids, create confinement, and potentially lift or improve support.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section">
+      <div class="accordion-header">
+        <span class="accordion-title">Why might a contractor propose one method but not another?</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>The reason may be legitimate: access, equipment size, building weight, footing condition, vibration limits, depth of weak soil, obstructions, soil type, water conditions, desired lift, or cost.</p>
+          <p>The owner should still ask what alternatives were considered and why they were ruled out.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section">
+      <div class="accordion-header">
+        <span class="accordion-title">Can methods be combined?</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Yes. A project may combine drainage correction, underpinning, void filling, soil improvement, monitoring, or slab repair. A combination is not automatically more complete. It should be tied to distinct identified problems.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section">
+      <div class="accordion-header">
+        <span class="accordion-title">What is the proposed load path?</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Ask how load moves from the existing footing, wall, column, or slab into the proposed repair and then into the ground.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section">
+      <div class="accordion-header">
+        <span class="accordion-title">What is the existing foundation actually capable of carrying?</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>A high-capacity pier does not automatically make a weak, narrow, cracked, poorly reinforced, or eccentric footing suitable for concentrated bracket loads.</p>
         </div>
       </div>
     </div>
@@ -245,13 +326,11 @@ const schema = {
       <h3>Before any method is sold</h3>
       <ul>
         <li>What movement or support problem is this method intended to solve?</li>
-        <li>What investigation supports that explanation — site observations, elevation data, soil information, drainage review, records, monitoring, or engineering analysis?</li>
+        <li>What investigation supports that explanation?</li>
         <li>Is the goal stabilization, lifting, deep load transfer, soil improvement, void filling, retaining soil, or support for a new load?</li>
         <li>What is the load path from the building into the proposed system?</li>
-        <li>What conditions make this method a better fit than the other relevant options?</li>
-        <li>Were water, drainage, plumbing leaks, erosion, irrigation, utility trenches, and moisture-driven soil changes evaluated separately?</li>
-        <li>What limitations, risks, and conditions for success are specific to this method and this site?</li>
-        <li>What installation records, monitoring, testing, or verification will show whether the intended objective was achieved?</li>
+        <li>What is outside the scope — drainage, leak repair, slab work, utilities, monitoring, engineering?</li>
+        <li>How will success be defined: stabilization, achieved lift, restored slab support, reduced settlement risk, or cosmetic repair?</li>
       </ul>
     </div>
   </HubPageShell>
