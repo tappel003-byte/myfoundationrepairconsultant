@@ -1,95 +1,113 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HubPageShell from '../components/hub/HubPageShell.astro';
-import { cleanTitle } from '../lib/pages';
 
 const groups = [
   {
-    id: 'movement',
-    label: 'Movement and settlement',
+    id: 'behavior',
+    label: 'Foundation Behavior & Settlement',
     links: [
-      { href: '/all-articles/settlement', title: 'Settlement: What It Means' },
-      { href: '/all-articles/differential-settlement-why-uneven-movement-matters-more-than-movement-itself', title: 'Differential Settlement' },
-      { href: '/all-articles/foundation-problem-vs-normal-settling-how-to-evaluate-what-youre-seeing', title: 'Foundation Problem vs. Normal Settling' },
-      { href: '/all-articles/foundationcracks', title: 'Foundation Cracks' },
-      { href: '/all-articles/structuralcracks', title: 'Structural Cracks' },
+      { href: '/all-articles/settlement', title: 'Settlement' },
+      { href: '/all-articles/differential-settlement-why-uneven-movement-matters-more-than-movement-itself', title: 'Differential Settlement: Why Uneven Movement Matters More Than Movement Itself' },
+      { href: '/all-articles/underpinning-what-it-is-and-why-hearing-the-term-is-not-a-diagnosis', title: 'Underpinning: What It Is \u2014 and Why Hearing the Term Is Not a Diagnosis' },
+      { href: '', title: 'Foundation Problem vs. Normal Settling (under construction)' },
     ],
   },
   {
     id: 'soils',
-    label: 'Soils and climate',
+    label: 'Soil Behavior & Analysis',
     links: [
       { href: '/all-articles/expansivesoil', title: 'Expansive Soil' },
       { href: '/all-articles/collapsiblesoil', title: 'Collapsible Soil' },
-      { href: '/all-articles/soil-reports-what-they-are-and-what-theyre-actually-used-for', title: 'Soil Reports' },
-      { href: '/all-articles/why-soil-analysis-matters-in-understanding-structural-performance', title: 'Why Soil Analysis Matters' },
-      { href: '/all-articles/how-climate-and-weather-affect-foundation-stability', title: 'Climate and Weather' },
-      { href: '/all-articles/foundation-soil-behavior-in-the-phoenix-metropolitan-area', title: 'Phoenix Soil Behavior' },
-      { href: '/all-articles/southern-arizona-soil-conditions-and-structural-behavior', title: 'Southern Arizona Soils' },
+      { href: '/all-articles/why-soil-analysis-matters-in-understanding-structural-performance', title: 'Why Soil Analysis Matters in Understanding Structural Performance' },
+      { href: '/all-articles/soil-reports-what-they-are-and-what-theyre-actually-used-for', title: 'Soil Reports: What They Are \u2014 and What They\u2019re Actually Used For' },
     ],
   },
   {
-    id: 'systems',
-    label: 'Foundation systems',
+    id: 'types',
+    label: 'Foundation Types & Construction',
     links: [
-      { href: '/all-articles/slab-on-grade-foundations-what-they-are-and-what-they-dont-automatically-tell-you', title: 'Slab-on-Grade Foundations' },
-      { href: '/all-articles/crawlspaces-what-they-are-and-why-they-get-blamed-for-so-many-problems', title: 'Crawlspaces' },
-      { href: '/all-articles/underpinning-what-it-is-and-why-hearing-the-term-is-not-a-diagnosis', title: 'Underpinning' },
-      { href: '/all-articles/helicalpiers', title: 'Helical Piers (article)' },
-      { href: '/all-articles/why-torque-alone-doesnt-guarantee-capacity', title: 'Torque and Capacity' },
+      { href: '/all-articles/slab-on-grade-foundations-what-they-are-and-what-they-dont-automatically-tell-you', title: 'Slab-on-Grade Foundations: What They Are \u2014 and What They Don\u2019t Automatically Tell You' },
+      { href: '/all-articles/crawlspaces-what-they-are-and-why-they-get-blamed-for-so-many-problems', title: 'Crawlspaces: What They Are \u2014 and Why They Get Blamed for So Many Problems' },
+      { href: '', title: 'Foundation Types: A Complete Guide (under construction)' },
     ],
   },
   {
-    id: 'signs',
-    label: 'Signs and inspection',
+    id: 'symptoms',
+    label: 'Understanding Damage & Symptoms',
     links: [
-      { href: '/all-articles/common-signs-a-foundation-inspection-may-be-worth-considering', title: 'When an Inspection May Be Worth Considering' },
+      { href: '/all-articles/common-signs-a-foundation-inspection-may-be-worth-considering', title: 'Common Signs a Foundation Inspection May Be Worth Considering' },
+      { href: '/all-articles/foundationcracks', title: 'Foundation Cracks: What They Mean \u2014 and When to Actually Worry' },
+      { href: '/all-articles/structuralcracks', title: 'Structural Cracks' },
+      { href: '', title: 'Structural Damage vs. Cosmetic Damage (under construction)' },
+    ],
+  },
+  {
+    id: 'methods',
+    label: 'Repair Method Deep Dives',
+    links: [
+      { href: '/all-articles/why-torque-alone-doesnt-guarantee-capacity', title: 'Why Torque Alone Doesn\u2019t Guarantee Capacity' },
+      { href: '', title: 'Distinguishing Moisture Problems from Bearing Capacity Deficiency (under construction)' },
+      { href: '', title: 'When Monitoring Makes More Sense Than Immediate Underpinning (under construction)' },
+    ],
+  },
+  {
+    id: 'materials',
+    label: 'Material Behavior Deep Dives',
+    links: [
+      { href: '', title: 'Why Concrete Cracks Even When Nothing Is Wrong (under construction)' },
+      { href: '', title: 'Shrinkage, Curing, and Stress Relief in Residential Concrete (under construction)' },
+      { href: '', title: 'Why Drywall Cracks Before Structural Failure Occurs (under construction)' },
+      { href: '', title: 'What Reinforcing Steel Actually Does \u2014 and What It Doesn\u2019t (under construction)' },
+      { href: '', title: 'Truss Uplift and Seasonal Movement Explained (under construction)' },
+    ],
+  },
+  {
+    id: 'climate',
+    label: 'Climate & Environmental Factors',
+    links: [
+      { href: '/all-articles/how-climate-and-weather-affect-foundation-stability', title: 'How Climate and Weather Affect Foundation Stability' },
     ],
   },
 ];
 
-const nav = groups.map((g) => ({ id: g.id, label: g.label }));
+const nav = groups.map((g) => ({ id: g.id, label: `${g.label} (${g.links.length} articles)` }));
 ---
 
 <BaseLayout
   title="Educational Articles"
-  description="In-depth articles on foundation behavior, soils, structural movement, and construction materials."
+  description="In-depth educational articles explaining foundation behavior, soil conditions, structural movement, and common construction materials."
   hub={true}
-  quote="Understanding comes from seeing how many small pieces fit together."
+  quote="Good decisions don\u2019t start with answers. They start with understanding the question."
 >
   <HubPageShell
     title="Educational Articles"
-    subhead="Foundation behavior, soils, and structural movement — written to be read"
-    glance={[
-      { label: 'Purpose', value: 'Understand before you decide' },
-      { label: 'Tone', value: 'No urgency' },
-      { label: 'Format', value: 'Papers, not posts' },
-      { label: 'Also', value: 'Industry articles live next door' },
-    ]}
+    subhead="Educational Articles"
+    bannerBlurb="Educational articles that explain foundation behavior, soil conditions, and common building materials without assuming damage or the need for repair."
     nav={nav}
-    topicsStyle="list"
+    topicsStyle="none"
   >
+    <p class="page-lede">Educational articles organized by topic to help building owners understand foundation behavior, soil conditions, and what different symptoms mean.</p>
     {groups.map((group) => (
       <div class="accordion-section" id={group.id}>
         <div class="accordion-header">
-          <span class="accordion-title">{group.label}</span>
+          <span class="accordion-title">{group.label} ({group.links.length} articles)</span>
           <span class="accordion-icon">▸</span>
         </div>
         <div class="accordion-content">
           <div class="accordion-content-inner">
             <div class="related-links">
               {group.links.map((link) => (
-                <a href={link.href}>{cleanTitle(link.title)} →</a>
+                link.href ? (
+                  <a href={link.href}>{link.title} →</a>
+                ) : (
+                  <span class="uc-title">{link.title}</span>
+                )
               ))}
             </div>
           </div>
         </div>
       </div>
     ))}
-    <div class="related-links">
-      <a href="/industry-articles">Industry articles →</a>
-      <a href="/all-articles">All articles →</a>
-      <a href="/start-here">Start Here →</a>
-    </div>
   </HubPageShell>
 </BaseLayout>
