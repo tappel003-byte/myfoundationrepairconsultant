@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/field-notes.css';
 const heardCards = [
   {
     id: 'piers',
@@ -178,3 +179,101 @@ const matchCards = matchPairs.flatMap((p) => [
     <p class="notes-exit"><a href="/repair-methods">Back to Repair Methods →</a></p>
   </div>
 </BaseLayout>
+<script is:inline>
+document.addEventListener('DOMContentLoaded', () => {
+  const shuffle = (node) => {
+    const cards = Array.from(node.children);
+    for (let i = cards.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      node.appendChild(cards[j]);
+      cards.splice(j, 1, cards[i]);
+    }
+  };
+  document.querySelectorAll('[data-shuffle]').forEach(shuffle);
+  document.querySelectorAll('.quiz').forEach((quiz) => {
+    const answer = quiz.getAttribute('data-answer');
+    const result = quiz.querySelector('.quiz-result');
+    quiz.querySelectorAll('.quiz-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (quiz.classList.contains('is-answered')) return;
+        quiz.classList.add('is-answered');
+        const choice = btn.getAttribute('data-choice');
+        const correct = choice === answer;
+        btn.classList.add(correct ? 'is-right' : 'is-wrong-pick');
+        const icon = document.createElement('span');
+        icon.className = 'quiz-icon';
+        icon.textContent = correct ? '\u2713' : '\u2717';
+        btn.appendChild(icon);
+        if (!correct) {
+          const rightBtn = quiz.querySelector('.quiz-btn[data-choice="' + answer + '"]');
+          if (rightBtn) {
+            rightBtn.classList.add('is-right');
+            const rightIcon = document.createElement('span');
+            rightIcon.className = 'quiz-icon';
+            rightIcon.textContent = '\u2713';
+            rightBtn.appendChild(rightIcon);
+          }
+        }
+        if (result) result.hidden = false;
+      });
+    });
+  });
+  const cycle = (card) => {
+    const steps = Number(card.getAttribute('data-steps') || 2);
+    const now = Number(card.getAttribute('data-step') || 0);
+    card.setAttribute('data-step', String((now + 1) % steps));
+  };
+  document.querySelectorAll('.notes .flip:not(.match-card)').forEach((card) => {
+    card.addEventListener('click', () => cycle(card));
+    card.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        cycle(card);
+      }
+    });
+  });
+  let flipped = [];
+  let boardLocked = false;
+  const status = document.getElementById('matchStatus');
+  const checkAllMatched = () => {
+    const total = document.querySelectorAll('.match-card').length;
+    const matched = document.querySelectorAll('.match-card.is-matched').length;
+    if (total > 0 && total === matched && status) status.hidden = false;
+  };
+  const flipCard = (card) => {
+    if (boardLocked) return;
+    if (card.classList.contains('is-flipped') || card.classList.contains('is-matched')) return;
+    card.classList.add('is-flipped');
+    flipped.push(card);
+    if (flipped.length === 2) {
+      boardLocked = true;
+      const [a, b] = flipped;
+      if (a.getAttribute('data-pair') === b.getAttribute('data-pair')) {
+        a.classList.add('is-matched');
+        b.classList.add('is-matched');
+        flipped = [];
+        boardLocked = false;
+        checkAllMatched();
+      } else {
+        a.classList.add('is-wrong');
+        b.classList.add('is-wrong');
+        window.setTimeout(() => {
+          a.classList.remove('is-flipped', 'is-wrong');
+          b.classList.remove('is-flipped', 'is-wrong');
+          flipped = [];
+          boardLocked = false;
+        }, 900);
+      }
+    }
+  };
+  document.querySelectorAll('.match-card').forEach((card) => {
+    card.addEventListener('click', () => flipCard(card));
+    card.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        flipCard(card);
+      }
+    });
+  });
+});
+</script>
