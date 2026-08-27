@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+
+const nav = [
+  { id: 'why', label: 'Why this page exists' },
+  { id: 'drilled', label: 'Drilled piers and shafts' },
+  { id: 'cfa', label: 'Auger-cast / CFA' },
+  { id: 'hpile', label: 'Driven H-piles' },
+  { id: 'pipe', label: 'Driven pipe piles' },
+  { id: 'bored', label: 'Bored piles' },
+  { id: 'timber', label: 'Timber piles' },
+  { id: 'precast', label: 'Precast driven piles' },
+  { id: 'caisson', label: 'Caissons' },
+  { id: 'sheet', label: 'Sheet piling' },
+  { id: 'pointers', label: 'Already on this site' },
+  { id: 'questions', label: 'Questions to ask' },
+];
+
+const pageDescription =
+  'Other deep foundations used in commercial, bridge, marine, and new-construction work — what they are, where they show up, and why they are usually not the first tool for repairing an existing house.';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Other Deep Foundations',
+  description: pageDescription,
+  url: 'https://www.myfoundationrepairconsultant.com/other-deep-foundations',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': 'https://www.myfoundationrepairconsultant.com/other-deep-foundations',
+  },
+  author: { '@type': 'Organization', name: 'My Foundation Repair Consultant' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'My Foundation Repair Consultant',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://images.squarespace-cdn.com/content/v1/6983db0242b9b6302c661059/fa18c5f7-2e51-4ae1-81d8-0517c590d714/MFRC+Logo.jpg',
+    },
+  },
+};
+---
+
+<BaseLayout
+  title="Other Deep Foundations"
+  description={pageDescription}
+  hub={true}
+  quote="A deep-foundation name is not a diagnosis. The useful question is what the system is meant to do — and what investigation shows that it belongs there."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  <HubPageShell
+    title="Other Deep Foundations"
+    subhead="Systems you may hear about that are usually not the first tool for repairing an existing house"
+    description="This page is an overview of deep-foundation systems used in commercial, industrial, bridge, marine, retaining, and new-construction work. They belong in the picture because a building owner may hear the terms. They are usually not the first choice for ordinary existing-house repair."
+    glance={[
+      { label: 'Typical use', value: 'Large new structures, bridges, marine work, excavations, retaining' },
+      { label: 'How load is carried', value: 'End bearing, shaft resistance, or both — some systems retain soil instead' },
+      { label: 'Common on', value: 'Commercial sites, infrastructure, industrial work, waterfronts' },
+      { label: 'Rarely first for house repair', value: 'Access, vibration, equipment, cost, and connection often favor other tools' },
+    ]}
+    nav={nav}
+    topicsStyle="list"
+  >
+    <h2 class="section-heading" id="why">Why this page exists</h2>
+    <div class="content-block">
+      <p>“Pile,” “pier,” and “deep foundation” are broad terms. They do not identify a single product, prove a diagnosis, or tell you whether a method fits a particular house.</p>
+      <p>Some systems below are excellent engineering for their intended use. That does not make them a normal answer for a settling house, a slab void, a drainage problem, or moisture-driven soil movement. The method should follow the investigation — not replace it.</p>
+      <p><strong>Displacement pile</strong> is a family name, not a separate product on this page. It means the pile is installed by moving soil aside rather than digging an open hole. Driven H-piles and driven pipe piles belong in that family. So do helical piers and push piers, which already have their own pages on this site.</p>
+    </div>
+
+    <div class="accordion-section" id="drilled">
+      <div class="accordion-header">
+        <span class="accordion-title">Drilled piers and drilled shafts</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Large-diameter holes drilled into the ground and filled with reinforced concrete. A shaft may bear on competent soil or rock and may include a widened base or other engineered features.</p>
+          <p>Load is commonly carried by end bearing at the base, shaft resistance along the sides, or both.</p>
+          <p>Usual work: larger commercial buildings, bridges, towers, major retaining structures, transmission structures, heavy loads, or difficult near-surface ground.</p>
+          <p>Usually not first for an existing house: large equipment, access, excavation, spoils, reinforcement, concrete, and a designed connection to the existing structure are often more than the job needs.</p>
+          <p>If a bid proposes drilled shafts on a house, ask why smaller underpinning systems were not compared and what load, access, soil, or structure makes a shaft the better fit.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="cfa">
+      <div class="accordion-header">
+        <span class="accordion-title">Auger-cast / CFA piles</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>A hollow-stem continuous auger is advanced, then grout or concrete is pumped as the auger is withdrawn. Reinforcement is placed as designed.</p>
+          <p>Load is generally shaft resistance, end bearing, or both.</p>
+          <p>Usual work: new commercial construction, multi-family, urban sites where driven-pile vibration is unwanted.</p>
+          <p>Usually not first for an existing house: equipment, access, spoils, installation control, and connection details are built for planned new work more than for an occupied house.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="hpile">
+      <div class="accordion-header">
+        <span class="accordion-title">Driven H-piles and I-beams</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Steel H-shaped members installed by impact or vibration. People say “I-beam” loosely. An H-pile, a wide-flange beam, and a soldier pile can look related and still do different jobs.</p>
+          <p>These are displacement-installed elements: soil is moved aside, not dug out as an open hole.</p>
+          <p>Usual work: bridges, industrial buildings, marine structures, heavy commercial work, temporary works, some shoring.</p>
+          <p>Usually not first for an existing house: vibration, noise, access, and a designed connection — and nearby brittle finishes or utilities may not tolerate driving.</p>
+          <p>Ask whether the proposal is a true load-bearing driven H-pile, a soldier-pile wall, or a steel member nicknamed an I-beam.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="pipe">
+      <div class="accordion-header">
+        <span class="accordion-title">Driven pipe piles</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Steel pipe driven open-ended or closed-ended, sometimes filled with concrete after installation. Also a displacement-installed system.</p>
+          <p>Usual work: bridges, marine structures, industrial facilities, heavy commercial work.</p>
+          <p>Usually not first for an existing house: same family of problems as driven H-piles — equipment, vibration, access, connection.</p>
+          <p>This term is often confused with smaller steel pipe underpinning. They are not automatically the same system.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="bored">
+      <div class="accordion-header">
+        <span class="accordion-title">Bored piles</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>A family name for piles installed by boring out soil before placing reinforcement and concrete or grout. Drilled shafts and drilled piers can sit in this family.</p>
+          <p>The word alone does not give diameter, depth, reinforcement, load path, or fitness for a repair. It is a category, not a diagnosis.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="timber">
+      <div class="accordion-header">
+        <span class="accordion-title">Timber piles</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Wood members driven into the ground. Modern work generally uses treated timber in suitable conditions.</p>
+          <p>Usual work: historic structures, some waterfront and low-rise work in suitable ground, some regional practice.</p>
+          <p>Usually not first for an ordinary house in the Southwest. Durability, groundwater, access, driving, and local practice all matter. An older building may already sit on timber that does not look like modern steel or concrete.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="precast">
+      <div class="accordion-header">
+        <span class="accordion-title">Precast concrete driven piles</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Factory-made reinforced or prestressed concrete elements driven into the ground.</p>
+          <p>Usual work: marine work, bridges, parking structures, industrial and larger commercial projects.</p>
+          <p>Usually not first for house repair: transport, handling, driving equipment, vibration, headroom, and connection.</p>
+          <p>Pressed concrete piles used under an existing foundation are a different repair conversation. See <a href="/push-piers">Push Piers</a>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="caisson">
+      <div class="accordion-header">
+        <span class="accordion-title">Caissons</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>The word is used inconsistently. In some regions it means a drilled shaft. In others it means a large marine or specialty foundation.</p>
+          <p>Before treating a “caisson” bid as a repair plan, you need the actual system, size, installation, connection, and purpose. The name is not the explanation.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="sheet">
+      <div class="accordion-header">
+        <span class="accordion-title">Sheet piling — not a foundation pile</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Sheet piling is a continuous wall of interlocking sections (steel, vinyl, composite, timber, or concrete). It usually resists lateral earth and water pressure. It is not an axial pile that underpins a house.</p>
+          <p>Usual work: waterfronts, excavations, cofferdams, cutoff walls, shoreline protection, some basement and utility work.</p>
+          <p>A property may need retaining work and foundation support. Those are separate questions. If sheet piling is proposed near a house, ask whether the job is retaining, excavation support, erosion control, groundwater cutoff, or structural support. Those scopes are not interchangeable.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="pointers">
+      <div class="accordion-header">
+        <span class="accordion-title">Already explained on this site</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Micropiles, helical piers, and push piers can be legitimate tools on an existing building. They have their own pages. Repeating them here would blur this overview.</p>
+          <p>If one of the systems on this page is proposed for an existing house, that can be reasonable. It still needs a clear reason the more common repair methods were not selected.</p>
+          <div class="related-links">
+            <a href="/helical-piers">Helical Piers →</a>
+            <a href="/push-piers">Push Piers →</a>
+            <a href="/micropiles">Micropiles →</a>
+            <a href="/compaction-grouting">Compaction Grouting →</a>
+            <a href="/foam-jacking">Foam Jacking →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ask-box" id="questions">
+      <h3>Questions building owners should ask</h3>
+      <ul>
+        <li>What problem is this system meant to solve: deep load transfer, ground improvement, void filling, retaining, erosion, excavation support, or something else?</li>
+        <li>What investigation supports the proposed method?</li>
+        <li>Is it supporting an existing footing, a wall, a slab, a new addition, or a retaining structure?</li>
+        <li>How will load move from the existing building into the proposed system?</li>
+        <li>What alternatives were compared, including helical piers, push piers, micropiles, compaction grouting, drainage work, or slab support?</li>
+        <li>What site conditions make this practical: access, headroom, vibration, utilities, groundwater, obstructions, structure weight, or unusually high loads?</li>
+        <li>What records will document installation and show the work met the objective?</li>
+        <li>What water, drainage, plumbing, or soil-moisture condition must be corrected separately?</li>
+      </ul>
+    </div>
+  </HubPageShell>
+</BaseLayout>
