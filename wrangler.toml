@@ -3,5 +3,6 @@ compatibility_date = "2024-09-23"
 workers_dev = true
 
 # Static Astro site — no Worker script, just upload dist/
+# Deploy kick: field-notes rewrite on main
 [assets]
 directory = "./dist"
