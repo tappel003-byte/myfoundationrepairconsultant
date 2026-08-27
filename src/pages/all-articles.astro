@@ -3,12 +3,45 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HubPageShell from '../components/hub/HubPageShell.astro';
 import { pages, cleanTitle } from '../lib/pages';
 
-const articles = pages.filter(
-  (p, i, arr) =>
-    p.type === 'article' &&
-    arr.findIndex((x) => x.url === p.url) === i &&
-    !p.url.endsWith('-1')
-);
+const industryUrls = new Set([
+  '/all-articles/if-you-show-me-the-incentive-ill-show-you-the-outcome',
+  '/all-articles/the-free-evaluation-and-the-culture-it-creates',
+  '/all-articles/symptoms-are-easy-to-see-causes-are-not',
+  '/all-articles/psychology-of-sign-today-discounts',
+  '/all-articles/what-is-a-sales-metric-and-why-it-doesnt-translate-to-foundation-repair',
+  '/all-articles/how-to-compare-foundation-repair-estimates',
+  '/all-articles/why-a-detailed-scope-of-work-matters-in-foundation-repair',
+  '/all-articles/managing-change-orders-in-foundation-repair',
+]);
+
+const sortKey = (title: string) =>
+  title.replace(/^(the|a|an)\s+/i, '').replace(/[^a-z0-9]+/gi, ' ').trim().toLowerCase();
+
+const articles = pages
+  .filter(
+    (p, i, arr) =>
+      p.type === 'article' &&
+      arr.findIndex((x) => x.url === p.url) === i &&
+      !p.url.endsWith('-1')
+  )
+  .map((article) => {
+    const title = cleanTitle(article.title);
+    const key = sortKey(title);
+    const letter = (key.charAt(0) || '#').toUpperCase();
+    return {
+      url: article.url,
+      title,
+      letter: /[A-Z]/.test(letter) ? letter : '#',
+      desk: industryUrls.has(article.url) ? 'Industry' : 'Educational',
+    };
+  })
+  .sort((a, b) => a.letter.localeCompare(b.letter) || sortKey(a.title).localeCompare(sortKey(b.title)));
+
+const letters = [...new Set(articles.map((a) => a.letter))];
+const grouped = letters.map((letter) => ({
+  letter,
+  items: articles.filter((a) => a.letter === letter),
+}));
 ---
 
 <BaseLayout
@@ -21,23 +54,121 @@ const articles = pages.filter(
     title="All Articles"
     subhead="A file cabinet, not the front door"
     bannerBlurb="Use Educational Articles or Industry Articles first. This page is the complete published list."
-    description="This is the full cabinet. Educational Articles and Industry Articles are the better front doors."
     nav={[]}
     topicsStyle="none"
   >
-    <p class="page-lede">
-      <a href="/educational-articles">Educational articles</a>
-      &nbsp;·&nbsp;
-      <a href="/industry-articles">Industry articles</a>
-      &nbsp;·&nbsp;
-      <a href="/start-here">Start Here</a>
-    </p>
-    <ul class="article-index" id="list">
-      {articles.map((article) => (
-        <li>
-          <a href={article.url}>{cleanTitle(article.title)}</a>
-        </li>
+    <div class="catalog">
+      <p class="catalog-lede">This is the full cabinet. Educational Articles and Industry Articles are the better front doors.</p>
+      <p class="catalog-doors">
+        <a href="/educational-articles">Educational articles</a>
+        <a href="/industry-articles">Industry articles</a>
+        <a href="/start-here">Start Here</a>
+      </p>
+
+      <nav class="letter-rail" aria-label="Jump by letter">
+        {letters.map((letter) => (
+          <a href={`#letter-${letter}`}>{letter}</a>
+        ))}
+      </nav>
+
+      {grouped.map((group) => (
+        <section class="letter-block" id={`letter-${group.letter}`}>
+          <h2 class="letter-label">{group.letter}</h2>
+          <ul class="letter-grid">
+            {group.items.map((article) => (
+              <li>
+                <a href={article.url}>{article.title}</a>
+                <span class="desk-tag">{article.desk}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
       ))}
-    </ul>
+    </div>
   </HubPageShell>
 </BaseLayout>
+
+<style is:global>
+  .page-redesign:has(.catalog) {
+    max-width: 1100px;
+    padding-top: 48px;
+  }
+  .catalog {
+    max-width: 1100px;
+    margin: 0 auto 64px;
+  }
+  .catalog-lede {
+    max-width: 680px;
+    color: #4a4a4a;
+    margin: 0 0 18px;
+  }
+  .catalog-doors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    margin: 0 0 36px;
+  }
+  .catalog-doors a { color: #2d9499; }
+  .letter-rail {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 4px;
+    padding: 16px 0 28px;
+    border-top: 1px solid #e0e0dc;
+    border-bottom: 1px solid #e0e0dc;
+    margin-bottom: 8px;
+  }
+  .letter-rail a {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #2e2e2e;
+    min-width: 28px;
+    text-align: center;
+    padding: 4px 0;
+  }
+  .letter-rail a:hover { color: #2d9499; }
+  .letter-block {
+    padding: 28px 0 8px;
+    border-bottom: 1px solid #eee;
+  }
+  .letter-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 16px;
+    color: #1a1a1a;
+  }
+  .letter-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 40px;
+  }
+  .letter-grid li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 6px 0;
+  }
+  .letter-grid a {
+    color: #2d9499;
+    text-decoration: none;
+    line-height: 1.35;
+  }
+  .letter-grid a:hover { text-decoration: underline; }
+  .desk-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #8a8a8a;
+  }
+  @media (max-width: 700px) {
+    .letter-grid { grid-template-columns: 1fr; }
+  }
+</style>
