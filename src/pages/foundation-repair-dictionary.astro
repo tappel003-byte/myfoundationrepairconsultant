@@ -53,6 +53,9 @@ body = body.replace(
     topicsStyle="none"
   >
     <div class="dictionary">
+      <p class="dictionary-lede">
+        Plain-language definitions for homeowners — and anyone trying to understand what’s happening beneath their foundation.
+      </p>
       <Fragment set:html={body} />
     </div>
   </HubPageShell>
@@ -62,81 +65,96 @@ body = body.replace(
   .dictionary {
     max-width: 720px;
   }
+  .dictionary-lede {
+    border-left: 2px solid #c8c8c8;
+    padding: 4px 0 28px 18px;
+    margin: 8px 0 0;
+    color: #5a5a5a;
+    font-size: 18px;
+    line-height: 1.65;
+    border-bottom: 1px solid #e4e4e4;
+  }
   .dictionary .letter-nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px 14px;
-    margin: 8px 0 36px;
-    font-family: 'DM Mono', monospace;
-    font-size: 13px;
-    letter-spacing: 1px;
+    gap: 10px 12px;
+    margin: 28px 0 0;
+    padding: 16px 0;
+    border-bottom: 1px solid #e4e4e4;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 15px;
+    letter-spacing: 2px;
   }
   .dictionary .letter-nav a {
-    color: var(--teal);
+    color: #1a1a1a;
     font-weight: 500;
     text-decoration: none;
   }
-  .dictionary .letter-nav a:hover { text-decoration: underline; }
+  .dictionary .letter-nav a:hover,
+  .dictionary .letter-nav a:focus {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
   .dictionary .empty-letter {
-    color: #c0c0c0;
-    font-weight: 500;
+    color: #c8c8c8;
+    font-weight: 400;
   }
   .dictionary .letter-section {
-    margin: 0 0 28px;
+    margin: 0 0 32px;
   }
   .dictionary .letter-heading {
     font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    font-weight: 600;
-    margin: 8px 0 16px;
+    font-size: 28px;
+    font-weight: 400;
+    color: #8a8a8a;
+    margin: 28px 0 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e4e4e4;
   }
   .dictionary .term-card {
-    background: #f3f3f3;
-    border: 1px solid #d2d2d2;
-    padding: 24px 28px;
-    margin: 0 0 14px;
+    background: #fff;
+    border: 1px solid #d8d8d8;
+    padding: 28px 32px 22px;
+    margin: 18px 0 0;
   }
   .dictionary .term-name {
     font-family: 'Playfair Display', serif;
     font-size: 22px;
     font-weight: 600;
-    margin: 0 0 10px;
+    margin: 0 0 12px;
     color: #1a1a1a;
   }
   .dictionary .term-definition p {
-    margin: 0 0 12px;
+    margin: 0 0 14px;
     font-size: 17px;
     line-height: 1.7;
     color: #2e2e2e;
   }
   .dictionary .term-definition p:last-child { margin-bottom: 0; }
   .dictionary .related-terms {
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 1px solid #e0e0e0;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid #ececec;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px 14px;
+    gap: 8px 16px;
     align-items: baseline;
   }
   .dictionary .related-label {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
-    letter-spacing: 1.4px;
+    letter-spacing: 1.6px;
     text-transform: uppercase;
     color: #8a8a8a;
   }
   .dictionary a.related-term {
-    color: var(--teal);
-    text-decoration: none;
-    font-size: 16px;
-  }
-  .dictionary a.related-term:hover {
+    color: #1a1a1a;
     text-decoration: underline;
     text-underline-offset: 3px;
+    font-size: 15px;
   }
   .dictionary span.related-term {
     color: #5a5a5a;
-    font-size: 16px;
+    font-size: 15px;
   }
 </style>
