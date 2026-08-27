@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+import { pages, cleanTitle } from '../lib/pages';
+
+const articles = pages.filter(
+  (p, i, arr) =>
+    p.type === 'article' &&
+    p.status !== 'under-construction' &&
+    arr.findIndex((x) => x.url === p.url) === i &&
+    !p.url.endsWith('-1')
+);
+---
+
+<BaseLayout
+  title="All Articles"
+  description="Every published MFRC article in one file cabinet."
+  hub={true}
+  quote="Understanding comes from seeing how many small pieces fit together."
+>
+  <HubPageShell
+    title="All Articles"
+    subhead="A file cabinet, not the front door"
+    bannerBlurb="Use Educational Articles or Industry Articles first. This page is the complete published list."
+    nav={[{ id: 'list', label: 'Published articles' }]}
+    topicsStyle="none"
+  >
+    <div class="related-links" style="margin-bottom: 28px;">
+      <a href="/educational-articles">Educational articles →</a>
+      <a href="/industry-articles">Industry articles →</a>
+      <a href="/start-here">Start Here →</a>
+    </div>
+    <div class="related-links" id="list">
+      {articles.map((article) => (
+        <a href={article.url}>{cleanTitle(article.title)} →</a>
+      ))}
+    </div>
+  </HubPageShell>
+</BaseLayout>
