@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+import extracted from '../../content/extracted/foundation-behavior-in-arizona.html?raw';
+---
+
+<BaseLayout
+  title="Foundation Behavior in Arizona"
+  description="How soil conditions influence foundation movement across Arizona."
+  hub={true}
+  quote="The most useful thing you can do when you notice a crack is to understand it — not react to it."
+>
+  <HubPageShell
+    title="Foundation Behavior in Arizona"
+    subhead="Soil, climate, and movement across the state"
+    nav={[{ id: 'body', label: 'On this page' }]}
+    topicsStyle="none"
+  >
+    <div id="body" class="content-block" set:html={extracted} />
+    <div class="related-links">
+      <a href="/know-before-you-sign">Know before you sign →</a>
+      <a href="/investigate-further-arizona">Investigate further →</a>
+      <a href="/all-articles/foundation-soil-behavior-in-the-phoenix-metropolitan-area">Phoenix soils →</a>
+      <a href="/all-articles/southern-arizona-soil-conditions-and-structural-behavior">Southern Arizona soils →</a>
+      <a href="/start-here">Start Here →</a>
+    </div>
+  </HubPageShell>
+</BaseLayout>
