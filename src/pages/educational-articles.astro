@@ -10,7 +10,7 @@ const groups = [
       { href: '/all-articles/settlement', title: 'Settlement' },
       { href: '/all-articles/differential-settlement-why-uneven-movement-matters-more-than-movement-itself', title: 'Differential Settlement: Why Uneven Movement Matters More Than Movement Itself' },
       { href: '/all-articles/underpinning-what-it-is-and-why-hearing-the-term-is-not-a-diagnosis', title: 'Underpinning: What It Is \u2014 and Why Hearing the Term Is Not a Diagnosis' },
-      { href: '', title: 'Foundation Problem vs. Normal Settling (under construction)' },
+      { href: '/all-articles/foundation-problem-vs-normal-settling-how-to-evaluate-what-youre-seeing', title: 'Foundation Problem vs. Normal Settling' },
     ],
   },
   {
@@ -29,7 +29,7 @@ const groups = [
     links: [
       { href: '/all-articles/slab-on-grade-foundations-what-they-are-and-what-they-dont-automatically-tell-you', title: 'Slab-on-Grade Foundations: What They Are \u2014 and What They Don\u2019t Automatically Tell You' },
       { href: '/all-articles/crawlspaces-what-they-are-and-why-they-get-blamed-for-so-many-problems', title: 'Crawlspaces: What They Are \u2014 and Why They Get Blamed for So Many Problems' },
-      { href: '', title: 'Foundation Types: A Complete Guide (under construction)' },
+      { href: '/foundation-types', title: 'Foundation Types' },
     ],
   },
   {
@@ -39,7 +39,7 @@ const groups = [
       { href: '/all-articles/common-signs-a-foundation-inspection-may-be-worth-considering', title: 'Common Signs a Foundation Inspection May Be Worth Considering' },
       { href: '/all-articles/foundationcracks', title: 'Foundation Cracks: What They Mean \u2014 and When to Actually Worry' },
       { href: '/all-articles/structuralcracks', title: 'Structural Cracks' },
-      { href: '', title: 'Structural Damage vs. Cosmetic Damage (under construction)' },
+      { href: '/all-articles/structural-damage-vs-cosmetic-damage', title: 'Structural Damage vs. Cosmetic Damage' },
     ],
   },
   {
@@ -47,19 +47,19 @@ const groups = [
     label: 'Repair Method Deep Dives',
     links: [
       { href: '/all-articles/why-torque-alone-doesnt-guarantee-capacity', title: 'Why Torque Alone Doesn\u2019t Guarantee Capacity' },
-      { href: '', title: 'Distinguishing Moisture Problems from Bearing Capacity Deficiency (under construction)' },
-      { href: '', title: 'When Monitoring Makes More Sense Than Immediate Underpinning (under construction)' },
+      { href: '/all-articles/distinguishing-moisture-problems-from-bearing-capacity-deficiency', title: 'Distinguishing Moisture Problems from Bearing Capacity Deficiency' },
+      { href: '/all-articles/when-monitoring-makes-more-sense-than-immediate-underpinning', title: 'When Monitoring Makes More Sense Than Immediate Underpinning' },
     ],
   },
   {
     id: 'materials',
     label: 'Material Behavior Deep Dives',
     links: [
-      { href: '', title: 'Why Concrete Cracks Even When Nothing Is Wrong (under construction)' },
-      { href: '', title: 'Shrinkage, Curing, and Stress Relief in Residential Concrete (under construction)' },
-      { href: '', title: 'Why Drywall Cracks Before Structural Failure Occurs (under construction)' },
-      { href: '', title: 'What Reinforcing Steel Actually Does \u2014 and What It Doesn\u2019t (under construction)' },
-      { href: '', title: 'Truss Uplift and Seasonal Movement Explained (under construction)' },
+      { href: '/all-articles/why-concrete-cracks-even-when-nothing-is-wrong', title: 'Why Concrete Cracks Even When Nothing Is Wrong' },
+      { href: '/all-articles/shrinkage-curing-and-stress-relief', title: 'Shrinkage, Curing, and Stress Relief in Residential Concrete' },
+      { href: '/all-articles/why-drywall-cracks-before-structural-failure', title: 'Why Drywall Cracks Before Structural Failure Occurs' },
+      { href: '/all-articles/what-reinforcing-steel-actually-does', title: 'What Reinforcing Steel Actually Does \u2014 and What It Doesn\u2019t' },
+      { href: '/all-articles/truss-uplift-and-seasonal-movement', title: 'Truss Uplift and Seasonal Movement Explained' },
     ],
   },
   {
@@ -98,11 +98,7 @@ const nav = groups.map((g) => ({ id: g.id, label: `${g.label} (${g.links.length}
           <div class="accordion-content-inner">
             <div class="related-links">
               {group.links.map((link) => (
-                link.href ? (
-                  <a href={link.href}>{link.title} →</a>
-                ) : (
-                  <span class="uc-title">{link.title}</span>
-                )
+                <a href={link.href}>{link.title} →</a>
               ))}
             </div>
           </div>
