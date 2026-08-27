@@ -19,11 +19,11 @@ const nav = [
   title="Helical Piers"
   description="What helical piers are, how they transfer load, when they are appropriate, and when they are not — without sales language."
   hub={true}
+  quote="Understanding what a solution does is the first step toward knowing whether you need it."
 >
   <HubPageShell
     title="Helical Piers"
     subhead="What they are, how they work, and when they actually make sense"
-    description="Helical piers appear frequently in foundation evaluations — often without context. This page explains the system, when it's appropriate, and when other approaches make more sense."
     glance={[
       { label: 'Installation', value: 'Rotated into ground (torque)' },
       { label: 'Capacity', value: 'Helical plates + shaft friction' },
@@ -31,13 +31,8 @@ const nav = [
       { label: 'Not for', value: 'Moisture problems, cosmetic cracks alone' },
     ]}
     nav={nav}
+    topicsStyle="list"
   >
-    <div class="intro">
-      <p>Helical piers are frequently mentioned during foundation evaluations and repair estimates.</p>
-      <p>For many building owners, the term appears suddenly — often without context about what the system is, why it's being suggested, or what alternatives might exist.</p>
-      <p>Hearing the term during an evaluation does not automatically mean they are necessary, nor does it mean your foundation is failing. The appropriateness of helical piers depends on documented soil conditions and the actual cause of any movement — not on the presence of cracks alone.</p>
-    </div>
-
     <h2 class="section-heading" id="what-they-are">What helical piers are</h2>
     <div class="content-block">
       <p>A helical pier is a steel shaft with one or more helical bearing plates welded to it. The system is installed by rotating it into the ground until it reaches soil capable of supporting structural load.</p>
@@ -90,12 +85,17 @@ const nav = [
       </div>
     </div>
 
-    <div class="callout-warn" id="when-no">
-      <h3>When helical piers are not appropriate</h3>
-      <div class="content-block">
-        <p><strong>When the problem isn't bearing capacity:</strong> Helical piers address load support. They do not resolve drainage problems, moisture infiltration, plumbing leaks, or seasonal soil expansion. Installing piers when moisture is the cause may stabilize elevation while the underlying issue continues.</p>
-        <p><strong>When movement has stopped:</strong> Historic settlement that has stabilized may not justify underpinning. If monitoring shows no ongoing change, the structure may have reached equilibrium.</p>
-        <p><strong>When cosmetic cracking is misinterpreted:</strong> Most residential cracking results from material behavior — shrinkage, thermal movement — not foundation distress. Evaluation should distinguish between the two before underpinning is recommended.</p>
+    <div class="accordion-section" id="when-no">
+      <div class="accordion-header">
+        <span class="accordion-title">When helical piers are not appropriate</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p><strong>When the problem isn't bearing capacity:</strong> Helical piers address load support. They do not resolve drainage problems, moisture infiltration, plumbing leaks, or seasonal soil expansion. Installing piers when moisture is the cause may stabilize elevation while the underlying issue continues.</p>
+          <p><strong>When movement has stopped:</strong> Historic settlement that has stabilized may not justify underpinning. If monitoring shows no ongoing change, the structure may have reached equilibrium.</p>
+          <p><strong>When cosmetic cracking is misinterpreted:</strong> Most residential cracking results from material behavior — shrinkage, thermal movement — not foundation distress. Evaluation should distinguish between the two before underpinning is recommended.</p>
+        </div>
       </div>
     </div>
 
@@ -158,10 +158,6 @@ const nav = [
       </ul>
     </div>
 
-    <div class="pull-quote">
-      <p>"Understanding what a solution does is the first step toward knowing whether you need it."</p>
-    </div>
-
     <h2 class="section-heading">Digging deeper</h2>
     <div class="deeper-grid">
       <div class="deeper-card">
@@ -169,12 +165,12 @@ const nav = [
         <p>Published article</p>
       </div>
       <div class="deeper-card">
-        <h4>Moisture vs. Bearing Capacity Deficiency</h4>
-        <p>Under construction</p>
+        <h4><a href="/all-articles/underpinning-what-it-is-and-why-hearing-the-term-is-not-a-diagnosis">Underpinning is not a diagnosis</a></h4>
+        <p>Published article</p>
       </div>
       <div class="deeper-card">
-        <h4>When Monitoring Makes More Sense</h4>
-        <p>Under construction</p>
+        <h4><a href="/micropiles">Micropiles</a></h4>
+        <p>Related method</p>
       </div>
     </div>
   </HubPageShell>
