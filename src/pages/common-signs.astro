@@ -24,6 +24,7 @@ const body = start >= 0 ? extracted.slice(start).replace(/<\/div>\s*$/, '') : ex
   title="Common Signs"
   description="What homeowners often notice — and what it usually means."
   hub={true}
+  quote="A sign is something you can see. A cause is something you have to establish."
 >
   <HubPageShell
     title="Common Signs"
@@ -39,5 +40,10 @@ const body = start >= 0 ? extracted.slice(start).replace(/<\/div>\s*$/, '') : ex
     topicsStyle="list"
   >
     <Fragment set:html={body} />
+    <div class="related-links">
+      <a href="/material-behavior">Material behavior →</a>
+      <a href="/start-here">Start Here →</a>
+      <a href="/educational-articles">Educational articles →</a>
+    </div>
   </HubPageShell>
 </BaseLayout>
