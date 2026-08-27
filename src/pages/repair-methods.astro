@@ -3,12 +3,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HubPageShell from '../components/hub/HubPageShell.astro';
 
 const nav = [
+  { id: 'doors', label: 'Your situation' },
+  { id: 'methods', label: 'The methods' },
   { id: 'start', label: 'Start here' },
   { id: 'core', label: 'Core questions' },
-  { id: 'methods', label: 'The methods' },
   { id: 'orient', label: 'Where to read next' },
   { id: 'more', label: 'More questions' },
-  { id: 'before', label: 'Before any method is sold' },
+  { id: 'before', label: 'Questions before choosing' },
 ];
 
 const pageDescription =
@@ -36,26 +37,42 @@ const schema = {
   mainEntity: [
     {
       '@type': 'Question',
+      name: 'Does my foundation need deeper support?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'That describes a job, not yet a method. Ask what load must move, where it must go, and why deeper support is needed. Helical piers, push piers, and micropiles may apply when the question is a structural underpinning load path.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is the soil under my house the problem?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Soil can mean moisture-sensitive ground, loose fill, loss of support, erosion, or something else. Ask what condition was identified and how. Compaction grouting and, in some cases, foam jacking or other ground-improvement systems may apply.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is there a void under my slab?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A void can matter a great deal — or be only one part of the story. Ask what created it and whether the source is still active. Foam jacking and compaction grouting are the usual places to start reading.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can this be lifted?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Lift and stabilization are different jobs. Ask whether lift is necessary, how much is intended, what could limit it, and what will be monitored. Foam jacking is often discussed for slabs. Helical or push piers may be discussed when a footing itself is being lifted.',
+      },
+    },
+    {
+      '@type': 'Question',
       name: 'What is the difference between a helical pier and a push pier?',
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'Helical piers are rotated into the ground using helical plates. Push piers are pressed from the existing foundation using the building weight as reaction. They are not interchangeable on every house.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Can foam replace a pier?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Foam is not a pile. In some documented conditions, deeper polyurethane injection can be a reasonable alternative to a pier proposal when the problem is treatable soil or voiding and the building does not require a separate deep load path. It is a poor substitute when a footing still needs reliable transfer to deeper competent material, or when water is still removing support.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'When is compaction grouting most effective?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'When the job is densifying suitable soil — not when the need is a conventional structural pile, and not as a synonym for foam.',
       },
     },
     {
@@ -98,6 +115,137 @@ const schema = {
     nav={nav}
     topicsStyle="list"
   >
+    <h2 class="section-heading" id="doors">Your situation</h2>
+    <p class="door-lead">Tap a question that matches what you are trying to understand. The six method names stay visible below whether you tap or not.</p>
+
+    <div class="door-grid">
+      <label class="door-card">
+        <input type="checkbox" class="door-toggle" />
+        <span class="door-face door-front">
+          <span class="door-hint">Question</span>
+          <span class="door-q">Does my foundation need deeper support?</span>
+          <span class="door-cue">Tap for the better question</span>
+        </span>
+        <span class="door-face door-back">
+          <span class="door-hint">Better question</span>
+          <span class="door-a">That describes a job, not yet a method. Ask what load must move, where it must go, and why deeper support is needed.</span>
+          <span class="door-links">
+            <a href="/helical-piers">Helical Piers →</a>
+            <a href="/push-piers">Push Piers →</a>
+            <a href="/micropiles">Micropiles →</a>
+          </span>
+          <span class="door-cue">Tap to close</span>
+        </span>
+      </label>
+
+      <label class="door-card">
+        <input type="checkbox" class="door-toggle" />
+        <span class="door-face door-front">
+          <span class="door-hint">Question</span>
+          <span class="door-q">Is the soil under my house the problem?</span>
+          <span class="door-cue">Tap for the better question</span>
+        </span>
+        <span class="door-face door-back">
+          <span class="door-hint">Better question</span>
+          <span class="door-a">Soil can mean moisture-sensitive ground, loose fill, loss of support, erosion, or something else. Ask what condition was identified and how.</span>
+          <span class="door-links">
+            <a href="/compaction-grouting">Compaction Grouting →</a>
+            <a href="/foam-jacking">Foam Jacking →</a>
+            <a href="/other-deep-foundations">Other Deep Foundations →</a>
+          </span>
+          <span class="door-cue">Tap to close</span>
+        </span>
+      </label>
+
+      <label class="door-card">
+        <input type="checkbox" class="door-toggle" />
+        <span class="door-face door-front">
+          <span class="door-hint">Question</span>
+          <span class="door-q">Is there a void under my slab?</span>
+          <span class="door-cue">Tap for the better question</span>
+        </span>
+        <span class="door-face door-back">
+          <span class="door-hint">Better question</span>
+          <span class="door-a">A void can matter a great deal — or be only one part of the story. Ask what created it and whether the source is still active.</span>
+          <span class="door-links">
+            <a href="/foam-jacking">Foam Jacking →</a>
+            <a href="/compaction-grouting">Compaction Grouting →</a>
+          </span>
+          <span class="door-cue">Tap to close</span>
+        </span>
+      </label>
+
+      <label class="door-card">
+        <input type="checkbox" class="door-toggle" />
+        <span class="door-face door-front">
+          <span class="door-hint">Question</span>
+          <span class="door-q">Can this be lifted?</span>
+          <span class="door-cue">Tap for the better question</span>
+        </span>
+        <span class="door-face door-back">
+          <span class="door-hint">Better question</span>
+          <span class="door-a">Lift and stabilization are different jobs. Ask whether lift is necessary, how much is intended, what could limit it, and what will be monitored.</span>
+          <span class="door-links">
+            <a href="/foam-jacking">Foam Jacking →</a>
+            <a href="/helical-piers">Helical Piers →</a>
+            <a href="/push-piers">Push Piers →</a>
+          </span>
+          <span class="door-cue">Tap to close</span>
+        </span>
+      </label>
+    </div>
+
+    <p class="mercy-line" id="mercy">
+      See a name you don’t recognize — drilled shaft, caisson, CFA, H-pile, sheet pile, Geopier?
+      <a href="/other-deep-foundations">Other Deep Foundations →</a>
+    </p>
+
+    <h2 class="section-heading" id="methods">The methods</h2>
+    <div class="condition-grid">
+      <div class="condition-card" id="helical">
+        <h4>Helical Piers</h4>
+        <p>Steel elements installed by rotation to provide a deep-foundation load path. Not an automatic answer to every crack or moisture-related movement.</p>
+        <div class="related-links">
+          <a href="/helical-piers">Helical Piers →</a>
+        </div>
+      </div>
+      <div class="condition-card" id="micropiles">
+        <h4>Micropiles</h4>
+        <p>Small-diameter drilled-and-grouted reinforced foundation elements. Used for structural support and, in some work, in-place earth reinforcement. Not simply “stronger piers.”</p>
+        <div class="related-links">
+          <a href="/micropiles">Micropiles →</a>
+        </div>
+      </div>
+      <div class="condition-card" id="push">
+        <h4>Push Piers</h4>
+        <p>Steel resistance piers pressed using an existing structure as installation reaction. Not torque-installed helical piers. Not automatically suitable for a light structure or an unresolved water problem.</p>
+        <div class="related-links">
+          <a href="/push-piers">Push Piers →</a>
+        </div>
+      </div>
+      <div class="condition-card" id="grout">
+        <h4>Compaction Grouting</h4>
+        <p>Stiff, low-mobility grout used to displace and densify suitable ground. Not foam. Not a conventional deep pile.</p>
+        <div class="related-links">
+          <a href="/compaction-grouting">Compaction Grouting →</a>
+        </div>
+      </div>
+      <div class="condition-card" id="foam">
+        <h4>Foam Jacking</h4>
+        <p>Expanding polyurethane used to fill voids, restore contact, and lift concrete in controlled stages. Not a pile. In suitable documented conditions it can be used for more than cosmetic slab lifting, and it can be a reasonable alternative to a pier proposal when the problem is treatable soil or voiding and a separate deep load path is not required.</p>
+        <div class="related-links">
+          <a href="/foam-jacking">Foam Jacking →</a>
+        </div>
+      </div>
+      <div class="condition-card" id="other">
+        <h4>Other Deep Foundations</h4>
+        <p>A vocabulary guide to systems commonly encountered in commercial, industrial, infrastructure, marine, retaining, and new-construction work. Not a sixth residential repair product.</p>
+        <div class="related-links">
+          <a href="/other-deep-foundations">Other Deep Foundations →</a>
+        </div>
+      </div>
+    </div>
+
     <div class="ask-box" id="start">
       <h3>Start here</h3>
       <ul>
@@ -145,52 +293,6 @@ const schema = {
       <h3>Is water part of the mechanism?</h3>
       <p>Water is not automatically the cause of movement. It should not be treated as an afterthought. Roof runoff, surface drainage, irrigation, plumbing leaks, erosion, perched water, groundwater, and moisture-sensitive soil can change support conditions.</p>
       <p>A deep foundation system may still be appropriate when water is involved. The proposal should explain whether the water mechanism has been addressed, controlled, or intentionally separated from the structural-repair scope.</p>
-    </div>
-
-    <h2 class="section-heading" id="methods">The methods</h2>
-    <div class="condition-grid">
-      <div class="condition-card" id="helical">
-        <h4>Helical Piers</h4>
-        <p>Steel elements installed by rotation to provide a deep-foundation load path. Not an automatic answer to every crack or moisture-related movement.</p>
-        <div class="related-links">
-          <a href="/helical-piers">Helical Piers →</a>
-        </div>
-      </div>
-      <div class="condition-card" id="micropiles">
-        <h4>Micropiles</h4>
-        <p>Small-diameter drilled-and-grouted reinforced foundation elements. Used for structural support and, in some work, in-place earth reinforcement. Not simply “stronger piers.”</p>
-        <div class="related-links">
-          <a href="/micropiles">Micropiles →</a>
-        </div>
-      </div>
-      <div class="condition-card" id="push">
-        <h4>Push Piers</h4>
-        <p>Steel resistance piers pressed using an existing structure as installation reaction. Not torque-installed helical piers. Not automatically suitable for a light structure or an unresolved water problem.</p>
-        <div class="related-links">
-          <a href="/push-piers">Push Piers →</a>
-        </div>
-      </div>
-      <div class="condition-card" id="grout">
-        <h4>Compaction Grouting</h4>
-        <p>Stiff, low-mobility grout used to displace and densify suitable ground. Not foam. Not a conventional deep pile.</p>
-        <div class="related-links">
-          <a href="/compaction-grouting">Compaction Grouting →</a>
-        </div>
-      </div>
-      <div class="condition-card" id="foam">
-        <h4>Foam Jacking</h4>
-        <p>Expanding polyurethane used to fill voids, restore contact, and lift concrete in controlled stages. Not a pile. In suitable documented conditions it can be used for more than cosmetic slab lifting, and it can be a reasonable alternative to a pier proposal when the problem is treatable soil or voiding and a separate deep load path is not required.</p>
-        <div class="related-links">
-          <a href="/foam-jacking">Foam Jacking →</a>
-        </div>
-      </div>
-      <div class="condition-card" id="other">
-        <h4>Other Deep Foundations</h4>
-        <p>A vocabulary guide to systems commonly encountered in commercial, industrial, infrastructure, marine, retaining, and new-construction work. Not a sixth residential repair product.</p>
-        <div class="related-links">
-          <a href="/other-deep-foundations">Other Deep Foundations →</a>
-        </div>
-      </div>
     </div>
 
     <h2 class="section-heading" id="orient">Where to read next</h2>
@@ -323,7 +425,7 @@ const schema = {
     </div>
 
     <div class="ask-box" id="before">
-      <h3>Before any method is sold</h3>
+      <h3>Questions to ask before choosing a method</h3>
       <ul>
         <li>What movement or support problem is this method intended to solve?</li>
         <li>What investigation supports that explanation?</li>
@@ -335,3 +437,102 @@ const schema = {
     </div>
   </HubPageShell>
 </BaseLayout>
+
+<style>
+  .door-lead {
+    max-width: var(--col);
+    color: var(--text-muted);
+    margin: -8px 0 24px;
+    font-size: 17px;
+  }
+  .door-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 0 0 28px;
+  }
+  .door-card {
+    display: block;
+    position: relative;
+    background: #ececec;
+    border: 1px solid #c8c8c8;
+    border-left: 3px solid var(--chile);
+    padding: 22px 22px 18px;
+    cursor: pointer;
+    min-height: 168px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+  .door-card:hover {
+    transform: translateY(-4px);
+    border-color: #9a9a9a;
+    box-shadow: 0 14px 26px -16px rgba(0,0,0,0.4);
+    background: #e4e4e4;
+  }
+  .door-toggle {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .door-face { display: block; }
+  .door-back { display: none; }
+  .door-card:has(.door-toggle:checked) {
+    background: #e8e8e8;
+  }
+  .door-card:has(.door-toggle:checked) .door-front { display: none; }
+  .door-card:has(.door-toggle:checked) .door-back { display: block; }
+  .door-hint,
+  .door-cue {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .door-hint { margin-bottom: 10px; }
+  .door-cue { margin-top: 16px; color: var(--teal); }
+  .door-q {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--text-dark);
+  }
+  .door-a {
+    display: block;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--text-body);
+  }
+  .door-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    margin-top: 14px;
+  }
+  .door-links a,
+  .mercy-line a,
+  .related-links a {
+    color: var(--teal);
+    text-decoration: none;
+    font-size: 15px;
+  }
+  .door-links a:hover,
+  .mercy-line a:hover,
+  .related-links a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .mercy-line {
+    max-width: var(--col);
+    margin: 0 0 40px;
+    padding: 16px 0 0;
+    font-size: 16px;
+    color: var(--text-body);
+  }
+  @media (max-width: 700px) {
+    .door-grid { grid-template-columns: 1fr; }
+    .door-card { min-height: 0; }
+  }
+</style>
