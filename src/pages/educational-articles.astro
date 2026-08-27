@@ -78,7 +78,7 @@ const groups = [
   },
 ];
 
-const nav = groups.map((g) => ({ id: g.id, label: `${g.label} (${g.links.length} articles)` }));
+const nav = groups.map((g) => ({ id: g.id, label: g.label }));
 const countLabel = (n) => (n === 1 ? '(1 article)' : `(${n} articles)`);
 ---
 
@@ -92,7 +92,6 @@ const countLabel = (n) => (n === 1 ? '(1 article)' : `(${n} articles)`);
     title="Educational Articles"
     subhead="Educational Articles"
     bannerBlurb="Educational articles that explain foundation behavior, soil conditions, and common building materials without assuming damage or the need for repair."
-    description="Educational articles organized by topic to help building owners understand foundation behavior, soil conditions, and what different symptoms mean."
     nav={nav}
     topicsStyle="none"
   >
@@ -105,7 +104,7 @@ const countLabel = (n) => (n === 1 ? '(1 article)' : `(${n} articles)`);
           </div>
           <div class="accordion-content">
             <div class="accordion-content-inner">
-              <div class="related-links">
+              <div class="article-index-links">
                 {group.links.map((link) => (
                   <a href={link.href}>{link.title}</a>
                 ))}
@@ -145,13 +144,13 @@ const countLabel = (n) => (n === 1 ? '(1 article)' : `(${n} articles)`);
     color: #5a5a5a;
     font-size: 12px;
   }
-  .cabinet-row .related-links {
+  .article-index-links {
     display: flex;
     flex-direction: column;
     gap: 8px;
     padding-bottom: 16px;
   }
-  .cabinet-row .related-links a {
+  .article-index-links a {
     color: #2d9499;
   }
 </style>
