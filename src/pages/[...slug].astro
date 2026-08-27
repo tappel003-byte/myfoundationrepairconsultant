@@ -19,6 +19,12 @@ const isHub = page.type === 'hub-custom';
 const isArticle = page.type === 'article';
 const title = cleanTitle(page.title);
 
+rawHtml = rawHtml
+  .replace(/https:\/\/claude\.ai\/chat\/[^"#\s]+#([a-z0-9-]+)/gi, '#$1')
+  .replace(/https:\/\/claude\.ai[^"\s<]*/gi, '/material-behavior')
+  .replace(/what-youre-seing/gi, 'what-youre-seeing')
+  .replace(/<p class="is-empty is-editor-empty"><\/p>/g, '');
+
 const dictPath = path.join(process.cwd(), 'content/extracted', 'foundation-repair-dictionary.html');
 const dictHtml = fs.existsSync(dictPath) ? fs.readFileSync(dictPath, 'utf-8') : '';
 const dictIds = new Set([...dictHtml.matchAll(/id="([a-z0-9-]+)"/g)].map((m) => m[1]));
