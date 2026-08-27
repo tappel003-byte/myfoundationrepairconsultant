@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-const logoSrc =
-  'https://images.squarespace-cdn.com/content/v1/6983db0242b9b6302c661059/fa18c5f7-2e51-4ae1-81d8-0517c590d714/MFRC+Logo.jpg?format=500w';
 const heardCards = [
   {
     id: 'piers',
@@ -9,7 +7,6 @@ const heardCards = [
     might: 'Trying to move part of the load to deeper, more stable ground.',
     prove: 'What caused the movement, whether it is still happening, or that a deep load path is actually the fix.',
     ask: 'What problem are the piers meant to solve, and what tells you that?',
-    urgent: false,
   },
   {
     id: 'bedrock',
@@ -17,7 +14,6 @@ const heardCards = [
     might: 'Bedrock really can be a strong bearing layer — reaching it is sometimes exactly right.',
     prove: 'How deep it is, whether it is actually competent, or how the system connects to it.',
     ask: 'What material did you find, at what depth, and how does the design use it?',
-    urgent: false,
   },
   {
     id: 'void',
@@ -25,7 +21,6 @@ const heardCards = [
     might: 'Soil can wash out or settle, leaving a real gap.',
     prove: 'That the foundation itself needs underpinning — a slab and a footing carry different loads.',
     ask: 'Is this slab part of the building structural support, or just a floor that needs to sit right again?',
-    urgent: false,
   },
   {
     id: 'lift',
@@ -33,7 +28,6 @@ const heardCards = [
     might: 'Some methods genuinely restore lost elevation, not just stop movement.',
     prove: 'Lift and stabilization are different goals — or how much lift, or what it does to plumbing and finishes.',
     ask: 'Is the goal to stop it, restore elevation, or both — and what happens to the rest of the house if it moves?',
-    urgent: false,
   },
   {
     id: 'best',
@@ -41,7 +35,6 @@ const heardCards = [
     might: 'A specific method really can be the strongest fit for a specific site.',
     prove: '"Best" without a stated reason does not say why, for your house, specifically.',
     ask: 'Best for what condition — and compared to what?',
-    urgent: false,
   },
   {
     id: 'now',
@@ -49,7 +42,6 @@ const heardCards = [
     might: 'Some things genuinely are urgent — active water, fast new movement, a real safety concern.',
     prove: 'Urgency in the pitch is not urgency in the ground. Historic, stable movement usually is not an emergency.',
     ask: 'What is actually changing right now — and what happens if I get a second opinion first?',
-    urgent: true,
   },
 ];
 const truthCards = [
@@ -84,11 +76,6 @@ const truthCards = [
     why: 'The right method matches the problem, not the loudest pitch.',
   },
 ];
-// Each situation has exactly one correct method — no multi-answer pairs.
-// "Limited access, low headroom" pairs with Micropiles specifically because
-// the Micropiles page has a dedicated "Limited access" condition card
-// naming "Low headroom (8–10 ft)" almost verbatim; Helical Piers only
-// mentions "limited access" in passing, no headroom specifics.
 const matchPairs = [
   { id: 'access', situation: 'Limited access, low headroom', method: 'Micropiles' },
   { id: 'loose', situation: 'Loose or voided soil that can be densified', method: 'Compaction Grouting' },
@@ -113,26 +100,23 @@ const matchCards = matchPairs.flatMap((p) => [
     </p>
     <section class="game" id="heard">
       <h2>What they said</h2>
-      <p class="game-note">Tap once for the sentence. Tap again for what it does and does not prove.</p>
+      <p class="game-note">Tap a card for what it might mean, what it does not prove, and a better question.</p>
       <div class="deck deck-3" data-shuffle>
         {heardCards.map((card) => (
           <div
-            class:list={['flip', card.urgent && 'is-urgent']}
+            class="flip"
             role="button"
             tabindex="0"
-            data-steps="3"
+            data-steps="2"
             aria-label={card.heard}
           >
             <div class="flip-inner">
-              <div class="face face-down">
-                <img src={logoSrc} alt="MFRC" width="180" height="114" />
-              </div>
-              <div class="face face-mid">
+              <div class="face face-front">
                 <span class="kicker">Someone said</span>
                 <span class="line">{card.heard}</span>
-                <span class="hint">Tap again</span>
+                <span class="hint">Tap for the rest</span>
               </div>
-              <div class="face face-up">
+              <div class="face face-back">
                 <span class="bit"><strong>Might mean</strong>{card.might}</span>
                 <span class="bit"><strong>Does not prove</strong>{card.prove}</span>
                 <span class="bit ask"><strong>Ask instead</strong>{card.ask}</span>
@@ -180,9 +164,9 @@ const matchCards = matchPairs.flatMap((p) => [
           >
             <div class="flip-inner">
               <div class="face face-down">
-                <img src={logoSrc} alt="MFRC" width="180" height="114" />
+                <span class="kicker">Field notes</span>
               </div>
-              <div class="face face-up match-face">
+              <div class="face face-back match-face">
                 <span class="kicker">{card.kind}</span>
                 <span class="line">{card.text}</span>
               </div>
@@ -194,349 +178,3 @@ const matchCards = matchPairs.flatMap((p) => [
     <p class="notes-exit"><a href="/repair-methods">Back to Repair Methods →</a></p>
   </div>
 </BaseLayout>
-<style>
-  .notes {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 56px 32px 80px;
-  }
-  .notes-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--chile);
-    margin: 0 0 10px;
-  }
-  .notes h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 5vw, 48px);
-    font-weight: 700;
-    margin: 0 0 18px;
-    color: #1a1a1a;
-  }
-  .notes-lede {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #5a5a5a;
-    max-width: 640px;
-    margin: 0 0 48px;
-  }
-  .notes .game {
-    margin-bottom: 56px;
-  }
-  .notes .game h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 26px;
-    font-weight: 600;
-    margin: 0 0 8px;
-  }
-  .notes .game h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 600;
-    margin: 0 0 12px;
-  }
-  .notes .game-note {
-    color: #5a5a5a;
-    margin: 0 0 20px;
-    font-size: 16px;
-  }
-  .notes .deck {
-    display: grid;
-    gap: 18px;
-  }
-  .notes .deck-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .notes .deck-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-  .notes .quiz-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-  }
-  .notes .quiz {
-    background: #fbf8f2;
-    border: 1px solid #e2d9cc;
-    border-radius: 10px;
-    padding: 24px;
-  }
-  .notes .quiz-claim {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 1.35;
-    color: #1a1a1a;
-    margin: 0 0 18px;
-  }
-  .notes .quiz-buttons {
-    display: flex;
-    gap: 10px;
-  }
-  .notes .quiz-btn {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 10px 0;
-    background: #fff;
-    border: 1px solid #cfcfcf;
-    border-radius: 6px;
-    cursor: pointer;
-    color: #2e2e2e;
-  }
-  .notes .quiz-btn:hover { border-color: var(--teal); color: var(--teal); }
-  .notes .quiz.is-answered .quiz-btn { pointer-events: none; }
-  .notes .quiz.is-answered .quiz-btn:not(.is-right):not(.is-wrong-pick) { opacity: 0.35; }
-  .notes .quiz.is-answered .quiz-btn.is-right { border-color: var(--teal); color: var(--teal); }
-  .notes .quiz.is-answered .quiz-btn.is-wrong-pick { border-color: var(--chile); color: var(--chile); }
-  .notes .quiz-icon { font-weight: 700; }
-  .notes .quiz-result {
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid #e2d9cc;
-  }
-  .notes .flip {
-    position: relative;
-    width: 100%;
-    min-height: 260px;
-    height: 260px;
-    perspective: 1200px;
-    cursor: pointer;
-  }
-  .notes .flip-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .notes .flip[data-step='1'] .flip-inner,
-  .notes .flip[data-step='2'] .flip-inner { transform: rotateY(180deg); }
-  .notes .match-card.is-flipped .flip-inner,
-  .notes .match-card.is-matched .flip-inner { transform: rotateY(180deg); }
-  .notes .face {
-    position: absolute;
-    inset: 0;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .notes .face-down {
-    background: #ececec;
-    border: 1px solid #cfcfcf;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-  }
-  .notes .face-down img {
-    width: 160px;
-    max-width: 80%;
-    height: auto;
-    opacity: 0.7;
-    display: block;
-  }
-  .notes .face-mid,
-  .notes .face-up {
-    background: #fbf8f2;
-    border: 1px solid #e2d9cc;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    transform: rotateY(180deg);
-  }
-  .notes .flip[data-steps='3'] .face-up { opacity: 0; }
-  .notes .flip[data-steps='3'][data-step='2'] .face-up { opacity: 1; }
-  .notes .flip[data-steps='3'][data-step='2'] .face-mid { opacity: 0; }
-  .notes .is-urgent .face-mid,
-  .notes .is-urgent .face-up,
-  .notes .is-urgent .face-down {
-    border-left: 4px solid var(--chile);
-  }
-  .notes .kicker,
-  .notes .hint {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #8a8a8a;
-  }
-  .notes .hint { margin-top: 14px; color: var(--teal); }
-  .notes .line {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 1.3;
-    color: #1a1a1a;
-    margin-top: 8px;
-  }
-  .notes .bit {
-    display: block;
-    font-size: 14px;
-    line-height: 1.45;
-    color: #2e2e2e;
-    margin-bottom: 10px;
-  }
-  .notes .bit strong {
-    display: block;
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 1.6px;
-    text-transform: uppercase;
-    font-weight: 400;
-    color: #8a8a8a;
-    margin-bottom: 3px;
-  }
-  .notes .bit.ask strong { color: var(--teal); }
-  .notes .call {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 10px;
-  }
-  .notes .call-true { color: var(--teal); }
-  .notes .why {
-    font-size: 15px;
-    line-height: 1.5;
-    color: #2e2e2e;
-  }
-  .notes .match-card.is-matched .face-up {
-    outline: 2px solid var(--teal);
-    outline-offset: -2px;
-    background: #f3f1ea;
-  }
-  .notes .match-card.is-wrong .flip-inner { animation: notes-shake 0.35s ease; }
-  .notes .match-status {
-    background: #f3f1ea;
-    border-left: 3px solid var(--teal);
-    padding: 12px 16px;
-    margin: 0 0 16px;
-    font-size: 16px;
-  }
-  .notes-exit { margin: 8px 0 0; }
-  .notes-exit a {
-    color: var(--teal);
-    text-decoration: none;
-    font-size: 17px;
-  }
-  .notes-exit a:hover { text-decoration: underline; text-underline-offset: 3px; }
-  @keyframes notes-shake {
-    0%, 100% { transform: rotateY(180deg) translateX(0); }
-    25% { transform: rotateY(180deg) translateX(-6px); }
-    75% { transform: rotateY(180deg) translateX(6px); }
-  }
-  @media (max-width: 900px) {
-    .notes .deck-3,
-    .notes .quiz-grid { grid-template-columns: 1fr; }
-    .notes .deck-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .notes { padding: 32px 20px 64px; }
-    .notes .flip { height: 230px; min-height: 230px; }
-  }
-</style>
-<script is:inline>
-document.addEventListener('DOMContentLoaded', () => {
-  const shuffle = (node) => {
-    const cards = Array.from(node.children);
-    for (let i = cards.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      node.appendChild(cards[j]);
-      cards.splice(j, 1, cards[i]);
-    }
-  };
-  document.querySelectorAll('[data-shuffle]').forEach(shuffle);
-  document.querySelectorAll('.quiz').forEach((quiz) => {
-    const answer = quiz.getAttribute('data-answer');
-    const result = quiz.querySelector('.quiz-result');
-    quiz.querySelectorAll('.quiz-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        if (quiz.classList.contains('is-answered')) return;
-        quiz.classList.add('is-answered');
-        const choice = btn.getAttribute('data-choice');
-        const correct = choice === answer;
-        btn.classList.add(correct ? 'is-right' : 'is-wrong-pick');
-        const icon = document.createElement('span');
-        icon.className = 'quiz-icon';
-        icon.textContent = correct ? '\u2713' : '\u2717';
-        btn.appendChild(icon);
-        if (!correct) {
-          const rightBtn = quiz.querySelector('.quiz-btn[data-choice="' + answer + '"]');
-          if (rightBtn) {
-            rightBtn.classList.add('is-right');
-            const rightIcon = document.createElement('span');
-            rightIcon.className = 'quiz-icon';
-            rightIcon.textContent = '\u2713';
-            rightBtn.appendChild(rightIcon);
-          }
-        }
-        if (result) result.hidden = false;
-      });
-    });
-  });
-  const cycle = (card) => {
-    const steps = Number(card.getAttribute('data-steps') || 2);
-    const now = Number(card.getAttribute('data-step') || 0);
-    card.setAttribute('data-step', String((now + 1) % steps));
-  };
-  document.querySelectorAll('.notes .flip:not(.match-card)').forEach((card) => {
-    card.addEventListener('click', () => cycle(card));
-    card.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        cycle(card);
-      }
-    });
-  });
-  let flipped = [];
-  let boardLocked = false;
-  const status = document.getElementById('matchStatus');
-  const checkAllMatched = () => {
-    const total = document.querySelectorAll('.match-card').length;
-    const matched = document.querySelectorAll('.match-card.is-matched').length;
-    if (total > 0 && total === matched && status) {
-      status.hidden = false;
-    }
-  };
-  const flipCard = (card) => {
-    if (boardLocked) return;
-    if (card.classList.contains('is-flipped') || card.classList.contains('is-matched')) return;
-    card.classList.add('is-flipped');
-    flipped.push(card);
-    if (flipped.length === 2) {
-      boardLocked = true;
-      const [a, b] = flipped;
-      if (a.getAttribute('data-pair') === b.getAttribute('data-pair')) {
-        a.classList.add('is-matched');
-        b.classList.add('is-matched');
-        flipped = [];
-        boardLocked = false;
-        checkAllMatched();
-      } else {
-        a.classList.add('is-wrong');
-        b.classList.add('is-wrong');
-        window.setTimeout(() => {
-          a.classList.remove('is-flipped', 'is-wrong');
-          b.classList.remove('is-flipped', 'is-wrong');
-          flipped = [];
-          boardLocked = false;
-        }, 900);
-      }
-    }
-  };
-  document.querySelectorAll('.match-card').forEach((card) => {
-    card.addEventListener('click', () => flipCard(card));
-    card.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        flipCard(card);
-      }
-    });
-  });
-});
-</script>
