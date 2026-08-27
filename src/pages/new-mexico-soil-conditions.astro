@@ -1,27 +1,66 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HubPageShell from '../components/hub/HubPageShell.astro';
-import extracted from '../../content/extracted/new-mexico-soil-conditions.html?raw';
+
+const nav = [
+  { id: 'starting', label: 'Regional starting points' },
+  { id: 'next', label: 'What to read next' },
+];
 ---
 
 <BaseLayout
   title="New Mexico Soil Conditions"
   description="Soil conditions and foundation hazards by New Mexico region."
   hub={true}
-  quote="Taking the time to understand a problem is never a wasted step."
+  quote="New Mexico does not have one foundation problem. It has many regional starting points and thousands of variations."
 >
   <HubPageShell
     title="New Mexico Soil Conditions"
     subhead="Basins, soils, and why the same crack does not mean the same thing statewide"
-    description="Soil conditions and foundation hazards by New Mexico region. The same crack does not mean the same thing statewide."
-    nav={[{ id: 'body', label: 'On this page' }]}
-    topicsStyle="none"
+    description="New Mexico spans multiple geologically distinct basins, each with different soil conditions, different movement mechanisms, and different investigation requirements."
+    glance={[
+      { label: 'Northwest', value: 'Expansive clays' },
+      { label: 'South', value: 'Collapsible alluvium' },
+      { label: 'Southeast', value: 'Dissolved gypsum' },
+      { label: 'Mountains', value: 'Frost-modified soils' },
+    ]}
+    nav={nav}
+    topicsStyle="list"
   >
-    <div id="body" class="content-block" set:html={extracted} />
-    <div class="related-links">
-      <a href="/foundation-behavior-in-new-mexico">Foundation behavior in New Mexico →</a>
-      <a href="/investigate-further">Investigate further →</a>
-      <a href="/educational-articles">Educational articles →</a>
+    <div class="accordion-section" id="starting">
+      <div class="accordion-header">
+        <span class="accordion-title">Regional starting points</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>These profiles explain what is actually in the ground. They are starting points, not a diagnosis of any one house.</p>
+          <ul>
+            <li>Expansive clays in parts of the northwest</li>
+            <li>Collapsible alluvium in parts of the south</li>
+            <li>Dissolved gypsum in parts of the southeast</li>
+            <li>Frost-modified soils in mountain communities</li>
+          </ul>
+          <p>Understanding the basin comes before choosing a method.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="next">
+      <div class="accordion-header">
+        <span class="accordion-title">What to read next</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Use the behavior page for how those soils show up in a house. Use Investigate Further only if you want a next step in New Mexico.</p>
+          <div class="related-links">
+            <a href="/foundation-behavior-in-new-mexico">Foundation behavior in New Mexico →</a>
+            <a href="/investigate-further">Investigate further →</a>
+            <a href="/educational-articles">Educational articles →</a>
+          </div>
+        </div>
+      </div>
     </div>
   </HubPageShell>
 </BaseLayout>
