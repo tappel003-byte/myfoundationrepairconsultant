@@ -2,17 +2,133 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HubPageShell from '../components/hub/HubPageShell.astro';
 
-const nav = [
-  { id: 'why-varies', label: 'Why behavior varies' },
-  { id: 'movement', label: 'Movement vs failure' },
-  { id: 'phx', label: 'Central Arizona' },
-  { id: 'tuc', label: 'Southern Arizona' },
-  { id: 'naz', label: 'Northern Arizona' },
-  { id: 'king', label: 'Northwestern Arizona' },
-  { id: 'white', label: 'White Mountains' },
-  { id: 'yuma', label: 'Southwestern Arizona' },
-  { id: 'four', label: 'Four Corners' },
-  { id: 'scott', label: 'Foothill communities' },
+const regions = [
+  {
+    id: 'phx',
+    number: 'Region 01',
+    name: 'Central Arizona',
+    cities: 'Phoenix · Mesa · Chandler · Gilbert · Tempe · Glendale · Peoria · Surprise · Goodyear · Avondale · Litchfield Park',
+    overview: [
+      'Central Arizona is characterized by expansive clay basins and highly variable near-surface soils: expansive clays, layered alluvium, and cut-and-fill materials in master-planned developments.',
+      'Seasonal soil movement is common. Cracking often reflects moisture imbalance rather than structural instability. Irrigation patterns influence the seasonal zone of wetting.',
+      'Repair discussions here often include pier systems, underpinning, grade-beam reinforcement, perimeter stabilization, and moisture management. Movement in this region is frequently cyclical and moisture-driven rather than progressive.',
+    ],
+    hazards: [
+      ['Expansive clay basins', 'Near-surface clays swell and shrink with seasonal and irrigation moisture.'],
+      ['Cut-and-fill pads', 'Master-planned grading can place two different materials under one house.'],
+      ['Irrigation wetting', 'Landscape water changes the seasonal zone of wetting from lot to lot.'],
+      ['Cyclical movement', 'Much of what is sold as failure here is moisture-driven and not progressive collapse.'],
+    ],
+    paper: '/all-articles/foundation-soil-behavior-in-the-phoenix-metropolitan-area',
+    paperLabel: 'Phoenix metropolitan soils',
+  },
+  {
+    id: 'tuc',
+    number: 'Region 02',
+    name: 'Southern Arizona',
+    cities: 'Tucson · Oro Valley · Sierra Vista · Green Valley · Benson',
+    overview: [
+      'Southern Arizona soils commonly include caliche layers, sandy and silty desert materials, and collapsible soils in localized areas.',
+      'Movement may follow intense rainfall. Drainage conditions strongly influence soil response. Settlement patterns often differ from central Arizona’s expansive clay behavior.',
+    ],
+    hazards: [
+      ['Caliche layers', 'A hard cap can stop a probe before the material that actually governs settlement is reached.'],
+      ['Collapsible soils', 'Some desert deposits lose strength the first time they take a sustained wetting under load.'],
+      ['Rainfall timing', 'Movement often follows intense storms rather than a slow seasonal clay cycle.'],
+    ],
+    paper: '/all-articles/southern-arizona-soil-conditions-and-structural-behavior',
+    paperLabel: 'Southern Arizona soils',
+  },
+  {
+    id: 'naz',
+    number: 'Region 03',
+    name: 'Northern Arizona',
+    cities: 'Flagstaff · Prescott · Payson · Show Low · Munds Park',
+    overview: [
+      'Northern Arizona is influenced by elevation and climate: volcanic soils, mountain and forest soils, frost-affected materials.',
+      'Freeze–thaw cycles and seasonal moisture variation affect soil volume. Movement may be temperature-driven rather than irrigation-driven.',
+    ],
+    hazards: [
+      ['Frost and freeze–thaw', 'Higher elevations introduce movement that basin-clay models do not explain.'],
+      ['Volcanic and forest soils', 'Residual and mountain soils do not behave like Phoenix basin fill.'],
+      ['Seasonal moisture', 'Snowmelt and winter wet periods matter more than summer irrigation patterns.'],
+    ],
+  },
+  {
+    id: 'king',
+    number: 'Region 04',
+    name: 'Northwestern Arizona',
+    cities: 'Kingman · Lake Havasu City',
+    overview: [
+      'Northwestern Arizona commonly includes granular desert soils, mixed sedimentary formations, and variable compaction in developed areas.',
+      'Movement may be influenced by grading variability. Expansive clay is less regionally dominant than in central Arizona.',
+    ],
+    hazards: [
+      ['Grading variability', 'Settlement is often localized and site-specific rather than basin-wide heave.'],
+      ['Granular desert soils', 'Fill and compaction quality can matter more than clay mineralogy.'],
+      ['Less clay dominance', 'Methods common in Phoenix are not automatically the right starting point here.'],
+    ],
+  },
+  {
+    id: 'white',
+    number: 'Region 05',
+    name: 'White Mountains',
+    cities: 'Show Low · Pinetop-Lakeside · Springerville · Eagar · Heber-Overgaard',
+    overview: [
+      'High-elevation terrain with volcanic and cinder-based soils, forest soils, frost-affected materials, and variable depth to rock.',
+      'Snowmelt and freeze–thaw matter more here than basin clay.',
+    ],
+    hazards: [
+      ['Elevation and frost', 'Seasonal temperature cycles drive movement that looks different from Phoenix cracking.'],
+      ['Variable depth to rock', 'A foundation can span soil and rock over a short distance.'],
+      ['Forest soils', 'Organic and volcanic materials do not follow basin-clay rules.'],
+    ],
+  },
+  {
+    id: 'yuma',
+    number: 'Region 06',
+    name: 'Southwestern Arizona',
+    cities: 'Yuma · Somerton · San Luis',
+    overview: [
+      'Southwestern Arizona soils are often shaped by desert alluvium, irrigation from agricultural activity, and granular and mixed soil profiles.',
+      'Settlement may vary with fill thickness and drainage. Movement can differ significantly between adjacent properties.',
+    ],
+    hazards: [
+      ['Agricultural irrigation', 'Long-term watering changes how otherwise dry desert soils behave.'],
+      ['Fill thickness', 'Settlement is often a fill-and-drainage problem, not a basin-clay problem.'],
+      ['Lot-to-lot difference', 'Neighboring properties can move for different reasons.'],
+    ],
+  },
+  {
+    id: 'four',
+    number: 'Region 07',
+    name: 'Four Corners',
+    cities: 'Page · Kayenta · Chinle · Tuba City',
+    overview: [
+      'Northeastern Arizona sits within plateau and sedimentary environments: shallow bedrock, layered sedimentary soils, and variable clay content.',
+      'Movement is often highly site-specific and differs from basin-wide expansive clay behavior.',
+    ],
+    hazards: [
+      ['Shallow bedrock', 'Layering and rock depth vary enough that one boring rarely tells the whole story.'],
+      ['Site-specific movement', 'This is not a Phoenix-style clay basin.'],
+      ['Elevation-driven moisture', 'Moisture patterns follow elevation more than urban irrigation.'],
+    ],
+  },
+  {
+    id: 'scott',
+    number: 'Region 08',
+    name: 'Foothill communities',
+    cities: 'Scottsdale · Cave Creek · Fountain Hills',
+    overview: [
+      'Foothill communities commonly involve decomposed granite soils, slope-influenced drainage, and cut-and-fill transitions along a single structure.',
+      'Soil layering can vary dramatically over short distances. Movement here is often terrain-driven rather than basin-clay-driven.',
+    ],
+    hazards: [
+      ['Decomposed granite', 'DG and slope drainage are a different problem than valley clay.'],
+      ['Cut-and-fill on one house', 'One structure can sit on cut rock and fill soil at the same time.'],
+      ['Slope drainage', 'Concentrated runoff on hillside lots drives movement that a flat-lot clay model misses.'],
+    ],
+  },
 ];
 ---
 
@@ -25,162 +141,160 @@ const nav = [
   <HubPageShell
     title="Foundation Behavior in Arizona"
     subhead="Soil, climate, and movement across the state"
-    description="Across much of Arizona, foundation problems are driven by soil behavior and moisture variability rather than structural collapse."
-    glance={[
-      { label: 'Central', value: 'Expansive clay basins' },
-      { label: 'South', value: 'Caliche and collapsible soils' },
-      { label: 'Pressure', value: 'Sign-today estimates' },
-      { label: 'Next', value: 'Know Before You Sign' },
-    ]}
-    nav={nav}
-    topicsStyle="list"
+    bannerBlurb="Across much of Arizona, foundation problems are driven by soil behavior and moisture variability rather than structural collapse."
+    nav={[]}
+    topicsStyle="none"
   >
-    <div class="accordion-section" id="why-varies">
-      <div class="accordion-header">
-        <span class="accordion-title">Why foundation behavior varies across Arizona</span>
-        <span class="accordion-icon">▸</span>
-      </div>
-      <div class="accordion-content">
-        <div class="accordion-content-inner content-block">
-          <p>Three primary variables shape foundation performance across the state:</p>
-          <p><strong>Soil composition.</strong> Expansive clay basins, caliche-rich soils, sandy and silty desert materials, decomposed granite in foothill communities, volcanic soils at higher elevations, and sedimentary plateau formations in the northeast. Each responds differently to moisture.</p>
-          <p><strong>Moisture patterns.</strong> Extended dry periods, seasonal monsoons, irrigation, snowmelt in northern regions, and drainage conditions all influence soil expansion and contraction.</p>
-          <p><strong>Development and site preparation.</strong> Mass grading, cut-and-fill pads, hillside construction, and varying foundation types introduce additional variability from one property to another.</p>
+    <div class="az-atlas">
+      <section class="basin-index" id="region-index">
+        <p class="basin-index-label">Find your region — 8 areas</p>
+        <div class="basin-grid">
+          {regions.map((region) => (
+            <a href={`#${region.id}`} class="basin-card no-photo">
+              <div class="basin-card-text">
+                <div class="basin-card-name">{region.name}</div>
+                <div class="basin-card-cities">{region.cities}</div>
+              </div>
+            </a>
+          ))}
         </div>
-      </div>
-    </div>
+      </section>
 
-    <div class="accordion-section" id="movement">
-      <div class="accordion-header">
-        <span class="accordion-title">Movement vs “foundation failure”</span>
-        <span class="accordion-icon">▸</span>
+      <div class="intro-bridge">
+        <p>Foundation behavior in Arizona is driven primarily by soil conditions. While structural systems matter, most movement originates in the ground itself. Soil composition, moisture patterns, and how the lot was graded all change from one part of the state to another.</p>
+        <p>Visible cracking, minor settlement, or seasonal shifts do not automatically indicate structural instability. Most observed movement reflects soil response to moisture variability.</p>
       </div>
-      <div class="accordion-content">
-        <div class="accordion-content-inner content-block">
-          <p>Across Arizona, some degree of soil-related movement is common. Visible cracking, minor settlement, or seasonal shifts do not automatically indicate structural instability or foundation failure.</p>
-          <p>True failure involves loss of load-carrying capacity, structural instability, or progressive, non-recoverable distress. Most observed movement reflects soil response to moisture variability.</p>
-          <div class="related-links">
-            <a href="/how-the-industry-has-changed">How the industry has changed →</a>
+
+      <div class="section-divider">
+        <div class="divider-rule"></div>
+        <div class="divider-label">Regional profiles</div>
+        <div class="divider-rule"></div>
+      </div>
+
+      {regions.map((region) => (
+        <section class="basin-section visible" id={region.id}>
+          <div class="basin-photo-header">
+            <div class="basin-photo-content">
+              <span class="basin-number">{region.number}</span>
+              <h2 class="basin-title">{region.name}</h2>
+              <p class="basin-cities-tag">{region.cities}</p>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-section" id="phx">
-      <div class="accordion-header">
-        <span class="accordion-title">Central Arizona — Phoenix metropolitan area</span>
-        <span class="accordion-icon">▸</span>
-      </div>
-      <div class="accordion-content">
-        <div class="accordion-content-inner content-block">
-          <p>Phoenix, Mesa, Chandler, Gilbert, Tempe, Glendale, Peoria, Surprise, Goodyear, Avondale, Litchfield Park.</p>
-          <p>Central Arizona is characterized by expansive clay basins and highly variable near-surface soils: expansive clays, layered alluvium, and cut-and-fill materials in master-planned developments.</p>
-          <p>Seasonal soil movement is common. Cracking often reflects moisture imbalance rather than structural instability. Irrigation patterns influence the seasonal zone of wetting.</p>
-          <p>Repair discussions here often include pier systems, underpinning, grade-beam reinforcement, perimeter stabilization, and moisture management. Movement in this region is frequently cyclical and moisture-driven rather than progressive.</p>
-          <div class="related-links">
-            <a href="/all-articles/foundation-soil-behavior-in-the-phoenix-metropolitan-area">Phoenix metropolitan soils →</a>
+          <div class="basin-body">
+            <div class="basin-intro">
+              <span class="basin-col-label">What is going on here</span>
+              {region.overview.map((para) => <p>{para}</p>)}
+            </div>
+            <div class="basin-conditions">
+              <span class="basin-col-label">What usually gets misread</span>
+              {region.hazards.map(([name, desc]) => (
+                <div class="condition-item">
+                  <div class="condition-name">{name}</div>
+                  <div class="condition-desc">{desc}</div>
+                </div>
+              ))}
+              {region.paper && (
+                <div class="condition-item">
+                  <div class="condition-name">Deeper paper</div>
+                  <div class="condition-desc"><a href={region.paper}>{region.paperLabel} →</a></div>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-section" id="tuc">
-      <div class="accordion-header">
-        <span class="accordion-title">Southern Arizona — Tucson and surrounding areas</span>
-        <span class="accordion-icon">▸</span>
-      </div>
-      <div class="accordion-content">
-        <div class="accordion-content-inner content-block">
-          <p>Tucson, Oro Valley, Sierra Vista, Green Valley, Benson.</p>
-          <p>Southern Arizona soils commonly include caliche layers, sandy and silty desert materials, and collapsible soils in localized areas.</p>
-          <p>Movement may follow intense rainfall. Drainage conditions strongly influence soil response. Settlement patterns often differ from central Arizona’s expansive clay behavior.</p>
-          <div class="related-links">
-            <a href="/all-articles/southern-arizona-soil-conditions-and-structural-behavior">Southern Arizona soils →</a>
+          <div class="basin-nav-bar">
+            <a href="#region-index" class="basin-nav-link">↑ Back to regions</a>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-section" id="naz">
-      <div class="accordion-header">
-        <span class="accordion-title">Northern Arizona</span>
-        <span class="accordion-icon">▸</span>
-      </div>
-      <div class="accordion-content">
-        <div class="accordion-content-inner content-block">
-          <p>Flagstaff, Prescott, Payson, Show Low, Munds Park.</p>
-          <p>Northern Arizona is influenced by elevation and climate: volcanic soils, mountain and forest soils, frost-affected materials. Freeze–thaw cycles and seasonal moisture variation affect soil volume. Movement may be temperature-driven rather than irrigation-driven.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-section" id="king">
-      <div class="accordion-header">
-        <span class="accordion-title">Northwestern Arizona</span>
-        <span class="accordion-icon">▸</span>
-      </div>
-      <div class="accordion-content">
-        <div class="accordion-content-inner content-block">
-          <p>Kingman, Lake Havasu City.</p>
-          <p>Granular desert soils, mixed sedimentary formations, and variable compaction in developed areas. Movement may be influenced by grading variability. Expansive clay is less regionally dominant than in central Arizona.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-section" id="white">
-      <div class="accordion-header">
-        <span class="accordion-title">Eastern Arizona — White Mountains</span>
-        <span class="accordion-icon">▸</span>
-      </div>
-      <div class="accordion-content">
-        <div class="accordion-content-inner content-block">
-          <p>Show Low, Pinetop-Lakeside, Springerville, Eagar, Heber-Overgaard.</p>
-          <p>High-elevation terrain with volcanic and cinder-based soils, forest soils, frost-affected materials, and variable depth to rock. Snowmelt and freeze–thaw matter more here than basin clay.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-section" id="yuma">
-      <div class="accordion-header">
-        <span class="accordion-title">Southwestern Arizona</span>
-        <span class="accordion-icon">▸</span>
-      </div>
-      <div class="accordion-content">
-        <div class="accordion-content-inner content-block">
-          <p>Yuma, Somerton, San Luis.</p>
-          <p>Desert alluvium, irrigation influence from agricultural activity, granular and mixed soil profiles. Settlement may vary with fill thickness and drainage. Movement can differ significantly between adjacent properties.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-section" id="four">
-      <div class="accordion-header">
-        <span class="accordion-title">Northeastern Arizona — Four Corners</span>
-        <span class="accordion-icon">▸</span>
-      </div>
-      <div class="accordion-content">
-        <div class="accordion-content-inner content-block">
-          <p>Page, Kayenta, Chinle, Tuba City.</p>
-          <p>Plateau and sedimentary environments: shallow bedrock, layered sedimentary soils, variable clay content. Movement is often highly site-specific and differs from basin-wide expansive clay behavior.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-section" id="scott">
-      <div class="accordion-header">
-        <span class="accordion-title">Scottsdale, Cave Creek, Fountain Hills, and foothill communities</span>
-        <span class="accordion-icon">▸</span>
-      </div>
-      <div class="accordion-content">
-        <div class="accordion-content-inner content-block">
-          <p>Decomposed granite soils, slope-influenced drainage, and cut-and-fill transitions along a single structure. Soil layering can vary dramatically over short distances. Movement here is often terrain-driven rather than basin-clay-driven.</p>
-          <div class="related-links">
-            <a href="/know-before-you-sign">Know before you sign →</a>
-            <a href="/investigate-further-arizona">Investigate further in Arizona →</a>
-            <a href="/start-here">Start Here →</a>
-          </div>
-        </div>
-      </div>
+        </section>
+      ))}
     </div>
   </HubPageShell>
 </BaseLayout>
+
+<style is:global>
+  .page-redesign:has(.az-atlas) {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .az-atlas {
+    --rule: #E0E0DC;
+    --off-white: #F7F7F4;
+    --text-primary: #1A1A1A;
+    --text-secondary: #4A4A4A;
+    --text-muted: #888888;
+  }
+  .az-atlas .basin-index { background: #fff; padding: 56px 40px 64px; }
+  .az-atlas .basin-index-label {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-muted); text-align: center; margin-bottom: 36px;
+  }
+  .az-atlas .basin-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px; max-width: 1100px; margin: 0 auto;
+  }
+  .az-atlas .basin-card {
+    display: block; text-decoration: none; background: var(--off-white);
+    border: 1px solid var(--rule); border-radius: 6px; min-height: 120px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04); transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .az-atlas .basin-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.09); }
+  .az-atlas .basin-card-text { padding: 18px 20px; }
+  .az-atlas .basin-card-name { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+  .az-atlas .basin-card-cities { font-size: 12px; color: var(--text-muted); line-height: 1.55; }
+  .az-atlas .intro-bridge { max-width: 680px; margin: 48px auto 0; padding: 0 40px; text-align: center; }
+  .az-atlas .intro-bridge p { font-size: 16px; color: var(--text-secondary); line-height: 1.85; }
+  .az-atlas .intro-bridge p + p { margin-top: 18px; }
+  .az-atlas .section-divider {
+    max-width: 1100px; margin: 56px auto 0; padding: 0 40px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .az-atlas .divider-rule { flex: 1; height: 1px; background: var(--rule); }
+  .az-atlas .divider-label {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-muted); white-space: nowrap;
+  }
+  .az-atlas .basin-section { max-width: 1100px; margin: 0 auto; padding: 56px 40px 0; }
+  .az-atlas .basin-photo-header {
+    background: var(--off-white); border: 1px solid var(--rule); border-bottom: none; border-radius: 8px 8px 0 0;
+  }
+  .az-atlas .basin-photo-content { padding: 24px 40px 28px; }
+  .az-atlas .basin-number {
+    display: block; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 8px;
+  }
+  .az-atlas .basin-title {
+    font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 700; letter-spacing: -0.025em;
+    margin: 0 0 10px; color: var(--text-primary);
+  }
+  .az-atlas .basin-cities-tag { font-size: 13px; font-weight: 600; color: var(--text-secondary); line-height: 1.65; margin: 0; }
+  .az-atlas .basin-body {
+    display: grid; grid-template-columns: 1fr 1fr;
+    background: #fff; border: 1px solid var(--rule); border-top: none;
+  }
+  .az-atlas .basin-intro { padding: 36px 40px; border-right: 1px solid var(--rule); }
+  .az-atlas .basin-col-label {
+    display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 18px;
+  }
+  .az-atlas .basin-intro p { font-size: 15px; line-height: 1.85; color: var(--text-secondary); margin: 0; }
+  .az-atlas .basin-intro p + p { margin-top: 14px; }
+  .az-atlas .basin-conditions { padding: 36px 40px; background: var(--off-white); }
+  .az-atlas .condition-item { padding: 14px 0; border-bottom: 1px solid var(--rule); }
+  .az-atlas .condition-item:last-of-type { border-bottom: none; }
+  .az-atlas .condition-name { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+  .az-atlas .condition-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.65; }
+  .az-atlas .condition-desc a { color: #2d9499; }
+  .az-atlas .basin-nav-bar {
+    display: flex; justify-content: flex-end; padding: 12px 40px;
+    border: 1px solid var(--rule); border-top: none; border-radius: 0 0 8px 8px; background: #fff;
+  }
+  .az-atlas .basin-nav-link {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none;
+  }
+  @media (max-width: 860px) {
+    .az-atlas .basin-body { grid-template-columns: 1fr; }
+    .az-atlas .basin-intro { border-right: none; border-bottom: 1px solid var(--rule); }
+    .az-atlas .basin-index, .az-atlas .basin-section { padding-left: 24px; padding-right: 24px; }
+  }
+</style>
