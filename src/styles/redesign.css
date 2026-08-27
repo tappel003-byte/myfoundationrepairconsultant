@@ -59,6 +59,18 @@
 .related-links { display: flex; flex-direction: column; gap: 10px; }
 .related-links a { color: var(--teal); }
 
+.back-to-topics {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--teal);
+  text-decoration: none;
+}
+.back-to-topics:hover { text-decoration: underline; text-underline-offset: 3px; }
+
 .article-index {
   list-style: none;
   padding: 0;
