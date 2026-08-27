@@ -1,5 +1,6 @@
 ---
 import { getAllRoutes, cleanTitle, pages, type PageEntry } from '../lib/pages';
+import { linkFirstMentions } from '../lib/dictionaryLink';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -61,26 +62,16 @@ if (!isHub) {
 }
 
 rawHtml = linkDictionaryLists(rawHtml);
+if (isArticle) rawHtml = linkFirstMentions(rawHtml);
 
-const quoteMatch =
-  rawHtml.match(/<div class="pull-quote"[\s\S]*?<p>([\s\S]*?)<\/p>/i) ||
-  rawHtml.match(/<blockquote[\s\S]*?<p>([\s\S]*?)<\/p>/i);
-const quote = quoteMatch
-  ? quoteMatch[1].replace(/<[^>]+>/g, '').replace(/[\u201c\u201d"]/g, '').trim()
-  : '';
-
-if (quoteMatch) {
-  rawHtml = rawHtml.replace(quoteMatch[0], '');
-}
-
-const articles = pages.filter((p) => p.type === 'article');
+const articles = pages.filter((p) => p.type === 'article' && !p.url.endsWith('-1'));
 const unique = articles.filter((p, i, arr) => arr.findIndex((x) => x.url === p.url) === i);
 const idx = unique.findIndex((p) => p.url === page.url);
 const prev = idx > 0 ? unique[idx - 1] : null;
 const next = idx >= 0 && idx < unique.length - 1 ? unique[idx + 1] : null;
 ---
 
-<BaseLayout title={title} description={page.description} hub={isHub} quote={quote}>
+<BaseLayout title={title} description={page.description} hub={isHub}>
   {isHub ? (
     <Fragment set:html={rawHtml} />
   ) : isArticle ? (
@@ -156,10 +147,13 @@ const next = idx >= 0 && idx < unique.length - 1 ? unique[idx + 1] : null;
     border-top: 1px solid #e4e4e4;
   }
   .paper-pager a {
-    color: #2d9499;
+    color: #1a1a1a;
     text-decoration: none;
     font-size: 17px;
     line-height: 1.35;
+  }
+  .paper-pager a:hover {
+    color: #2d9499;
   }
   .pager-next { text-align: right; }
 </style>
