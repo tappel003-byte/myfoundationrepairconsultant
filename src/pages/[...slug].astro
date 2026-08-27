@@ -1,7 +1,6 @@
 ---
 import { getAllRoutes, cleanTitle, pages, type PageEntry } from '../lib/pages';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import '../styles/redesign.css';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -89,7 +88,7 @@ bodyHtml = bodyHtml.replace(/<h2([^>]*)>/gi, () => {
 });
 
 const showToc = isArticle && headings.length >= 4;
-const articles = pages.filter((p) => p.type === 'article' && p.status !== 'under-construction');
+const articles = pages.filter((p) => p.type === 'article');
 const unique = articles.filter((p, i, arr) => arr.findIndex((x) => x.url === p.url) === i);
 const idx = unique.findIndex((p) => p.url === page.url);
 const prev = idx > 0 ? unique[idx - 1] : null;
