@@ -25,11 +25,28 @@
 .notes .match-card.is-flipped .flip-inner,
 .notes .match-card.is-matched .flip-inner { transform: rotateY(180deg); }
 .notes .face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 10px; overflow: hidden; }
-.notes .face-down,
 .notes .face-front,
-.notes .face-back { background: #fbf8f2; border: 1px solid #e2d9cc; padding: 20px; display: flex; flex-direction: column; justify-content: center; }
-.notes .face-down { align-items: center; background: #f3f1ea; }
+.notes .face-back { background: #ececec; border: 1px solid #cfcfcf; padding: 20px; display: flex; flex-direction: column; justify-content: center; }
 .notes .face-back { transform: rotateY(180deg); }
+.notes .match-card .face-down {
+  background: #fff;
+  border: 1px solid #cfcfcf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.notes .match-card .face-down img {
+  width: 150px;
+  max-width: 78%;
+  height: auto;
+  opacity: 0.7;
+  display: block;
+}
+.notes .match-card .face-back {
+  background: #fbf8f2;
+  border: 1px solid #e2d9cc;
+}
 .notes .kicker,
 .notes .hint { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #8a8a8a; }
 .notes .hint { margin-top: 14px; color: var(--teal); }
