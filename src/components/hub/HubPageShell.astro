@@ -90,6 +90,15 @@ const {
     header.addEventListener('click', () => header.parentElement?.classList.toggle('active'));
   });
 
+  document.querySelectorAll('.accordion-content-inner').forEach((inner) => {
+    if (inner.querySelector('.back-to-topics')) return;
+    const link = document.createElement('a');
+    link.href = '#topics';
+    link.className = 'back-to-topics';
+    link.textContent = 'Back to topics';
+    inner.appendChild(link);
+  });
+
   const openTarget = (id) => {
     if (!id) return;
     const target = document.getElementById(id);
