@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HubPageShell from '../components/hub/HubPageShell.astro';
-import '../styles/redesign.css';
 
 const faqs = [
   {
@@ -89,6 +88,7 @@ const nav = faqs.map((f) => ({ id: f.id, label: f.q.replace('?', '') }));
   <HubPageShell
     title="Start Here"
     subhead="Ten questions building owners ask when something doesn't feel right"
+    description="Most building owners don't start by looking for foundation repair. They start by noticing a crack, a door that sticks, or something that just doesn't feel right."
     glance={[
       { label: 'Purpose', value: 'Education before action' },
       { label: 'Tone', value: 'No urgency, no sales' },
@@ -96,7 +96,7 @@ const nav = faqs.map((f) => ({ id: f.id, label: f.q.replace('?', '') }));
       { label: 'Depth', value: 'Overview → linked articles' },
     ]}
     nav={nav}
-    topicsStyle="none"
+    topicsStyle="list"
   >
     <div class="faq-list" data-faq-group>
       {faqs.map((faq) => (
