@@ -23,6 +23,17 @@ if (!isHub) {
   rawHtml = rawHtml.replace(new RegExp(`^\\s*<h2>${title.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}</h2>`, 'i'), '');
 }
 
+const quoteMatch =
+  rawHtml.match(/<div class="pull-quote"[\s\S]*?<p>([\s\S]*?)<\/p>/i) ||
+  rawHtml.match(/<blockquote[\s\S]*?<p>([\s\S]*?)<\/p>/i);
+const quote = quoteMatch
+  ? quoteMatch[1].replace(/<[^>]+>/g, '').replace(/[\u201c\u201d"]/g, '').trim()
+  : '';
+
+if (quoteMatch) {
+  rawHtml = rawHtml.replace(quoteMatch[0], '');
+}
+
 const headings = [...rawHtml.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi)].map((m, i) => {
   const text = m[1].replace(/<[^>]+>/g, '').trim();
   const id = `s-${i + 1}`;
@@ -39,19 +50,22 @@ bodyHtml = bodyHtml.replace(/<h2([^>]*)>/gi, () => {
 
 const showToc = isArticle && headings.length >= 4;
 const articles = pages.filter((p) => p.type === 'article' && p.status !== 'under-construction');
-const idx = articles.findIndex((p) => p.url === page.url);
-const prev = idx > 0 ? articles[idx - 1] : null;
-const next = idx >= 0 && idx < articles.length - 1 ? articles[idx + 1] : null;
+const unique = articles.filter((p, i, arr) => arr.findIndex((x) => x.url === p.url) === i);
+const idx = unique.findIndex((p) => p.url === page.url);
+const prev = idx > 0 ? unique[idx - 1] : null;
+const next = idx >= 0 && idx < unique.length - 1 ? unique[idx + 1] : null;
 ---
 
-<BaseLayout title={title} description={page.description} hub={isHub}>
+<BaseLayout title={title} description={page.description} hub={isHub} quote={quote}>
   {isHub ? (
     <Fragment set:html={rawHtml} />
   ) : isArticle ? (
     <article class="paper">
       <header class="paper-head">
         <h1>{title}</h1>
-        {page.description && <p class="paper-dek">{page.description}</p>}
+        {page.description && page.description.trim() && !page.description.includes('under construction') && (
+          <p class="paper-dek">{page.description}</p>
+        )}
       </header>
       {showToc && (
         <nav class="paper-toc" aria-label="In this paper">
