@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+import extracted from '../../content/extracted/foundation-behavior-in-new-mexico.html?raw';
+---
+
+<BaseLayout
+  title="Foundation Behavior in New Mexico"
+  description="How soil and moisture affect foundations across New Mexico."
+  hub={true}
+  quote="Taking the time to understand a problem is never a wasted step."
+>
+  <HubPageShell
+    title="Foundation Behavior in New Mexico"
+    subhead="Soil, moisture, and movement in a dry climate"
+    nav={[{ id: 'body', label: 'On this page' }]}
+    topicsStyle="none"
+  >
+    <div id="body" class="content-block" set:html={extracted} />
+    <div class="related-links">
+      <a href="/new-mexico-soil-conditions">New Mexico soil conditions →</a>
+      <a href="/investigate-further">Investigate further →</a>
+      <a href="/common-signs">Common signs →</a>
+      <a href="/start-here">Start Here →</a>
+    </div>
+  </HubPageShell>
+</BaseLayout>
