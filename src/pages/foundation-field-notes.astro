@@ -9,48 +9,48 @@ const heardCards = [
     id: 'piers',
     heard: 'They said I need piers.',
     might: 'Trying to move part of the load to deeper, more stable ground.',
-    prove: 'What caused the movement, whether it\u2019s still happening, or that a deep load path is actually the fix.',
+    prove: 'What caused the movement, whether it is still happening, or that a deep load path is actually the fix.',
     ask: 'What problem are the piers meant to solve, and what tells you that?',
     urgent: false,
   },
   {
     id: 'bedrock',
     heard: 'They said we have to get to bedrock.',
-    might: 'Bedrock really can be a strong bearing layer \u2014 reaching it is sometimes exactly right.',
-    prove: 'How deep it is, whether it\u2019s actually competent, or how the system connects to it.',
+    might: 'Bedrock really can be a strong bearing layer — reaching it is sometimes exactly right.',
+    prove: 'How deep it is, whether it is actually competent, or how the system connects to it.',
     ask: 'What material did you find, at what depth, and how does the design use it?',
     urgent: false,
   },
   {
     id: 'void',
-    heard: 'They said there\u2019s a void under the slab.',
+    heard: 'They said there is a void under the slab.',
     might: 'Soil can wash out or settle, leaving a real gap.',
-    prove: 'That the foundation itself needs underpinning \u2014 a slab and a footing carry different loads.',
-    ask: 'Is this slab part of the building\u2019s structural support, or just a floor that needs to sit right again?',
+    prove: 'That the foundation itself needs underpinning — a slab and a footing carry different loads.',
+    ask: 'Is this slab part of the building structural support, or just a floor that needs to sit right again?',
     urgent: false,
   },
   {
     id: 'lift',
     heard: 'They said they can lift it.',
     might: 'Some methods genuinely restore lost elevation, not just stop movement.',
-    prove: 'Lift and stabilization are different goals \u2014 or how much lift, or what it does to plumbing and finishes.',
-    ask: 'Is the goal to stop it, restore elevation, or both \u2014 and what happens to the rest of the house if it moves?',
+    prove: 'Lift and stabilization are different goals — or how much lift, or what it does to plumbing and finishes.',
+    ask: 'Is the goal to stop it, restore elevation, or both — and what happens to the rest of the house if it moves?',
     urgent: false,
   },
   {
     id: 'best',
     heard: 'They said this is the best system.',
     might: 'A specific method really can be the strongest fit for a specific site.',
-    prove: '\u201cBest\u201d without a stated reason doesn\u2019t say why, for your house, specifically.',
-    ask: 'Best for what condition \u2014 and compared to what?',
+    prove: '"Best" without a stated reason does not say why, for your house, specifically.',
+    ask: 'Best for what condition — and compared to what?',
     urgent: false,
   },
   {
     id: 'now',
     heard: 'They said it needs to be fixed now.',
-    might: 'Some things genuinely are urgent \u2014 active water, fast new movement, a real safety concern.',
-    prove: 'Urgency in the pitch isn\u2019t urgency in the ground. Historic, stable movement usually isn\u2019t an emergency.',
-    ask: 'What\u2019s actually changing right now \u2014 and what happens if I get a second opinion first?',
+    might: 'Some things genuinely are urgent — active water, fast new movement, a real safety concern.',
+    prove: 'Urgency in the pitch is not urgency in the ground. Historic, stable movement usually is not an emergency.',
+    ask: 'What is actually changing right now — and what happens if I get a second opinion first?',
     urgent: true,
   },
 ];
@@ -72,11 +72,11 @@ const truthCards = [
     id: 'foam',
     claim: 'Foam jacking is a type of pier.',
     answer: 'False',
-    why: 'Foam fills voids and can lift a slab; it doesn\u2019t transfer load like a pier.',
+    why: 'Foam fills voids and can lift a slab; it does not transfer load like a pier.',
   },
   {
     id: 'rock',
-    claim: '\u201cBedrock\u201d guarantees a stable repair.',
+    claim: '"Bedrock" guarantees a stable repair.',
     answer: 'False',
     why: 'It still has to be identified, verified, and properly connected.',
   },
@@ -93,7 +93,7 @@ const situations = [
     id: 'access',
     text: 'Limited access, low headroom',
     accept: ['helical', 'micropiles'],
-    note: 'More than one method can genuinely fit here \u2014 that\u2019s not a trick, that\u2019s real.',
+    note: 'More than one method can genuinely fit here — that is not a trick, that is real.',
   },
   {
     id: 'loose',
@@ -107,12 +107,12 @@ const situations = [
   },
   {
     id: 'heavy',
-    text: 'Heavy structure, settlement that\u2019s localized and mapped',
+    text: 'Heavy structure, settlement that is localized and mapped',
     accept: ['push'],
   },
   {
     id: 'name',
-    text: 'A name on the bid you don\u2019t recognize',
+    text: 'A name on the bid you do not recognize',
     accept: ['other'],
   },
 ];
@@ -128,14 +128,14 @@ const methods = [
 ---
 
 <BaseLayout
-  title="What Did You Just Hear? \u2014 Foundation Field Notes"
-  description="A small deck of things people hear about foundation repair \u2014 what they might mean, what they don\u2019t prove, and a better question to ask. Not a diagnosis. Not a sales page."
+  title="What Did You Just Hear? — Foundation Field Notes"
+  description="A small deck of things people hear about foundation repair — what they might mean, what they do not prove, and a better question to ask. Not a diagnosis. Not a sales page."
 >
   <div class="notes">
     <p class="notes-eyebrow">Just for the Fun of It</p>
     <h1>What Did You Just Hear?</h1>
     <p class="notes-lede">
-      Three short decks. No score. No right house. Tap a card, read what came out of someone\u2019s mouth, and see the better question underneath.
+      Three short decks. No score. No right house. Tap a card, read what came out of someone's mouth, and see the better question underneath.
     </p>
 
     <section class="game" id="heard">
@@ -143,28 +143,29 @@ const methods = [
       <p class="game-note">Tap once for the sentence. Tap again for what it does and does not prove.</p>
       <div class="deck deck-3" data-shuffle>
         {heardCards.map((card) => (
-          <button
+          <div
             class:list={['flip', card.urgent && 'is-urgent']}
-            type="button"
+            role="button"
+            tabindex="0"
             data-steps="3"
             aria-label={card.heard}
           >
-            <span class="flip-inner">
-              <span class="face face-down">
-                <img src={logoSrc} alt="" />
-              </span>
-              <span class="face face-mid">
+            <div class="flip-inner">
+              <div class="face face-down">
+                <img src={logoSrc} alt="MFRC" width="180" height="114" />
+              </div>
+              <div class="face face-mid">
                 <span class="kicker">Someone said</span>
                 <span class="line">{card.heard}</span>
                 <span class="hint">Tap again</span>
-              </span>
-              <span class="face face-up">
+              </div>
+              <div class="face face-up">
                 <span class="bit"><strong>Might mean</strong>{card.might}</span>
-                <span class="bit"><strong>Doesn\u2019t prove</strong>{card.prove}</span>
+                <span class="bit"><strong>Does not prove</strong>{card.prove}</span>
                 <span class="bit ask"><strong>Ask instead</strong>{card.ask}</span>
-              </span>
-            </span>
-          </button>
+              </div>
+            </div>
+          </div>
         ))}
       </div>
     </section>
@@ -174,22 +175,22 @@ const methods = [
       <p class="game-note">Tap once for the claim. Tap again for the call.</p>
       <div class="deck deck-3" data-shuffle>
         {truthCards.map((card) => (
-          <button class="flip" type="button" data-steps="3" aria-label={card.claim}>
-            <span class="flip-inner">
-              <span class="face face-down">
-                <img src={logoSrc} alt="" />
-              </span>
-              <span class="face face-mid">
+          <div class="flip" role="button" tabindex="0" data-steps="3" aria-label={card.claim}>
+            <div class="flip-inner">
+              <div class="face face-down">
+                <img src={logoSrc} alt="MFRC" width="180" height="114" />
+              </div>
+              <div class="face face-mid">
                 <span class="kicker">Claim</span>
                 <span class="line">{card.claim}</span>
                 <span class="hint">Tap again</span>
-              </span>
-              <span class="face face-up">
+              </div>
+              <div class="face face-up">
                 <span class:list={['call', card.answer === 'True' && 'call-true']}>{card.answer}</span>
                 <span class="why">{card.why}</span>
-              </span>
-            </span>
-          </button>
+              </div>
+            </div>
+          </div>
         ))}
       </div>
     </section>
@@ -205,25 +206,26 @@ const methods = [
           <h3>Situation</h3>
           <div class="deck deck-2" data-shuffle>
             {situations.map((sit) => (
-              <button
+              <div
                 class="flip match-card"
-                type="button"
+                role="button"
+                tabindex="0"
                 data-role="sit"
                 data-id={sit.id}
                 data-accept={sit.accept.join(',')}
                 data-note={sit.note || ''}
                 aria-label={sit.text}
               >
-                <span class="flip-inner">
-                  <span class="face face-down">
-                    <img src={logoSrc} alt="" />
-                  </span>
-                  <span class="face face-up sit-face">
+                <div class="flip-inner">
+                  <div class="face face-down">
+                    <img src={logoSrc} alt="MFRC" width="180" height="114" />
+                  </div>
+                  <div class="face face-up sit-face">
                     <span class="kicker">Situation</span>
                     <span class="line">{sit.text}</span>
-                  </span>
-                </span>
-              </button>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -231,23 +233,24 @@ const methods = [
           <h3>Method</h3>
           <div class="deck deck-2" data-shuffle>
             {methods.map((method) => (
-              <button
+              <div
                 class="flip match-card"
-                type="button"
+                role="button"
+                tabindex="0"
                 data-role="method"
                 data-id={method.id}
                 aria-label={method.text}
               >
-                <span class="flip-inner">
-                  <span class="face face-down">
-                    <img src={logoSrc} alt="" />
-                  </span>
-                  <span class="face face-up method-face">
+                <div class="flip-inner">
+                  <div class="face face-down">
+                    <img src={logoSrc} alt="MFRC" width="180" height="114" />
+                  </div>
+                  <div class="face face-up method-face">
                     <span class="kicker">Method</span>
                     <span class="line">{method.text}</span>
-                  </span>
-                </span>
-              </button>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -255,12 +258,12 @@ const methods = [
     </section>
 
     <p class="notes-exit">
-      <a href="/repair-methods">Back to Repair Methods \u2192</a>
+      <a href="/repair-methods">Back to Repair Methods →</a>
     </p>
   </div>
 </BaseLayout>
 
-<style>
+<style is:global>
   .notes {
     max-width: 1080px;
     margin: 0 auto;
@@ -289,115 +292,105 @@ const methods = [
     color: #5a5a5a;
     margin: 0 0 48px;
   }
-  .game {
-    margin: 0 0 56px;
-  }
-  .game h2 {
+  .notes .game { margin: 0 0 56px; }
+  .notes .game h2 {
     font-family: 'Playfair Display', serif;
     font-size: 28px;
     font-weight: 600;
     margin: 0 0 8px;
   }
-  .game h3 {
+  .notes .game h3 {
     font-family: 'Playfair Display', serif;
     font-size: 18px;
     font-weight: 600;
     margin: 0 0 12px;
   }
-  .game-note {
+  .notes .game-note {
     color: #5a5a5a;
     margin: 0 0 20px;
     font-size: 16px;
   }
-  .deck {
+  .notes .deck {
     display: grid;
-    gap: 16px;
+    gap: 18px;
   }
-  .deck-3 { grid-template-columns: repeat(3, 1fr); }
-  .deck-2 { grid-template-columns: repeat(2, 1fr); }
-  .match-board {
+  .notes .deck-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .notes .deck-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .notes .match-board {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 28px;
   }
-  .flip {
-    appearance: none;
-    border: 0;
-    padding: 0;
-    background: transparent;
+  .notes .flip {
+    position: relative;
     width: 100%;
-    height: 240px;
+    min-height: 260px;
+    height: 260px;
     perspective: 1200px;
     cursor: pointer;
-    text-align: left;
   }
-  .flip-inner {
+  .notes .flip-inner {
     position: relative;
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .flip[data-step='1'] .flip-inner,
-  .flip[data-step='2'] .flip-inner { transform: rotateY(180deg); }
-  .face {
+  .notes .flip[data-step='1'] .flip-inner,
+  .notes .flip[data-step='2'] .flip-inner { transform: rotateY(180deg); }
+  .notes .face {
     position: absolute;
     inset: 0;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     border-radius: 10px;
-    box-shadow: 0 10px 24px -18px rgba(0,0,0,0.45);
     overflow: hidden;
   }
-  .face-down {
+  .notes .face-down {
     background: #ececec;
     border: 1px solid #cfcfcf;
-    display: grid;
-    place-items: center;
-    padding: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
   }
-  .face-down img {
-    width: min(78%, 180px);
+  .notes .face-down img {
+    width: 160px;
+    max-width: 80%;
     height: auto;
     opacity: 0.7;
     display: block;
   }
-  .face-mid,
-  .face-up,
-  .sit-face,
-  .method-face {
+  .notes .face-mid,
+  .notes .face-up,
+  .notes .sit-face,
+  .notes .method-face {
     background: #fbf8f2;
     border: 1px solid #e2d9cc;
-    padding: 18px 18px 16px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     transform: rotateY(180deg);
   }
-  .flip[data-steps='3'] .face-up,
-  .flip[data-steps='3'] .face-mid {
-    transform: rotateY(180deg);
-  }
-  .flip[data-steps='3'] .face-up { opacity: 0; pointer-events: none; }
-  .flip[data-steps='3'][data-step='2'] .face-up { opacity: 1; pointer-events: auto; }
-  .flip[data-steps='3'][data-step='2'] .face-mid { opacity: 0; pointer-events: none; }
-  .is-urgent .face-mid,
-  .is-urgent .face-up {
+  .notes .flip[data-steps='3'] .face-up { opacity: 0; }
+  .notes .flip[data-steps='3'][data-step='2'] .face-up { opacity: 1; }
+  .notes .flip[data-steps='3'][data-step='2'] .face-mid { opacity: 0; }
+  .notes .is-urgent .face-mid,
+  .notes .is-urgent .face-up,
+  .notes .is-urgent .face-down {
     border-left: 4px solid var(--chile);
   }
-  .is-urgent .face-down {
-    border-left: 4px solid var(--chile);
-  }
-  .kicker,
-  .hint {
+  .notes .kicker,
+  .notes .hint {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #8a8a8a;
   }
-  .hint { margin-top: 14px; color: var(--teal); }
-  .line {
+  .notes .hint { margin-top: 14px; color: var(--teal); }
+  .notes .line {
     font-family: 'Playfair Display', serif;
     font-size: 20px;
     font-weight: 600;
@@ -405,14 +398,14 @@ const methods = [
     color: #1a1a1a;
     margin-top: 8px;
   }
-  .bit {
+  .notes .bit {
     display: block;
     font-size: 14px;
     line-height: 1.45;
     color: #2e2e2e;
     margin-bottom: 10px;
   }
-  .bit strong {
+  .notes .bit strong {
     display: block;
     font-family: 'DM Mono', monospace;
     font-size: 10px;
@@ -422,57 +415,51 @@ const methods = [
     color: #8a8a8a;
     margin-bottom: 3px;
   }
-  .bit.ask strong { color: var(--teal); }
-  .call {
+  .notes .bit.ask strong { color: var(--teal); }
+  .notes .call {
     font-family: 'Playfair Display', serif;
     font-size: 28px;
     font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 10px;
   }
-  .call-true { color: var(--teal); }
-  .why {
+  .notes .call-true { color: var(--teal); }
+  .notes .why {
     font-size: 15px;
     line-height: 1.5;
     color: #2e2e2e;
   }
-  .match-card.is-picked .face-up {
+  .notes .match-card.is-picked .face-up {
     outline: 2px solid var(--teal);
     outline-offset: -2px;
   }
-  .match-card.is-paired .face-up {
-    background: #f3f1ea;
-  }
-  .match-card.is-wrong {
-    animation: shake 0.35s ease;
-  }
-  .match-status {
+  .notes .match-card.is-paired .face-up { background: #f3f1ea; }
+  .notes .match-card.is-wrong { animation: notes-shake 0.35s ease; }
+  .notes .match-status {
     background: #f3f1ea;
     border-left: 3px solid var(--teal);
     padding: 12px 16px;
     margin: 0 0 16px;
     font-size: 16px;
   }
-  .notes-exit {
-    margin: 8px 0 0;
-  }
+  .notes-exit { margin: 8px 0 0; }
   .notes-exit a {
     color: var(--teal);
     text-decoration: none;
     font-size: 17px;
   }
   .notes-exit a:hover { text-decoration: underline; text-underline-offset: 3px; }
-  @keyframes shake {
+  @keyframes notes-shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-6px); }
     75% { transform: translateX(6px); }
   }
   @media (max-width: 900px) {
-    .deck-3,
-    .deck-2,
-    .match-board { grid-template-columns: 1fr; }
+    .notes .deck-3,
+    .notes .deck-2,
+    .notes .match-board { grid-template-columns: 1fr; }
     .notes { padding: 32px 20px 64px; }
-    .flip { height: 220px; }
+    .notes .flip { height: 230px; min-height: 230px; }
   }
 </style>
 
@@ -487,12 +474,19 @@ const methods = [
   };
   document.querySelectorAll('[data-shuffle]').forEach(shuffle);
 
-  document.querySelectorAll('.flip:not(.match-card)').forEach((card) => {
+  const cycle = (card) => {
     const steps = Number(card.getAttribute('data-steps') || 2);
-    card.addEventListener('click', () => {
-      const now = Number(card.getAttribute('data-step') || 0);
-      const next = (now + 1) % steps;
-      card.setAttribute('data-step', String(next));
+    const now = Number(card.getAttribute('data-step') || 0);
+    card.setAttribute('data-step', String((now + 1) % steps));
+  };
+
+  document.querySelectorAll('.notes .flip:not(.match-card)').forEach((card) => {
+    card.addEventListener('click', () => cycle(card));
+    card.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        cycle(card);
+      }
     });
   });
 
