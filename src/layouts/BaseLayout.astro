@@ -2,6 +2,7 @@
 import SiteHeader from '../components/SiteHeader.astro';
 import '../styles/mfrc.css';
 import '../styles/redesign.css';
+import '../styles/dict-links.css';
 
 interface Props {
   title: string;
@@ -16,6 +17,22 @@ const {
   hub = false,
   quote = '',
 } = Astro.props;
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/start-here';
+const quotePages = new Set([
+  '/start-here',
+  '/educational-articles',
+  '/repair-methods',
+  '/micropiles',
+  '/helical-piers',
+  '/push-piers',
+  '/compaction-grouting',
+  '/foam-jacking',
+  '/other-deep-foundations',
+  '/foundation-field-notes',
+]);
+const shownQuote = quote && quotePages.has(path);
+
 const fullTitle = title.includes('MFRC')
   ? title
   : `${title} — My Foundation Repair Consultant`;
@@ -28,7 +45,7 @@ const fullTitle = title.includes('MFRC')
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     {description && <meta name="description" content={description} />}
-    <link rel="canonical" href={`https://www.myfoundationrepairconsultant.com${Astro.url.pathname.replace(/\/$/, '') || '/start-here'}`} />
+    <link rel="canonical" href={`https://www.myfoundationrepairconsultant.com${path}`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -44,7 +61,7 @@ const fullTitle = title.includes('MFRC')
     <SiteHeader />
     <main>
       <slot />
-      {quote && <p class="page-quote">{quote}</p>}
+      {shownQuote && <p class="page-quote">{quote}</p>}
       <div class="page-end" aria-hidden="true"></div>
     </main>
   </body>
