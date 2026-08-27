@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import html from '../../../content/extracted/structural-damage-vs-cosmetic-damage.html?raw';
+---
+<BaseLayout title="Structural Damage vs. Cosmetic Damage" description="What those labels describe, and what they do not decide." hub={false}>
+  <article class="paper">
+    <header class="paper-head">
+      <h1>Structural Damage vs. Cosmetic Damage</h1>
+    </header>
+    <div class="paper-body" set:html={html} />
+  </article>
+</BaseLayout>
