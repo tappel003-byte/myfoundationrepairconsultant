@@ -91,26 +91,62 @@ const nav = groups.map((g) => ({ id: g.id, label: `${g.label} (${g.links.length}
     title="Educational Articles"
     subhead="Educational Articles"
     bannerBlurb="Educational articles that explain foundation behavior, soil conditions, and common building materials without assuming damage or the need for repair."
+    description="Educational articles organized by topic to help building owners understand foundation behavior, soil conditions, and what different symptoms mean."
     nav={nav}
     topicsStyle="none"
   >
-    <p class="page-lede">Educational articles organized by topic to help building owners understand foundation behavior, soil conditions, and what different symptoms mean.</p>
-    {groups.map((group) => (
-      <div class="accordion-section" id={group.id}>
-        <div class="accordion-header">
-          <span class="accordion-title">{group.label} ({group.links.length} articles)</span>
-          <span class="accordion-icon">▸</span>
-        </div>
-        <div class="accordion-content">
-          <div class="accordion-content-inner">
-            <div class="related-links">
-              {group.links.map((link) => (
-                <a href={link.href}>{link.title} →</a>
-              ))}
+    <div class="cabinet">
+      {groups.map((group) => (
+        <div class="cabinet-row accordion-section" id={group.id}>
+          <div class="accordion-header">
+            <span class="accordion-title">{group.label} <em>({group.links.length} articles)</em></span>
+            <span class="accordion-icon">▸</span>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-content-inner">
+              <div class="related-links">
+                {group.links.map((link) => (
+                  <a href={link.href}>{link.title}</a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </HubPageShell>
 </BaseLayout>
+
+<style is:global>
+  .cabinet {
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 8px 0 48px;
+  }
+  .cabinet-row {
+    background: #f3f3f3;
+    border: 1px solid #d2d2d2;
+    padding: 0 20px;
+    max-width: none;
+  }
+  .cabinet-row .accordion-title {
+    font-size: 20px;
+  }
+  .cabinet-row .accordion-title em {
+    font-style: normal;
+    font-weight: 400;
+    color: #5a5a5a;
+    font-size: 16px;
+  }
+  .cabinet-row .related-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 16px;
+  }
+  .cabinet-row .related-links a {
+    color: #2d9499;
+  }
+</style>
