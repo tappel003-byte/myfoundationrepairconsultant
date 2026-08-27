@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import html from '../../../content/extracted/when-monitoring-makes-more-sense-than-immediate-underpinning.html?raw';
+---
+<BaseLayout title="When Monitoring Makes More Sense Than Immediate Underpinning" description="When time is the first measurement." hub={false}>
+  <article class="paper">
+    <header class="paper-head">
+      <h1>When Monitoring Makes More Sense Than Immediate Underpinning</h1>
+    </header>
+    <div class="paper-body" set:html={html} />
+  </article>
+</BaseLayout>
