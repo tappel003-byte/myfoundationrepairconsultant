@@ -90,6 +90,32 @@ const {
     header.addEventListener('click', () => header.parentElement?.classList.toggle('active'));
   });
 
+  const openTarget = (id) => {
+    if (!id) return;
+    const target = document.getElementById(id);
+    if (!target) return;
+    const section = target.classList.contains('accordion-section')
+      ? target
+      : target.closest('.accordion-section');
+    section?.classList.add('active');
+    (section || target).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  document.querySelectorAll('.topics-list a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const href = link.getAttribute('href') || '';
+      const id = href.slice(1);
+      if (!id) return;
+      event.preventDefault();
+      openTarget(id);
+      history.replaceState(null, '', href);
+    });
+  });
+
+  if (window.location.hash) {
+    openTarget(window.location.hash.slice(1));
+  }
+
   const floatingNav = document.getElementById('floatingNav');
   const hero = document.querySelector('.hero-banner');
   const topLink = document.getElementById('floatingTopLink');
