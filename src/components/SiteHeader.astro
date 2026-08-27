@@ -82,11 +82,38 @@ const nav = [
   </div>
 </header>
 
+<style>
+  .nav-dropdown.open > .nav-menu {
+    display: block;
+  }
+</style>
+
 <script>
   const toggle = document.getElementById('navToggle');
   const nav = document.getElementById('siteNav');
   toggle?.addEventListener('click', () => {
     const open = nav?.classList.toggle('open');
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  document.querySelectorAll('.nav-dropdown').forEach((item) => {
+    let closeTimer;
+    const open = () => {
+      clearTimeout(closeTimer);
+      document.querySelectorAll('.nav-dropdown.open').forEach((other) => {
+        if (other !== item) other.classList.remove('open');
+      });
+      item.classList.add('open');
+    };
+    const closeSoon = () => {
+      closeTimer = setTimeout(() => item.classList.remove('open'), 350);
+    };
+    item.addEventListener('mouseenter', open);
+    item.addEventListener('mouseleave', closeSoon);
+    item.querySelector('.nav-parent')?.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (item.classList.contains('open')) item.classList.remove('open');
+      else open();
+    });
   });
 </script>
