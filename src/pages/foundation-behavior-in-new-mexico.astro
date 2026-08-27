@@ -1,28 +1,123 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HubPageShell from '../components/hub/HubPageShell.astro';
-import extracted from '../../content/extracted/foundation-behavior-in-new-mexico.html?raw';
+
+const nav = [
+  { id: 'why-varies', label: 'Why behavior varies' },
+  { id: 'methods', label: 'Why methods vary' },
+  { id: 'movement', label: 'Movement vs failure' },
+  { id: 'why-page', label: 'Why this page exists' },
+  { id: 'how-to', label: 'How to use this' },
+];
 ---
 
 <BaseLayout
   title="Foundation Behavior in New Mexico"
   description="How soil and moisture affect foundations across New Mexico."
   hub={true}
-  quote="Taking the time to understand a problem is never a wasted step."
+  quote="In New Mexico, understanding the ground beneath a home matters as much as the home itself."
 >
   <HubPageShell
     title="Foundation Behavior in New Mexico"
     subhead="Soil, moisture, and movement in a dry climate"
-    description="How soil and moisture affect foundations across New Mexico."
-    nav={[{ id: 'body', label: 'On this page' }]}
-    topicsStyle="none"
+    description="New Mexico does not have one foundation problem profile. Where the house sits often matters as much as what it sits on."
+    glance={[
+      { label: 'Climate', value: 'Arid, monsoon, irrigation' },
+      { label: 'Soils', value: 'Clay, silt, fill, gypsum' },
+      { label: 'Misread', value: 'Movement sold as failure' },
+      { label: 'Next', value: 'Soils page, then Investigate Further' },
+    ]}
+    nav={nav}
+    topicsStyle="list"
   >
-    <div id="body" class="content-block" set:html={extracted} />
-    <div class="related-links">
-      <a href="/new-mexico-soil-conditions">New Mexico soil conditions →</a>
-      <a href="/investigate-further">Investigate further →</a>
-      <a href="/common-signs">Common signs →</a>
-      <a href="/start-here">Start Here →</a>
+    <div class="accordion-section" id="why-varies">
+      <div class="accordion-header">
+        <span class="accordion-title">Why foundation behavior varies across New Mexico</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Three factors dominate foundation behavior statewide:</p>
+          <ul>
+            <li><strong>Soil type</strong> — expansive clays, collapsible silts, granular soils, or cemented layers</li>
+            <li><strong>Moisture variability</strong> — seasonal precipitation, monsoons, irrigation, and drainage</li>
+            <li><strong>Construction practices</strong> — age of housing stock, foundation type, and local building norms</li>
+          </ul>
+          <p>Most foundation movement in New Mexico is driven by <strong>soil–moisture interaction</strong>, not by inadequate structural design.</p>
+          <p>New Mexico spans multiple geologically distinct basins. Expansive clays in the northwest, collapsible alluvium in the south, dissolved gypsum in the southeast, frost-modified soils in the mountain communities. A crack in Farmington does not mean the same thing as a crack in Roswell, and a repair method appropriate in one basin may be unnecessary or counterproductive in another.</p>
+          <div class="related-links">
+            <a href="/new-mexico-soil-conditions">New Mexico soil conditions →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="methods">
+      <div class="accordion-header">
+        <span class="accordion-title">How repair methods vary — and why that matters</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Foundation repair methods vary across New Mexico because <strong>the problems vary</strong>.</p>
+          <p>A repair approach that makes sense in Albuquerque may be unnecessary in Farmington. A solution appropriate for Santa Fe masonry homes may be wrong for Las Cruces slab construction.</p>
+          <p>A repair method being common in a region does <strong>not</strong> mean it is required for every home in that region.</p>
+          <p>Understanding <em>why</em> a method is being recommended matters as much as <em>what</em> is being recommended.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="movement">
+      <div class="accordion-header">
+        <span class="accordion-title">Movement vs failure</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Across New Mexico, <strong>foundation movement is common</strong>. Actual <strong>foundation failure is rare</strong>.</p>
+          <p>Failure implies loss of load-carrying capacity, structural instability, or progressive, non-recoverable distress.</p>
+          <p>Most cracks, sloping floors, and sticking doors do <strong>not</strong> meet this definition. Treating all movement as failure leads to over-repair, unnecessary expense, and poor long-term outcomes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="why-page">
+      <div class="accordion-header">
+        <span class="accordion-title">Why this page exists</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>New Mexico homeowners are often given explanations that ignore regional context.</p>
+          <p>A crack in Santa Fe does not mean the same thing as a crack in Albuquerque. Movement in Farmington behaves differently than movement in Las Cruces.</p>
+          <p>This page exists to provide geographic and technical context — not sales conclusions.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="how-to">
+      <div class="accordion-header">
+        <span class="accordion-title">How to use this information</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>If you’re seeing cracks or movement:</p>
+          <ul>
+            <li>Consider where the home is located.</li>
+            <li>Understand what soil and climate influences are common in that region.</li>
+            <li>Learn which signs usually matter, and which often do not.</li>
+            <li>Slow the conversation down before anyone sells a method.</li>
+          </ul>
+          <div class="related-links">
+            <a href="/new-mexico-soil-conditions">New Mexico soil conditions →</a>
+            <a href="/common-signs">Common signs →</a>
+            <a href="/foundation-repair-dictionary">Dictionary →</a>
+            <a href="/how-the-industry-has-changed">How the industry has changed →</a>
+            <a href="/investigate-further">Investigate further →</a>
+          </div>
+        </div>
+      </div>
     </div>
   </HubPageShell>
 </BaseLayout>
