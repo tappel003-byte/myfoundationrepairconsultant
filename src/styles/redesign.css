@@ -1,0 +1,47 @@
+/* Paper + banner rules. Layout chrome lives in mfrc.css. */
+:root { --banner: #6b6b6b; --chile: #c4160d; --teal: #2d9499; }
+
+.hero-banner { background: var(--banner); color: #fff; }
+.hero-banner-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 72px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+}
+.hero-banner h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+.hero-blurb { font-size: 16px; line-height: 1.65; color: rgba(255,255,255,0.94); margin: 0; }
+
+.topics-list { max-width: 680px; margin: 8px 0 48px; display: flex; flex-direction: column; gap: 8px; }
+.topics-list-heading { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; margin: 0 0 12px; }
+.topics-list a { color: var(--teal); text-underline-offset: 3px; }
+.related-links { display: flex; flex-direction: column; gap: 10px; }
+.related-links a { color: var(--teal); }
+
+.paper { max-width: 720px; margin: 0 auto; padding: 56px 48px 80px; }
+.paper-head h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 600;
+  text-align: center;
+  margin: 0 0 20px;
+}
+.paper-dek { font-size: 18px; color: #5a5a5a; text-align: center; margin: 0 0 36px; }
+.paper-toc { display: flex; flex-direction: column; gap: 8px; margin: 0 0 40px; padding-bottom: 24px; border-bottom: 1px solid #e4e4e4; }
+.paper-toc a { color: var(--teal); }
+.paper-body { font-size: 18px; line-height: 1.75; }
+.paper-body h2 { font-family: 'Playfair Display', serif; font-size: 28px; margin: 40px 0 16px; }
+.paper-pager { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; padding-top: 28px; border-top: 1px solid #e4e4e4; }
+.paper-pager a { color: var(--teal); text-decoration: none; }
+.pager-next { text-align: right; }
+
+.letter-nav { display: flex; flex-wrap: wrap; gap: 10px 14px; margin: 0 0 40px; }
+.letter-nav a { color: var(--teal); font-weight: 600; text-decoration: none; }
+.term-name { font-family: 'Playfair Display', serif; font-size: 24px; margin: 0 0 10px; }
