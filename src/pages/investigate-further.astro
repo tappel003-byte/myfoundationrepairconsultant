@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+---
+
+<BaseLayout
+  title="Investigate Further"
+  description="Optional next steps after education for New Mexico homeowners."
+  hub={true}
+  quote="Taking the time to understand a problem is never a wasted step."
+>
+  <HubPageShell
+    title="Investigate Further"
+    subhead="Education first. Next steps only if you choose them."
+    bannerBlurb="MFRC does not inspect houses or sell repair. If you choose a next step in New Mexico, the options below may be appropriate."
+    glance={[
+      { label: 'This page', value: 'Optional next step' },
+      { label: 'MFRC', value: 'Education only' },
+      { label: 'Geotech', value: 'Sandia Geo' },
+      { label: 'Repair', value: 'TLS Foundations' },
+    ]}
+    nav={[
+      { id: 'geo', label: 'Geotechnical investigation' },
+      { id: 'repair', label: 'Investigating repair' },
+    ]}
+    topicsStyle="list"
+  >
+    <h2 class="section-heading" id="geo">Geotechnical investigation</h2>
+    <div class="content-block">
+      <p>Some foundation questions involve conditions below the surface that cannot be understood through visual observation alone.</p>
+      <p>Homeowners may choose to consult a licensed geotechnical engineering firm.</p>
+      <div class="related-links">
+        <a href="https://www.sandiageo.com/" rel="noopener">Sandia Geo →</a>
+      </div>
+    </div>
+    <h2 class="section-heading" id="repair">Investigating foundation repair</h2>
+    <div class="content-block">
+      <p>If you are considering foundation repair or comparing repair approaches, you may choose to speak with a qualified foundation repair contractor.</p>
+      <div class="related-links">
+        <a href="https://www.tlsfoundations.com/" rel="noopener">TLS Foundations →</a>
+        <a href="/foundation-behavior-in-new-mexico">Foundation behavior in New Mexico →</a>
+        <a href="/new-mexico-soil-conditions">New Mexico soil conditions →</a>
+        <a href="/start-here">Start Here →</a>
+      </div>
+    </div>
+  </HubPageShell>
+</BaseLayout>
