@@ -28,10 +28,12 @@
 .notes .face-front,
 .notes .face-back { background: #ececec; border: 1px solid #cfcfcf; padding: 20px; display: flex; flex-direction: column; justify-content: center; }
 .notes .face-back { transform: rotateY(180deg); }
-.notes .match-card .face-down {
+.notes .match-card .face-down,
+.notes .match-card .face-back {
   background: #fff;
-  border: 1px solid #cfcfcf;
+  border: 2px solid #1a1a1a;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 24px;
@@ -43,9 +45,14 @@
   opacity: 0.7;
   display: block;
 }
-.notes .match-card .face-back {
-  background: #fbf8f2;
-  border: 1px solid #e2d9cc;
+.notes .match-card.is-wrong .face-down,
+.notes .match-card.is-wrong .face-back {
+  border-color: var(--chile);
+}
+.notes .match-card.is-matched .face-back {
+  border-color: var(--teal);
+  outline: none;
+  background: #fff;
 }
 .notes .kicker,
 .notes .hint { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #8a8a8a; }
@@ -57,7 +64,6 @@
 .notes .call { display: block; font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: #1a1a1a; margin: 0 0 8px; }
 .notes .call-true { color: var(--teal); }
 .notes .why { display: block; font-size: 15px; line-height: 1.5; color: #2e2e2e; }
-.notes .match-card.is-matched .face-back { outline: 2px solid var(--teal); outline-offset: -2px; background: #f3f1ea; }
 .notes .match-card.is-wrong .flip-inner { animation: notes-shake 0.35s ease; }
 .notes .match-status { background: #f3f1ea; border-left: 3px solid var(--teal); padding: 12px 16px; margin: 0 0 16px; font-size: 16px; }
 .notes-exit { margin: 8px 0 0; }
