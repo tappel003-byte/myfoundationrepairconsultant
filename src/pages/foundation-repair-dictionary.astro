@@ -13,6 +13,7 @@ function card(id: string) {
 }
 
 const inserts: [string, string][] = [
+  ['</section><!-- D -->', `${card('caliche')}\n${card('compaction-grouting')}`],
   ['</section><!-- H -->', card('geotechnical-investigation')],
   ['</section><!-- I -->', card('helical-pier-capacity')],
   ['</section><!-- M -->', card('load-testing')],
@@ -24,7 +25,8 @@ let body = extracted
   .replace(/<div class="page-header"[\s\S]*?<\/div>/, '');
 
 for (const [marker, html] of inserts) {
-  if (html && body.includes(marker) && !body.includes(`id="${html.match(/id="([^"]+)"/)?.[1]}"`)) {
+  const id = html.match(/id="([^"]+)"/)?.[1];
+  if (html && body.includes(marker) && id && !body.includes(`id="${id}"`)) {
     body = body.replace(marker, `${html}\n${marker}`);
   }
 }
@@ -61,9 +63,7 @@ body = body.replace(
 </BaseLayout>
 
 <style is:global>
-  .dictionary {
-    max-width: 720px;
-  }
+  .dictionary { max-width: 720px; }
   .dictionary-lede {
     border-left: 2px solid #c8c8c8;
     padding: 4px 0 28px 18px;
@@ -94,13 +94,8 @@ body = body.replace(
     text-decoration: underline;
     text-underline-offset: 4px;
   }
-  .dictionary .empty-letter {
-    color: #c8c8c8;
-    font-weight: 400;
-  }
-  .dictionary .letter-section {
-    margin: 0 0 32px;
-  }
+  .dictionary .empty-letter { color: #c8c8c8; font-weight: 400; }
+  .dictionary .letter-section { margin: 0 0 32px; }
   .dictionary .letter-heading {
     font-family: 'Playfair Display', serif;
     font-size: 28px;
