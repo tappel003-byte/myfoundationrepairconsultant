@@ -43,16 +43,10 @@ const countLabel = (n) => (n === 1 ? '(1 article)' : `(${n} articles)`);
 >
   <HubPageShell
     title="Industry Articles"
-    subhead="Context around language, marketing, and process — not a contractor directory"
-    description="Short observations that provide context around common language, marketing, and processes within the foundation repair industry."
-    glance={[
-      { label: 'These papers', value: 'How the industry talks' },
-      { label: 'Not', value: 'A bid comparison tool' },
-      { label: 'Use with', value: 'How the Industry Has Changed' },
-      { label: 'Then', value: 'Slow the decision down' },
-    ]}
+    subhead="Industry Articles"
+    bannerBlurb="Short observations that provide context around common language, marketing, and processes within the foundation repair industry."
     nav={nav}
-    topicsStyle="list"
+    topicsStyle="none"
   >
     <div class="cabinet">
       {groups.map((group) => (
@@ -63,7 +57,7 @@ const countLabel = (n) => (n === 1 ? '(1 article)' : `(${n} articles)`);
           </div>
           <div class="accordion-content">
             <div class="accordion-content-inner">
-              <div class="related-links">
+              <div class="article-index-links">
                 {group.links.map((link) => (
                   <a href={link.href}>{link.title}</a>
                 ))}
@@ -72,11 +66,6 @@ const countLabel = (n) => (n === 1 ? '(1 article)' : `(${n} articles)`);
           </div>
         </div>
       ))}
-    </div>
-    <div class="related-links">
-      <a href="/how-the-industry-has-changed">How the industry has changed →</a>
-      <a href="/educational-articles">Educational articles →</a>
-      <a href="/start-here">Start Here →</a>
     </div>
   </HubPageShell>
 </BaseLayout>
@@ -108,13 +97,13 @@ const countLabel = (n) => (n === 1 ? '(1 article)' : `(${n} articles)`);
     color: #5a5a5a;
     font-size: 12px;
   }
-  .cabinet-row .related-links {
+  .article-index-links {
     display: flex;
     flex-direction: column;
     gap: 8px;
     padding-bottom: 16px;
   }
-  .cabinet-row .related-links a {
+  .article-index-links a {
     color: #2d9499;
   }
 </style>
