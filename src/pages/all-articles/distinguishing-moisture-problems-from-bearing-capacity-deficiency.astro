@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import html from '../../../content/extracted/distinguishing-moisture-problems-from-bearing-capacity-deficiency.html?raw';
+---
+<BaseLayout title="Moisture Problems vs. Bearing Capacity" description="Why water and weak soil can leave the same marks and still need different responses." hub={false}>
+  <article class="paper">
+    <header class="paper-head">
+      <h1>Distinguishing Moisture Problems from Bearing Capacity Deficiency</h1>
+    </header>
+    <div class="paper-body" set:html={html} />
+  </article>
+</BaseLayout>
