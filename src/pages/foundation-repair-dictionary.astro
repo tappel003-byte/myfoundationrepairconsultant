@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+import extracted from '../../content/extracted/foundation-repair-dictionary.html?raw';
+
+const outbound: Record<string, string> = {
+  'helical-pier': '/helical-piers',
+  micropile: '/micropiles',
+  settlement: '/all-articles/settlement',
+  'differential-settlement': '/all-articles/differential-settlement-why-uneven-movement-matters-more-than-movement-itself',
+  underpinning: '/all-articles/underpinning-what-it-is-and-why-hearing-the-term-is-not-a-diagnosis',
+  'expansive-soil': '/all-articles/expansivesoil',
+  'collapsible-soil': '/all-articles/collapsiblesoil',
+  'slab-on-grade': '/all-articles/slab-on-grade-foundations-what-they-are-and-what-they-dont-automatically-tell-you',
+  crawlspace: '/all-articles/crawlspaces-what-they-are-and-why-they-get-blamed-for-so-many-problems',
+  'soil-report': '/all-articles/soil-reports-what-they-are-and-what-theyre-actually-used-for',
+  'foundation-crack': '/all-articles/foundationcracks',
+  'structural-crack': '/all-articles/structuralcracks',
+  'free-evaluation': '/all-articles/the-free-evaluation-and-the-culture-it-creates',
+  'sales-metric': '/all-articles/what-is-a-sales-metric-and-why-it-doesnt-translate-to-foundation-repair',
+  'scope-of-work': '/all-articles/why-a-detailed-scope-of-work-matters-in-foundation-repair',
+};
+
+const knownIds = new Set(
+  [...extracted.matchAll(/id="([a-z0-9-]+)"/g)].map((m) => m[1])
+);
+
+let body = extracted
+  .replace(/<div class="floating-nav"[\s\S]*?<\/div>/, '')
+  .replace(/<div class="page-header"[\s\S]*?<\/div>/, '');
+
+body = body.replace(
+  /<span class="related-term" data-term="([^"]+)">([^<]+)<\/span>/g,
+  (_m, id, label) =>
+    knownIds.has(id)
+      ? `<a class="related-term" href="#${id}">${label}</a>`
+      : `<span class="related-term">${label}</span>`
+);
+
+body = body.replace(
+  /<div class="term-card" id="([^"]+)">/g,
+  (_m, id) => {
+    const href = outbound[id];
+    return href
+      ? `<div class="term-card" id="${id}" data-more="${href}">`
+      : `<div class="term-card" id="${id}">`;
+  }
+);
+
+body = body.replace(
+  /<div class="term-card" id="([^"]+)" data-more="([^"]+)">([\s\S]*?)<\/div>\s*<\/div>/g,
+  (_m, id, href, inner) =>
+    `<div class="term-card" id="${id}">${inner}<p class="term-more"><a href="${href}">Full page →</a></p></div></div>`
+);
+---
+
+<BaseLayout
+  title="Foundation Repair Dictionary"
+  description="Plain-language definitions of foundation repair terms homeowners commonly hear."
+  hub={true}
+  quote="Clarity isn’t about knowing more — it’s about knowing what matters."
+>
+  <HubPageShell
+    title="Foundation Repair Dictionary"
+    subhead="Plain-language definitions — and anyone trying to understand what is happening beneath a foundation"
+    nav={[]}
+    topicsStyle="none"
+  >
+    <Fragment set:html={body} />
+  </HubPageShell>
+</BaseLayout>
