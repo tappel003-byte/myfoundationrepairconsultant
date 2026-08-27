@@ -73,11 +73,12 @@ if (quoteMatch) {
   rawHtml = rawHtml.replace(quoteMatch[0], '');
 }
 
-const headings = [...rawHtml.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi)].map((m, i) => {
-  const text = m[1].replace(/<[^>]+>/g, '').trim();
-  const id = `s-${i + 1}`;
-  return { id, text };
-}).filter((h) => h.text && h.text.length < 120 && text !== 'Related dictionary terms');
+const headings = [...rawHtml.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi)]
+  .map((m, i) => {
+    const heading = m[1].replace(/<[^>]+>/g, '').trim();
+    return { id: `s-${i + 1}`, text: heading };
+  })
+  .filter((h) => h.text && h.text.length < 120 && h.text !== 'Related dictionary terms');
 
 let bodyHtml = rawHtml;
 let headingIndex = 0;
