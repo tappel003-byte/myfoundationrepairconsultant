@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+---
+
+<BaseLayout
+  title="Know Before You Sign"
+  description="What Arizona homeowners need to understand before responding to a foundation repair recommendation."
+  hub={true}
+  quote="The most useful thing you can do when you notice a crack is to understand it — not react to it."
+>
+  <HubPageShell
+    title="Know Before You Sign"
+    subhead="Arizona homeowners evaluating a recommendation"
+    bannerBlurb="A practical overview of what is normal in Arizona soil, what warrants attention, and what a qualified evaluation looks like."
+    glance={[
+      { label: 'First', value: 'Understand the crack' },
+      { label: 'Then', value: 'Ask what was measured' },
+      { label: 'Avoid', value: 'Sign-today pressure' },
+      { label: 'Next', value: 'Compare explanations' },
+    ]}
+    nav={[
+      { id: 'context', label: 'Arizona context' },
+      { id: 'read', label: 'Read next' },
+    ]}
+    topicsStyle="list"
+  >
+    <h2 class="section-heading" id="context">Arizona context</h2>
+    <div class="content-block">
+      <p>This page is a practical overview for Arizona homeowners evaluating foundation concerns — what is normal in Arizona's soil environment, what actually warrants attention, and what a qualified evaluation looks like.</p>
+    </div>
+    <h2 class="section-heading" id="read">Read next</h2>
+    <div class="related-links">
+      <a href="/foundation-behavior-in-arizona">Foundation behavior in Arizona →</a>
+      <a href="/all-articles/foundation-soil-behavior-in-the-phoenix-metropolitan-area">Phoenix soil behavior →</a>
+      <a href="/all-articles/southern-arizona-soil-conditions-and-structural-behavior">Southern Arizona soils →</a>
+      <a href="/industry-articles">Industry articles →</a>
+      <a href="/all-articles/psychology-of-sign-today-discounts">Sign-today discounts →</a>
+      <a href="/investigate-further-arizona">Investigate further in Arizona →</a>
+    </div>
+  </HubPageShell>
+</BaseLayout>
