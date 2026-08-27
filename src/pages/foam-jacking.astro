@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+
+const nav = [
+  { id: 'what-they-are', label: 'What it is' },
+  { id: 'load-transfer', label: 'How it works' },
+  { id: 'when-yes', label: 'When appropriate' },
+  { id: 'when-no', label: 'When it is not' },
+  { id: 'compare', label: 'Related methods' },
+  { id: 'cousins', label: 'What it is not' },
+  { id: 'questions', label: 'Questions to ask' },
+];
+
+const pageDescription =
+  'What polyurethane foam jacking is, how expanding foam fills voids and can lift a slab, when it is appropriate, and why it is not a pier or a substitute for underpinning.';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Foam Jacking',
+  description: pageDescription,
+  url: 'https://www.myfoundationrepairconsultant.com/foam-jacking',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': 'https://www.myfoundationrepairconsultant.com/foam-jacking',
+  },
+  author: { '@type': 'Organization', name: 'My Foundation Repair Consultant' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'My Foundation Repair Consultant',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://images.squarespace-cdn.com/content/v1/6983db0242b9b6302c661059/fa18c5f7-2e51-4ae1-81d8-0517c590d714/MFRC+Logo.jpg',
+    },
+  },
+};
+---
+
+<BaseLayout
+  title="Foam Jacking"
+  description={pageDescription}
+  hub={true}
+  quote="Foam can restore contact beneath a slab. It does not, by itself, explain why that contact was lost."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  <HubPageShell
+    title="Foam Jacking"
+    subhead="Void filling and slab lift — not a pier, and not compaction grouting"
+    description="This page is about polyurethane foam jacking: expanding foam injected under a slab to fill voids and, when the slab can take it, raise it. It is not underpinning a footing."
+    glance={[
+      { label: 'Installation', value: 'Small holes, staged injection under the slab' },
+      { label: 'Capacity source', value: 'Slab on foam and the ground below — not pile capacity' },
+      { label: 'Best for', value: 'Voids and modest slab re-level where cause and drainage are known' },
+      { label: 'Not for', value: 'A failed footing load path, deep weak soil, or water still running' },
+    ]}
+    nav={nav}
+    topicsStyle="list"
+  >
+    <h2 class="section-heading" id="what-they-are">What foam jacking is</h2>
+    <div class="content-block">
+      <p>Foam jacking uses a two-component polyurethane that expands after it is injected beneath concrete. It can move into available voids and, after contact is made, exert lifting pressure on the slab.</p>
+      <p>It is commonly discussed for sidewalks, driveways, patios, and garage slabs. Whether it belongs under a building-supported slab depends on what that slab does: loading, reinforcement, joints, utilities, the subgrade, and why the slab moved.</p>
+    </div>
+
+    <div class="accordion-section" id="load-transfer">
+      <div class="accordion-header">
+        <span class="accordion-title">How it works</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Foam jacking does not install a pier. It does not underpin a structure in the deep-foundation sense. It provides fill and contact under a slab. Long-term behavior still depends on the foam and the soil under it.</p>
+          <p>If weak, wet, eroding, compressible, or volume-changing soil remains below the treated zone, the slab can keep moving. Poor drainage and saturated or weak soils are conditions that can bring settlement back.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="when-yes">
+      <div class="accordion-header">
+        <span class="accordion-title">When it is appropriate</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <ul>
+            <li>Investigation points to a discrete void, loss of contact, or modest slab settlement</li>
+            <li>The concrete can take a controlled lift</li>
+            <li>The objective is void filling, trip-hazard or drainage-slope correction, or slab re-level — not structural underpinning</li>
+            <li>Utilities, plumbing, conduits, and drainage paths have been located</li>
+            <li>The water source or soil-loss mechanism has been corrected or is being corrected with the work</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="when-no">
+      <div class="accordion-header">
+        <span class="accordion-title">When it is not</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <ul>
+            <li>A foundation wall, perimeter footing, or column needs a reliable deep load path</li>
+            <li>The concern is bearing failure or settlement in deeper soils</li>
+            <li>Roof runoff, leaking plumbing, irrigation, poor grading, erosion, or groundwater is still removing or softening supporting soil</li>
+            <li>The slab is badly cracked, is part of the building load path, or carries loads beyond its condition</li>
+            <li>The scope promises permanent stabilization without explaining the soil, water, and load conditions below the foam</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="compare">
+      <div class="accordion-header">
+        <span class="accordion-title">Relation to piers and compaction grouting</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Helical piers, micropiles, and push piers transfer structural loads through engineered deep-foundation mechanisms. Foam jacking is not a substitute when a footing or column needs that kind of underpinning.</p>
+          <p>Foam may be considered after structural work to restore slab support or fill a leftover void. That is still an engineering decision about what moved and what each method is for.</p>
+          <div class="related-links">
+            <a href="/compaction-grouting">Compaction Grouting →</a>
+            <a href="/helical-piers">Helical Piers →</a>
+            <a href="/micropiles">Micropiles →</a>
+            <a href="/push-piers">Push Piers →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="cousins">
+      <div class="accordion-header">
+        <span class="accordion-title">What it is not</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p><strong>Mudjacking</strong> or slabjacking generally uses a cementitious or soil-cement slurry to fill voids and lift slabs. Related category. Different material.</p>
+          <p><strong>Compaction grouting</strong> is not a heavier version of foam jacking. Compaction grouting uses low-mobility grout to displace and densify soil in designed zones. Foam jacking is usually aimed at filling voids and lifting a slab.</p>
+          <p>If a bid says “soil stabilization,” ask whether they mean confirmed soil improvement or foam filling and slab elevation. Those are not the same claim.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ask-box" id="questions">
+      <h3>Questions building owners should ask</h3>
+      <ul>
+        <li>What caused the void or settlement: water, erosion, leaking utilities, poor compaction, collapsible soil, or something else?</li>
+        <li>Is this a lightly loaded slab, or does it participate in the building’s structural support?</li>
+        <li>What evidence shows the void’s depth and extent?</li>
+        <li>Where are plumbing lines, drains, conduits, and any post-tension cables?</li>
+        <li>What maximum lift is planned, and how will movement be watched?</li>
+        <li>How do they avoid over-lifting, cracking the slab, damaging utilities, or sending foam where it should not go?</li>
+        <li>What conditions below the foam will carry load after lifting?</li>
+        <li>What water-management work is required so the same support loss does not come back?</li>
+      </ul>
+    </div>
+
+    <h2 class="section-heading">Digging deeper</h2>
+    <div class="deeper-grid">
+      <div class="deeper-card">
+        <h4><a href="/compaction-grouting">Compaction Grouting</a></h4>
+        <p>Related method — different mechanism</p>
+      </div>
+      <div class="deeper-card">
+        <h4><a href="/push-piers">Push Piers</a></h4>
+        <p>Related method</p>
+      </div>
+      <div class="deeper-card">
+        <h4><a href="/helical-piers">Helical Piers</a></h4>
+        <p>Related method</p>
+      </div>
+    </div>
+  </HubPageShell>
+</BaseLayout>
