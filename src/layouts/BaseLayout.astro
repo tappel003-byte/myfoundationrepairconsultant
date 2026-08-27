@@ -7,9 +7,15 @@ interface Props {
   title: string;
   description?: string;
   hub?: boolean;
+  quote?: string;
 }
 
-const { title, description = '', hub = false } = Astro.props;
+const {
+  title,
+  description = '',
+  hub = false,
+  quote = '',
+} = Astro.props;
 const fullTitle = title.includes('MFRC')
   ? title
   : `${title} — My Foundation Repair Consultant`;
@@ -38,7 +44,7 @@ const fullTitle = title.includes('MFRC')
     <SiteHeader />
     <main>
       <slot />
-      <p class="page-quote">“Understanding comes from seeing how many small pieces fit together.”</p>
+      {quote && <p class="page-quote“>{quote}</p>}
       <div class="page-end" aria-hidden="true"></div>
     </main>
   </body>
