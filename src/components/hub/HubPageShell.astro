@@ -49,6 +49,8 @@ const {
   </section>
 
   <div class="page page-redesign">
+    {description && <p class="page-lede">{description}</p>}
+
     {glance && glance.length > 0 && (
       <div class="glance" aria-label="At a glance">
         {glance.map((item) => (
@@ -76,8 +78,6 @@ const {
       </nav>
     )}
     {topicsStyle === 'none' && <div id="topics" class="section-anchor" />}
-
-    {description && <p class="page-lede">{description}</p>}
 
     <div class="redesign-body">
       <slot />
