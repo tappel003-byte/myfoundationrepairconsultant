@@ -73,22 +73,6 @@ if (quoteMatch) {
   rawHtml = rawHtml.replace(quoteMatch[0], '');
 }
 
-const headings = [...rawHtml.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi)]
-  .map((m, i) => {
-    const heading = m[1].replace(/<[^>]+>/g, '').trim();
-    return { id: `s-${i + 1}`, text: heading };
-  })
-  .filter((h) => h.text && h.text.length < 120 && h.text !== 'Related dictionary terms');
-
-let bodyHtml = rawHtml;
-let headingIndex = 0;
-bodyHtml = bodyHtml.replace(/<h2([^>]*)>/gi, () => {
-  const id = headings[headingIndex] ? headings[headingIndex].id : `s-${headingIndex + 1}`;
-  headingIndex += 1;
-  return `<h2 id="${id}">`;
-});
-
-const showToc = isArticle && headings.length >= 4;
 const articles = pages.filter((p) => p.type === 'article');
 const unique = articles.filter((p, i, arr) => arr.findIndex((x) => x.url === p.url) === i);
 const idx = unique.findIndex((p) => p.url === page.url);
@@ -103,18 +87,8 @@ const next = idx >= 0 && idx < unique.length - 1 ? unique[idx + 1] : null;
     <article class="paper">
       <header class="paper-head">
         <h1>{title}</h1>
-        {page.description && page.description.trim() && !page.description.includes('under construction') && (
-          <p class="paper-dek">{page.description}</p>
-        )}
       </header>
-      {showToc && (
-        <nav class="paper-toc" aria-label="In this paper">
-          {headings.map((h) => (
-            <a href={`#${h.id}`}>{h.text}</a>
-          ))}
-        </nav>
-      )}
-      <div class="paper-body" set:html={bodyHtml} />
+      <div class="paper-body" set:html={rawHtml} />
       <nav class="paper-pager" aria-label="More papers">
         {prev ? (
           <a class="pager-prev" href={prev.url}>
@@ -140,3 +114,52 @@ const next = idx >= 0 && idx < unique.length - 1 ? unique[idx + 1] : null;
     </div>
   )}
 </BaseLayout>
+
+<style is:global>
+  .paper {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 56px 48px 80px;
+  }
+  .paper-head h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    margin: 0 0 36px;
+  }
+  .paper-body {
+    font-size: 18px;
+    line-height: 1.75;
+  }
+  .paper-body h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 600;
+    margin: 36px 0 14px;
+    line-height: 1.25;
+  }
+  .paper-body p { margin: 0 0 16px; }
+  .paper-body ul,
+  .paper-body ol {
+    margin: 12px 0 20px;
+    padding-left: 1.4em;
+  }
+  .paper-body li { margin: 0 0 8px; }
+  .paper-pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid #e4e4e4;
+  }
+  .paper-pager a {
+    color: #2d9499;
+    text-decoration: none;
+    font-size: 17px;
+    line-height: 1.35;
+  }
+  .pager-next { text-align: right; }
+</style>
