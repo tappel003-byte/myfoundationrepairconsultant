@@ -17,7 +17,7 @@ interface Props {
   glance?: GlanceItem[];
   nav: NavItem[];
   showFloatingNav?: boolean;
-  topicsStyle?: 'box' | 'list';
+  topicsStyle?: 'box' | 'list' | 'none';
 }
 
 const {
@@ -28,7 +28,7 @@ const {
   glance,
   nav,
   showFloatingNav = true,
-  topicsStyle = 'box',
+  topicsStyle = 'list',
 } = Astro.props;
 ---
 
@@ -49,8 +49,6 @@ const {
   </section>
 
   <div class="page page-redesign">
-    <p class="page-dek">{subhead}</p>
-
     {glance && glance.length > 0 && (
       <div class="glance" aria-label="At a glance">
         {glance.map((item) => (
@@ -62,20 +60,22 @@ const {
       </div>
     )}
 
-    {topicsStyle === 'list' ? (
+    {topicsStyle === 'list' && (
       <nav class="topics-list" id="topics" aria-label="Topics">
         <h2 class="topics-list-heading">Topics</h2>
         {nav.map((item) => (
           <a href={`#${item.id}`}>{item.label}</a>
         ))}
       </nav>
-    ) : (
+    )}
+    {topicsStyle === 'box' && (
       <nav class="quick-nav" id="topics" aria-label="On this page">
         {nav.map((item) => (
           <a href={`#${item.id}`}>{item.label}</a>
         ))}
       </nav>
     )}
+    {topicsStyle === 'none' && <div id="topics" class="section-anchor" />}
 
     {description && <p class="page-lede">{description}</p>}
 
