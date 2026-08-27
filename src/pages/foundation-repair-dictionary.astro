@@ -4,10 +4,13 @@ import HubPageShell from '../components/hub/HubPageShell.astro';
 import extracted from '../../content/extracted/foundation-repair-dictionary.html?raw';
 import additions from '../data/dictionary-additions.html?raw';
 
-const card = (id: string) => {
-  const m = additions.match(new RegExp(`<div class="term-card" id="${id}">[\\s\\S]*?<\/div>\\s*<\/div>`));
-  return m ? m[0] : '';
-};
+function card(id: string) {
+  const start = additions.indexOf(`<div class="term-card" id="${id}">`);
+  if (start < 0) return '';
+  const next = additions.indexOf('<div class="term-card"', start + 1);
+  const end = next > 0 ? next : additions.indexOf('</section>', start);
+  return additions.slice(start, end).trim();
+}
 
 const inserts: [string, string][] = [
   ['</section><!-- H -->', card('geotechnical-investigation')],
@@ -21,8 +24,8 @@ let body = extracted
   .replace(/<div class="page-header"[\s\S]*?<\/div>/, '');
 
 for (const [marker, html] of inserts) {
-  if (html && body.includes(marker) && !body.includes(html.slice(0, 60))) {
-    body = body.replace(marker, html + marker);
+  if (html && body.includes(marker) && !body.includes(`id="${html.match(/id="([^"]+)"/)?.[1]}"`)) {
+    body = body.replace(marker, `${html}\n${marker}`);
   }
 }
 
