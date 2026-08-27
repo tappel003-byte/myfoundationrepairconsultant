@@ -2,22 +2,27 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HubPageShell from '../components/hub/HubPageShell.astro';
 import extracted from '../../content/extracted/foundation-repair-dictionary.html?raw';
+import additions from '../data/dictionary-additions.html?raw';
 
 const knownIds = new Set(
-  [...extracted.matchAll(/id="([a-z0-9-]+)"/g)].map((m) => m[1])
+  [...extracted.matchAll(/id="([a-z0-9-]+)"/g), ...additions.matchAll(/id="([a-z0-9-]+)"/g)].map((m) => m[1])
 );
+
+function wireRelated(html: string) {
+  return html.replace(
+    /<span class="related-term" data-term="([^"]+)">([^<]+)<\/span>/g,
+    (_m, id, label) =>
+      knownIds.has(id)
+        ? `<a class="related-term" href="#${id}">${label}</a>`
+        : `<span class="related-term">${label}</span>`
+  );
+}
 
 let body = extracted
   .replace(/<div class="floating-nav"[\s\S]*?<\/div>/, '')
   .replace(/<div class="page-header"[\s\S]*?<\/div>/, '');
 
-body = body.replace(
-  /<span class="related-term" data-term="([^"]+)">([^<]+)<\/span>/g,
-  (_m, id, label) =>
-    knownIds.has(id)
-      ? `<a class="related-term" href="#${id}">${label}</a>`
-      : `<span class="related-term">${label}</span>`
-);
+body = wireRelated(body) + wireRelated(additions);
 ---
 
 <BaseLayout
