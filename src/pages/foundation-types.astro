@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+import extracted from '../../content/extracted/foundation-types.html?raw';
+
+const nav = [
+  { id: 'shallow', label: 'Shallow' },
+  { id: 'deep', label: 'Deep' },
+  { id: 'slab', label: 'Slab' },
+  { id: 'wall', label: 'Wall & stem' },
+  { id: 'specialized', label: 'Specialized' },
+  { id: 'selection', label: 'Selection factors' },
+  { id: 'recommendations', label: 'Understanding recommendations' },
+];
+
+const start = extracted.indexOf('<!-- SHALLOW');
+const body = start >= 0 ? extracted.slice(start) : extracted;
+---
+
+<BaseLayout
+  title="Foundation Types"
+  description="Shallow, deep, slab, and wall systems — how they transfer load and when each is used."
+  hub={true}
+  quote="Foundation selection should be based on documented site conditions and engineering analysis—not sales presentations or urgency tactics."
+>
+  <HubPageShell
+    title="Foundation Types"
+    subhead="A guide for building owners — what supports the structure and why it matters"
+    glance={[
+      { label: 'Shallow', value: 'Spread and strip — load near surface' },
+      { label: 'Deep', value: 'Piles and shafts — load at depth' },
+      { label: 'Slab', value: 'Slab-on-grade, mat, raft' },
+      { label: 'Wall', value: 'Basement, crawl, stem' },
+    ]}
+    nav={nav}
+    topicsStyle="list"
+  >
+    <Fragment set:html={body} />
+    <div class="related-links">
+      <a href="/all-articles/slab-on-grade-foundations-what-they-are-and-what-they-dont-automatically-tell-you">Slab-on-grade article →</a>
+      <a href="/all-articles/crawlspaces-what-they-are-and-why-they-get-blamed-for-so-many-problems">Crawlspaces →</a>
+      <a href="/helical-piers">Helical piers →</a>
+      <a href="/micropiles">Micropiles →</a>
+      <a href="/foundation-repair-dictionary">Dictionary →</a>
+    </div>
+  </HubPageShell>
+</BaseLayout>
