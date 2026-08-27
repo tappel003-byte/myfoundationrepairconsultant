@@ -1,0 +1,147 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+
+const nav = [
+  { id: 'methods', label: 'The methods' },
+  { id: 'questions', label: 'Before any method is sold' },
+];
+
+const pageDescription =
+  'A starting place for foundation repair method names that appear in proposals. Helical piers, micropiles, push piers, compaction grouting, foam jacking, and other deep foundations — what each is for, and what it is not.';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': ['Article', 'FAQPage'],
+  headline: 'Repair Methods',
+  description: pageDescription,
+  url: 'https://www.myfoundationrepairconsultant.com/repair-methods',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': 'https://www.myfoundationrepairconsultant.com/repair-methods',
+  },
+  author: { '@type': 'Organization', name: 'My Foundation Repair Consultant' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'My Foundation Repair Consultant',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://images.squarespace-cdn.com/content/v1/6983db0242b9b6302c661059/fa18c5f7-2e51-4ae1-81d8-0517c590d714/MFRC+Logo.jpg',
+    },
+  },
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What movement or support problem is this method intended to solve?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Name the problem first. A method name is not a diagnosis.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What investigation supports that explanation?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Site observations, elevation data, soil information, drainage review, records, monitoring, or engineering analysis should support the proposed method.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is the goal stabilization, lifting, deep load transfer, soil improvement, void filling, retaining soil, or support for a new load?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Those jobs are not interchangeable. The method has to match the goal.',
+      },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Repair Methods"
+  description={pageDescription}
+  hub={true}
+  quote="The useful question is not which repair method sounds strongest. It is what problem has actually been identified, and whether the proposed method is designed to solve that problem."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  <HubPageShell
+    title="Repair Methods"
+    subhead="A method name is not a diagnosis"
+    description="This guide is a starting place for terms that may appear in a proposal. The right approach depends on the building, the movement pattern, soil and water, access, and the load path — not on which product name appears first."
+    glance={[
+      { label: 'Start here', value: 'Understand the name on the proposal' },
+      { label: 'Then', value: 'Read the page for that method' },
+      { label: 'Always', value: 'Ask what problem it is meant to solve' },
+      { label: 'Not this page', value: 'A ranking of best products' },
+    ]}
+    nav={nav}
+    topicsStyle="list"
+  >
+    <h2 class="section-heading" id="methods">The methods</h2>
+    <div class="condition-grid">
+      <div class="condition-card" id="helical">
+        <h4>Helical Piers</h4>
+        <p>Steel elements installed by rotating helical bearing plates into the ground. They transfer structural load to deeper soil or rock.</p>
+        <p>They are not a universal answer to cracking, moisture change, drainage problems, voids, or every form of settlement.</p>
+        <div class="related-links">
+          <a href="/helical-piers">Helical Piers →</a>
+        </div>
+      </div>
+      <div class="condition-card" id="micropiles">
+        <h4>Micropiles</h4>
+        <p>Small-diameter, drilled-and-grouted reinforced piles used for structural support and, in some work, in-place earth reinforcement.</p>
+        <p>They are often considered where access, vibration, ground conditions, obstructions, or load make another approach a poor fit. They are not simply a more technical name for any pier repair.</p>
+        <div class="related-links">
+          <a href="/micropiles">Micropiles →</a>
+        </div>
+      </div>
+      <div class="condition-card" id="push">
+        <h4>Push Piers</h4>
+        <p>Steel resistance piers hydraulically pressed from an existing foundation, using the building’s weight as the installation reaction.</p>
+        <p>They are used for selected existing-building underpinning. They are not torque-installed helical piers, and they are not automatically appropriate when the structure is light, the footing is unsuitable, or the cause of movement is still unresolved.</p>
+        <div class="related-links">
+          <a href="/push-piers">Push Piers →</a>
+        </div>
+      </div>
+      <div class="condition-card" id="grout">
+        <h4>Compaction Grouting</h4>
+        <p>A ground-improvement method that injects stiff, low-mobility grout to displace and densify suitable soil.</p>
+        <p>It is used to improve support in specific ground conditions. It is not expanding polyurethane foam and it is not a conventional structural pile.</p>
+        <div class="related-links">
+          <a href="/compaction-grouting">Compaction Grouting →</a>
+        </div>
+      </div>
+      <div class="condition-card" id="foam">
+        <h4>Foam Jacking</h4>
+        <p>Expanding polyurethane injected beneath a slab to fill accessible voids and, where conditions allow, lift or re-level concrete.</p>
+        <p>It is used for slab support and elevation correction. It is not pile underpinning and it is not a substitute for correcting an active water, erosion, or weak-soil condition.</p>
+        <div class="related-links">
+          <a href="/foam-jacking">Foam Jacking →</a>
+        </div>
+      </div>
+      <div class="condition-card" id="other">
+        <h4>Other Deep Foundations</h4>
+        <p>A catalog of names that often arise in commercial and infrastructure work: drilled shafts, auger-cast / CFA piles, driven H-piles and pipe piles, timber piles, precast concrete piles, caissons, sheet piling, and rammed aggregate piers.</p>
+        <p>This is not a sixth residential repair product page. It explains systems owners may hear about and why their normal purpose may be different from repairing an existing house.</p>
+        <div class="related-links">
+          <a href="/other-deep-foundations">Other Deep Foundations →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ask-box" id="questions">
+      <h3>Before any method is sold</h3>
+      <ul>
+        <li>What movement or support problem is this method intended to solve?</li>
+        <li>What investigation supports that explanation — site observations, elevation data, soil information, drainage review, records, monitoring, or engineering analysis?</li>
+        <li>Is the goal stabilization, lifting, deep load transfer, soil improvement, void filling, retaining soil, or support for a new load?</li>
+        <li>What is the load path from the building into the proposed system?</li>
+        <li>What conditions make this method a better fit than the other relevant options?</li>
+        <li>Were water, drainage, plumbing leaks, erosion, irrigation, utility trenches, and moisture-driven soil changes evaluated separately?</li>
+        <li>What limitations, risks, and conditions for success are specific to this method and this site?</li>
+        <li>What installation records, monitoring, testing, or verification will show whether the intended objective was achieved?</li>
+      </ul>
+    </div>
+  </HubPageShell>
+</BaseLayout>
