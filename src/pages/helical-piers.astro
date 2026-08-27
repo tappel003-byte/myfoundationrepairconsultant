@@ -13,14 +13,39 @@ const nav = [
   { id: 'compare', label: 'Compare methods' },
   { id: 'questions', label: 'Questions to ask' },
 ];
+
+const pageDescription =
+  'What helical piers are, how they transfer load, when they are appropriate, and when they are not — without sales language.';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Helical Piers',
+  description: pageDescription,
+  url: 'https://www.myfoundationrepairconsultant.com/helical-piers',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': 'https://www.myfoundationrepairconsultant.com/helical-piers',
+  },
+  author: { '@type': 'Organization', name: 'My Foundation Repair Consultant' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'My Foundation Repair Consultant',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://images.squarespace-cdn.com/content/v1/6983db0242b9b6302c661059/fa18c5f7-2e51-4ae1-81d8-0517c590d714/MFRC+Logo.jpg',
+    },
+  },
+};
 ---
 
 <BaseLayout
   title="Helical Piers"
-  description="What helical piers are, how they transfer load, when they are appropriate, and when they are not — without sales language."
+  description={pageDescription}
   hub={true}
-  quote="Understanding what a solution does is the first step toward knowing whether you need it."
+  quote="Understanding what a solution does is the first step toward knowing whether you need\u00a0it."
 >
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
   <HubPageShell
     title="Helical Piers"
     subhead="What they are, how they work, and when they actually make sense"
