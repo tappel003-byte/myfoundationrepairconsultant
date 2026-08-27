@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+
+const nav = [
+  { id: 'what-they-are', label: 'What it is' },
+  { id: 'load-transfer', label: 'How it works' },
+  { id: 'when-yes', label: 'When appropriate' },
+  { id: 'when-no', label: 'When it is not' },
+  { id: 'compare', label: 'Related methods' },
+  { id: 'cousins', label: 'What it is not' },
+  { id: 'questions', label: 'Questions to ask' },
+];
+
+const pageDescription =
+  'What compaction grouting is, how stiff low-mobility grout densifies soil, when it is appropriate, and how it differs from foam jacking, permeation grouting, and underpinning.';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Compaction Grouting',
+  description: pageDescription,
+  url: 'https://www.myfoundationrepairconsultant.com/compaction-grouting',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': 'https://www.myfoundationrepairconsultant.com/compaction-grouting',
+  },
+  author: { '@type': 'Organization', name: 'My Foundation Repair Consultant' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'My Foundation Repair Consultant',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://images.squarespace-cdn.com/content/v1/6983db0242b9b6302c661059/fa18c5f7-2e51-4ae1-81d8-0517c590d714/MFRC+Logo.jpg',
+    },
+  },
+};
+---
+
+<BaseLayout
+  title="Compaction Grouting"
+  description={pageDescription}
+  hub={true}
+  quote="Compaction grouting is ground improvement, not a shortcut around understanding the ground."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  <HubPageShell
+    title="Compaction Grouting"
+    subhead="Ground improvement by displacement — not a pile, and not foam"
+    description="This page is about compaction grouting: stiff, low-mobility grout injected so it forms bulbs that push and densify the soil around them. Hearing ‘grouting’ on an estimate does not tell you which mechanism you are being sold."
+    glance={[
+      { label: 'Installation', value: 'Staged injection through casing at planned depths' },
+      { label: 'Capacity source', value: 'Denser, stiffer treated ground — not a pile' },
+      { label: 'Best for', value: 'Loose, voided, or collapsible ground that can take displacement' },
+      { label: 'Not for', value: 'Mystery cracks, an active leak, or soil that will fracture without a plan' },
+    ]}
+    nav={nav}
+    topicsStyle="list"
+  >
+    <h2 class="section-heading" id="what-they-are">What compaction grouting is</h2>
+    <div class="content-block">
+      <p>Compaction grouting uses a stiff, low-slump, low-mobility grout. The grout is meant to stay near the injection point and form a bulb, or a string of bulbs, rather than soak into ordinary soil pores.</p>
+      <p>As each bulb grows under controlled injection, it displaces the soil next to it. In suitable ground, that displacement can increase density and stiffness.</p>
+    </div>
+
+    <div class="accordion-section" id="load-transfer">
+      <div class="accordion-header">
+        <span class="accordion-title">How it works</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Compaction grouting does not create a conventional pile that carries building load to a distant deep layer. It is meant to improve the treated ground itself.</p>
+          <p>What you get depends on the soil, the treatment depths and pattern, the grout, the injection sequence, pressure and volume control, drainage, and monitoring. The grout mass is part of the treated system. The core idea is displacement and densification — not “adding concrete underground” as a slogan.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="when-yes">
+      <div class="accordion-header">
+        <span class="accordion-title">When it is appropriate</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <ul>
+            <li>Investigation identifies loose, disturbed, voided, or potentially collapsible material that can take displacement treatment</li>
+            <li>The objective is to improve support, reduce settlement potential, or fill selected voided zones under control</li>
+            <li>The work is laid out with planned locations, depths, stages, volumes, pressures, and a way to check the result</li>
+            <li>Nearby foundations, utilities, slabs, and walls have been considered — displacement can move more than the target zone</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="when-no">
+      <div class="accordion-header">
+        <span class="accordion-title">When it is not</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <ul>
+            <li>The proposal says “compaction grouting” with no defined grout consistency, treatment geometry, volume or pressure limits, or verification plan</li>
+            <li>The soil is not known well enough to predict whether grout will form bulbs, fracture the ground, migrate, or heave something it should not</li>
+            <li>The real problem is an ongoing leak, roof runoff, grading, irrigation, or erosion</li>
+            <li>The foundation needs a defined deep load path rather than improved shallow or intermediate support</li>
+            <li>The goal is cosmetic elevation with no story about the soil and moisture below</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="compare">
+      <div class="accordion-header">
+        <span class="accordion-title">Relation to helical piers, micropiles, and push piers</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Compaction grouting changes the ground. Helical piers, micropiles, and push piers are structural elements that transfer load through designed deep-foundation mechanisms.</p>
+          <p>They can show up in the same study. They are not interchangeable products. A project may need one, a combination, or none of them.</p>
+          <div class="related-links">
+            <a href="/helical-piers">Helical Piers →</a>
+            <a href="/micropiles">Micropiles →</a>
+            <a href="/push-piers">Push Piers →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="cousins">
+      <div class="accordion-header">
+        <span class="accordion-title">What it is not</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p><strong>Permeation grouting</strong> is meant to enter soil voids with relatively little displacement. Compaction grout is deliberately stiff and works by pushing soil aside.</p>
+          <p><strong>Polyurethane foam injection</strong> is not compaction grouting. Foam is an expanding resin used to fill voids and lift slabs. It does not form the classic low-mobility grout bulbs.</p>
+          <p>A bid that only says “pressure grouting” has not named a method. Ask whether the planned mechanism is compaction, permeation, fracture grouting, void filling, slab lifting, or a mix of those. Those words are not synonyms.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ask-box" id="questions">
+      <h3>Questions building owners should ask</h3>
+      <ul>
+        <li>What soil condition is being treated, and how was it identified?</li>
+        <li>Is the planned mechanism compaction, permeation, fracture, void filling, or lifting?</li>
+        <li>What grout mix, slump or mobility range, and strength properties are specified?</li>
+        <li>What depths, spacing, stages, volumes, and pressure limits are planned?</li>
+        <li>What prevents unintended lifting, fracturing, migration, or damage to utilities and nearby structures?</li>
+        <li>How will anyone know the ground improvement met the objective?</li>
+        <li>What will be monitored during injection: movement, pressure, volume, elevation?</li>
+        <li>What drainage, plumbing, or moisture condition must be corrected before or with the work?</li>
+      </ul>
+    </div>
+
+    <h2 class="section-heading">Digging deeper</h2>
+    <div class="deeper-grid">
+      <div class="deeper-card">
+        <h4><a href="/push-piers">Push Piers</a></h4>
+        <p>Related method</p>
+      </div>
+      <div class="deeper-card">
+        <h4><a href="/helical-piers">Helical Piers</a></h4>
+        <p>Related method</p>
+      </div>
+      <div class="deeper-card">
+        <h4><a href="/micropiles">Micropiles</a></h4>
+        <p>Related method</p>
+      </div>
+    </div>
+  </HubPageShell>
+</BaseLayout>
