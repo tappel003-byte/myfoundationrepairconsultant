@@ -1,5 +1,6 @@
 ---
 import SiteHeader from '../components/SiteHeader.astro';
+import { articleSchema } from '../lib/schema';
 import '../styles/mfrc.css';
 import '../styles/redesign.css';
 import '../styles/dict-links.css';
@@ -33,6 +34,25 @@ const quotePages = new Set([
 ]);
 const shownQuote = quote && quotePages.has(path);
 
+const ownSchema = new Set([
+  '/start-here',
+  '/repair-methods',
+  '/micropiles',
+  '/helical-piers',
+  '/push-piers',
+  '/compaction-grouting',
+  '/foam-jacking',
+  '/other-deep-foundations',
+]);
+const pageUrl = `https://www.myfoundationrepairconsultant.com${path}`;
+const layoutSchema = !ownSchema.has(path)
+  ? articleSchema({
+      headline: title,
+      description,
+      url: pageUrl,
+    })
+  : null;
+
 const fullTitle = title.includes('MFRC')
   ? title
   : `${title} — My Foundation Repair Consultant`;
@@ -45,7 +65,7 @@ const fullTitle = title.includes('MFRC')
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     {description && <meta name="description" content={description} />}
-    <link rel="canonical" href={`https://www.myfoundationrepairconsultant.com${path}`} />
+    <link rel="canonical" href={pageUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -56,6 +76,9 @@ const fullTitle = title.includes('MFRC')
     <meta property="og:title" content={fullTitle} />
     {description && <meta property="og:description" content={description} />}
     <meta property="og:type" content="website" />
+    {layoutSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(layoutSchema)} />
+    )}
   </head>
   <body class={hub ? 'hub-layout' : 'article-layout'}>
     <SiteHeader />
