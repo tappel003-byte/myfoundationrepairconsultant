@@ -3,12 +3,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HubPageShell from '../components/hub/HubPageShell.astro';
 
 const nav = [
+  { id: 'fitness', label: 'The right tool' },
+  { id: 'questions', label: 'Questions this hub answers' },
   { id: 'methods', label: 'The methods' },
-  { id: 'questions', label: 'Before any method is sold' },
+  { id: 'before', label: 'Before any method is sold' },
 ];
 
 const pageDescription =
-  'A starting place for foundation repair method names that appear in proposals. Helical piers, micropiles, push piers, compaction grouting, foam jacking, and other deep foundations — what each is for, and what it is not.';
+  'Foundation repair methods compared: helical piers vs push piers, micropiles, compaction grouting, foam jacking, and other deep foundations. A method name is not a diagnosis. Use the tool that matches the condition.';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -32,26 +34,42 @@ const schema = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'What movement or support problem is this method intended to solve?',
+      name: 'What is the difference between a helical pier and a push pier?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Name the problem first. A method name is not a diagnosis.',
+        text: 'Helical piers are rotated into the ground using helical plates. Push piers are pressed from the existing foundation using the building weight as reaction. They are not the same tool and they are not interchangeable on every house.',
       },
     },
     {
       '@type': 'Question',
-      name: 'What investigation supports that explanation?',
+      name: 'When is compaction grouting most effective?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Site observations, elevation data, soil information, drainage review, records, monitoring, or engineering analysis should support the proposed method.',
+        text: 'When the job is densifying suitable soil and improving support in that ground — not when the need is a structural pile, and not as a substitute for expanding foam under a slab.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Is the goal stabilization, lifting, deep load transfer, soil improvement, void filling, retaining soil, or support for a new load?',
+      name: 'When is foam jacking the wrong tool?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Those jobs are not interchangeable. The method has to match the goal.',
+        text: 'When the problem is an active water, erosion, or weak-soil condition, or when the need is pile underpinning of a footing rather than filling an accessible slab void.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is a quieter or less expensive method sometimes the right method?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Soil, water, access, structure weight, scope, and cost can make a simpler method the honest answer if it matches the condition that was found.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does a crack mean a house needs piers?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. A crack is a symptom. Drainage, plumbing leaks, seasonal movement, and material behavior can produce cracks without a deep-foundation repair.',
       },
     },
   ],
@@ -68,16 +86,109 @@ const schema = {
   <HubPageShell
     title="Repair Methods"
     subhead="A method name is not a diagnosis"
-    description="This guide is a starting place for terms that may appear in a proposal. The right approach depends on the building, the movement pattern, soil and water, access, and the load path — not on which product name appears first."
+    description="This guide is a starting place for names that show up in a proposal. Read the questions first if you want the short path. Open a method card when you need the tool itself."
     glance={[
-      { label: 'Start here', value: 'Understand the name on the proposal' },
-      { label: 'Then', value: 'Read the page for that method' },
-      { label: 'Always', value: 'Ask what problem it is meant to solve' },
+      { label: 'Start here', value: 'What problem is being solved?' },
+      { label: 'Then', value: 'Which tool matches that job?' },
+      { label: 'Compare', value: 'Helical vs push, grout vs foam' },
       { label: 'Not this page', value: 'A ranking of best products' },
     ]}
     nav={nav}
     topicsStyle="list"
   >
+    <div class="ask-box" id="fitness">
+      <h3>The right tool for the job</h3>
+      <p>A method is only as good as the job it is asked to do. Helical piers, micropiles, push piers, grout, and foam are tools. A tool used on the wrong problem is the wrong tool, even when it is expensive or sounds more engineered.</p>
+      <p>Sometimes the quieter option is the better one. Soil, water, access, structure weight, scope, and cost can make a simpler method the honest answer. The question is not which name sounds strongest. It is which method matches the condition that was actually found.</p>
+    </div>
+
+    <h2 class="section-heading" id="questions">Questions this hub should leave you able to answer</h2>
+    <p>Open a group. The answers live on this page and on the method pages the links point to.</p>
+
+    <div class="accordion-section" id="q-what">
+      <div class="accordion-header">
+        <span class="accordion-title">What is this method?</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner">
+          <ul>
+            <li><a href="/helical-piers">What is a helical pier?</a></li>
+            <li><a href="/push-piers">What is a push pier?</a></li>
+            <li><a href="/micropiles">What is a micropile?</a></li>
+            <li><a href="/compaction-grouting">What is compaction grouting?</a></li>
+            <li><a href="/foam-jacking">What is foam jacking?</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="q-diff">
+      <div class="accordion-header">
+        <span class="accordion-title">What is the difference?</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner">
+          <ul>
+            <li><a href="#helical">Helical pier vs push pier?</a> Helical piers are rotated in with plates. Push piers are pressed from the foundation using the building as reaction.</li>
+            <li><a href="/micropiles">Helical or micropile vs “just put steel in the ground”?</a> A product name is not a design. Access, vibration, load, and ground decide the tool.</li>
+            <li><a href="#grout">Compaction grouting vs foam jacking?</a> Grout densifies soil. Foam fills accessible voids and can lift a slab. They are not the same material and not the same job.</li>
+            <li><a href="#foam">A pier vs filling a void under a slab?</a> Underpinning a footing and filling a slab void are different load paths.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="q-when">
+      <div class="accordion-header">
+        <span class="accordion-title">When is this the right tool — and when is it not?</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner">
+          <ul>
+            <li><a href="/compaction-grouting">When is compaction grouting most effective?</a> When the soil can be densified and the job is ground improvement, not a structural pile.</li>
+            <li><a href="/foam-jacking">When is foam the wrong tool?</a> Active water, erosion, weak soil, or a footing that needs a pier — not a slab void fill.</li>
+            <li><a href="/push-piers">When is a push pier a poor fit?</a> When the house is too light, the footing cannot take the reaction, or the cause of movement is still open.</li>
+            <li><a href="/micropiles">When does limited access point to micropiles?</a> Tight working room, vibration limits, obstructions, or loads that another system cannot reach cleanly.</li>
+            <li><a href="/all-articles/when-monitoring-makes-more-sense-than-immediate-underpinning">When is monitoring better than any of these?</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="q-cause">
+      <div class="accordion-header">
+        <span class="accordion-title">Cause before product</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner">
+          <ul>
+            <li>Can drainage or a plumbing leak make a good method fail? Yes. Water that is still changing the soil is not fixed by steel or grout alone.</li>
+            <li>Does a crack mean you need piers? No. A crack is a symptom. Seasonal movement and material behavior produce cracks on stable houses too.</li>
+            <li>Stabilize vs lift — are those the same job? No. Holding a building where it is and raising it are different objectives.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="q-names">
+      <div class="accordion-header">
+        <span class="accordion-title">Names that show up on bids</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner">
+          <p>If the proposal says drilled shaft, caisson, CFA, H-pile, pipe pile, timber pile, sheet pile, or Geopier / rammed aggregate pier, start here:</p>
+          <div class="related-links">
+            <a href="/other-deep-foundations">Other Deep Foundations →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <h2 class="section-heading" id="methods">The methods</h2>
     <div class="condition-grid">
       <div class="condition-card" id="helical">
@@ -130,7 +241,7 @@ const schema = {
       </div>
     </div>
 
-    <div class="ask-box" id="questions">
+    <div class="ask-box" id="before">
       <h3>Before any method is sold</h3>
       <ul>
         <li>What movement or support problem is this method intended to solve?</li>
