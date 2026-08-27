@@ -1,9 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
 const logoSrc =
   'https://images.squarespace-cdn.com/content/v1/6983db0242b9b6302c661059/fa18c5f7-2e51-4ae1-81d8-0517c590d714/MFRC+Logo.jpg?format=500w';
-
 const heardCards = [
   {
     id: 'piers',
@@ -54,7 +52,6 @@ const heardCards = [
     urgent: true,
   },
 ];
-
 const truthCards = [
   {
     id: 'same',
@@ -87,46 +84,23 @@ const truthCards = [
     why: 'The right method matches the problem, not the loudest pitch.',
   },
 ];
-
-const situations = [
-  {
-    id: 'access',
-    text: 'Limited access, low headroom',
-    accept: ['helical', 'micropiles'],
-    note: 'More than one method can genuinely fit here — that is not a trick, that is real.',
-  },
-  {
-    id: 'loose',
-    text: 'Loose or voided soil that can be densified',
-    accept: ['grout'],
-  },
-  {
-    id: 'slabvoid',
-    text: 'A void under a slab',
-    accept: ['foam'],
-  },
-  {
-    id: 'heavy',
-    text: 'Heavy structure, settlement that is localized and mapped',
-    accept: ['push'],
-  },
-  {
-    id: 'name',
-    text: 'A name on the bid you do not recognize',
-    accept: ['other'],
-  },
+// Each situation has exactly one correct method — no multi-answer pairs.
+// "Limited access, low headroom" pairs with Micropiles specifically because
+// the Micropiles page has a dedicated "Limited access" condition card
+// naming "Low headroom (8–10 ft)" almost verbatim; Helical Piers only
+// mentions "limited access" in passing, no headroom specifics.
+const matchPairs = [
+  { id: 'access', situation: 'Limited access, low headroom', method: 'Micropiles' },
+  { id: 'loose', situation: 'Loose or voided soil that can be densified', method: 'Compaction Grouting' },
+  { id: 'slabvoid', situation: 'A void under a slab', method: 'Foam Jacking' },
+  { id: 'heavy', situation: 'Heavy structure, settlement that is localized and mapped', method: 'Push Piers' },
+  { id: 'name', situation: 'A name on the bid you do not recognize', method: 'Other Deep Foundations' },
 ];
-
-const methods = [
-  { id: 'helical', text: 'Helical Piers' },
-  { id: 'micropiles', text: 'Micropiles' },
-  { id: 'grout', text: 'Compaction Grouting' },
-  { id: 'foam', text: 'Foam Jacking' },
-  { id: 'push', text: 'Push Piers' },
-  { id: 'other', text: 'Other Deep Foundations' },
-];
+const matchCards = matchPairs.flatMap((p) => [
+  { pairId: p.id, kind: 'Situation', text: p.situation },
+  { pairId: p.id, kind: 'Method', text: p.method },
+]);
 ---
-
 <BaseLayout
   title="What Did You Just Hear? — Foundation Field Notes"
   description="A small deck of things people hear about foundation repair — what they might mean, what they do not prove, and a better question to ask. Not a diagnosis. Not a sales page."
@@ -137,7 +111,6 @@ const methods = [
     <p class="notes-lede">
       Three short decks. No score. No right house. Tap a card, read what came out of someone's mouth, and see the better question underneath.
     </p>
-
     <section class="game" id="heard">
       <h2>What they said</h2>
       <p class="game-note">Tap once for the sentence. Tap again for what it does and does not prove.</p>
@@ -169,133 +142,92 @@ const methods = [
         ))}
       </div>
     </section>
-
     <section class="game" id="truth">
       <h2>True or false</h2>
-      <p class="game-note">Tap once for the claim. Tap again for the call.</p>
-      <div class="deck deck-3" data-shuffle>
+      <p class="game-note">Pick your answer. See the call.</p>
+      <div class="quiz-grid" data-shuffle>
         {truthCards.map((card) => (
-          <div class="flip" role="button" tabindex="0" data-steps="3" aria-label={card.claim}>
+          <div class="quiz" data-answer={card.answer}>
+            <p class="quiz-claim">{card.claim}</p>
+            <div class="quiz-buttons" role="group" aria-label="Answer">
+              <button type="button" class="quiz-btn" data-choice="True">
+                <span class="quiz-btn-label">True</span>
+              </button>
+              <button type="button" class="quiz-btn" data-choice="False">
+                <span class="quiz-btn-label">False</span>
+              </button>
+            </div>
+            <div class="quiz-result" hidden>
+              <span class:list={['call', card.answer === 'True' && 'call-true']}>{card.answer}</span>
+              <span class="why">{card.why}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+    <section class="game" id="match">
+      <h2>Match it</h2>
+      <p class="game-note">Flip two cards. If they pair, they stay. If not, they flip back.</p>
+      <p class="match-status" id="matchStatus" hidden>All matched. Nice.</p>
+      <div class="deck deck-5 match-deck" data-shuffle>
+        {matchCards.map((card) => (
+          <div
+            class="flip match-card"
+            role="button"
+            tabindex="0"
+            data-pair={card.pairId}
+            aria-label={card.text}
+          >
             <div class="flip-inner">
               <div class="face face-down">
                 <img src={logoSrc} alt="MFRC" width="180" height="114" />
               </div>
-              <div class="face face-mid">
-                <span class="kicker">Claim</span>
-                <span class="line">{card.claim}</span>
-                <span class="hint">Tap again</span>
-              </div>
-              <div class="face face-up">
-                <span class:list={['call', card.answer === 'True' && 'call-true']}>{card.answer}</span>
-                <span class="why">{card.why}</span>
+              <div class="face face-up match-face">
+                <span class="kicker">{card.kind}</span>
+                <span class="line">{card.text}</span>
               </div>
             </div>
           </div>
         ))}
       </div>
     </section>
-
-    <section class="game" id="match">
-      <h2>Match it</h2>
-      <p class="game-note">
-        Flip a situation. Flip a method. Some situations have more than one honest answer.
-      </p>
-      <p class="match-status" id="matchStatus" hidden></p>
-      <div class="match-board">
-        <div>
-          <h3>Situation</h3>
-          <div class="deck deck-2" data-shuffle>
-            {situations.map((sit) => (
-              <div
-                class="flip match-card"
-                role="button"
-                tabindex="0"
-                data-role="sit"
-                data-id={sit.id}
-                data-accept={sit.accept.join(',')}
-                data-note={sit.note || ''}
-                aria-label={sit.text}
-              >
-                <div class="flip-inner">
-                  <div class="face face-down">
-                    <img src={logoSrc} alt="MFRC" width="180" height="114" />
-                  </div>
-                  <div class="face face-up sit-face">
-                    <span class="kicker">Situation</span>
-                    <span class="line">{sit.text}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div>
-          <h3>Method</h3>
-          <div class="deck deck-2" data-shuffle>
-            {methods.map((method) => (
-              <div
-                class="flip match-card"
-                role="button"
-                tabindex="0"
-                data-role="method"
-                data-id={method.id}
-                aria-label={method.text}
-              >
-                <div class="flip-inner">
-                  <div class="face face-down">
-                    <img src={logoSrc} alt="MFRC" width="180" height="114" />
-                  </div>
-                  <div class="face face-up method-face">
-                    <span class="kicker">Method</span>
-                    <span class="line">{method.text}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <p class="notes-exit">
-      <a href="/repair-methods">Back to Repair Methods →</a>
-    </p>
+    <p class="notes-exit"><a href="/repair-methods">Back to Repair Methods →</a></p>
   </div>
 </BaseLayout>
-
-<style is:global>
+<style>
   .notes {
-    max-width: 1080px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 48px 32px 80px;
+    padding: 56px 32px 80px;
   }
   .notes-eyebrow {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: #8a8a8a;
-    margin: 0 0 12px;
+    color: var(--chile);
+    margin: 0 0 10px;
   }
   .notes h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(34px, 5vw, 52px);
-    font-weight: 600;
-    line-height: 1.15;
-    margin: 0 0 16px;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 700;
+    margin: 0 0 18px;
     color: #1a1a1a;
   }
   .notes-lede {
-    max-width: 640px;
     font-size: 18px;
-    line-height: 1.65;
+    line-height: 1.6;
     color: #5a5a5a;
+    max-width: 640px;
     margin: 0 0 48px;
   }
-  .notes .game { margin: 0 0 56px; }
+  .notes .game {
+    margin-bottom: 56px;
+  }
   .notes .game h2 {
     font-family: 'Playfair Display', serif;
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 600;
     margin: 0 0 8px;
   }
@@ -315,11 +247,57 @@ const methods = [
     gap: 18px;
   }
   .notes .deck-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .notes .deck-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .notes .match-board {
+  .notes .deck-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .notes .quiz-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .notes .quiz {
+    background: #fbf8f2;
+    border: 1px solid #e2d9cc;
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .notes .quiz-claim {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #1a1a1a;
+    margin: 0 0 18px;
+  }
+  .notes .quiz-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  .notes .quiz-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 10px 0;
+    background: #fff;
+    border: 1px solid #cfcfcf;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #2e2e2e;
+  }
+  .notes .quiz-btn:hover { border-color: var(--teal); color: var(--teal); }
+  .notes .quiz.is-answered .quiz-btn { pointer-events: none; }
+  .notes .quiz.is-answered .quiz-btn:not(.is-right):not(.is-wrong-pick) { opacity: 0.35; }
+  .notes .quiz.is-answered .quiz-btn.is-right { border-color: var(--teal); color: var(--teal); }
+  .notes .quiz.is-answered .quiz-btn.is-wrong-pick { border-color: var(--chile); color: var(--chile); }
+  .notes .quiz-icon { font-weight: 700; }
+  .notes .quiz-result {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #e2d9cc;
   }
   .notes .flip {
     position: relative;
@@ -338,6 +316,8 @@ const methods = [
   }
   .notes .flip[data-step='1'] .flip-inner,
   .notes .flip[data-step='2'] .flip-inner { transform: rotateY(180deg); }
+  .notes .match-card.is-flipped .flip-inner,
+  .notes .match-card.is-matched .flip-inner { transform: rotateY(180deg); }
   .notes .face {
     position: absolute;
     inset: 0;
@@ -362,9 +342,7 @@ const methods = [
     display: block;
   }
   .notes .face-mid,
-  .notes .face-up,
-  .notes .sit-face,
-  .notes .method-face {
+  .notes .face-up {
     background: #fbf8f2;
     border: 1px solid #e2d9cc;
     padding: 20px;
@@ -429,12 +407,12 @@ const methods = [
     line-height: 1.5;
     color: #2e2e2e;
   }
-  .notes .match-card.is-picked .face-up {
+  .notes .match-card.is-matched .face-up {
     outline: 2px solid var(--teal);
     outline-offset: -2px;
+    background: #f3f1ea;
   }
-  .notes .match-card.is-paired .face-up { background: #f3f1ea; }
-  .notes .match-card.is-wrong { animation: notes-shake 0.35s ease; }
+  .notes .match-card.is-wrong .flip-inner { animation: notes-shake 0.35s ease; }
   .notes .match-status {
     background: #f3f1ea;
     border-left: 3px solid var(--teal);
@@ -450,20 +428,20 @@ const methods = [
   }
   .notes-exit a:hover { text-decoration: underline; text-underline-offset: 3px; }
   @keyframes notes-shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-6px); }
-    75% { transform: translateX(6px); }
+    0%, 100% { transform: rotateY(180deg) translateX(0); }
+    25% { transform: rotateY(180deg) translateX(-6px); }
+    75% { transform: rotateY(180deg) translateX(6px); }
   }
   @media (max-width: 900px) {
     .notes .deck-3,
-    .notes .deck-2,
-    .notes .match-board { grid-template-columns: 1fr; }
+    .notes .quiz-grid { grid-template-columns: 1fr; }
+    .notes .deck-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .notes { padding: 32px 20px 64px; }
     .notes .flip { height: 230px; min-height: 230px; }
   }
 </style>
-
-<script>
+<script is:inline>
+document.addEventListener('DOMContentLoaded', () => {
   const shuffle = (node) => {
     const cards = Array.from(node.children);
     for (let i = cards.length - 1; i > 0; i -= 1) {
@@ -473,13 +451,39 @@ const methods = [
     }
   };
   document.querySelectorAll('[data-shuffle]').forEach(shuffle);
-
+  document.querySelectorAll('.quiz').forEach((quiz) => {
+    const answer = quiz.getAttribute('data-answer');
+    const result = quiz.querySelector('.quiz-result');
+    quiz.querySelectorAll('.quiz-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (quiz.classList.contains('is-answered')) return;
+        quiz.classList.add('is-answered');
+        const choice = btn.getAttribute('data-choice');
+        const correct = choice === answer;
+        btn.classList.add(correct ? 'is-right' : 'is-wrong-pick');
+        const icon = document.createElement('span');
+        icon.className = 'quiz-icon';
+        icon.textContent = correct ? '\u2713' : '\u2717';
+        btn.appendChild(icon);
+        if (!correct) {
+          const rightBtn = quiz.querySelector('.quiz-btn[data-choice="' + answer + '"]');
+          if (rightBtn) {
+            rightBtn.classList.add('is-right');
+            const rightIcon = document.createElement('span');
+            rightIcon.className = 'quiz-icon';
+            rightIcon.textContent = '\u2713';
+            rightBtn.appendChild(rightIcon);
+          }
+        }
+        if (result) result.hidden = false;
+      });
+    });
+  });
   const cycle = (card) => {
     const steps = Number(card.getAttribute('data-steps') || 2);
     const now = Number(card.getAttribute('data-step') || 0);
     card.setAttribute('data-step', String((now + 1) % steps));
   };
-
   document.querySelectorAll('.notes .flip:not(.match-card)').forEach((card) => {
     card.addEventListener('click', () => cycle(card));
     card.addEventListener('keydown', (event) => {
@@ -489,60 +493,50 @@ const methods = [
       }
     });
   });
-
-  let pickedSit = null;
-  let pickedMethod = null;
+  let flipped = [];
+  let boardLocked = false;
   const status = document.getElementById('matchStatus');
-
-  const clearPicks = () => {
-    document.querySelectorAll('.match-card.is-picked').forEach((el) => el.classList.remove('is-picked'));
-    pickedSit = null;
-    pickedMethod = null;
-  };
-
-  const tryMatch = () => {
-    if (!pickedSit || !pickedMethod) return;
-    const accept = (pickedSit.getAttribute('data-accept') || '').split(',');
-    const methodId = pickedMethod.getAttribute('data-id');
-    const ok = accept.includes(methodId);
-    if (ok) {
-      pickedSit.classList.add('is-paired');
-      pickedMethod.classList.add('is-paired');
-      const note = pickedSit.getAttribute('data-note');
-      if (note && status) {
-        status.hidden = false;
-        status.textContent = note;
-      }
-      clearPicks();
-    } else {
-      pickedSit.classList.add('is-wrong');
-      pickedMethod.classList.add('is-wrong');
-      window.setTimeout(() => {
-        pickedSit?.classList.remove('is-wrong');
-        pickedMethod?.classList.remove('is-wrong');
-        clearPicks();
-      }, 420);
+  const checkAllMatched = () => {
+    const total = document.querySelectorAll('.match-card').length;
+    const matched = document.querySelectorAll('.match-card.is-matched').length;
+    if (total > 0 && total === matched && status) {
+      status.hidden = false;
     }
   };
-
-  document.querySelectorAll('.match-card').forEach((card) => {
-    card.addEventListener('click', () => {
-      if (card.classList.contains('is-paired')) return;
-      const open = card.getAttribute('data-step') === '1';
-      if (!open) {
-        card.setAttribute('data-step', '1');
-        return;
-      }
-      const role = card.getAttribute('data-role');
-      if (role === 'sit') {
-        document.querySelectorAll('.match-card[data-role="sit"].is-picked').forEach((el) => el.classList.remove('is-picked'));
-        pickedSit = card;
+  const flipCard = (card) => {
+    if (boardLocked) return;
+    if (card.classList.contains('is-flipped') || card.classList.contains('is-matched')) return;
+    card.classList.add('is-flipped');
+    flipped.push(card);
+    if (flipped.length === 2) {
+      boardLocked = true;
+      const [a, b] = flipped;
+      if (a.getAttribute('data-pair') === b.getAttribute('data-pair')) {
+        a.classList.add('is-matched');
+        b.classList.add('is-matched');
+        flipped = [];
+        boardLocked = false;
+        checkAllMatched();
       } else {
-        document.querySelectorAll('.match-card[data-role="method"].is-picked').forEach((el) => el.classList.remove('is-picked'));
-        pickedMethod = card;
+        a.classList.add('is-wrong');
+        b.classList.add('is-wrong');
+        window.setTimeout(() => {
+          a.classList.remove('is-flipped', 'is-wrong');
+          b.classList.remove('is-flipped', 'is-wrong');
+          flipped = [];
+          boardLocked = false;
+        }, 900);
       }
-      card.classList.add('is-picked');
-      tryMatch();
+    }
+  };
+  document.querySelectorAll('.match-card').forEach((card) => {
+    card.addEventListener('click', () => flipCard(card));
+    card.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        flipCard(card);
+      }
     });
   });
+});
 </script>
