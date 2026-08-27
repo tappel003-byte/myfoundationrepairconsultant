@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+
+const nav = [
+  { id: 'what-they-are', label: 'What they are' },
+  { id: 'load-transfer', label: 'How they transfer load' },
+  { id: 'when-yes', label: 'When appropriate' },
+  { id: 'when-no', label: "When they're not" },
+  { id: 'compare', label: 'Related methods' },
+  { id: 'cousins', label: 'Related systems' },
+  { id: 'questions', label: 'Questions to ask' },
+];
+
+const pageDescription =
+  'What push piers (resistance piers) are, how they transfer load using the building as reaction, when they are appropriate, and how they differ from helical piers, micropiles, and pressed concrete piles.';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Push Piers',
+  description: pageDescription,
+  url: 'https://www.myfoundationrepairconsultant.com/push-piers',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': 'https://www.myfoundationrepairconsultant.com/push-piers',
+  },
+  author: { '@type': 'Organization', name: 'My Foundation Repair Consultant' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'My Foundation Repair Consultant',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://images.squarespace-cdn.com/content/v1/6983db0242b9b6302c661059/fa18c5f7-2e51-4ae1-81d8-0517c590d714/MFRC+Logo.jpg',
+    },
+  },
+};
+---
+
+<BaseLayout
+  title="Push Piers"
+  description={pageDescription}
+  hub={true}
+  quote="A resistance pier is not proof that the soil problem was understood. It is one possible way to bypass part of it."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  <HubPageShell
+    title="Push Piers"
+    subhead="Also called resistance piers — what they are, how they carry load, and when they actually make sense"
+    description="This page is about push piers: steel sections hydraulically pressed under an existing foundation, using the building’s weight as the reaction. Hearing the term on an estimate does not mean you need them."
+    glance={[
+      { label: 'Installation', value: 'Steel pipe pressed from a footing bracket' },
+      { label: 'Capacity source', value: 'Driving resistance against the structure — not torque' },
+      { label: 'Best for', value: 'Heavy enough structure, mapped settlement, deeper competent ground' },
+      { label: 'Not for', value: 'Light buildings, weak footings, unknown soil, open water problems' },
+    ]}
+    nav={nav}
+    topicsStyle="list"
+  >
+    <h2 class="section-heading" id="what-they-are">What push piers are</h2>
+    <div class="content-block">
+      <p>Push piers — also called resistance piers — are typically steel pipe segments advanced from a bracket at an existing footing. The bracket is the connection that lets load move off inadequate shallow support and into the pier.</p>
+      <p>“Resistance pier” describes the installation idea: the existing structure supplies the reaction that presses the pier downward. That is different from a helical pier, which is rotated in with a torque motor, and from a micropile, which is drilled and grouted.</p>
+      <ul>
+        <li>Steel pipe sections, usually joined as they are pressed</li>
+        <li>Foundation bracket at the footing</li>
+        <li>Hydraulic ram using the building as reaction</li>
+      </ul>
+    </div>
+
+    <div class="accordion-section" id="load-transfer">
+      <div class="accordion-header">
+        <span class="accordion-title">How they transfer load</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>A completed system is meant to carry part of the foundation load through the bracket and steel pier to a deeper bearing layer, or to a depth where enough resistance develops.</p>
+          <p>Installation pressure is useful field information. It is not, by itself, universal proof of long-term capacity. The footing, the bracket, pier alignment, the soil profile, groundwater, group effects, and the structural load path all matter.</p>
+          <p>Torque talk belongs to helical piers. Do not treat a push-pier pressure reading as if it were helical torque.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="when-yes">
+      <div class="accordion-header">
+        <span class="accordion-title">When push piers are appropriate</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <ul>
+            <li>Settlement is localized or otherwise well mapped</li>
+            <li>The existing structure is heavy enough to provide practical installation reaction</li>
+            <li>The existing footing can accept the bracket load after engineering review</li>
+            <li>Access allows excavation at the footing and room for the equipment</li>
+            <li>Investigation indicates that transferring load deeper is more appropriate than treating only near-surface soil</li>
+            <li>The repair objective is stabilization — any lift is a separate, cautious decision</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="when-no">
+      <div class="accordion-header">
+        <span class="accordion-title">When they are not</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <ul>
+            <li>The structure is too light to provide the required reaction</li>
+            <li>The footing is too narrow, deteriorated, or otherwise unable to take a concentrated bracket force without a designed change</li>
+            <li>A plumbing leak, poor drainage, roof discharge, irrigation, expansive-soil moisture change, erosion, or voiding is still active and unaddressed</li>
+            <li>The problem is a lightly loaded interior slab rather than a foundation load path</li>
+            <li>The investigation cannot establish a credible target depth or basis for capacity</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="compare">
+      <div class="accordion-header">
+        <span class="accordion-title">Relation to helical piers and micropiles</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>All three can be part of underpinning. They are not the same product.</p>
+          <ul>
+            <li><strong>Push pier:</strong> pressed using structure weight as reaction</li>
+            <li><strong>Helical pier:</strong> installed by rotation; torque is field data, not a substitute for investigation</li>
+            <li><strong>Micropile:</strong> drilled and grouted; capacity from designed ground interaction and the steel/grout section</li>
+          </ul>
+          <p>The right method depends on loads, footing geometry, access, soil profile, obstructions, groundwater, and the repair objective — not on the word “pier” appearing on an estimate.</p>
+          <div class="related-links">
+            <a href="/helical-piers">Helical Piers →</a>
+            <a href="/micropiles">Micropiles →</a>
+            <a href="/all-articles/underpinning-what-it-is-and-why-hearing-the-term-is-not-a-diagnosis">Underpinning is not a diagnosis →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="cousins">
+      <div class="accordion-header">
+        <span class="accordion-title">Related systems — pressed concrete piles</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Concrete pressed piles, or pressed concrete piles, are a related push system: stacked precast concrete sections pressed beneath a foundation, generally using the structure as reaction. They are not automatically equivalent to an engineered steel resistance-pier system.</p>
+          <p>Ask about documentation, joints, alignment, continuity, the bracket and footing connection, installation records, and any verification plan. Those are reasons to compare systems on a specific project — not reasons to assume every concrete pressed-pile installation is defective.</p>
+          <p>Do not accept “same as steel push piers” without that comparison in writing.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ask-box" id="questions">
+      <h3>Questions building owners should ask</h3>
+      <ul>
+        <li>What investigation shows that deep load transfer is the appropriate response?</li>
+        <li>What is the load path from the building to the pier, and can the existing footing take the bracket force?</li>
+        <li>What supplies installation reaction, and is the building heavy enough?</li>
+        <li>What field records will be provided for each pier: depth, installation pressure, final resistance, lift, and lock-off?</li>
+        <li>What is the stated basis for allowable load?</li>
+        <li>Is the goal stabilization, lift, or both?</li>
+        <li>What moisture, drainage, plumbing, or erosion condition must be corrected separately?</li>
+        <li>Why a push pier here rather than a helical pier, a micropile, or ground improvement?</li>
+      </ul>
+    </div>
+
+    <h2 class="section-heading">Digging deeper</h2>
+    <div class="deeper-grid">
+      <div class="deeper-card">
+        <h4><a href="/helical-piers">Helical Piers</a></h4>
+        <p>Related method</p>
+      </div>
+      <div class="deeper-card">
+        <h4><a href="/micropiles">Micropiles</a></h4>
+        <p>Related method</p>
+      </div>
+      <div class="deeper-card">
+        <h4><a href="/all-articles/underpinning-what-it-is-and-why-hearing-the-term-is-not-a-diagnosis">Underpinning is not a diagnosis</a></h4>
+        <p>Published article</p>
+      </div>
+    </div>
+  </HubPageShell>
+</BaseLayout>
