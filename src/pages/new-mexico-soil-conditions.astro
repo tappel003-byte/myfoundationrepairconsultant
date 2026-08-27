@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+import extracted from '../../content/extracted/new-mexico-soil-conditions.html?raw';
+---
+
+<BaseLayout
+  title="New Mexico Soil Conditions"
+  description="Soil conditions and foundation hazards by New Mexico region."
+  hub={true}
+  quote="Taking the time to understand a problem is never a wasted step."
+>
+  <HubPageShell
+    title="New Mexico Soil Conditions"
+    subhead="Basins, soils, and why the same crack does not mean the same thing statewide"
+    nav={[{ id: 'body', label: 'On this page' }]}
+    topicsStyle="none"
+  >
+    <div id="body" class="content-block" set:html={extracted} />
+    <div class="related-links">
+      <a href="/foundation-behavior-in-new-mexico">Foundation behavior in New Mexico →</a>
+      <a href="/investigate-further">Investigate further →</a>
+      <a href="/educational-articles">Educational articles →</a>
+    </div>
+  </HubPageShell>
+</BaseLayout>
