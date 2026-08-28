@@ -13,10 +13,16 @@ function card(id: string) {
 }
 
 const inserts: [string, string][] = [
-  ['</section><!-- D -->', `${card('caliche')}\n${card('compaction-grouting')}`],
+  ['</section><!-- A -->', card('auger-cast-pile')],
+  ['</section><!-- B -->', card('bond-strength')],
+  ['</section><!-- D -->', `${card('caliche')}\n${card('compaction-grouting')}\n${card('drilled-pier')}\n${card('driven-pile')}`],
+  ['</section><!-- F -->', `${card('fill')}\n${card('floor-elevation-survey')}\n${card('foam-jacking')}`],
   ['</section><!-- H -->', card('geotechnical-investigation')],
   ['</section><!-- I -->', card('helical-pier-capacity')],
+  ['</section><!-- L -->', card('limited-access')],
   ['</section><!-- M -->', card('load-testing')],
+  ['</section><!-- N -->', card('native-soil')],
+  ['</section><!-- P -->', card('polyurethane-injection')],
   ['</section><!-- U -->', card('torque-correlation')],
 ];
 
@@ -141,6 +147,7 @@ body = body.replace(
     text-transform: uppercase;
     color: #8a8a8a;
   }
+  .dictionary .dictionary a.related-term,
   .dictionary a.related-term {
     color: #1a1a1a;
     text-decoration: underline;
