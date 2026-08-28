@@ -10,7 +10,7 @@ const faqs = [
     body: `<p>Yes. All buildings settle to some degree. Settlement is downward movement as soil compresses under load and adjusts to moisture changes.</p>
     <p><strong>Typically no concern when:</strong> uniform across the foundation, minimal (fractions of an inch), and stable (movement stopped).</p>
     <p><strong>Becomes a concern when:</strong> differential (uneven), ongoing, or significant relative to tolerances.</p>
-    <div class="related-links"><a href="/all-articles/settlement">Settlement →</a><a href="/all-articles/differential-settlement-why-uneven-movement-matters-more-than-movement-itself">Differential settlement →</a></div>`,
+    <div class="related-links"><a href="/foundation-repair-dictionary#settlement">Settlement →</a><a href="/all-articles/differential-settlement-why-uneven-movement-matters-more-than-movement-itself">Differential settlement →</a></div>`,
   },
   {
     id: 'causes',
@@ -66,7 +66,8 @@ const faqs = [
     id: 'structural-vs-cosmetic',
     q: 'Structural damage or cosmetic?',
     body: `<p><strong>Structural:</strong> compromises load-bearing capacity or connections. <strong>Cosmetic:</strong> appearance only — drywall cracks, trim gaps, minor slab cracks.</p>
-    <p>Many symptoms fall between. Visual appearance alone often cannot determine which. Professional evaluation examines load paths, distress magnitude, and progression.</p>`,
+    <p>Many symptoms fall between. Visual appearance alone often cannot determine which. Professional evaluation examines load paths, distress magnitude, and progression.</p>
+    <div class="related-links"><a href="/all-articles/structural-damage-vs-cosmetic-damage">Structural vs. cosmetic →</a></div>`,
   },
   {
     id: 'need-repair',
@@ -106,6 +107,16 @@ const schema = articleSchema({
     nav={nav}
     topicsStyle="list"
   >
+    <p class="content-block" style="margin: 0 0 8px;">Terms that show up first in almost every conversation:</p>
+    <div class="related-links" style="margin: 0 0 32px;">
+      <a href="/foundation-repair-dictionary#settlement">Settlement</a>
+      <a href="/foundation-repair-dictionary#expansive-soil">Expansive soil</a>
+      <a href="/foundation-repair-dictionary#collapsible-soil">Collapsible soil</a>
+      <a href="/common-signs">Foundation cracks</a>
+      <a href="/common-signs">Structural cracks</a>
+      <a href="/foundation-types">Foundation types</a>
+    </div>
+
     <div class="faq-list" data-faq-group>
       {faqs.map((faq) => (
         <div class="accordion-section" id={faq.id}>
