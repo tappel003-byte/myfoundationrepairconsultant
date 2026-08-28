@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HubPageShell from '../components/hub/HubPageShell.astro';
+import { articleSchema } from '../lib/schema';
 
 const nav = [
   { id: 'what-they-are', label: 'What it is' },
@@ -15,26 +16,11 @@ const nav = [
 const pageDescription =
   'What compaction grouting is, how stiff low-mobility grout densifies soil, when it is appropriate, and how it differs from foam jacking, permeation grouting, and underpinning.';
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
+const schema = articleSchema({
   headline: 'Compaction Grouting',
   description: pageDescription,
   url: 'https://www.myfoundationrepairconsultant.com/compaction-grouting',
-  mainEntityOfPage: {
-    '@type': 'WebPage',
-    '@id': 'https://www.myfoundationrepairconsultant.com/compaction-grouting',
-  },
-  author: { '@type': 'Organization', name: 'My Foundation Repair Consultant' },
-  publisher: {
-    '@type': 'Organization',
-    name: 'My Foundation Repair Consultant',
-    logo: {
-      '@type': 'ImageObject',
-      url: 'https://images.squarespace-cdn.com/content/v1/6983db0242b9b6302c661059/fa18c5f7-2e51-4ae1-81d8-0517c590d714/MFRC+Logo.jpg',
-    },
-  },
-};
+});
 ---
 
 <BaseLayout
