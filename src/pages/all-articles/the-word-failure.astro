@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { linkFirstMentions } from '../../lib/dictionaryLink';
+import raw from '../../../content/extracted/the-word-failure.html?raw';
+
+const html = linkFirstMentions(raw);
+---
+
+<BaseLayout
+  title="The Word \u201cFailure\u201d"
+  description="Why \u201cfailure\u201d is the industry\u2019s most effective word, what it actually requires in engineering terms, and how to hear it without losing time."
+>
+  <article class="paper">
+    <header class="paper-head">
+      <h1>The Word \u201cFailure\u201d</h1>
+    </header>
+    <div class="paper-body" set:html={html} />
+    <nav class="paper-pager" aria-label="More papers">
+      <a class="pager-prev" href="/how-the-industry-has-changed">
+        <span>\u2190</span>
+        How the Industry Has Changed
+      </a>
+      <a class="pager-next" href="/all-articles/foundation-failure-patterns-and-prevention">
+        Foundation Failure Patterns and Prevention
+        <span>\u2192</span>
+      </a>
+    </nav>
+  </article>
+</BaseLayout>
