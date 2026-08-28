@@ -151,3 +151,39 @@ const nav = [
     </div>
   </HubPageShell>
 </BaseLayout>
+
+<style is:global>
+  .required-read {
+    max-width: var(--col);
+    background: #f3f3f3;
+    border-left: 3px solid var(--chile);
+    padding: 22px 28px;
+    margin: 8px 0 40px;
+  }
+  .required-read-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 8px;
+  }
+  .required-read h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+  .required-read h3 a {
+    color: var(--text-dark);
+    text-decoration: none;
+  }
+  .required-read h3 a:hover {
+    color: var(--teal);
+  }
+  .required-read p:last-child {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 16px;
+  }
+</style>
