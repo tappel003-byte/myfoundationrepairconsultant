@@ -1,5 +1,5 @@
 const LOGO =
-  'https://www.myfoundationrepairconsultant.com/mfrc-logo.jpg';
+  'https://www.myfoundationrepairconsultant.com/MFRC%20Logo.jpg';
 
 export function articleSchema(opts: {
   headline: string;
