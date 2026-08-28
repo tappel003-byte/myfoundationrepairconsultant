@@ -1,4 +1,4 @@
-const LOGO =
+export const LOGO =
   'https://www.myfoundationrepairconsultant.com/MFRC%20Logo.jpg';
 
 export function articleSchema(opts: {
