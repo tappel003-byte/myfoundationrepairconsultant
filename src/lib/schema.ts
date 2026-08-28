@@ -1,5 +1,5 @@
 const LOGO =
-  'https://images.squarespace-cdn.com/content/v1/6983db0242b9b6302c661059/fa18c5f7-2e51-4ae1-81d8-0517c590d714/MFRC+Logo.jpg';
+  'https://www.myfoundationrepairconsultant.com/mfrc-logo.jpg';
 
 export function articleSchema(opts: {
   headline: string;
