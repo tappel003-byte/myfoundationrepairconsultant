@@ -29,6 +29,26 @@ const dictPath = path.join(process.cwd(), 'content/extracted', 'foundation-repai
 const dictHtml = fs.existsSync(dictPath) ? fs.readFileSync(dictPath, 'utf-8') : '';
 const dictIds = new Set([...dictHtml.matchAll(/id="([a-z0-9-]+)"/g)].map((m) => m[1]));
 
+const DICT_ALIASES: Record<string, string> = {
+  'bond-strength': 'bond-strength',
+  'load-path': 'load-path',
+  'load-testing': 'load-testing',
+  'geotechnical-investigation': 'geotechnical-investigation',
+  'soil-report': 'soil-report',
+  'micropile': 'micropile',
+  'helical-pier': 'helical-pier',
+  'push-pier': 'push-pier',
+  'underpinning': 'underpinning',
+  'bearing-capacity': 'bearing-capacity',
+  'settlement': 'settlement',
+  'differential-settlement': 'differential-settlement',
+  'native-soil': 'native-soil',
+  'fill': 'fill',
+  'expansive-soil': 'expansive-soil',
+  'collapsible-soil': 'collapsible-soil',
+  'compaction': 'compaction',
+};
+
 function toDictId(label: string) {
   return label
     .toLowerCase()
@@ -46,13 +66,13 @@ function linkDictionaryLists(html: string) {
       if (!items.length) return full;
       const linked = items
         .map((item) => {
-          const id = toDictId(item);
-          return dictIds.has(id)
+          const id = DICT_ALIASES[toDictId(item)] || toDictId(item);
+          return dictIds.has(id) || DICT_ALIASES[id]
             ? `<li><a href="/foundation-repair-dictionary#${id}">${item}</a></li>`
             : `<li>${item}</li>`;
         })
         .join('');
-      return `<h2>Related dictionary terms</h2><ul class="related-links">${linked}</ul>`;
+      return `<h2>Related dictionary terms</h2><ul class="dict-term-list">${linked}</ul>`;
     }
   );
 }
@@ -150,6 +170,13 @@ const next = idx >= 0 && idx < unique.length - 1 ? unique[idx + 1] : null;
     margin: 36px 0 14px;
     line-height: 1.25;
   }
+  .paper-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 28px 0 12px;
+    line-height: 1.3;
+  }
   .paper-body p { margin: 0 0 16px; }
   .paper-body ul,
   .paper-body ol {
@@ -157,6 +184,19 @@ const next = idx >= 0 && idx < unique.length - 1 ? unique[idx + 1] : null;
     padding-left: 1.4em;
   }
   .paper-body li { margin: 0 0 8px; }
+  .paper-body a {
+    color: #2d9499;
+  }
+  .paper-body .dict-term-list {
+    display: block;
+    list-style: disc;
+    margin: 12px 0 20px;
+    padding-left: 1.4em;
+  }
+  .paper-body .dict-term-list li {
+    display: list-item;
+    margin: 0 0 8px;
+  }
   .paper-pager {
     display: grid;
     grid-template-columns: 1fr 1fr;
