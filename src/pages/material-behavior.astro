@@ -15,6 +15,7 @@ const start = extracted.indexOf('<div class="intro">');
 let body = start >= 0 ? extracted.slice(start) : extracted;
 body = body.replace(/<div class="quick-nav"[\s\S]*?<\/div>/, '');
 body = body.replace(/<div class="page-header"[\s\S]*?<\/div>/, '');
+body = body.replace(/<p>Under construction<\/p>/g, '');
 body = body.replace(/<\/div>\s*$/, '');
 ---
 
