@@ -462,5 +462,69 @@
     "description": "A homeowner method for recording whether floor slope is changing — without treating a marble as a survey.",
     "type": "article",
     "file": "how-to-document-and-monitor-floor-slope.html"
+  },
+  {
+    "url": "/all-articles/soil-foundation-interaction-principles",
+    "slug": "soil-foundation-interaction-principles",
+    "title": "Soil-Foundation Interaction Principles — My Foundation Repair Consultant",
+    "description": "Why bearing capacity and settlement are two different questions, and why soil is part of the structural system.",
+    "type": "article",
+    "file": "soil-foundation-interaction-principles.html"
+  },
+  {
+    "url": "/all-articles/load-transfer-mechanisms-in-foundation-systems",
+    "slug": "load-transfer-mechanisms-in-foundation-systems",
+    "title": "Load Transfer Mechanisms in Foundation Systems — My Foundation Repair Consultant",
+    "description": "How load actually reaches the ground, and why deep is not automatically the same as strong.",
+    "type": "article",
+    "file": "load-transfer-mechanisms-in-foundation-systems.html"
+  },
+  {
+    "url": "/all-articles/foundation-design-and-engineering-requirements",
+    "slug": "foundation-design-and-engineering-requirements",
+    "title": "Foundation Design and Engineering Requirements — My Foundation Repair Consultant",
+    "description": "What an engineered foundation actually requires, and how that differs from a prescriptive code detail.",
+    "type": "article",
+    "file": "foundation-design-and-engineering-requirements.html"
+  },
+  {
+    "url": "/all-articles/foundation-failure-patterns-and-prevention",
+    "slug": "foundation-failure-patterns-and-prevention",
+    "title": "Foundation Failure Patterns and Prevention — My Foundation Repair Consultant",
+    "description": "The real mechanisms behind foundation movement, and why prevention is a sequence instead of a product.",
+    "type": "article",
+    "file": "foundation-failure-patterns-and-prevention.html"
+  },
+  {
+    "url": "/all-articles/grout-to-ground-bond-strength-in-different-soil-types",
+    "slug": "grout-to-ground-bond-strength-in-different-soil-types",
+    "title": "Grout-to-Ground Bond Strength in Different Soil Types — My Foundation Repair Consultant",
+    "description": "Why a published bond-strength number is a starting point, not a guarantee of what was built.",
+    "type": "article",
+    "file": "grout-to-ground-bond-strength-in-different-soil-types.html"
+  },
+  {
+    "url": "/all-articles/load-testing-and-verification-methods-for-micropiles",
+    "slug": "load-testing-and-verification-methods-for-micropiles",
+    "title": "Load Testing and Verification Methods for Micropiles — My Foundation Repair Consultant",
+    "description": "Verification tests the method. Proof tests the pile that is actually carrying the building.",
+    "type": "article",
+    "file": "load-testing-and-verification-methods-for-micropiles.html"
+  },
+  {
+    "url": "/all-articles/grouting-pressure-and-quality-control",
+    "slug": "grouting-pressure-and-quality-control",
+    "title": "Grouting Pressure and Quality Control — My Foundation Repair Consultant",
+    "description": "Why grout pressure and volume are records to interpret, not scores that prove a pile by themselves.",
+    "type": "article",
+    "file": "grouting-pressure-and-quality-control.html"
+  },
+  {
+    "url": "/all-articles/micropile-design-calculations-and-engineering-requirements",
+    "slug": "micropile-design-calculations-and-engineering-requirements",
+    "title": "Micropile Design Calculations and Engineering Requirements — My Foundation Repair Consultant",
+    "description": "Design capacity is a prediction. Installed capacity is what construction and testing actually show.",
+    "type": "article",
+    "file": "micropile-design-calculations-and-engineering-requirements.html"
   }
 ]
