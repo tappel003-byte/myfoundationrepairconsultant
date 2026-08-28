@@ -16,6 +16,7 @@ const extractDir = path.join(process.cwd(), 'content/extracted');
 
 export const pages = (manifest as PageEntry[])
   .filter((page, index, arr) => {
+    if (page.url.endsWith('-1')) return false;
     if (!fs.existsSync(path.join(extractDir, page.file))) return false;
     return arr.findIndex((p) => p.url === page.url) === index;
   })
