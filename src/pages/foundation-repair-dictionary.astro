@@ -15,8 +15,13 @@ function card(id: string) {
 const inserts: [string, string][] = [
   ['</section><!-- A -->', card('auger-cast-pile')],
   ['</section><!-- B -->', card('bond-strength')],
-  ['</section><!-- D -->', `${card('caliche')}\n${card('compaction-grouting')}\n${card('drilled-pier')}\n${card('driven-pile')}`],
-  ['</section><!-- F -->', `${card('fill')}\n${card('floor-elevation-survey')}\n${card('foam-jacking')}`],
+  ['</section><!-- C -->', card('caliche')],
+  ['</section><!-- C -->', card('compaction-grouting')],
+  ['</section><!-- D -->', card('drilled-pier')],
+  ['</section><!-- D -->', card('driven-pile')],
+  ['</section><!-- F -->', card('fill')],
+  ['</section><!-- F -->', card('floor-elevation-survey')],
+  ['</section><!-- F -->', card('foam-jacking')],
   ['</section><!-- H -->', card('geotechnical-investigation')],
   ['</section><!-- I -->', card('helical-pier-capacity')],
   ['</section><!-- L -->', card('limited-access')],
@@ -147,7 +152,6 @@ body = body.replace(
     text-transform: uppercase;
     color: #8a8a8a;
   }
-  .dictionary .dictionary a.related-term,
   .dictionary a.related-term {
     color: #1a1a1a;
     text-decoration: underline;
