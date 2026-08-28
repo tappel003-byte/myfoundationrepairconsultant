@@ -76,6 +76,9 @@ const next = idx >= 0 && idx < unique.length - 1 ? unique[idx + 1] : null;
     <Fragment set:html={rawHtml} />
   ) : isArticle ? (
     <article class="paper">
+      <div class="floating-nav" id="articleTopNav">
+        <a href="#" id="articleTopLink" class="top-link"><span>↑</span> Top</a>
+      </div>
       <header class="paper-head">
         <h1>{title}</h1>
       </header>
@@ -105,6 +108,22 @@ const next = idx >= 0 && idx < unique.length - 1 ? unique[idx + 1] : null;
     </div>
   )}
 </BaseLayout>
+
+<script>
+  const floatingNav = document.getElementById('articleTopNav');
+  const head = document.querySelector('.paper-head');
+  const topLink = document.getElementById('articleTopLink');
+
+  if (floatingNav && head) {
+    window.addEventListener('scroll', () => {
+      floatingNav.classList.toggle('visible', window.scrollY > head.offsetHeight);
+    });
+    topLink?.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+</script>
 
 <style is:global>
   .paper {
