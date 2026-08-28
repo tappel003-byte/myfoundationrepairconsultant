@@ -446,5 +446,21 @@
     "description": "Why stucco maps with hairline cracks on a house that is still doing its job.",
     "type": "article",
     "file": "why-stucco-cracks-on-stable-homes.html"
+  },
+  {
+    "url": "/all-articles/normal-floor-deflection-vs-foundation-movement",
+    "slug": "normal-floor-deflection-vs-foundation-movement",
+    "title": "Normal Floor Deflection vs. Foundation Movement — My Foundation Repair Consultant",
+    "description": "Why an uneven floor is often framing or construction tolerance — and when slope is reporting a change in support.",
+    "type": "article",
+    "file": "normal-floor-deflection-vs-foundation-movement.html"
+  },
+  {
+    "url": "/all-articles/how-to-document-and-monitor-floor-slope",
+    "slug": "how-to-document-and-monitor-floor-slope",
+    "title": "How to Document and Monitor Floor Slope Over Time — My Foundation Repair Consultant",
+    "description": "A homeowner method for recording whether floor slope is changing — without treating a marble as a survey.",
+    "type": "article",
+    "file": "how-to-document-and-monitor-floor-slope.html"
   }
 ]
