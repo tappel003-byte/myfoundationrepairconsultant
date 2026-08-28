@@ -62,6 +62,8 @@ const {
       </div>
     )}
 
+    <slot name="before-topics" />
+
     {topicsStyle === 'list' && (
       <nav class="topics-list" id="topics" aria-label="Topics">
         <h2 class="topics-list-heading">Topics</h2>
