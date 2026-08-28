@@ -3,6 +3,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HubPageShell from '../components/hub/HubPageShell.astro';
 import { articleSchema, stripHtml } from '../lib/schema';
 
+const terms = [
+  {
+    term: 'Settlement',
+    def: 'Downward movement as soil compresses under load. Common. Not automatically a problem.',
+  },
+  {
+    term: 'Expansive soil',
+    def: 'Clay that swells when wet and shrinks when dry.',
+  },
+  {
+    term: 'Collapsible soil',
+    def: 'Soil that loses volume the first time it gets wet under load.',
+  },
+  {
+    term: 'Foundation cracks',
+    def: 'A crack in concrete or masonry. A record of stress, not a diagnosis.',
+  },
+  {
+    term: 'Structural cracks',
+    def: 'A crack that follows a load path or keeps growing. Still not a product to buy.',
+  },
+  {
+    term: 'Foundation types',
+    def: 'How the house is supported: slab, crawlspace, basement, and the rest.',
+  },
+];
+
 const faqs = [
   {
     id: 'settlement-normal',
@@ -107,14 +134,18 @@ const schema = articleSchema({
     nav={nav}
     topicsStyle="list"
   >
-    <p class="content-block" style="margin: 0 0 8px;">Terms that show up first in almost every conversation:</p>
-    <div class="related-links" style="margin: 0 0 32px;">
-      <a href="/foundation-repair-dictionary#settlement">Settlement</a>
-      <a href="/foundation-repair-dictionary#expansive-soil">Expansive soil</a>
-      <a href="/foundation-repair-dictionary#collapsible-soil">Collapsible soil</a>
-      <a href="/common-signs">Foundation cracks</a>
-      <a href="/common-signs">Structural cracks</a>
-      <a href="/foundation-types">Foundation types</a>
+    <div slot="before-topics" class="term-block">
+      <p class="term-intro">These are common terms used throughout this website.</p>
+      <div class="term-grid">
+        {terms.map((item) => (
+          <button type="button" class="term-flip" aria-label={item.term}>
+            <span class="term-flip-inner">
+              <span class="term-face term-front">{item.term}</span>
+              <span class="term-face term-back">{item.def}</span>
+            </span>
+          </button>
+        ))}
+      </div>
     </div>
 
     <div class="faq-list" data-faq-group>
@@ -168,3 +199,77 @@ const schema = articleSchema({
     </div>
   </HubPageShell>
 </BaseLayout>
+
+<style>
+  .term-block {
+    margin: 0 0 40px;
+  }
+  .term-intro {
+    font-size: 17px;
+    color: #5a5a5a;
+    margin: 0 0 16px;
+  }
+  .term-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .term-flip {
+    display: block;
+    width: 100%;
+    height: 132px;
+    perspective: 800px;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+  }
+  .term-flip-inner {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.45s ease;
+    transform-style: preserve-3d;
+  }
+  .term-flip:hover .term-flip-inner,
+  .term-flip.is-flipped .term-flip-inner,
+  .term-flip:focus-visible .term-flip-inner {
+    transform: rotateY(180deg);
+  }
+  .term-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background: #f3f3f3;
+    border: 1px solid #d2d2d2;
+    border-left: 3px solid #c4160d;
+    padding: 18px 16px;
+    box-shadow: 0 4px 12px -8px rgba(0,0,0,0.1);
+  }
+  .term-front {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+    display: flex;
+    align-items: center;
+  }
+  .term-back {
+    transform: rotateY(180deg);
+    font-size: 15px;
+    line-height: 1.5;
+    color: #2e2e2e;
+  }
+  @media (max-width: 700px) {
+    .term-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.term-flip').forEach((card) => {
+    card.addEventListener('click', () => card.classList.toggle('is-flipped'));
+  });
+</script>
