@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import html from '../../../content/extracted/how-to-document-and-monitor-floor-slope.html?raw';
+---
+<BaseLayout title="How to Document and Monitor Floor Slope Over Time" description="A homeowner method for recording whether floor slope is changing — without treating a marble as a survey." hub={false}>
+  <article class="paper">
+    <header class="paper-head">
+      <h1>How to Document and Monitor Floor Slope Over Time</h1>
+    </header>
+    <div class="paper-body" set:html={html} />
+  </article>
+</BaseLayout>
