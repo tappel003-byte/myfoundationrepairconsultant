@@ -63,7 +63,7 @@ export const DICT_TERMS: DictTerm[] = [
   {
     id: 'push-pier',
     names: ['push piers', 'push pier'],
-    def: 'A steel section driven to refusal. Resistance during driving is not the same as proven capacity.',
+    def: 'A steel section driven to refusal. Resistance during driving is not a proven capacity.',
   },
   {
     id: 'soil-report',
@@ -74,6 +74,16 @@ export const DICT_TERMS: DictTerm[] = [
     id: 'caliche',
     names: ['caliche'],
     def: 'A cemented desert layer. It can stop a probe before the soil that actually governs movement is reached.',
+  },
+  {
+    id: 'bond-strength',
+    names: ['bond strength', 'grout-to-ground bond'],
+    def: 'The resistance developed between grout and the surrounding ground along a micropile shaft.',
+  },
+  {
+    id: 'load-path',
+    names: ['load path'],
+    def: 'The route force takes from the structure into the foundation and into the ground.',
   },
 ];
 
