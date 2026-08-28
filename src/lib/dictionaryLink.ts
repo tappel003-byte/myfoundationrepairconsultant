@@ -71,29 +71,14 @@ export const DICT_TERMS: DictTerm[] = [
     def: 'A document describing subsurface conditions. Many residential repairs never receive one.',
   },
   {
-    id: 'settlement',
-    names: ['settlement'],
-    def: 'Downward movement of a foundation. Not all settlement is a problem.',
-  },
-  {
-    id: 'heave',
-    names: ['heave'],
-    def: 'Upward movement, often from wetting of expansive clay. It is the opposite of settlement.',
-  },
-  {
     id: 'caliche',
     names: ['caliche'],
     def: 'A cemented desert layer. It can stop a probe before the soil that actually governs movement is reached.',
   },
-  {
-    id: 'pier',
-    names: ['piers', 'pier'],
-    def: 'A deep support element under a foundation. The word names a method family, not a diagnosis.',
-  },
 ];
 
 function escapeAttr(value: string) {
-  return value.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+  return value.replace(/&/g, '&').replace(/"/g, '"');
 }
 
 export function linkFirstMentions(html: string): string {
