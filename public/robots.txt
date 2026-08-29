@@ -3,3 +3,4 @@ Allow: /
 Disallow: /preview/
 
 Sitemap: https://www.myfoundationrepairconsultant.com/sitemap-index.xml
+Sitemap: https://www.myfoundationrepairconsultant.com/sitemap.xml
