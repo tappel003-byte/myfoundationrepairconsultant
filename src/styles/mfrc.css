@@ -495,9 +495,14 @@ hr { display: none; }
   left: auto;
   right: 0;
 }
-.nav-dropdown:hover .nav-menu,
-.nav-dropdown:focus-within .nav-menu {
+.nav-dropdown.open > .nav-menu {
   display: block;
+}
+@media (hover: hover) and (pointer: fine) {
+  .nav-dropdown:hover .nav-menu,
+  .nav-dropdown:focus-within .nav-menu {
+    display: block;
+  }
 }
 .nav-toggle {
   display: none;
