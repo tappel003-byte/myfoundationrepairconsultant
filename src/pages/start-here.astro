@@ -233,7 +233,11 @@ const schema = articleSchema({
     transition: transform 0.45s ease;
     transform-style: preserve-3d;
   }
-  .term-flip:hover .term-flip-inner,
+  @media (hover: hover) and (pointer: fine) {
+    .term-flip:hover .term-flip-inner {
+      transform: rotateY(180deg);
+    }
+  }
   .term-flip.is-flipped .term-flip-inner,
   .term-flip:focus-visible .term-flip-inner {
     transform: rotateY(180deg);
