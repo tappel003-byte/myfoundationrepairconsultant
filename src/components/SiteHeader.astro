@@ -122,4 +122,10 @@ const nav = [
       else open();
     });
   });
+
+  document.addEventListener('click', (event) => {
+    document.querySelectorAll('.nav-dropdown.open').forEach((item) => {
+      if (!item.contains(event.target)) item.classList.remove('open');
+    });
+  });
 </script>
