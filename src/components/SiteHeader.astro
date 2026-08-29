@@ -118,12 +118,13 @@ const nav = [
     item.addEventListener('mouseleave', closeSoon);
     item.querySelector('.nav-parent')?.addEventListener('click', (event) => {
       event.preventDefault();
+      event.stopPropagation();
       if (item.classList.contains('open')) item.classList.remove('open');
       else open();
     });
   });
 
-  document.addEventListener('click', (event) => {
+  document.addEventListener('pointerdown', (event) => {
     document.querySelectorAll('.nav-dropdown.open').forEach((item) => {
       if (!item.contains(event.target)) item.classList.remove('open');
     });
