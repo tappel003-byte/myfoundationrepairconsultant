@@ -140,9 +140,18 @@ html body .glance-item {
 html body .glance-item:first-child { padding-left: 32px; }
 html body .glance-item:last-child { padding-right: 32px; }
 @media (max-width: 1100px) {
-  html body .glance,
+  html body .glance {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 32px;
+    table-layout: auto !important;
+    padding: 28px 32px;
+  }
   html body .glance-item {
     display: block !important;
     width: 100% !important;
+    padding: 0 !important;
   }
 }
