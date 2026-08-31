@@ -12,34 +12,32 @@ function card(id: string) {
   return additions.slice(start, end).trim();
 }
 
-const inserts: [string, string][] = [
-  ['</div><!-- A -->', card('auger-cast-pile')],
-  ['</section><!-- B -->', card('bond-strength')],
-  ['</section><!-- C -->', card('caliche')],
-  ['</section><!-- C -->', card('compaction-grouting')],
-  ['</section><!-- D -->', card('drilled-pier')],
-  ['</section><!-- D -->', card('driven-pile')],
-  ['</section><!-- F -->', card('fill')],
-  ['</section><!-- F -->', card('floor-elevation-survey')],
-  ['</section><!-- F -->', card('foam-jacking')],
-  ['</section><!-- H -->', card('geotechnical-investigation')],
-  ['</section><!-- I -->', card('helical-pier-capacity')],
-  ['</section><!-- L -->', card('limited-access')],
-  ['</section><!-- M -->', card('load-testing')],
-  ['</section><!-- M -->', card('moisture-content')],
-  ['</section><!-- N -->', card('native-soil')],
-  ['</section><!-- P -->', card('polyurethane-injection')],
-  ['</section><!-- U -->', card('torque-correlation')],
+function termName(html: string) {
+  return html.match(/<div class="term-name">([^<]+)<\/div>/)?.[1] ?? '';
+}
+
+// Each addition is filed under the letter its term actually starts with —
+// computed from the term's own name, not guessed from a marker position.
+const additionIds = [
+  'auger-cast-pile', 'bond-strength', 'caliche', 'compaction-grouting',
+  'drilled-pier', 'driven-pile', 'fill', 'floor-elevation-survey',
+  'foam-jacking', 'geotechnical-investigation', 'helical-pier-capacity',
+  'limited-access', 'load-testing', 'moisture-content', 'native-soil',
+  'polyurethane-injection', 'torque-correlation',
 ];
 
 let body = extracted
   .replace(/<div class="floating-nav"[\s\S]*?<\/div>/, '')
   .replace(/<div class="page-header"[\s\S]*?<\/div>/, '');
 
-for (const [marker, html] of inserts) {
-  const id = html.match(/id="([^"]+)"/)?.[1];
-  if (html && body.includes(marker) && id && !body.includes(`id="${id}"`)) {
-    body = body.replace(marker, `${html}\n${marker}`);
+for (const id of additionIds) {
+  const html = card(id);
+  if (!html || body.includes(`id="${id}"`)) continue;
+  const letter = termName(html).charAt(0).toUpperCase();
+  const sectionOpen = `<section class="letter-section" id="${letter}">`;
+  const insertAfter = `${sectionOpen}<h2 class="letter-heading">${letter}</h2>`;
+  if (body.includes(insertAfter)) {
+    body = body.replace(insertAfter, `${insertAfter}${html}`);
   }
 }
 
