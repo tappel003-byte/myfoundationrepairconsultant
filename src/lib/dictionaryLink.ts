@@ -563,7 +563,14 @@ export const DICT_TERMS: DictTerm[] = [
 ];
 
 function escapeAttr(value: string) {
-  return value.replace(/&/g, '&').replace(/"/g, '"');
+  return value.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+}
+
+interface DictMatch {
+  start: number;
+  end: number;
+  text: string;
+  term: DictTerm;
 }
 
 export function linkFirstMentions(html: string): string {
@@ -583,20 +590,41 @@ export function linkFirstMentions(html: string): string {
     }
     if (inAnchor || inHeading || !part.trim()) continue;
 
-    let text = part;
+    // Find every match against the ORIGINAL plain text first, then splice
+    // the results in afterward. A term's own definition text can mention
+    // another term by name (e.g. "bearing capacity" mentions "pier") — if we
+    // instead replaced-and-rescanned in a loop, a later term could match
+    // inside the tooltip text we'd just inserted for an earlier one,
+    // corrupting the markup.
+    const matches: DictMatch[] = [];
     for (const term of DICT_TERMS) {
       if (used.has(term.id)) continue;
       const pattern = term.names.map((name) => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
       const re = new RegExp(`\\b(${pattern})\\b`, 'i');
-      if (!re.test(text)) continue;
-      used.add(term.id);
-      text = text.replace(
-        re,
-        (match) =>
-          `<a class="dict-term" href="/foundation-repair-dictionary#${term.id}" data-def="${escapeAttr(term.def)}">${match}</a>`
-      );
+      const m = re.exec(part);
+      if (m) matches.push({ start: m.index, end: m.index + m[0].length, text: m[0], term });
     }
-    parts[i] = text;
+    if (!matches.length) continue;
+
+    matches.sort((a, b) => a.start - b.start);
+    const chosen: DictMatch[] = [];
+    let cursor = 0;
+    for (const m of matches) {
+      if (m.start < cursor) continue;
+      chosen.push(m);
+      used.add(m.term.id);
+      cursor = m.end;
+    }
+
+    let result = '';
+    let pos = 0;
+    for (const m of chosen) {
+      result += part.slice(pos, m.start);
+      result += `<a class="dict-term" href="/foundation-repair-dictionary#${m.term.id}" data-def="${escapeAttr(m.term.def)}">${m.text}</a>`;
+      pos = m.end;
+    }
+    result += part.slice(pos);
+    parts[i] = result;
   }
 
   return parts.join('');
