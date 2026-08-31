@@ -93,6 +93,9 @@ export const EDUCATIONAL_GROUPS: ArticleGroup[] = [
       { href: '/all-articles/how-climate-and-weather-affect-foundation-stability', title: 'How Climate and Weather Affect Foundation Stability' },
     ],
   },
+];
+
+export const INDUSTRY_GROUPS: ArticleGroup[] = [
   {
     id: 'decisions',
     label: 'Costs & Practical Decisions',
@@ -104,9 +107,6 @@ export const EDUCATIONAL_GROUPS: ArticleGroup[] = [
       { href: '/all-articles/what-to-monitor-after-a-foundation-repair', title: 'What to Monitor After a Foundation Repair' },
     ],
   },
-];
-
-export const INDUSTRY_GROUPS: ArticleGroup[] = [
   {
     id: 'business',
     label: 'Business Model & Economics',
