@@ -50,11 +50,9 @@
   text-decoration-color: #c8dfe0;
   text-underline-offset: 3px;
   padding: 6px 0;
-  border-bottom: 1px solid transparent;
 }
 .topics-list a:hover {
   text-decoration-color: var(--teal);
-  border-bottom-color: var(--teal);
 }
 @media (max-width: 700px) {
   .topics-list { grid-template-columns: 1fr; }
