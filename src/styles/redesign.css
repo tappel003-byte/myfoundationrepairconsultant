@@ -33,7 +33,7 @@
   margin: 8px 0 40px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4px 32px;
+  gap: 14px 32px;
 }
 .topics-list-heading {
   grid-column: 1 / -1;
@@ -46,11 +46,14 @@
   color: var(--teal);
   font-size: 16px;
   line-height: 1.35;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: #c8dfe0;
+  text-underline-offset: 3px;
   padding: 6px 0;
   border-bottom: 1px solid transparent;
 }
 .topics-list a:hover {
+  text-decoration-color: var(--teal);
   border-bottom-color: var(--teal);
 }
 @media (max-width: 700px) {
