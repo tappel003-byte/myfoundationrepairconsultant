@@ -71,18 +71,24 @@ export const EDUCATIONAL_GROUPS: ArticleGroup[] = [
     ],
   },
   {
-    id: 'materials',
-    label: 'Material Behavior Deep Dives',
+    id: 'materials-exterior',
+    label: 'Concrete & Masonry Behavior',
     links: [
       { href: '/all-articles/why-concrete-cracks-even-when-nothing-is-wrong', title: 'Why Concrete Cracks Even When Nothing Is Wrong' },
       { href: '/all-articles/shrinkage-curing-and-stress-relief', title: 'Shrinkage, Curing, and Stress Relief in Residential Concrete' },
-      { href: '/all-articles/why-drywall-cracks-before-structural-failure', title: 'Why Drywall Cracks Before Structural Failure Occurs' },
-      { href: '/all-articles/what-reinforcing-steel-actually-does', title: 'What Reinforcing Steel Actually Does — and What It Doesn’t' },
-      { href: '/all-articles/truss-uplift-and-seasonal-movement', title: 'Truss Uplift and Seasonal Movement Explained' },
       { href: '/all-articles/brick-and-block-movement', title: 'Brick and Block Movement' },
       { href: '/all-articles/why-stucco-cracks-on-stable-homes', title: 'Why Stucco Cracks on Stable Homes' },
-      { href: '/all-articles/seasonal-interior-cracking', title: 'Seasonal Interior Cracking' },
+      { href: '/all-articles/what-reinforcing-steel-actually-does', title: 'What Reinforcing Steel Actually Does — and What It Doesn’t' },
+    ],
+  },
+  {
+    id: 'materials-interior',
+    label: 'Interior Finishes & Framing Behavior',
+    links: [
+      { href: '/all-articles/why-drywall-cracks-before-structural-failure', title: 'Why Drywall Cracks Before Structural Failure Occurs' },
       { href: '/all-articles/plaster-cracking-in-older-homes', title: 'Plaster Cracking in Older Homes' },
+      { href: '/all-articles/seasonal-interior-cracking', title: 'Seasonal Interior Cracking' },
+      { href: '/all-articles/truss-uplift-and-seasonal-movement', title: 'Truss Uplift and Seasonal Movement Explained' },
       { href: '/all-articles/moisture-content-and-framing-shrinkage', title: 'Moisture Content and Framing Shrinkage' },
     ],
   },
@@ -137,8 +143,18 @@ export const INDUSTRY_GROUPS: ArticleGroup[] = [
 
 const ALL_GROUPS: ArticleGroup[] = [...EDUCATIONAL_GROUPS, ...INDUSTRY_GROUPS];
 
+// Picks the next `limit` members after this article's own position in the
+// group, wrapping around circularly — rather than always the first `limit`
+// members — so every article in a group gets recommended by its siblings on
+// a fair, roughly even basis instead of the same few members always winning.
 export function getRelatedArticles(url: string, limit = 4): ArticleGroupLink[] {
   const group = ALL_GROUPS.find((g) => g.links.some((l) => l.href === url));
   if (!group) return [];
-  return group.links.filter((l) => l.href !== url).slice(0, limit);
+  const idx = group.links.findIndex((l) => l.href === url);
+  const n = group.links.length;
+  const related: ArticleGroupLink[] = [];
+  for (let i = 1; i < n && related.length < limit; i++) {
+    related.push(group.links[(idx + i) % n]);
+  }
+  return related;
 }
