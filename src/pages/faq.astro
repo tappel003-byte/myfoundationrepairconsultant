@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+import { articleSchema, stripHtml } from '../lib/schema';
+
+const faqs = [
+  {
+    id: 'crack-serious',
+    q: 'Is a foundation crack always a sign of a serious problem?',
+    body: 'No. Most cracks are related to normal material behavior — shrinkage, seasonal moisture change, or construction tolerances — not structural failure. See <a href="/material-behavior">Material Behavior</a> for what usually causes cracking, and <a href="/common-signs">Common Signs</a> for how to read a visible sign without over- or under-reacting.',
+  },
+  {
+    id: 'structural-vs-cosmetic',
+    q: 'What is the difference between a "structural" crack and a "cosmetic" crack?',
+    body: '"Cosmetic" usually means the crack is in a finish and is not changing how the house carries load. "Structural" means the crack is in a load-path element like a wall, beam, or footing — it describes where the crack is, not automatically how serious it is. See <a href="/all-articles/structural-damage-vs-cosmetic-damage">Structural Damage vs. Cosmetic Damage</a> for the full explanation.',
+  },
+  {
+    id: 'insurance',
+    q: 'Does homeowner’s insurance cover foundation repair?',
+    body: 'Usually not for gradual settlement or soil movement — standard policies are written around sudden, accidental damage. Coverage depends entirely on the specific policy. See <a href="/all-articles/insurance-and-financing-for-foundation-repair">Insurance and Financing for Foundation Repair</a> for how to actually get an answer.',
+  },
+  {
+    id: 'cost',
+    q: 'How much does foundation repair cost?',
+    body: 'There is no single number — cost depends on the method, the scope, the soil, and the region, and estimates for the same house can vary widely between companies. See <a href="/all-articles/how-to-compare-foundation-repair-estimates">How to Compare Foundation Repair Estimates</a> for how to evaluate what is actually being proposed instead of comparing price alone.',
+  },
+  {
+    id: 'doors-sticking',
+    q: 'My doors are sticking and floors feel uneven. Does that mean I need foundation repair?',
+    body: 'Not necessarily. Sticking doors and slightly uneven floors are common and often related to framing, humidity, or normal seasonal movement rather than foundation movement. See <a href="/common-signs">Common Signs</a> and <a href="/all-articles/normal-floor-deflection-vs-foundation-movement">Normal Floor Deflection vs. Foundation Movement</a>.',
+  },
+  {
+    id: 'underpinning',
+    q: 'What is underpinning?',
+    body: 'Underpinning is a general term for methods that add support beneath an existing foundation — it describes a category, not a specific product or a diagnosis. See <a href="/all-articles/underpinning-what-it-is-and-why-hearing-the-term-is-not-a-diagnosis">Underpinning: What It Is</a> for the full explanation.',
+  },
+  {
+    id: 'helical-vs-push',
+    q: 'What is the difference between helical piers and push piers?',
+    body: 'Both are underpinning systems, but they transfer load and are installed differently, and each fits different soil and load conditions. See <a href="/helical-piers">Helical Piers</a> and <a href="/push-piers">Push Piers</a> for how each works and when it is typically appropriate.',
+  },
+  {
+    id: 'monitoring',
+    q: 'Is it ever better to monitor a house instead of repairing it right away?',
+    body: 'Yes, in specific situations. Monitoring is a legitimate decision to gather more information over time, not just a way to avoid a needed repair. See <a href="/all-articles/when-monitoring-makes-more-sense-than-immediate-underpinning">When Monitoring Makes More Sense Than Immediate Underpinning</a>.',
+  },
+  {
+    id: 'second-opinion',
+    q: 'Should I get a second opinion before agreeing to a repair?',
+    body: 'It is a reasonable step, especially when the same person diagnosing the problem is also selling the repair. See <a href="/all-articles/how-to-vet-a-foundation-repair-contractor">How to Vet a Foundation Repair Contractor</a> and <a href="/how-the-industry-has-changed">How the Industry Has Changed</a>.',
+  },
+  {
+    id: 'resale',
+    q: 'Does a foundation repair hurt my home’s resale value?',
+    body: 'A documented, properly repaired foundation is often viewed more favorably than an undisclosed problem that was never evaluated. See <a href="/all-articles/how-foundation-repair-affects-resale-and-appraisal">How Foundation Repair Affects Resale and Appraisal</a>.',
+  },
+  {
+    id: 'warranty',
+    q: 'What does a foundation repair warranty actually cover?',
+    body: 'Usually the installed system itself, not automatically every related issue — the specific terms and conditions matter more than the length of coverage. See <a href="/all-articles/understanding-foundation-repair-warranties">Understanding Foundation Repair Warranties</a>.',
+  },
+];
+
+const nav = faqs.map((f) => ({ id: f.id, label: f.q.replace('?', '') }));
+
+const pageDescription =
+  'Short, direct answers to the questions homeowners ask most often about foundation cracks, repair methods, cost, insurance, warranties, and evaluating a recommendation.';
+
+const schema = articleSchema({
+  headline: 'Frequently Asked Questions',
+  description: pageDescription,
+  url: 'https://www.myfoundationrepairconsultant.com/faq',
+  faqs: faqs.map((f) => ({ name: f.q, text: stripHtml(f.body) })),
+});
+---
+
+<BaseLayout
+  title="Frequently Asked Questions"
+  description={pageDescription}
+  hub={true}
+  quote="A short, honest answer is worth more than a long sales pitch."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  <HubPageShell
+    title="Frequently Asked Questions"
+    subhead="Short answers to what homeowners ask most often"
+    description="These are direct, general answers to the questions that come up most — each one links to a page on this site that goes deeper. None of this replaces an actual evaluation of your specific house."
+    nav={nav}
+    topicsStyle="list"
+  >
+    {faqs.map((f) => (
+      <div class="accordion-section" id={f.id}>
+        <div class="accordion-header">
+          <span class="accordion-title">{f.q}</span>
+          <span class="accordion-icon">▸</span>
+        </div>
+        <div class="accordion-content">
+          <div class="accordion-content-inner content-block">
+            <p set:html={f.body} />
+          </div>
+        </div>
+      </div>
+    ))}
+  </HubPageShell>
+</BaseLayout>

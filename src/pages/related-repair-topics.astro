@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HubPageShell from '../components/hub/HubPageShell.astro';
+import { articleSchema } from '../lib/schema';
+
+const nav = [
+  { id: 'why', label: 'Why this page exists' },
+  { id: 'topics', label: 'The topics' },
+  { id: 'pointers', label: 'Already on this site' },
+  { id: 'questions', label: 'Questions to ask' },
+];
+
+const pageDescription =
+  'Drainage and French drains, crawlspace encapsulation, wall anchors and carbon fiber wall reinforcement, and mudjacking — what each one actually addresses, and why none of them are underpinning.';
+
+const schema = articleSchema({
+  headline: 'Drainage, Crawlspaces & Wall Support',
+  description: pageDescription,
+  url: 'https://www.myfoundationrepairconsultant.com/related-repair-topics',
+});
+---
+
+<BaseLayout
+  title="Drainage, Crawlspaces & Wall Support"
+  description={pageDescription}
+  hub={true}
+  quote="A different problem needs a different answer, not a bigger version of the same one."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  <HubPageShell
+    title="Drainage, Crawlspaces & Wall Support"
+    subhead="Four topics that come up constantly and are not underpinning"
+    description="Drainage, crawlspace encapsulation, wall anchors, carbon fiber reinforcement, and mudjacking each solve a specific, different problem. None of them lift a settled foundation, and none of them are a substitute for an actual evaluation of what a house needs."
+    glance={[
+      { label: 'Drainage', value: 'Manages water before it reaches the foundation' },
+      { label: 'Crawlspace encapsulation', value: 'Vapor barrier and moisture control, not structural support' },
+      { label: 'Wall anchors / carbon fiber', value: 'Resist a bowing wall — do not lift a foundation' },
+      { label: 'Mudjacking', value: 'Cementitious slab lift — a different material than foam jacking' },
+    ]}
+    nav={nav}
+    topicsStyle="list"
+  >
+    <h2 class="section-heading" id="why">Why this page exists</h2>
+    <div class="content-block">
+      <p>These four topics come up in almost every foundation conversation, but none of them are underpinning, and treating them as if they were the same kind of fix as a pier system creates confusion about what problem each one actually solves.</p>
+      <p>Some of these are appropriate on their own. Some are appropriate alongside a repair. None of them are a substitute for identifying what is actually causing a symptom before choosing how to address it.</p>
+    </div>
+
+    <h2 class="section-heading" id="topics">The topics</h2>
+    <div class="condition-grid">
+      <div class="condition-card" id="drainage">
+        <h4>Drainage and French drains</h4>
+        <p>A perforated pipe set in gravel that collects and redirects water away from a foundation — either at the surface or along a wall.</p>
+        <p>What it does: reduces the amount of water reaching soil near the foundation, which can reduce the soil movement that drives many of the symptoms described in <a href="/material-behavior">Material Behavior</a>.</p>
+        <p>What it doesn't do: it doesn't lift a foundation, add structural capacity, or repair damage that has already occurred. It addresses a cause, not a symptom that's already visible.</p>
+        <p>Drainage work alone is often a reasonable first response when moisture is identified as the driver of movement, before more invasive underpinning is considered.</p>
+      </div>
+      <div class="condition-card" id="crawlspace">
+        <h4>Crawlspace encapsulation</h4>
+        <p>Sealing a crawlspace with a vapor barrier — sometimes paired with dehumidification or a connection to conditioned air — to control moisture and humidity.</p>
+        <p>What it does: reduces moisture-driven wood decay, humidity-related material issues, and some pest conditions. See <a href="/foundation-types">Foundation Types</a> for how crawlspace construction fits into the broader picture.</p>
+        <p>What it doesn't do: it is not a structural repair. Encapsulation addresses moisture and air quality, not foundation support or settlement, and shouldn't be sold as a fix for foundation movement.</p>
+      </div>
+      <div class="condition-card" id="wall-anchors">
+        <h4>Wall anchors and carbon fiber wall reinforcement</h4>
+        <p>Two different systems for a bowing or leaning basement or foundation wall. Wall anchors extend steel rods into stable soil outside the wall, connected to a plate inside. Carbon fiber strips are bonded to the wall's interior face to resist further bowing.</p>
+        <p>What they do: stabilize a wall under lateral soil pressure — anchors can sometimes help straighten a wall over time as well.</p>
+        <p>What they don't do: neither system lifts a foundation or addresses vertical settlement. They are not interchangeable with the underpinning systems used for that — see <a href="/helical-piers">Helical Piers</a> or <a href="/push-piers">Push Piers</a> for that different problem.</p>
+      </div>
+      <div class="condition-card" id="mudjacking">
+        <h4>Mudjacking</h4>
+        <p>A cementitious slurry — often a mix of soil, cement, and other additives — pumped beneath a slab to lift it. This is the older of the two common slab-lifting methods.</p>
+        <p>Versus foam jacking: mudjacking uses a much heavier material and larger access holes, generally allows less precise lift control, and the added weight can, in some soils, contribute to future settling in a way lightweight polyurethane foam does not. See <a href="/foam-jacking">Foam Jacking</a> for the other method.</p>
+        <p>Mudjacking is not the same as underpinning. It addresses a slab, not the foundation itself.</p>
+      </div>
+    </div>
+
+    <div class="accordion-section" id="pointers">
+      <div class="accordion-header">
+        <span class="accordion-title">Already explained on this site</span>
+        <span class="accordion-icon">▸</span>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-content-inner content-block">
+          <p>Underpinning methods, and the deep-foundation systems that get confused with routine repair, already have their own pages. Repeating them here would blur what this page is actually about.</p>
+          <div class="related-links">
+            <a href="/foam-jacking">Foam Jacking →</a>
+            <a href="/helical-piers">Helical Piers →</a>
+            <a href="/push-piers">Push Piers →</a>
+            <a href="/other-deep-foundations">Other Deep Foundations →</a>
+            <a href="/material-behavior">Material Behavior →</a>
+            <a href="/common-signs">Common Signs →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ask-box" id="questions">
+      <h3>Questions to ask when one of these is proposed</h3>
+      <ul>
+        <li>What specific problem is this addressing — water, humidity, a bowing wall, or a settled slab?</li>
+        <li>Is this being proposed instead of, or in addition to, an evaluation of the foundation itself?</li>
+        <li>For wall anchors versus carbon fiber: how much movement has already occurred, and is there room outside the wall to install anchors?</li>
+        <li>For mudjacking versus foam jacking: why was this material chosen over the other for this specific slab and soil?</li>
+        <li>If drainage is proposed, what evidence connects the water to the symptom being addressed?</li>
+      </ul>
+    </div>
+  </HubPageShell>
+</BaseLayout>

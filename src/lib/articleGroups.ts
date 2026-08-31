@@ -93,6 +93,17 @@ export const EDUCATIONAL_GROUPS: ArticleGroup[] = [
       { href: '/all-articles/how-climate-and-weather-affect-foundation-stability', title: 'How Climate and Weather Affect Foundation Stability' },
     ],
   },
+  {
+    id: 'decisions',
+    label: 'Costs & Practical Decisions',
+    links: [
+      { href: '/all-articles/insurance-and-financing-for-foundation-repair', title: 'Insurance and Financing for Foundation Repair' },
+      { href: '/all-articles/how-foundation-repair-affects-resale-and-appraisal', title: 'How Foundation Repair Affects Resale and Appraisal' },
+      { href: '/all-articles/how-to-vet-a-foundation-repair-contractor', title: 'How to Vet a Foundation Repair Contractor' },
+      { href: '/all-articles/understanding-foundation-repair-warranties', title: 'Understanding Foundation Repair Warranties' },
+      { href: '/all-articles/what-to-monitor-after-a-foundation-repair', title: 'What to Monitor After a Foundation Repair' },
+    ],
+  },
 ];
 
 export const INDUSTRY_GROUPS: ArticleGroup[] = [
