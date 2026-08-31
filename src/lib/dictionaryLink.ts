@@ -4,6 +4,54 @@ export type DictTerm = {
   def: string;
 };
 
+const DICT_ALIASES: Record<string, string> = {
+  'bond-strength': 'bond-strength',
+  'load-path': 'load-path',
+  'load-testing': 'load-testing',
+  'geotechnical-investigation': 'geotechnical-investigation',
+  'soil-report': 'soil-report',
+  'micropile': 'micropile',
+  'helical-pier': 'helical-pier',
+  'push-pier': 'push-pier',
+  'underpinning': 'underpinning',
+  'bearing-capacity': 'bearing-capacity',
+  'settlement': 'settlement',
+  'differential-settlement': 'differential-settlement',
+  'native-soil': 'native-soil',
+  'fill': 'fill',
+  'expansive-soil': 'expansive-soil',
+  'collapsible-soil': 'collapsible-soil',
+  'compaction': 'compaction',
+};
+
+function toDictId(label: string) {
+  return label
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+export function linkDictionaryLists(html: string, dictIds: Set<string>): string {
+  return html.replace(
+    /<(h2|h3)[^>]*>Related dictionary terms<\/\1>\s*<ul>([\s\S]*?)<\/ul>/gi,
+    (full, _tag, list) => {
+      const items = [...list.matchAll(/<li>([\s\S]*?)<\/li>/gi)].map((m) =>
+        m[1].replace(/<[^>]+>/g, '').trim()
+      );
+      if (!items.length) return full;
+      const linked = items
+        .map((item) => {
+          const id = DICT_ALIASES[toDictId(item)] || toDictId(item);
+          return dictIds.has(id) || DICT_ALIASES[id]
+            ? `<li><a href="/foundation-repair-dictionary#${id}">${item}</a></li>`
+            : `<li>${item}</li>`;
+        })
+        .join('');
+      return `<h2>Related dictionary terms</h2><ul class="dict-term-list">${linked}</ul>`;
+    }
+  );
+}
+
 export const DICT_TERMS: DictTerm[] = [
   {
     id: 'differential-settlement',

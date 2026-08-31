@@ -1,6 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import html from '../../../content/extracted/when-monitoring-makes-more-sense-than-immediate-underpinning.html?raw';
+import { linkDictionaryLists } from '../../lib/dictionaryLink';
+import rawHtml from '../../../content/extracted/when-monitoring-makes-more-sense-than-immediate-underpinning.html?raw';
+import dictHtml from '../../../content/extracted/foundation-repair-dictionary.html?raw';
+
+const dictIds = new Set([...dictHtml.matchAll(/id="([a-z0-9-]+)"/g)].map((m) => m[1]));
+const html = linkDictionaryLists(rawHtml, dictIds);
 ---
 <BaseLayout title="When Monitoring Makes More Sense Than Immediate Underpinning" description="When time is the first measurement." hub={false}>
   <article class="paper">

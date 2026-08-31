@@ -1,6 +1,7 @@
 ---
 import { getAllRoutes, cleanTitle, pages, type PageEntry } from '../lib/pages';
 import { getRelatedArticles } from '../lib/articleGroups';
+import { linkDictionaryLists } from '../lib/dictionaryLink';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -27,59 +28,11 @@ const dictPath = path.join(process.cwd(), 'content/extracted', 'foundation-repai
 const dictHtml = fs.existsSync(dictPath) ? fs.readFileSync(dictPath, 'utf-8') : '';
 const dictIds = new Set([...dictHtml.matchAll(/id="([a-z0-9-]+)"/g)].map((m) => m[1]));
 
-const DICT_ALIASES: Record<string, string> = {
-  'bond-strength': 'bond-strength',
-  'load-path': 'load-path',
-  'load-testing': 'load-testing',
-  'geotechnical-investigation': 'geotechnical-investigation',
-  'soil-report': 'soil-report',
-  'micropile': 'micropile',
-  'helical-pier': 'helical-pier',
-  'push-pier': 'push-pier',
-  'underpinning': 'underpinning',
-  'bearing-capacity': 'bearing-capacity',
-  'settlement': 'settlement',
-  'differential-settlement': 'differential-settlement',
-  'native-soil': 'native-soil',
-  'fill': 'fill',
-  'expansive-soil': 'expansive-soil',
-  'collapsible-soil': 'collapsible-soil',
-  'compaction': 'compaction',
-};
-
-function toDictId(label: string) {
-  return label
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
-}
-
-function linkDictionaryLists(html: string) {
-  return html.replace(
-    /<(h2|h3)[^>]*>Related dictionary terms<\/\1>\s*<ul>([\s\S]*?)<\/ul>/gi,
-    (full, _tag, list) => {
-      const items = [...list.matchAll(/<li>([\s\S]*?)<\/li>/gi)].map((m) =>
-        m[1].replace(/<[^>]+>/g, '').trim()
-      );
-      if (!items.length) return full;
-      const linked = items
-        .map((item) => {
-          const id = DICT_ALIASES[toDictId(item)] || toDictId(item);
-          return dictIds.has(id) || DICT_ALIASES[id]
-            ? `<li><a href="/foundation-repair-dictionary#${id}">${item}</a></li>`
-            : `<li>${item}</li>`;
-        })
-        .join('');
-      return `<h2>Related dictionary terms</h2><ul class="dict-term-list">${linked}</ul>`;
-    }
-  );
-}
-
 if (!isHub) {
   rawHtml = rawHtml.replace(new RegExp(`^\\s*<h2>${title.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}</h2>`, 'i'), '');
 }
 
-rawHtml = linkDictionaryLists(rawHtml);
+rawHtml = linkDictionaryLists(rawHtml, dictIds);
 
 const articles = pages.filter((p) => p.type === 'article' && !p.url.endsWith('-1'));
 const unique = articles.filter((p, i, arr) => arr.findIndex((x) => x.url === p.url) === i);

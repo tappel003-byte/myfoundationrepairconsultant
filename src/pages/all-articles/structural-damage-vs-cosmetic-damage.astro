@@ -1,6 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import html from '../../../content/extracted/structural-damage-vs-cosmetic-damage.html?raw';
+import { linkDictionaryLists } from '../../lib/dictionaryLink';
+import rawHtml from '../../../content/extracted/structural-damage-vs-cosmetic-damage.html?raw';
+import dictHtml from '../../../content/extracted/foundation-repair-dictionary.html?raw';
+
+const dictIds = new Set([...dictHtml.matchAll(/id="([a-z0-9-]+)"/g)].map((m) => m[1]));
+const html = linkDictionaryLists(rawHtml, dictIds);
 ---
 <BaseLayout title="Structural Damage vs. Cosmetic Damage" description="What those labels describe, and what they do not decide." hub={false}>
   <article class="paper">
