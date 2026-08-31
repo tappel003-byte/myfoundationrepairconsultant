@@ -9,9 +9,28 @@ const html = linkDictionaryLists(rawHtml, dictIds);
 ---
 <BaseLayout title="When Monitoring Makes More Sense Than Immediate Underpinning" description="When time is the first measurement." hub={false}>
   <article class="paper">
+    <div class="floating-nav" id="articleTopNav">
+      <a href="#" id="articleTopLink" class="top-link"><span>↑</span> Top</a>
+    </div>
     <header class="paper-head">
       <h1>When Monitoring Makes More Sense Than Immediate Underpinning</h1>
     </header>
     <div class="paper-body" set:html={html} />
   </article>
 </BaseLayout>
+
+<script>
+  const floatingNav = document.getElementById('articleTopNav');
+  const head = document.querySelector('.paper-head');
+  const topLink = document.getElementById('articleTopLink');
+
+  if (floatingNav && head) {
+    window.addEventListener('scroll', () => {
+      floatingNav.classList.toggle('visible', window.scrollY > head.offsetHeight);
+    });
+    topLink?.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+</script>
