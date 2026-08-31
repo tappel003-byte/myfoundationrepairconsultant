@@ -179,7 +179,7 @@
     "url": "/all-articles/structuralcracks",
     "slug": "structuralcracks",
     "title": "Structural Cracks: What the Term Really Means — and What It Often Gets Used to Imply — My Foundation Repair Consultant",
-    "description": " It all begins with an idea. ",
+    "description": "What the phrase \"structural crack\" actually means, why it gets used to imply urgency, and the questions worth asking before treating it as a diagnosis.",
     "type": "article",
     "file": "structuralcracks.html"
   },
@@ -187,7 +187,7 @@
     "url": "/all-articles/expansivesoil",
     "slug": "expansivesoil",
     "title": "Expansive Soil: What It Is — and What It Does Not Automatically Mean for Your House — My Foundation Repair Consultant",
-    "description": " It all begins with an idea. ",
+    "description": "What expansive soil is, why it gets blamed for so much movement, and why the term alone doesn't tell you whether repair is needed.",
     "type": "article",
     "file": "expansivesoil.html"
   },
@@ -534,5 +534,45 @@
     "description": "Why \"failure\" is the most persuasive word in foundation repair — and why it rarely means what an engineering report actually says.",
     "type": "article",
     "file": "the-word-failure.html"
+  },
+  {
+    "url": "/all-articles/insurance-and-financing-for-foundation-repair",
+    "slug": "insurance-and-financing-for-foundation-repair",
+    "title": "Insurance and Financing for Foundation Repair — My Foundation Repair Consultant",
+    "description": "What homeowner's insurance typically does and does not cover, common financing options, and the questions worth asking before assuming either applies.",
+    "type": "article",
+    "file": "insurance-and-financing-for-foundation-repair.html"
+  },
+  {
+    "url": "/all-articles/how-foundation-repair-affects-resale-and-appraisal",
+    "slug": "how-foundation-repair-affects-resale-and-appraisal",
+    "title": "How Foundation Repair Affects Resale and Appraisal — My Foundation Repair Consultant",
+    "description": "Why documentation, not the fact of a repair itself, is usually what buyers and appraisers actually react to.",
+    "type": "article",
+    "file": "how-foundation-repair-affects-resale-and-appraisal.html"
+  },
+  {
+    "url": "/all-articles/how-to-vet-a-foundation-repair-contractor",
+    "slug": "how-to-vet-a-foundation-repair-contractor",
+    "title": "How to Vet a Foundation Repair Contractor — My Foundation Repair Consultant",
+    "description": "Licensing, insurance, and independence from the sale — what to verify before comparing a single estimate.",
+    "type": "article",
+    "file": "how-to-vet-a-foundation-repair-contractor.html"
+  },
+  {
+    "url": "/all-articles/understanding-foundation-repair-warranties",
+    "slug": "understanding-foundation-repair-warranties",
+    "title": "Understanding Foundation Repair Warranties — My Foundation Repair Consultant",
+    "description": "What a repair warranty actually promises, what can void it, and why transferability matters more than the number of years printed on it.",
+    "type": "article",
+    "file": "understanding-foundation-repair-warranties.html"
+  },
+  {
+    "url": "/all-articles/what-to-monitor-after-a-foundation-repair",
+    "slug": "what-to-monitor-after-a-foundation-repair",
+    "title": "What to Monitor After a Foundation Repair — My Foundation Repair Consultant",
+    "description": "How post-repair monitoring differs from pre-repair monitoring, and how to tell normal settling from a sign the repair needs attention.",
+    "type": "article",
+    "file": "what-to-monitor-after-a-foundation-repair.html"
   }
 ]
