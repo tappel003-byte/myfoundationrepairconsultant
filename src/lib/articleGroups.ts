@@ -20,6 +20,7 @@ export const EDUCATIONAL_GROUPS: ArticleGroup[] = [
       { href: '/all-articles/foundation-problem-vs-normal-settling-how-to-evaluate-what-youre-seeing', title: 'Foundation Problem vs. Normal Settling' },
       { href: '/all-articles/why-houses-continue-to-move', title: 'Why Houses Continue to Move' },
       { href: '/all-articles/foundation-failure-patterns-and-prevention', title: 'Foundation Failure Patterns and Prevention' },
+      { href: '/all-articles/settlement', title: 'Settlement: What It Means — and Why Not All Settlement Is a Problem' },
     ],
   },
   {
@@ -29,6 +30,16 @@ export const EDUCATIONAL_GROUPS: ArticleGroup[] = [
       { href: '/all-articles/why-soil-analysis-matters-in-understanding-structural-performance', title: 'Why Soil Analysis Matters in Understanding Structural Performance' },
       { href: '/all-articles/soil-reports-what-they-are-and-what-theyre-actually-used-for', title: 'Soil Reports: What They Are — and What They’re Actually Used For' },
       { href: '/all-articles/soil-foundation-interaction-principles', title: 'Soil-Foundation Interaction Principles' },
+      { href: '/all-articles/expansivesoil', title: 'Expansive Soil: What It Is — and What It Does Not Automatically Mean for Your House' },
+      { href: '/all-articles/collapsiblesoil', title: 'Collapsible Soil: What It Is — and Why the Name Causes So Much Confusion' },
+    ],
+  },
+  {
+    id: 'regional-soils',
+    label: 'Regional Soil Conditions',
+    links: [
+      { href: '/all-articles/southern-arizona-soil-conditions-and-structural-behavior', title: 'Southern Arizona Soil Conditions and Structural Behavior' },
+      { href: '/all-articles/foundation-soil-behavior-in-the-phoenix-metropolitan-area', title: 'Foundation Soil Behavior in the Phoenix Metropolitan Area' },
     ],
   },
   {
@@ -50,6 +61,8 @@ export const EDUCATIONAL_GROUPS: ArticleGroup[] = [
       { href: '/all-articles/finish-materials-as-early-movement-indicators', title: 'Finish Materials as Early Movement Indicators' },
       { href: '/all-articles/normal-floor-deflection-vs-foundation-movement', title: 'Normal Floor Deflection vs. Foundation Movement' },
       { href: '/all-articles/how-to-document-and-monitor-floor-slope', title: 'How to Document and Monitor Floor Slope Over Time' },
+      { href: '/all-articles/foundationcracks', title: 'Foundation Cracks: What They Mean — and When to Actually Worry' },
+      { href: '/all-articles/structuralcracks', title: 'Structural Cracks: What the Term Really Means — and What It Often Gets Used to Imply' },
     ],
   },
   {
