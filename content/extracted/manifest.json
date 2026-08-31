@@ -526,5 +526,37 @@
     "description": "Design capacity is a prediction. Installed capacity is what construction and testing actually show.",
     "type": "article",
     "file": "micropile-design-calculations-and-engineering-requirements.html"
+  },
+  {
+    "url": "/all-articles/distinguishing-moisture-problems-from-bearing-capacity-deficiency",
+    "slug": "distinguishing-moisture-problems-from-bearing-capacity-deficiency",
+    "title": "Distinguishing Moisture Problems from Bearing Capacity Deficiency — My Foundation Repair Consultant",
+    "description": "Why the same cracks and slopes can point to a leak or drainage issue instead of a soil that can't hold the house — and how to tell which one you're looking at.",
+    "type": "article",
+    "file": "distinguishing-moisture-problems-from-bearing-capacity-deficiency.html"
+  },
+  {
+    "url": "/all-articles/when-monitoring-makes-more-sense-than-immediate-underpinning",
+    "slug": "when-monitoring-makes-more-sense-than-immediate-underpinning",
+    "title": "When Monitoring Makes More Sense Than Immediate Underpinning — My Foundation Repair Consultant",
+    "description": "When watching a house with dated photos and simple measurements is the more responsible next step than installing piers on the first visit.",
+    "type": "article",
+    "file": "when-monitoring-makes-more-sense-than-immediate-underpinning.html"
+  },
+  {
+    "url": "/all-articles/structural-damage-vs-cosmetic-damage",
+    "slug": "structural-damage-vs-cosmetic-damage",
+    "title": "Structural Damage vs. Cosmetic Damage — My Foundation Repair Consultant",
+    "description": "Why \"structural\" and \"cosmetic\" describe severity and function, not just where a crack happens to be — and why a structural crack isn't automatically a foundation problem.",
+    "type": "article",
+    "file": "structural-damage-vs-cosmetic-damage.html"
+  },
+  {
+    "url": "/all-articles/the-word-failure",
+    "slug": "the-word-failure",
+    "title": "The Word \"Failure\" — My Foundation Repair Consultant",
+    "description": "Why \"failure\" is the most persuasive word in foundation repair — and why it rarely means what an engineering report actually says.",
+    "type": "article",
+    "file": "the-word-failure.html"
   }
 ]

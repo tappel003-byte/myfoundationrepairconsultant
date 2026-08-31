@@ -6,18 +6,25 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root = path.join(process.cwd(), 'content/extracted');
+const pagesDir = path.join(process.cwd(), 'src/pages');
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'manifest.json'), 'utf-8'));
 const htmlFiles = fs.readdirSync(root).filter((f) => f.endsWith('.html'));
 
-const validPaths = new Set([
-  '/start-here',
-  '/how-the-industry-has-changed',
-  '/educational-articles',
-  '/industry-articles',
-  '/all-articles',
-  ...manifest.map((p) => p.url),
-  ...htmlFiles.map((f) => `/all-articles/${f.replace(/\.html$/, '')}`),
-]);
+// Every hand-built page under src/pages/*.astro is a real route (e.g. push-piers.astro
+// -> /push-piers). Deriving this from disk means a newly added page is automatically
+// valid, instead of needing its path hardcoded here too.
+const staticPageRoutes = fs
+  .readdirSync(pagesDir)
+  .filter((f) => f.endsWith('.astro') && !f.startsWith('[') && f !== '404.astro')
+  .map((f) => `/${f.replace(/\.astro$/, '')}`);
+
+const validPaths = new Set([...staticPageRoutes, ...manifest.map((p) => p.url)]);
+
+// Every file actually served is one that's both listed in manifest.json AND
+// present on disk (see src/lib/pages.ts). A file that exists but isn't in the
+// manifest has no route — it 404s even though nothing about it "looks" broken.
+const manifestFiles = new Set(manifest.map((p) => p.file));
+const orphanFiles = htmlFiles.filter((f) => f !== 'manifest.json' && !manifestFiles.has(f));
 
 // Domains that only ever show up in content by accident — leftover from drafting
 // the article in an AI chat and pasting its in-chat anchor links as if they were
@@ -45,7 +52,7 @@ for (const file of htmlFiles) {
   }
 }
 
-if (broken.length || artifacts.length) {
+if (broken.length || artifacts.length || orphanFiles.length) {
   if (broken.length) {
     console.error('Broken internal links found:');
     for (const { file, link } of broken) {
@@ -56,6 +63,12 @@ if (broken.length || artifacts.length) {
     console.error('Leftover AI-chat links found (should be real site paths):');
     for (const { file, href } of artifacts) {
       console.error(`  ${file}: ${href}`);
+    }
+  }
+  if (orphanFiles.length) {
+    console.error('Content files with no manifest.json entry (unreachable — add them or delete the file):');
+    for (const file of orphanFiles) {
+      console.error(`  ${file}`);
     }
   }
   process.exit(1);
