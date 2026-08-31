@@ -35,14 +35,6 @@ export const EDUCATIONAL_GROUPS: ArticleGroup[] = [
     ],
   },
   {
-    id: 'regional-soils',
-    label: 'Regional Soil Conditions',
-    links: [
-      { href: '/all-articles/southern-arizona-soil-conditions-and-structural-behavior', title: 'Southern Arizona Soil Conditions and Structural Behavior' },
-      { href: '/all-articles/foundation-soil-behavior-in-the-phoenix-metropolitan-area', title: 'Foundation Soil Behavior in the Phoenix Metropolitan Area' },
-    ],
-  },
-  {
     id: 'types',
     label: 'Foundation Types & Construction',
     links: [
