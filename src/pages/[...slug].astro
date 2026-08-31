@@ -1,7 +1,7 @@
 ---
 import { getAllRoutes, cleanTitle, pages, type PageEntry } from '../lib/pages';
 import { getRelatedArticles } from '../lib/articleGroups';
-import { linkDictionaryLists } from '../lib/dictionaryLink';
+import { linkDictionaryLists, linkFirstMentions } from '../lib/dictionaryLink';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -33,6 +33,7 @@ if (!isHub) {
 }
 
 rawHtml = linkDictionaryLists(rawHtml, dictIds);
+if (isArticle) rawHtml = linkFirstMentions(rawHtml);
 
 const articles = pages.filter((p) => p.type === 'article' && !p.url.endsWith('-1'));
 const unique = articles.filter((p, i, arr) => arr.findIndex((x) => x.url === p.url) === i);

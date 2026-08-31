@@ -279,11 +279,6 @@ export const DICT_TERMS: DictTerm[] = [
     def: 'Downward forces applied to foundation elements, such as piers or piles, as surrounding soil settles relative to them.',
   },
   {
-    id: 'drainage',
-    names: ['drainage'],
-    def: 'How surface and subsurface water moves around and away from a home.',
-  },
-  {
     id: 'efflorescence',
     names: ['efflorescences', 'efflorescence'],
     def: 'The white, powdery residue that can appear on concrete or masonry surfaces when moisture moves through the material and evaporates, leaving minerals behind.',
@@ -307,11 +302,6 @@ export const DICT_TERMS: DictTerm[] = [
     id: 'foam-jacking',
     names: ['foam jacking'],
     def: 'The common name for lifting or supporting concrete using expanding polyurethane foam, injected in controlled stages beneath a slab or footing.',
-  },
-  {
-    id: 'footing',
-    names: ['footings', 'footing'],
-    def: 'The portion of a foundation that spreads the weight of the structure into the soil below.',
   },
   {
     id: 'foundation-crack',
@@ -444,11 +434,6 @@ export const DICT_TERMS: DictTerm[] = [
     def: 'Resistance provided by soil when it is compressed by a structure pushing against it, such as a foundation wall moving slightly into the surrounding soil.',
   },
   {
-    id: 'pier',
-    names: ['piers', 'pier'],
-    def: 'A vertical foundation element that transfers structural loads from a building down to the soil or rock below.',
-  },
-  {
     id: 'pier-and-beam',
     names: ['pier and beams', 'pier and beam'],
     def: 'A foundation system where beams support the structure and transfer loads to discrete piers rather than a continuous slab.',
@@ -502,11 +487,6 @@ export const DICT_TERMS: DictTerm[] = [
     id: 'service-load',
     names: ['service loads', 'service load'],
     def: 'The amount of weight a structure—and the piers supporting it—are expected to carry during normal, everyday conditions.',
-  },
-  {
-    id: 'settlement',
-    names: ['settlements', 'settlement'],
-    def: 'Downward movement of soil or a foundation over time as loads are applied and soils compress.',
   },
   {
     id: 'settlement-monitoring',
