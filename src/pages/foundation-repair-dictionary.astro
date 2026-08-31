@@ -30,15 +30,31 @@ let body = extracted
   .replace(/<div class="floating-nav"[\s\S]*?<\/div>/, '')
   .replace(/<div class="page-header"[\s\S]*?<\/div>/, '');
 
+function insertAlphabetically(sectionBody: string, cardHtml: string, name: string) {
+  const cardStarts = [...sectionBody.matchAll(/<div class="term-card" id="[a-z0-9-]+">/g)].map((m) => m.index!);
+  let insertAt = sectionBody.length;
+  for (const start of cardStarts) {
+    const existingName = sectionBody.slice(start).match(/<div class="term-name">([^<]+)<\/div>/)?.[1] ?? '';
+    if (existingName.toLowerCase() > name.toLowerCase()) {
+      insertAt = start;
+      break;
+    }
+  }
+  return sectionBody.slice(0, insertAt) + cardHtml + sectionBody.slice(insertAt);
+}
+
 for (const id of additionIds) {
   const html = card(id);
   if (!html || body.includes(`id="${id}"`)) continue;
-  const letter = termName(html).charAt(0).toUpperCase();
-  const sectionOpen = `<section class="letter-section" id="${letter}">`;
-  const insertAfter = `${sectionOpen}<h2 class="letter-heading">${letter}</h2>`;
-  if (body.includes(insertAfter)) {
-    body = body.replace(insertAfter, `${insertAfter}${html}`);
-  }
+  const name = termName(html);
+  const letter = name.charAt(0).toUpperCase();
+  const sectionHeader = `<section class="letter-section" id="${letter}"><h2 class="letter-heading">${letter}</h2>`;
+  const sectionStart = body.indexOf(sectionHeader);
+  if (sectionStart < 0) continue;
+  const contentStart = sectionStart + sectionHeader.length;
+  const sectionEnd = body.indexOf('</section>', contentStart);
+  const newContent = insertAlphabetically(body.slice(contentStart, sectionEnd), html, name);
+  body = body.slice(0, contentStart) + newContent + body.slice(sectionEnd);
 }
 
 const knownIds = new Set([...body.matchAll(/id="([a-z0-9-]+)"/g)].map((m) => m[1]));
