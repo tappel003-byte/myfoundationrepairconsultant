@@ -16,18 +16,10 @@
     "file": "why-torque-alone-doesnt-guarantee-capacity.html"
   },
   {
-    "url": "/all-articles/foundation-problem-vs-normal-settling-how-to-evaluate-what-youre-seeing-1",
-    "slug": "foundation-problem-vs-normal-settling-how-to-evaluate-what-youre-seeing-1",
-    "title": "Foundation Problem vs. Normal Settling: How to Evaluate What You're Seeing — My Foundation Repair Consultant",
-    "description": "",
-    "type": "article",
-    "file": "foundation-problem-vs-normal-settling-how-to-evaluate-what-youre-seeing-1.html"
-  },
-  {
     "url": "/all-articles/foundation-problem-vs-normal-settling-how-to-evaluate-what-youre-seeing",
     "slug": "foundation-problem-vs-normal-settling-how-to-evaluate-what-youre-seeing",
     "title": "Foundation Problem vs. Normal Settling: How to Evaluate What You're Seeing — My Foundation Repair Consultant",
-    "description": "",
+    "description": "A framework for telling normal building settlement apart from a real foundation problem — using progression, timing, and pattern instead of guesswork.",
     "type": "article",
     "file": "foundation-problem-vs-normal-settling-how-to-evaluate-what-youre-seeing.html"
   },
@@ -75,7 +67,7 @@
     "url": "/all-articles/southern-arizona-soil-conditions-and-structural-behavior",
     "slug": "southern-arizona-soil-conditions-and-structural-behavior",
     "title": "Southern Arizona Soil Conditions and Structural Behavior — My Foundation Repair Consultant",
-    "description": "",
+    "description": "How Southern Arizona's soil differs from Phoenix — more heterogeneous and reactive — and what that means for foundation behavior in Tucson, Casa Grande, and Benson.",
     "type": "article",
     "file": "southern-arizona-soil-conditions-and-structural-behavior.html"
   },
@@ -83,7 +75,7 @@
     "url": "/all-articles/foundation-soil-behavior-in-the-phoenix-metropolitan-area",
     "slug": "foundation-soil-behavior-in-the-phoenix-metropolitan-area",
     "title": "Foundation Soil Behavior in the Phoenix Metropolitan Area — My Foundation Repair Consultant",
-    "description": "",
+    "description": "How expansive, moisture-sensitive clays across the Phoenix metro's alluvial basin shape foundation movement in Phoenix, Mesa, Chandler, and surrounding cities.",
     "type": "article",
     "file": "foundation-soil-behavior-in-the-phoenix-metropolitan-area.html"
   },
@@ -91,7 +83,7 @@
     "url": "/all-articles/why-soil-analysis-matters-in-understanding-structural-performance",
     "slug": "why-soil-analysis-matters-in-understanding-structural-performance",
     "title": "Why Soil Analysis Matters in Understanding Structural Performance — My Foundation Repair Consultant",
-    "description": "",
+    "description": "Why soil analysis — not just visual symptoms — is what actually explains how a structure will respond to load, moisture, and time.",
     "type": "article",
     "file": "why-soil-analysis-matters-in-understanding-structural-performance.html"
   },
@@ -99,7 +91,7 @@
     "url": "/all-articles/common-signs-a-foundation-inspection-may-be-worth-considering",
     "slug": "common-signs-a-foundation-inspection-may-be-worth-considering",
     "title": "Common Signs a Foundation Inspection May Be Worth Considering — My Foundation Repair Consultant",
-    "description": "",
+    "description": "Patterns of cracking, sticking doors, and uneven floors that may justify a closer look — and why none of them confirm a foundation problem on their own.",
     "type": "article",
     "file": "common-signs-a-foundation-inspection-may-be-worth-considering.html"
   },
@@ -107,7 +99,7 @@
     "url": "/all-articles/how-climate-and-weather-affect-foundation-stability",
     "slug": "how-climate-and-weather-affect-foundation-stability",
     "title": "How Climate and Weather Affect Foundation Stability — My Foundation Repair Consultant",
-    "description": "",
+    "description": "How weather patterns and long-term climate conditions affect soil behavior, and why that matters for understanding foundation movement.",
     "type": "article",
     "file": "how-climate-and-weather-affect-foundation-stability.html"
   },
@@ -115,7 +107,7 @@
     "url": "/all-articles/how-to-compare-foundation-repair-estimates",
     "slug": "how-to-compare-foundation-repair-estimates",
     "title": "How to Compare Foundation Repair Estimates — My Foundation Repair Consultant",
-    "description": "",
+    "description": "Why foundation repair estimates for the same house can vary widely, and how to compare scope and assumptions instead of just price.",
     "type": "article",
     "file": "how-to-compare-foundation-repair-estimates.html"
   },
@@ -123,7 +115,7 @@
     "url": "/all-articles/managing-change-orders-in-foundation-repair",
     "slug": "managing-change-orders-in-foundation-repair",
     "title": "Managing Change Orders in Foundation Repair — My Foundation Repair Consultant",
-    "description": "",
+    "description": "Why change orders are common even on well-planned foundation repairs, and how to stay in control of cost and scope when one comes up.",
     "type": "article",
     "file": "managing-change-orders-in-foundation-repair.html"
   },
@@ -131,7 +123,7 @@
     "url": "/all-articles/why-a-detailed-scope-of-work-matters-in-foundation-repair",
     "slug": "why-a-detailed-scope-of-work-matters-in-foundation-repair",
     "title": "Why a Detailed Scope of Work Matters in Foundation Repair — My Foundation Repair Consultant",
-    "description": "",
+    "description": "Why a vague scope of work is where foundation repair projects go wrong, and what a detailed one should actually define.",
     "type": "article",
     "file": "why-a-detailed-scope-of-work-matters-in-foundation-repair.html"
   },
@@ -139,7 +131,7 @@
     "url": "/all-articles/underpinning-what-it-is-and-why-hearing-the-term-is-not-a-diagnosis",
     "slug": "underpinning-what-it-is-and-why-hearing-the-term-is-not-a-diagnosis",
     "title": "Underpinning: What It Is — and Why Hearing the Term Is Not a Diagnosis — My Foundation Repair Consultant",
-    "description": "",
+    "description": "Underpinning describes a category of work, not a verdict — what the term actually means and why hearing it isn't a diagnosis.",
     "type": "article",
     "file": "underpinning-what-it-is-and-why-hearing-the-term-is-not-a-diagnosis.html"
   },
@@ -147,7 +139,7 @@
     "url": "/all-articles/crawlspaces-what-they-are-and-why-they-get-blamed-for-so-many-problems",
     "slug": "crawlspaces-what-they-are-and-why-they-get-blamed-for-so-many-problems",
     "title": "Crawlspaces: What They Are — and Why They Get Blamed for So Many Problems — My Foundation Repair Consultant",
-    "description": "",
+    "description": "What a crawlspace actually is, why it has a reputation problem, and why having one doesn't automatically mean trouble.",
     "type": "article",
     "file": "crawlspaces-what-they-are-and-why-they-get-blamed-for-so-many-problems.html"
   },
@@ -155,7 +147,7 @@
     "url": "/all-articles/slab-on-grade-foundations-what-they-are-and-what-they-dont-automatically-tell-you",
     "slug": "slab-on-grade-foundations-what-they-are-and-what-they-dont-automatically-tell-you",
     "title": "Slab-on-Grade Foundations: What They Are — and What They Don’t Automatically Tell You — My Foundation Repair Consultant",
-    "description": "",
+    "description": "What a slab-on-grade foundation is, and why the foundation type itself is rarely the actual cause when cracks or sticking doors appear.",
     "type": "article",
     "file": "slab-on-grade-foundations-what-they-are-and-what-they-dont-automatically-tell-you.html"
   },
@@ -163,7 +155,7 @@
     "url": "/all-articles/soil-reports-what-they-are-and-what-theyre-actually-used-for",
     "slug": "soil-reports-what-they-are-and-what-theyre-actually-used-for",
     "title": "Soil Reports: What They Are — and What They’re Actually Used For — My Foundation Repair Consultant",
-    "description": "",
+    "description": "What a soil report actually documents, and why it isn't the verdict on whether a foundation is failing that homeowners often expect.",
     "type": "article",
     "file": "soil-reports-what-they-are-and-what-theyre-actually-used-for.html"
   },
@@ -171,23 +163,15 @@
     "url": "/all-articles/differential-settlement-why-uneven-movement-matters-more-than-movement-itself",
     "slug": "differential-settlement-why-uneven-movement-matters-more-than-movement-itself",
     "title": "Differential Settlement: Why Uneven Movement Matters More Than Movement Itself — My Foundation Repair Consultant",
-    "description": "",
+    "description": "Why differential — uneven — settlement is the number that actually matters, not the amount of settlement by itself.",
     "type": "article",
     "file": "differential-settlement-why-uneven-movement-matters-more-than-movement-itself.html"
-  },
-  {
-    "url": "/all-articles/helicalpiers",
-    "slug": "helicalpiers",
-    "title": "Helical Piers: What They Are — and When They Actually Make Sense — My Foundation Repair Consultant",
-    "description": "",
-    "type": "article",
-    "file": "helicalpiers.html"
   },
   {
     "url": "/all-articles/foundationcracks",
     "slug": "foundationcracks",
     "title": "Foundation Cracks: What They Mean — and When to Actually Worry — My Foundation Repair Consultant",
-    "description": "",
+    "description": "What a foundation crack actually represents, and why a visible crack alone isn't proof that something serious is happening.",
     "type": "article",
     "file": "foundationcracks.html"
   },
@@ -211,7 +195,7 @@
     "url": "/all-articles/collapsiblesoil",
     "slug": "collapsiblesoil",
     "title": "Collapsible Soil: What It Is — and Why the Name Causes So Much Confusion — My Foundation Repair Consultant",
-    "description": "  ",
+    "description": "What collapsible soil actually is and how it behaves — a slower, more specific process than the word \"collapse\" suggests.",
     "type": "article",
     "file": "collapsiblesoil.html"
   },
@@ -219,7 +203,7 @@
     "url": "/all-articles/settlement",
     "slug": "settlement",
     "title": "Settlement: What It Means — and Why Not All Settlement Is a Problem — My Foundation Repair Consultant",
-    "description": "  ",
+    "description": "What settlement actually is and why hearing the word should prompt context, not automatic concern.",
     "type": "article",
     "file": "settlement.html"
   },
