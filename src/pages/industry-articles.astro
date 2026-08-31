@@ -1,35 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HubPageShell from '../components/hub/HubPageShell.astro';
-
-const groups = [
-  {
-    id: 'business',
-    label: 'Business Model & Economics',
-    links: [
-      { href: '/all-articles/if-you-show-me-the-incentive-ill-show-you-the-outcome', title: 'If You Show Me the Incentive, I’ll Show You the Outcome' },
-      { href: '/all-articles/the-free-evaluation-and-the-culture-it-creates', title: 'The “Free Evaluation” — and the Culture It Creates' },
-      { href: '/all-articles/symptoms-are-easy-to-see-causes-are-not', title: 'Symptoms Are Easy to See. Causes Are Not.' },
-    ],
-  },
-  {
-    id: 'sales',
-    label: 'Sales Practices & Tactics',
-    links: [
-      { href: '/all-articles/psychology-of-sign-today-discounts', title: 'The Psychology Behind Sign-Today Discounts in Foundation Repair' },
-      { href: '/all-articles/what-is-a-sales-metric-and-why-it-doesnt-translate-to-foundation-repair', title: 'What Is a Sales Metric — and Why It Doesn’t Translate to Foundation Repair' },
-    ],
-  },
-  {
-    id: 'evaluate',
-    label: 'Evaluating Contractors & Recommendations',
-    links: [
-      { href: '/all-articles/how-to-compare-foundation-repair-estimates', title: 'How to Compare Foundation Repair Estimates' },
-      { href: '/all-articles/why-a-detailed-scope-of-work-matters-in-foundation-repair', title: 'Why a Detailed Scope of Work Matters in Foundation Repair' },
-      { href: '/all-articles/managing-change-orders-in-foundation-repair', title: 'Managing Change Orders in Foundation Repair' },
-    ],
-  },
-];
+import { INDUSTRY_GROUPS as groups } from '../lib/articleGroups';
 
 const nav = groups.map((g) => ({ id: g.id, label: g.label }));
 const countLabel = (n) => (n === 1 ? '(1 article)' : `(${n} articles)`);

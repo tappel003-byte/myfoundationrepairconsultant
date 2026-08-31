@@ -1,6 +1,7 @@
 ---
 import { getAllRoutes, cleanTitle, pages, type PageEntry } from '../lib/pages';
 import { linkFirstMentions } from '../lib/dictionaryLink';
+import { getRelatedArticles } from '../lib/articleGroups';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -87,6 +88,7 @@ const unique = articles.filter((p, i, arr) => arr.findIndex((x) => x.url === p.u
 const idx = unique.findIndex((p) => p.url === page.url);
 const prev = idx > 0 ? unique[idx - 1] : null;
 const next = idx >= 0 && idx < unique.length - 1 ? unique[idx + 1] : null;
+const related = isArticle ? getRelatedArticles(page.url) : [];
 ---
 
 <BaseLayout title={title} description={page.description} hub={isHub}>
@@ -101,6 +103,16 @@ const next = idx >= 0 && idx < unique.length - 1 ? unique[idx + 1] : null;
         <h1>{title}</h1>
       </header>
       <div class="paper-body" set:html={rawHtml} />
+      {related.length > 0 && (
+        <div class="paper-related">
+          <h2>More on this topic</h2>
+          <ul>
+            {related.map((r) => (
+              <li><a href={r.href}>{r.title}</a></li>
+            ))}
+          </ul>
+        </div>
+      )}
       <nav class="paper-pager" aria-label="More papers">
         {prev ? (
           <a class="pager-prev" href={prev.url}>
@@ -194,6 +206,30 @@ const next = idx >= 0 && idx < unique.length - 1 ? unique[idx + 1] : null;
   .paper-body .dict-term-list li {
     display: list-item;
     margin: 0 0 8px;
+  }
+  .paper-related {
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 1px solid #e4e4e4;
+  }
+  .paper-related h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 14px;
+  }
+  .paper-related ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .paper-related li {
+    margin: 0 0 10px;
+  }
+  .paper-related a {
+    color: #2d9499;
+    font-size: 16px;
+    line-height: 1.4;
   }
   .paper-pager {
     display: grid;
