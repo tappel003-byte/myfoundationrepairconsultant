@@ -1,6 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HubPageShell from '../components/hub/HubPageShell.astro';
+import TermGlossary from '../components/TermGlossary.astro';
+
+const terms = [
+  {
+    term: 'Free evaluation',
+    def: 'An inspection offered at no cost — usually the first step in a sales process, not an independent assessment.',
+  },
+  {
+    term: 'Commission model',
+    def: 'Sales pay tied to closed projects, with no base salary. Shapes recommendations even without bad intent.',
+  },
+  {
+    term: 'Sales metric',
+    def: 'A measurable sales target — contracts signed, project size — that quietly shapes what gets recommended.',
+  },
+  {
+    term: 'Scope of work',
+    def: 'The specific methods, locations, materials, and quality checks a repair actually includes.',
+  },
+];
 
 const nav = [
   { id: 'what-changed', label: 'What changed' },
@@ -33,6 +53,13 @@ const nav = [
     nav={nav}
     topicsStyle="list"
   >
+    <div slot="before-topics">
+      <TermGlossary
+        intro="A few terms that come up throughout this page."
+        terms={terms}
+      />
+    </div>
+
     <h2 class="section-heading" id="what-changed">What changed</h2>
     <div class="content-block">
       <p>Information that was once filtered through engineers, longer timelines, and often the company owner personally visiting a home now frequently arrives inside a sales conversation.</p>
