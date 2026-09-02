@@ -16,8 +16,6 @@ function termName(html: string) {
   return html.match(/<div class="term-name">([^<]+)<\/div>/)?.[1] ?? '';
 }
 
-// Each addition is filed under the letter its term actually starts with —
-// computed from the term's own name, not guessed from a marker position.
 const additionIds = [
   'auger-cast-pile', 'bond-strength', 'caliche', 'compaction-grouting',
   'drilled-pier', 'driven-pile', 'fill', 'floor-elevation-survey',
@@ -80,9 +78,6 @@ body = body.replace(
     topicsStyle="none"
   >
     <div class="dictionary">
-      <p class="dictionary-lede">
-        Terms are listed alphabetically below. Each definition links to the related terms it depends on, so you can follow a concept as deep as you want without leaving the page.
-      </p>
       <Fragment set:html={body} />
     </div>
   </HubPageShell>
@@ -90,20 +85,11 @@ body = body.replace(
 
 <style is:global>
   .dictionary { max-width: 720px; }
-  .dictionary-lede {
-    border-left: 2px solid #c8c8c8;
-    padding: 4px 0 28px 18px;
-    margin: 8px 0 0;
-    color: #5a5a5a;
-    font-size: 18px;
-    line-height: 1.65;
-    border-bottom: 1px solid #e4e4e4;
-  }
   .dictionary .letter-nav {
     display: flex;
     flex-wrap: wrap;
     gap: 10px 12px;
-    margin: 28px 0 0;
+    margin: 0;
     padding: 16px 0;
     border-bottom: 1px solid #e4e4e4;
     font-family: 'Source Serif 4', Georgia, serif;
