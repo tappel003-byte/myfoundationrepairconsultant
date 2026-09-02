@@ -157,11 +157,12 @@ const schema = articleSchema({
           <div class="accordion-header">
             <span class="accordion-title">{faq.q}</span>
             <span class="accordion-icon">▸</span>
+            <span class="start-close-label">Close</span>
           </div>
           <div class="accordion-content">
             <div class="accordion-content-inner content-block">
               <div set:html={faq.body} />
-              <button type="button" class="start-close">Close</button>
+              <p><button type="button" class="start-close">Close</button></p>
             </div>
           </div>
         </div>
@@ -207,16 +208,17 @@ const schema = articleSchema({
 </BaseLayout>
 
 <script>
-  document.querySelectorAll('.start-close').forEach((button) => {
-    button.addEventListener('click', (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      button.closest('.accordion-section')?.classList.remove('active');
-    });
+  document.querySelector('.start-questions')?.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+    if (!target.classList.contains('start-close') && !target.classList.contains('start-close-label')) return;
+    event.preventDefault();
+    event.stopPropagation();
+    target.closest('.accordion-section')?.classList.remove('active');
   });
 </script>
 
-<style>
+<style is:global>
   .start-questions {
     margin: 8px 0 40px;
   }
@@ -232,19 +234,36 @@ const schema = articleSchema({
     border-bottom: 1px solid #e4e4e4;
     background: transparent;
     box-shadow: none;
+    max-width: none;
   }
   .start-q .accordion-header {
     padding: 14px 0;
     background: transparent;
+    gap: 12px;
   }
   .start-q .accordion-title {
     color: #2d9499;
     font-family: 'Source Serif 4', serif;
     font-size: 20px;
     font-weight: 600;
+    flex: 1;
   }
   .start-q .accordion-icon {
     color: #2d9499;
+  }
+  .start-close-label {
+    display: none;
+    color: #2d9499;
+    font-family: 'Source Serif 4', serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .start-q.active .accordion-icon {
+    display: none;
+  }
+  .start-q.active .start-close-label {
+    display: inline;
   }
   .start-q.active .accordion-title {
     color: #1a6f73;
@@ -253,14 +272,15 @@ const schema = articleSchema({
     padding: 4px 0 18px;
   }
   .start-close {
-    display: inline-block;
-    margin-top: 8px;
+    display: inline;
+    margin: 0;
     padding: 0;
     border: 0;
     background: none;
     color: #2d9499;
-    font: inherit;
-    font-size: 15px;
+    font-family: 'Source Serif 4', serif;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
     text-decoration: underline;
   }
