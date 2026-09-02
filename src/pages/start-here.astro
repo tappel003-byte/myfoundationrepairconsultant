@@ -150,7 +150,7 @@ const schema = articleSchema({
       <TermGlossary terms={terms} />
     </div>
 
-    <div class="start-questions" id="topics" data-faq-group>
+    <div class="start-questions" data-faq-group>
       <h2 class="start-questions-heading">Topics</h2>
       {faqs.map((faq) => (
         <div class="accordion-section start-q" id={faq.id}>
@@ -159,7 +159,10 @@ const schema = articleSchema({
             <span class="accordion-icon">▸</span>
           </div>
           <div class="accordion-content">
-            <div class="accordion-content-inner content-block" set:html={faq.body} />
+            <div class="accordion-content-inner content-block">
+              <div set:html={faq.body} />
+              <button type="button" class="start-close">Close</button>
+            </div>
           </div>
         </div>
       ))}
@@ -203,6 +206,16 @@ const schema = articleSchema({
   </HubPageShell>
 </BaseLayout>
 
+<script>
+  document.querySelectorAll('.start-close').forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      button.closest('.accordion-section')?.classList.remove('active');
+    });
+  });
+</script>
+
 <style>
   .start-questions {
     margin: 8px 0 40px;
@@ -238,5 +251,17 @@ const schema = articleSchema({
   }
   .start-q .accordion-content-inner {
     padding: 4px 0 18px;
+  }
+  .start-close {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #2d9499;
+    font: inherit;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: underline;
   }
 </style>
