@@ -69,6 +69,7 @@ const layoutSchema = !ownSchema.has(path)
 const fullTitle = title.includes('MFRC')
   ? title
   : `${title} — My Foundation Repair Consultant`;
+const logoUrl = '/MFRC%20Logo.jpg';
 ---
 
 <!doctype html>
@@ -79,9 +80,9 @@ const fullTitle = title.includes('MFRC')
     <title>{fullTitle}</title>
     {description && <meta name="description" content={description} />}
     <link rel="canonical" href={pageUrl} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
-    <link rel="apple-touch-icon" href="/MFRC%20Logo.jpg" />
+    <link rel="icon" type="image/jpeg" href={logoUrl} />
+    <link rel="shortcut icon" type="image/jpeg" href={logoUrl} />
+    <link rel="apple-touch-icon" href={logoUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -91,6 +92,7 @@ const fullTitle = title.includes('MFRC')
     <meta property="og:site_name" content="My Foundation Repair Consultant" />
     <meta property="og:title" content={fullTitle} />
     {description && <meta property="og:description" content={description} />}
+    <meta property="og:image" content={`https://www.myfoundationrepairconsultant.com${logoUrl}`} />
     <meta property="og:type" content="website" />
     {layoutSchema && (
       <script type="application/ld+json" set:html={JSON.stringify(layoutSchema)} />
