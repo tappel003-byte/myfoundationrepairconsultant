@@ -118,7 +118,6 @@ const faqs = [
   },
 ];
 
-const nav = faqs.map((f) => ({ id: f.id, label: f.q.replace('?', '') }));
 const schema = articleSchema({
   headline: 'Start Here',
   description: 'Independent foundation repair education. Ten questions building owners ask when they notice cracks, sticking doors, or movement.',
@@ -144,16 +143,17 @@ const schema = articleSchema({
       { label: 'Format', value: '10 essential questions' },
       { label: 'Depth', value: 'Overview → linked articles' },
     ]}
-    nav={nav}
-    topicsStyle="list"
+    nav={[]}
+    topicsStyle="none"
   >
     <div slot="before-topics">
       <TermGlossary terms={terms} />
     </div>
 
-    <div class="faq-list" data-faq-group>
+    <div class="start-questions" id="topics" data-faq-group>
+      <h2 class="start-questions-heading">Topics</h2>
       {faqs.map((faq) => (
-        <div class="accordion-section" id={faq.id}>
+        <div class="accordion-section start-q" id={faq.id}>
           <div class="accordion-header">
             <span class="accordion-title">{faq.q}</span>
             <span class="accordion-icon">▸</span>
@@ -202,3 +202,41 @@ const schema = articleSchema({
     </div>
   </HubPageShell>
 </BaseLayout>
+
+<style>
+  .start-questions {
+    margin: 8px 0 40px;
+  }
+  .start-questions-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    color: #1a1a1a;
+  }
+  .start-q {
+    border: none;
+    border-bottom: 1px solid #e4e4e4;
+    background: transparent;
+    box-shadow: none;
+  }
+  .start-q .accordion-header {
+    padding: 14px 0;
+    background: transparent;
+  }
+  .start-q .accordion-title {
+    color: #2d9499;
+    font-family: 'Source Serif 4', serif;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .start-q .accordion-icon {
+    color: #2d9499;
+  }
+  .start-q.active .accordion-title {
+    color: #1a6f73;
+  }
+  .start-q .accordion-content-inner {
+    padding: 4px 0 18px;
+  }
+</style>
