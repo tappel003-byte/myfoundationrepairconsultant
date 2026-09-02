@@ -93,6 +93,7 @@ const {
   });
 
   document.querySelectorAll('.accordion-content-inner').forEach((inner) => {
+    if (inner.closest('.start-questions')) return;
     if (inner.querySelector('.back-to-topics')) return;
     const link = document.createElement('a');
     link.href = '#topics';
