@@ -61,8 +61,6 @@ const faqs = [
   },
 ];
 
-const nav = faqs.map((f) => ({ id: f.id, label: f.q.replace('?', '') }));
-
 const pageDescription =
   'Short, direct answers to the questions homeowners ask most often about foundation cracks, repair methods, cost, insurance, warranties, and evaluating a recommendation.';
 
@@ -85,8 +83,8 @@ const schema = articleSchema({
     title="Frequently Asked Questions"
     subhead="Short answers to what homeowners ask most often"
     description="These are direct, general answers to the questions that come up most — each one links to a page on this site that goes deeper. None of this replaces an actual evaluation of your specific house."
-    nav={nav}
-    topicsStyle="list"
+    nav={[]}
+    topicsStyle="none"
   >
     <div class="faq-grid">
       {faqs.map((f, i) => (
