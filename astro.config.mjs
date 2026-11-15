@@ -10,6 +10,7 @@ const hideFromSitemap = [
 export default defineConfig({
   site: 'https://www.myfoundationrepairconsultant.com',
   output: 'static',
+  trailingSlash: 'never',
   integrations: [
     sitemap({
       filter: (page) => !hideFromSitemap.some((part) => page.includes(part)),
