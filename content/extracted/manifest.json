@@ -208,46 +208,6 @@
     "file": "settlement.html"
   },
   {
-    "url": "/foundation-behavior-in-new-mexico",
-    "slug": "foundation-behavior-in-new-mexico",
-    "title": "Foundation Behavior in New Mexico | Albuquerque & Santa Fe Soil Conditions — My Foundation Repair Consultant",
-    "description": "Learn how soil conditions and moisture changes affect foundation behavior across New Mexico, including Albuquerque and Santa Fe. Educational guidance on movement, cracking, and regional differences.",
-    "type": "page",
-    "file": "foundation-behavior-in-new-mexico.html"
-  },
-  {
-    "url": "/common-signs",
-    "slug": "common-signs",
-    "title": "Cracks, sticking doors, uneven floors, and other common signs associated with foundation repair.  — My Foundation Repair Consultant",
-    "description": "Learn how foundation repair typically comes up in New Mexico homes, what common signs may mean, how costs are considered, and when repair is — or isn’t — necessary.",
-    "type": "hub-custom",
-    "file": "common-signs.html"
-  },
-  {
-    "url": "/material-behavior",
-    "slug": "material-behavior",
-    "title": "Material Behavior in Homes: Why Cracks Form and When They Matter — My Foundation Repair Consultant",
-    "description": "Cracks in concrete, drywall, wood, and finishes are often caused by normal material behavior. Learn why cracks form, why they’re misdiagnosed, and when soil or foundation movement may be involved.",
-    "type": "hub-custom",
-    "file": "material-behavior.html"
-  },
-  {
-    "url": "/foundation-behavior-in-arizona",
-    "slug": "foundation-behavior-in-arizona",
-    "title": "Foundation Repair in Arizona | Soil Behavior & Movement Explained — My Foundation Repair Consultant",
-    "description": "Learn how soil conditions influence foundation movement across Arizona. Regional breakdowns, expansive clay behavior, and context for evaluating cracks and settlement before assuming “foundation failure.”",
-    "type": "page",
-    "file": "foundation-behavior-in-arizona.html"
-  },
-  {
-    "url": "/helical-piers",
-    "slug": "helical-piers",
-    "title": "Helical Piers: What They Are and When They Make Sense — My Foundation Repair Consultant",
-    "description": "Understanding helical piers: what they do, when they're appropriate, and when they're not. Educational guide for building owners evaluating foundation repair options.",
-    "type": "page",
-    "file": "helical-piers.html"
-  },
-  {
     "url": "/start-here",
     "slug": "start-here",
     "title": "MFRC | Foundation Repair Education, Definitions, and Common Signs",
@@ -558,5 +518,21 @@
     "description": "How post-repair monitoring differs from pre-repair monitoring, and how to tell normal settling from a sign the repair needs attention.",
     "type": "article",
     "file": "what-to-monitor-after-a-foundation-repair.html"
+  },
+  {
+    "url": "/common-signs",
+    "slug": "common-signs",
+    "title": "Cracks, sticking doors, uneven floors, and other common signs associated with foundation repair.  — My Foundation Repair Consultant",
+    "description": "Learn how foundation repair typically comes up in New Mexico homes, what common signs may mean, how costs are considered, and when repair is — or isn’t — necessary.",
+    "type": "hub-custom",
+    "file": "common-signs.html"
+  },
+  {
+    "url": "/material-behavior",
+    "slug": "material-behavior",
+    "title": "Material Behavior in Homes: Why Cracks Form and When They Matter — My Foundation Repair Consultant",
+    "description": "Cracks in concrete, drywall, wood, and finishes are often caused by normal material behavior. Learn why cracks form, why they’re misdiagnosed, and when soil or foundation movement may be involved.",
+    "type": "hub-custom",
+    "file": "material-behavior.html"
   }
 ]
