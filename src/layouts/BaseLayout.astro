@@ -1,5 +1,6 @@
 ---
 import SiteHeader from '../components/SiteHeader.astro';
+import Footer from '../components/Footer.astro';
 import { articleSchema } from '../lib/schema';
 import '../styles/mfrc.css';
 import '../styles/redesign.css';
@@ -12,6 +13,7 @@ interface Props {
   description?: string;
   hub?: boolean;
   quote?: string;
+  showFRA?: boolean;
 }
 
 const {
@@ -19,6 +21,7 @@ const {
   description = '',
   hub = false,
   quote = '',
+  showFRA = false,
 } = Astro.props;
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/start-here';
@@ -105,5 +108,6 @@ const logoUrl = '/MFRC%20Logo.jpg';
       {shownQuote && <p class="page-quote">{quote}</p>}
       <div class="page-end" aria-hidden="true"></div>
     </main>
+    <Footer showFRA={showFRA} />
   </body>
 </html>

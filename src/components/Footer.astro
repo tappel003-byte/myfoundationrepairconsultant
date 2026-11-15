@@ -1,0 +1,58 @@
+---
+// Quiet footer: one disclosure paragraph, no manifesto, no extra nav --
+// per AGENTS.md's design tokens. showFRA is set by the Arizona-specific
+// hub pages only (foundation-behavior-in-arizona, investigate-further-
+// arizona) -- TLS/SandiaGEO disclosure stays universal since that's the
+// consistent ownership fact; FRA is the regional addition.
+interface Props {
+  showFRA?: boolean;
+}
+
+const { showFRA = false } = Astro.props;
+---
+
+<footer class="mfrc-footer">
+  <div class="mfrc-footer-inner">
+    <p class="mfrc-footer-disclosure">
+      This content is created by the owners of{' '}
+      <a href="https://www.tlsfoundations.com" rel="nofollow" target="_blank">TLS Foundations</a>{', '}
+      a New Mexico foundation repair contractor, and{' '}
+      <a href="https://www.sandiageo.com" rel="nofollow" target="_blank">SandiaGEO</a>{', '}
+      a geotechnical investigation firm.
+      {showFRA && (
+        <>
+          {' '}The same owners also operate{' '}
+          <a href="https://foundationrepairadvocate.com" rel="nofollow" target="_blank">Foundation Repair Advocate</a>{', '}
+          an independent second-opinion and floor-survey service in Arizona.
+        </>
+      )}
+    </p>
+  </div>
+</footer>
+
+<style>
+  .mfrc-footer {
+    border-top: 2px solid var(--chile);
+    background: var(--bg-soft);
+    padding: 32px var(--gutter) 40px;
+  }
+  .mfrc-footer-inner {
+    max-width: var(--content-max);
+    margin: 0 auto;
+  }
+  .mfrc-footer-disclosure {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text-muted);
+    max-width: 760px;
+  }
+  .mfrc-footer-disclosure a {
+    color: var(--teal);
+    text-decoration: underline;
+  }
+  @media (max-width: 640px) {
+    .mfrc-footer {
+      padding: 28px 24px 36px;
+    }
+  }
+</style>
